@@ -149,6 +149,159 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/git_error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/git_error/" class="post-title-link" itemprop="url">git_error</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-15 00:36:16 / Modified: 00:37:26" itemprop="dateCreated datePublished" datetime="2022-03-15T00:36:16+08:00">2022-03-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="报错1-Could-not-resolve-host-github-com"><a href="#报错1-Could-not-resolve-host-github-com" class="headerlink" title="报错1 Could not resolve host: github.com"></a>报错1 Could not resolve host: github.com</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: Could not resolve host: github.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: Failed to connect to github.com port 443 after 21105 ms: Timed out</span><br></pre></td></tr></table></figure>
+<p>//通常是网络问题，没有解析到github的主机地址。</p>
+<ol>
+<li>通过ping获取主机后在hosts中手动指定解析即可</li>
+<li>git取消全局通过http/https代理连接<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy </span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+参考</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a18792627168/article/details/106132041/">https://blog.csdn.net/a18792627168/article/details/106132041/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/han-1034683568/p/6457894.html">https://www.cnblogs.com/han-1034683568/p/6457894.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44296929/article/details/111242452">https://blog.csdn.net/weixin_44296929/article/details/111242452</a></p>
+<h1 id="报错2-OpenSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#报错2-OpenSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="报错2 OpenSSL SSL_read: Connection was reset, errno 10054"></a>报错2 OpenSSL SSL_read: Connection was reset, errno 10054</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: OpenSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
+<p>//网络不稳定连接超时，取消ssl证书连接验证后再连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+<p>cmd更新dns缓存<code> ipconfig /flushdns</code><br>参考<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fairylyl/p/15059437.html">https://www.cnblogs.com/fairylyl/p/15059437.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/110882074">https://blog.csdn.net/weixin_43945983/article/details/110882074</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hosts_error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/hosts_error/" class="post-title-link" itemprop="url">host_error</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-15 00:36:16 / Modified: 00:37:44" itemprop="dateCreated datePublished" datetime="2022-03-15T00:36:16+08:00">2022-03-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>没有管理员权限修改保存<br><code> C:\Windows\System32\drivers\etc\hosts</code><br>运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">文件</span><br><span class="line">以管理员身份运行windows powershell</span><br><span class="line">notepad hosts</span><br></pre></td></tr></table></figure>
+<p>得以解决</p>
+<p>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33703550/article/details/79230577">https://blog.csdn.net/qq_33703550/article/details/79230577</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hexo_git/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -173,14 +326,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2022-03-13 22:47:33" itemprop="dateCreated datePublished" datetime="2022-03-13T22:47:33+08:00">2022-03-13</time>
+              <time title="Created: 2022-03-14 22:47:33" itemprop="dateCreated datePublished" datetime="2022-03-14T22:47:33+08:00">2022-03-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-14 23:08:29" itemprop="dateModified" datetime="2022-03-14T23:08:29+08:00">2022-03-14</time>
+                <time title="Modified: 2022-03-15 00:37:06" itemprop="dateModified" datetime="2022-03-15T00:37:06+08:00">2022-03-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -209,7 +362,8 @@
 <h2 id="通过密钥登录连接github"><a href="#通过密钥登录连接github" class="headerlink" title="通过密钥登录连接github"></a>通过密钥登录连接github</h2><p><code>ssh git@github.com</code><br>gitbash连接后出现以下表示git与github账户连接成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">This key is not known by any other names</span><br><span class="line">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span><br><span class="line">Warning: Permanently added &#x27;github.com&#x27; (ED25519) to the list of known hosts.</span><br><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi Tyson1077! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
 <h1 id="nodejs安装"><a href="#nodejs安装" class="headerlink" title="nodejs安装"></a>nodejs安装</h1><p>//hexo基于nodejs，安装后自动添加环境变量和npm<br>检验nodejs和npm是否安装<br><code>node -v </code><br><code>npm -v </code></p>
-<h1 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h1><h2 id="创建文件夹作为hexo根目录绝对路径"><a href="#创建文件夹作为hexo根目录绝对路径" class="headerlink" title="创建文件夹作为hexo根目录绝对路径"></a>创建文件夹作为hexo根目录绝对路径</h2><h3 id="通过windows-powershell安装hexo：shift-右键"><a href="#通过windows-powershell安装hexo：shift-右键" class="headerlink" title="通过windows powershell安装hexo：shift+右键"></a>通过windows powershell安装hexo：shift+右键</h3><p><code>npm install -g hexo-cli</code><br>成功</p>
+<h1 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h1><h2 id="创建文件夹作为hexo根目录绝对路径"><a href="#创建文件夹作为hexo根目录绝对路径" class="headerlink" title="创建文件夹作为hexo根目录绝对路径"></a>创建文件夹作为hexo根目录绝对路径</h2><p>进入hexo根目录操作<br><code> cd hexo/</code> </p>
+<h3 id="通过windows-powershell安装hexo：shift-右键"><a href="#通过windows-powershell安装hexo：shift-右键" class="headerlink" title="通过windows powershell安装hexo：shift+右键"></a>通过windows powershell安装hexo：shift+右键</h3><p><code>npm install -g hexo-cli</code><br>成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">added 59 packages, and audited 60 packages in 28s</span><br><span class="line"></span><br><span class="line">14 packages are looking for funding</span><br><span class="line">  run `npm fund` for details</span><br><span class="line"></span><br><span class="line">found 0 vulnerabilities</span><br><span class="line">npm notice</span><br><span class="line">npm notice New minor version of npm available! 8.3.1 -&gt; 8.5.4</span><br><span class="line">npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.5.4</span><br><span class="line">npm notice Run npm install -g npm@8.5.4 to update!</span><br><span class="line">npm notice</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>出现报错：</p>
@@ -220,7 +374,10 @@
 <p>成功</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/hexojs/hexo-starter.git/&#x27;: OpenSSL SSL_read: Connection was reset, errno 10054</span><br><span class="line">WARN  git clone failed. Copying data instead</span><br><span class="line">INFO  Install dependencies</span><br><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure>
 
-<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><p>//本地hexo预览地址 localhost:4000<br><code>hexo init</code><br><code>hexo -v </code><br>新建页面//new<br><code>hexo n xxx</code><br>生成静态页//generate<br><code>hexo g</code><br>启动本地预览//server<br><code>hexo s</code><br>关闭本地服务器<br><code>ctrl+c</code></p>
+<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><p>//本地hexo预览地址 localhost:4000<br>//新建一个网站。如果没有指定文件夹，hexo默认在目前的文件夹建立网站。<br><code>hexo init</code><br><code>hexo -v </code><br>新建页面//new<br><code>hexo n xxx</code><br>生成静态页//generate<br><code>hexo g</code><br>启动本地预览//server<br><code>hexo s</code><br>关闭本地服务器<br><code>ctrl+c</code><br>列出网站结构信息<br><code> hexo list xxx</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage: hexo list &lt;type&gt;</span><br><span class="line">Description:</span><br><span class="line">List the information of the site.</span><br><span class="line">Arguments:</span><br><span class="line">  type  Available types: page, post, route, tag, category</span><br></pre></td></tr></table></figure>
+
+
 <h2 id="配置hexo网页"><a href="#配置hexo网页" class="headerlink" title="配置hexo网页"></a>配置hexo网页</h2><p>安装hexo git模块拓展<br><code> npm i hexo-deployer-git</code><br>关联github：站点_config.yml</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: 仓库路径.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
 
@@ -232,7 +389,16 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://tyson1077.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure>
 <h2 id="seo优化"><a href="#seo优化" class="headerlink" title="seo优化"></a>seo优化</h2><h3 id="永久url结构"><a href="#永久url结构" class="headerlink" title="永久url结构"></a>永久url结构</h3><p>//搜索引擎优化认为最佳的网站结构是用户点击三次到达任何页面，因此过于复杂的网站分层结构不利于引擎蜘蛛爬取内容<br>修改url为sitename/title结构：配置站点_config.yml</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># permalink: :year/:month/:day/:title/</span><br><span class="line">permalink: :title/</span><br></pre></td></tr></table></figure>
-<h2 id="文章头配置"><a href="#文章头配置" class="headerlink" title="文章头配置"></a>文章头配置</h2>
+<h2 id="文章头配置"><a href="#文章头配置" class="headerlink" title="文章头配置"></a>文章头配置</h2><p>//如果没有指定新建页面的post模板参数，那么系统在scaffolds文件中使用post.md作为默认页面模板。<br>//修改<code> hexo\scaffolds\post.md</code>模板中的默认参数，之后生成文章页面时可以修改每个页面中引用参数内容。其中<code> title</code>和<code> date</code> 可自动生成引用<br>参考<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cd623d82c00a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">https://www.jianshu.com/p/cd623d82c00a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation</a><br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89">https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89</a><br>增加<code> categories</code>和<code> tag</code>参数引用：修改scaffolds\post.md</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>引用时</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: hexo_git</span><br><span class="line">categories: codes</span><br><span class="line">tag:</span><br><span class="line"> - hexo</span><br><span class="line"> - git</span><br></pre></td></tr></table></figure>
+<h2 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h2><p>参考<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter.html#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE">https://hexo.io/zh-cn/docs/front-matter.html#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE</a><br><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/theme-settings.html#categories-page">http://theme-next.iissnan.com/theme-settings.html#categories-page</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33857230/article/details/91474562">https://blog.csdn.net/weixin_33857230/article/details/91474562</a><br>生成”分类”页并添加type属性<br><code> hexo n categories</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2022-03-15 00:15:34</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+<p>菜单添加”分类页”：修改主题_config.yml，添加categories到menu下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br></pre></td></tr></table></figure>
+<p>本文参考<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496">https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">https://zhuanlan.zhihu.com/p/26625249</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35668237">https://zhuanlan.zhihu.com/p/35668237</a></p>
+
       
     </div>
 
@@ -384,7 +550,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
