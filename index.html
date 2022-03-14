@@ -163,7 +163,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/03/13/hexo_git/" class="post-title-link" itemprop="url">Untitled</a>
+            <a href="/2022/03/13/hexo_git/" class="post-title-link" itemprop="url">hexo_git</a>
         </h2>
 
         <div class="post-meta">
@@ -180,8 +180,17 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-14 15:30:38" itemprop="dateModified" datetime="2022-03-14T15:30:38+08:00">2022-03-14</time>
+                <time title="Modified: 2022-03-14 23:08:29" itemprop="dateModified" datetime="2022-03-14T23:08:29+08:00">2022-03-14</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
+                </span>
+            </span>
 
           
 
@@ -194,8 +203,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>title: hexo_git<br>categories: codes</p>
-<h1 id="git创建仓库"><a href="#git创建仓库" class="headerlink" title="git创建仓库"></a>git创建仓库</h1><h2 id="创建与git账户同名公有仓库"><a href="#创建与git账户同名公有仓库" class="headerlink" title="创建与git账户同名公有仓库"></a>创建与git账户同名公有仓库</h2><h3 id="repository仓库名称：-github-io"><a href="#repository仓库名称：-github-io" class="headerlink" title="repository仓库名称：.github.io"></a>repository仓库名称：.github.io</h3><h3 id="git绑定github账户"><a href="#git绑定github账户" class="headerlink" title="git绑定github账户"></a>git绑定github账户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;github账户名&quot;</span><br><span class="line">git config --global user.email &quot;github邮箱&quot;</span><br></pre></td></tr></table></figure>
+          <h1 id="git创建仓库"><a href="#git创建仓库" class="headerlink" title="git创建仓库"></a>git创建仓库</h1><h2 id="创建与git账户同名公有仓库"><a href="#创建与git账户同名公有仓库" class="headerlink" title="创建与git账户同名公有仓库"></a>创建与git账户同名公有仓库</h2><h3 id="repository仓库名称：-github-io"><a href="#repository仓库名称：-github-io" class="headerlink" title="repository仓库名称：.github.io"></a>repository仓库名称：.github.io</h3><h3 id="git绑定github账户"><a href="#git绑定github账户" class="headerlink" title="git绑定github账户"></a>git绑定github账户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;github账户名&quot;</span><br><span class="line">git config --global user.email &quot;github邮箱&quot;</span><br></pre></td></tr></table></figure>
 <p>//<code>git config</code>命令的<code>--global</code>参数表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址</p>
 <h3 id="生成ssh公钥绑定github-sshkey"><a href="#生成ssh公钥绑定github-sshkey" class="headerlink" title="生成ssh公钥绑定github_sshkey"></a>生成ssh公钥绑定github_sshkey</h3><p><code>ssh-keygen -t rsa -C &quot;github邮箱&quot;</code><br>//由于github要求推送同步需要验证是否为合法用户，为省时间采用配对公私钥验证账户密码保证推送同步的合法性</p>
 <h2 id="通过密钥登录连接github"><a href="#通过密钥登录连接github" class="headerlink" title="通过密钥登录连接github"></a>通过密钥登录连接github</h2><p><code>ssh git@github.com</code><br>gitbash连接后出现以下表示git与github账户连接成功</p>
@@ -216,14 +224,15 @@
 <h2 id="配置hexo网页"><a href="#配置hexo网页" class="headerlink" title="配置hexo网页"></a>配置hexo网页</h2><p>安装hexo git模块拓展<br><code> npm i hexo-deployer-git</code><br>关联github：站点_config.yml</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: 仓库路径.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
 
-<h2 id="部署hexo上线"><a href="#部署hexo上线" class="headerlink" title="部署hexo上线"></a>部署hexo上线</h2><p>更新hexo缓存<br><code>hexo clean</code><br>生成静态页//generate<br><code> hexo g</code><br>部署操作//deploy<br><code> hexo d</code></p>
+<h2 id="部署hexo上线"><a href="#部署hexo上线" class="headerlink" title="部署hexo上线"></a>部署hexo上线</h2><p>安装git部署插件 同步本地部署到仓库<br><code> npm install hexo-deployer-git --save</code><br>更新hexo缓存<br><code>hexo clean</code><br>生成静态页//generate<br><code> hexo g</code><br>部署操作//deploy<br><code> hexo d</code></p>
 <h1 id="hexo自定义"><a href="#hexo自定义" class="headerlink" title="hexo自定义"></a>hexo自定义</h1><h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>克隆主题到hexo根目录中<br><code>cd hexo/hexo </code><br><code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code><br>修改站点_config.yml主题名<br><code>theme:主题名</code><br>修改主题_config.yml样式<br><code> Scheme Settings</code></p>
 <h2 id="主题更新"><a href="#主题更新" class="headerlink" title="主题更新"></a>主题更新</h2><p><code>cd themes/next</code><br><code>git pull</code></p>
 <h2 id="网站个性化"><a href="#网站个性化" class="headerlink" title="网站个性化"></a>网站个性化</h2><p>修改基本信息配置：站点_config.yml</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: &quot;tyson自留地&quot;</span><br><span class="line">subtitle: &#x27;hello_world&#x27;</span><br><span class="line">description: &quot;tyson&#x27;s_1point3acres&quot;</span><br><span class="line">keywords: hexo,tyson</span><br><span class="line">author: tyson_H</span><br><span class="line">language: en</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://tyson1077.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure>
-
-
+<h2 id="seo优化"><a href="#seo优化" class="headerlink" title="seo优化"></a>seo优化</h2><h3 id="永久url结构"><a href="#永久url结构" class="headerlink" title="永久url结构"></a>永久url结构</h3><p>//搜索引擎优化认为最佳的网站结构是用户点击三次到达任何页面，因此过于复杂的网站分层结构不利于引擎蜘蛛爬取内容<br>修改url为sitename/title结构：配置站点_config.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># permalink: :year/:month/:day/:title/</span><br><span class="line">permalink: :title/</span><br></pre></td></tr></table></figure>
+<h2 id="文章头配置"><a href="#文章头配置" class="headerlink" title="文章头配置"></a>文章头配置</h2>
       
     </div>
 
@@ -378,6 +387,10 @@
           <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">posts</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span>
       </div>
   </nav>
 </div>
