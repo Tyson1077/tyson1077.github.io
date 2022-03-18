@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tyson1077.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="windows_apache_mysql_php集成包bitnami wamp stackwampserverxampp apache官网只有源代码提供win平台编译后的版本：apachelounge https:&#x2F;&#x2F;www.apachelounge.com&#x2F;download&#x2F;apachehaus https:&#x2F;&#x2F;www.apachehaus.com&#x2F;cgi-bin&#x2F;download.plx 目录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day1_wamp原生环境配置">
+<meta property="og:url" content="https://tyson1077.github.io/day1_wamp_dev_install/index.html">
+<meta property="og:site_name" content="tyson自留地">
+<meta property="og:description" content="windows_apache_mysql_php集成包bitnami wamp stackwampserverxampp apache官网只有源代码提供win平台编译后的版本：apachelounge https:&#x2F;&#x2F;www.apachelounge.com&#x2F;download&#x2F;apachehaus https:&#x2F;&#x2F;www.apachehaus.com&#x2F;cgi-bin&#x2F;download.plx 目录">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/iMzw2rd47xacOjs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/MkjYKPENWmUiDHy.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/SjqlZDYMIaEQ5mF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/WuH3xjNa614otPE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/KFVS2CQOm1seukA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/1MgjihJFSqdX3Db.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/9ajs6GxwKXL3tqI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/wcNl9qfonIGTCJx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/cwpzCQj31l4tNWU.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/6bWS4kMsN1uaCry.png">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/OMbQjITekdGop1h.png">
+<meta property="article:published_time" content="2022-03-18T17:10:39.545Z">
+<meta property="article:modified_time" content="2022-03-18T17:11:50.889Z">
+<meta property="article:author" content="tyson_H">
+<meta property="article:tag" content="hexo,tyson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/18/iMzw2rd47xacOjs.png">
+
+<link rel="canonical" href="https://tyson1077.github.io/day1_wamp_dev_install/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day1_wamp原生环境配置 | tyson自留地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">tyson自留地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hello_world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day1_wamp_dev_install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day1_wamp原生环境配置
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-19 01:10:39 / Modified: 01:11:50" itemprop="dateCreated datePublished" datetime="2022-03-19T01:10:39+08:00">2022-03-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="windows-apache-mysql-php集成包"><a href="#windows-apache-mysql-php集成包" class="headerlink" title="windows_apache_mysql_php集成包"></a>windows_apache_mysql_php集成包</h1><p>bitnami wamp stack<br>wampserver<br>xampp</p>
+<h1 id="apache"><a href="#apache" class="headerlink" title="apache"></a>apache</h1><p>官网只有源代码提供<br>win平台编译后的版本：<br>apachelounge <a target="_blank" rel="noopener" href="https://www.apachelounge.com/download/">https://www.apachelounge.com/download/</a><br>apachehaus <a target="_blank" rel="noopener" href="https://www.apachehaus.com/cgi-bin/download.plx">https://www.apachehaus.com/cgi-bin/download.plx</a></p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>C:\web\Apache24<br>/apache/bin apache程序目录<br>/apache/conf apache配置文件目录<br>/apache/error 错误日志<br>/apache/htdocs 默认网站根目录<br>/apache/modules apache动态加载模块目录</p>
+<h2 id="修改主配置"><a href="#修改主配置" class="headerlink" title="修改主配置"></a>修改主配置</h2><p><code> /apache/conf/httpd.conf</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Define SRVROOT &quot;C:\web\Apache24&quot; //安装路径</span><br><span class="line">DocumentRoot &quot;$&#123;SRVROOT&#125;/htdocs&quot; //服务器站点访问路径</span><br><span class="line">Listen 80 //监听端口</span><br><span class="line">ServerName localhost:80 //服务器域名</span><br></pre></td></tr></table></figure>
+<h2 id="安装启动apache"><a href="#安装启动apache" class="headerlink" title="安装启动apache"></a>安装启动apache</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">WINDOWS POWERSHELL ADMINISTRATOR</span><br><span class="line">cd C:\web\Apache24\bin</span><br><span class="line">.\httpd -k install -n Apache2.4 //安装</span><br><span class="line">Installing the &#x27;Apache2.4&#x27; service</span><br><span class="line">The &#x27;Apache2.4&#x27; service is successfully installed.</span><br><span class="line">Testing httpd.conf....</span><br><span class="line">Errors reported here must be corrected before the service can be started.</span><br><span class="line">ApacheMonitor.exe //运行</span><br><span class="line">.\httpd -k uninstall -n Apache2.4 //卸载</span><br><span class="line">.\httpd -M //列出模块</span><br><span class="line">.\httpd -t //验证配置</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:80 //本地环回址</span><br><span class="line">localhost:80 //本地域名</span><br></pre></td></tr></table></figure>
+<h2 id="指定本地dns解析"><a href="#指定本地dns解析" class="headerlink" title="指定本地dns解析"></a>指定本地dns解析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc\hosts</span><br><span class="line">127.0.0.1 localhost</span><br></pre></td></tr></table></figure>
+<h1 id="php"><a href="#php" class="headerlink" title="php"></a>php</h1><p><a target="_blank" rel="noopener" href="https://www.php.net/downloads">https://www.php.net/downloads</a><br>//VC15 x64 Thread Safe (2022-Feb-24 17:53:21)<br>//结束终止符;</p>
+<h2 id="目录结构-1"><a href="#目录结构-1" class="headerlink" title="目录结构"></a>目录结构</h2><p>/php/ext php拓展路径<br>/php/php.ini php主配置<br>php.exe 解释器<br>php7apache2_4.dll apache载入拓展模块</p>
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><h3 id="php主配置"><a href="#php主配置" class="headerlink" title="php主配置"></a>php主配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#php.ini</span><br><span class="line">php.ini-development //预设载开发主配置</span><br><span class="line">php.ini-production //预设载生产主配置</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">`extension_dir = &quot;C:\web\php-7.4.28\ext&quot;` //指定php拓展路径</span><br><span class="line">`date.timezone = PRC` //指定时区</span><br></pre></td></tr></table></figure>
+<h3 id="apache载入php模块"><a href="#apache载入php模块" class="headerlink" title="apache载入php模块"></a>apache载入php模块</h3><p><code> C:\web\Apache24\conf\httpd.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">LoadModule php7_module &quot;C:\web\php7428\php7apache2_4.dll&quot; //加载php模块</span><br><span class="line">PHPIniDir &quot;C:\web\php7428\php.ini&quot; //加载php.ini主配置</span><br><span class="line">AddType application/x-httpd-php .php //apache传递匹配.php拓展名任务给php引擎处理</span><br><span class="line">LoadModule &quot;C:\web\php7428\libssh2.dll&quot; //加载php模块保证cURL拓展可用</span><br></pre></td></tr></table></figure>
+<h3 id="配置apache默认索引页"><a href="#配置apache默认索引页" class="headerlink" title="配置apache默认索引页"></a>配置apache默认索引页</h3><p><code> C:\web\Apache24\conf\httpd.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule dir_module&gt;</span><br><span class="line">DirectoryIndex index.html index.php</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="测试php模块"><a href="#测试php模块" class="headerlink" title="测试php模块"></a>测试php模块</h3><p><code> C:\web\Apache24\htdocs\index.php</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">phpinfo();</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><p><a target="_blank" rel="noopener" href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a><br>#mysql5.5.20</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>//自定义安装模式<br><img src="https://s2.loli.net/2022/03/18/iMzw2rd47xacOjs.png"><br>//手动指定mysql路径和数据data路径<br><img src="https://s2.loli.net/2022/03/18/MkjYKPENWmUiDHy.png"><br><img src="https://s2.loli.net/2022/03/18/SjqlZDYMIaEQ5mF.png"><br>//配置安装mysql开发者环境<br>//开启tcpip3306端口<br>//开启windows防火墙端口访问<br><img src="https://s2.loli.net/2022/03/18/WuH3xjNa614otPE.png"><br>//使用mysql8.0用户强密码验证模式加密<br><img src="https://s2.loli.net/2022/03/18/KFVS2CQOm1seukA.png"><br>//mysqlroot密码<img src="https://s2.loli.net/2022/03/18/1MgjihJFSqdX3Db.png"><br>//配置windows下mysql服务启动<br>//mysql开机自启<br><img src="https://s2.loli.net/2022/03/18/9ajs6GxwKXL3tqI.png"><br><img src="https://s2.loli.net/2022/03/18/wcNl9qfonIGTCJx.png"><br>//验证登录mysql<br><img src="https://s2.loli.net/2022/03/18/cwpzCQj31l4tNWU.png"></p>
+<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">计算机属性</span><br><span class="line">高级系统设置</span><br><span class="line">环境变量</span><br><span class="line">系统变量PATH </span><br></pre></td></tr></table></figure>
+<p>//加入mysql应用程序bin路径<br><code> C:\web\mysql8\bin</code><br>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41247760/article/details/103939333">https://blog.csdn.net/weixin_41247760/article/details/103939333</a></p>
+<h2 id="目录结构-2"><a href="#目录结构-2" class="headerlink" title="目录结构"></a>目录结构</h2><p>/mysql/bin mysql程序执行路径<br>/mysql/data mysql数据存储路径<br>/mysql/lib mysql核心库路径<br>/mysql/bin/mysqld.exe 服务程序<br>/mysql/bin/mysql.exe 客户端访问程序<br>/mysql/bin/mysqldump.exe 备份程序</p>
+<h2 id="运行模式"><a href="#运行模式" class="headerlink" title="运行模式"></a>运行模式</h2><p>mysql作为c/s设计架构的程序区别于b/s，需要用客户端或拓展插件作为客户端访问服务端程序<br>//mysql客户端访问服务端需要进行寻址连接认证<br>登录操作<br><code> mysql 寻址操作 连接认证</code><br>基本操作参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-hlocalhost 主机址</span><br><span class="line">-P3306 端口</span><br><span class="line">-uroot 用户</span><br><span class="line">-proot 密码</span><br></pre></td></tr></table></figure>
+<p><code> \q 退出</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">//明文登录</span><br><span class="line">PS C:\web\mysql8\bin&gt; mysql -hlocalhost -P3306 -uroot -proot</span><br><span class="line">mysql: [Warning] Using a password on the command line interface can be insecure.</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 17</span><br><span class="line">Server version: 8.0.28 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2022, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; \q</span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line">//密文登录</span><br><span class="line">PS C:\web\mysql8\bin&gt; mysql -hlocalhost -P3306 -uroot -p</span><br><span class="line">Enter password: ****</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 18</span><br><span class="line">Server version: 8.0.28 MySQL Community Server - GPL</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2022, Oracle and/or its affiliates.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#x27;help;&#x27; or &#x27;\h&#x27; for help. Type &#x27;\c&#x27; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; \q</span><br><span class="line">Bye</span><br></pre></td></tr></table></figure>
+<h2 id="php连接模块载入mysql数据库"><a href="#php连接模块载入mysql数据库" class="headerlink" title="php连接模块载入mysql数据库"></a>php连接模块载入mysql数据库</h2><p>php本身无法连接操作mysql数据库，通过php操作mysqli函数拓展后才可连接<br><code> C:\web\php7428\ext\php_mysqli.dll</code><br>//php7后操作mysqli进阶版函数连接数据库<br><img src="https://s2.loli.net/2022/03/18/6bWS4kMsN1uaCry.png"><br>参考：关于php_mysql.dll和php_mysqli.dll的区别<a target="_blank" rel="noopener" href="https://blog.csdn.net/mistyraine/article/details/90479539">https://blog.csdn.net/mistyraine/article/details/90479539</a></p>
+<h3 id="开启php载入mysql拓展函数"><a href="#开启php载入mysql拓展函数" class="headerlink" title="开启php载入mysql拓展函数"></a>开启php载入mysql拓展函数</h3><p><code> C:\web\php7428\php.ini</code><br><code> extension=mysqli</code> </p>
+<h3 id="指定php拓展路径"><a href="#指定php拓展路径" class="headerlink" title="指定php拓展路径"></a>指定php拓展路径</h3><p><code> C:\web\php7428\php.ini</code><br><code> extension_dir = &quot;C:\web\php7428\ext&quot;</code></p>
+<h3 id="检验mysql拓展函数载入状态：重启apache程序"><a href="#检验mysql拓展函数载入状态：重启apache程序" class="headerlink" title="检验mysql拓展函数载入状态：重启apache程序"></a>检验mysql拓展函数载入状态：重启apache程序</h3><p><code> C:\web\Apache24\htdocs\index.php</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#调用phpinfo拓展函数模块</span><br><span class="line">&lt;?php</span><br><span class="line">phpinfo()</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>//php7后没有mysql拓展函数模块，因此检验mysqli是否载入<br>参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/Young_Gao/article/details/78227357">https://blog.csdn.net/Young_Gao/article/details/78227357</a><br> <img src="https://s2.loli.net/2022/03/18/OMbQjITekdGop1h.png"></p>
+<h3 id="设置时区：安全性"><a href="#设置时区：安全性" class="headerlink" title="设置时区：安全性"></a>设置时区：安全性</h3><p><code> C:\web\php7428\php.ini</code><br><code> date.timezone = PRC</code> </p>
+<h1 id="虚拟主机"><a href="#虚拟主机" class="headerlink" title="虚拟主机"></a>虚拟主机</h1><p>apache作为服务器路径反向代理程序可通过ip或域名映射虚拟主机站点根路径，而达到访问效果</p>
+<h2 id="指定本地dns映射解析"><a href="#指定本地dns映射解析" class="headerlink" title="指定本地dns映射解析"></a>指定本地dns映射解析</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\drivers\etc\hosts</span><br><span class="line">127.0.0.1 localhost</span><br></pre></td></tr></table></figure>
+<h2 id="启用apache虚拟主机模块"><a href="#启用apache虚拟主机模块" class="headerlink" title="启用apache虚拟主机模块"></a>启用apache虚拟主机模块</h2><p><code> C:\web\Apache24\conf\httpd.conf</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Virtual hosts</span><br><span class="line">Include conf/extra/httpd-vhosts.conf</span><br></pre></td></tr></table></figure>
+<h2 id="写入虚拟主机配置文件"><a href="#写入虚拟主机配置文件" class="headerlink" title="写入虚拟主机配置文件"></a>写入虚拟主机配置文件</h2><p><code> C:\web\Apache24\conf\extra\httpd-vhosts.conf</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt; //通配符80端口#</span><br><span class="line">    ServerAdmin webmaster@dummy-host.example.com //管理员邮箱</span><br><span class="line">    DocumentRoot &quot;$&#123;SRVROOT&#125;/docs/dummy-host.example.com&quot; //站点根路径#</span><br><span class="line">    ServerName dummy-host.example.com //域名#</span><br><span class="line">    ServerAlias www.dummy-host.example.com //域别名</span><br><span class="line">    ErrorLog &quot;logs/dummy-host.example.com-error.log&quot; //错误日志路径</span><br><span class="line">    CustomLog &quot;logs/dummy-host.example.com-access.log&quot; common //访客日志路径</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="控制目录访问权"><a href="#控制目录访问权" class="headerlink" title="控制目录访问权"></a>控制目录访问权</h2><p>//下至上读取<br><code> C:\web\Apache24\conf\httpd.conf</code></p>
+<p>```<br><Directory /> //根目录配置访问 优先级低<br>    AllowOverride none //不读取分布式配置文件.htaccess<br>    Require all denied //拒绝所有请求<br></Directory><br>&lt;Directory “${SRVROOT}/htdocs”&gt; //站点目录配置访问 优先级高<br>    Options Indexes FollowSymLinks //启动目录浏览检索index，若不存在则以列表展现目录以-Indexes可关闭；且允许符号链接<br>    AllowOverride All //读取子目录分布式配置文件.htaccess<br>    Require all granted //开启所有访问<br>    #Require local //只开启本地访问<br></Directory></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/typora_Untitled/" rel="prev" title="typora_Untitled">
+      <i class="fa fa-chevron-left"></i> typora_Untitled
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#windows-apache-mysql-php%E9%9B%86%E6%88%90%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">windows_apache_mysql_php集成包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#apache"><span class="nav-number">2.</span> <span class="nav-text">apache</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">修改主配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%90%AF%E5%8A%A8apache"><span class="nav-number">2.3.</span> <span class="nav-text">安装启动apache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%9C%AC%E5%9C%B0dns%E8%A7%A3%E6%9E%90"><span class="nav-number">2.4.</span> <span class="nav-text">指定本地dns解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php"><span class="nav-number">3.</span> <span class="nav-text">php</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-1"><span class="nav-number">3.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">修改配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php%E4%B8%BB%E9%85%8D%E7%BD%AE"><span class="nav-number">3.2.1.</span> <span class="nav-text">php主配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apache%E8%BD%BD%E5%85%A5php%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.2.</span> <span class="nav-text">apache载入php模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEapache%E9%BB%98%E8%AE%A4%E7%B4%A2%E5%BC%95%E9%A1%B5"><span class="nav-number">3.2.3.</span> <span class="nav-text">配置apache默认索引页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95php%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.4.</span> <span class="nav-text">测试php模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql"><span class="nav-number">4.</span> <span class="nav-text">mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">4.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">4.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84-2"><span class="nav-number">4.3.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.4.</span> <span class="nav-text">运行模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php%E8%BF%9E%E6%8E%A5%E6%A8%A1%E5%9D%97%E8%BD%BD%E5%85%A5mysql%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">4.5.</span> <span class="nav-text">php连接模块载入mysql数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AFphp%E8%BD%BD%E5%85%A5mysql%E6%8B%93%E5%B1%95%E5%87%BD%E6%95%B0"><span class="nav-number">4.5.1.</span> <span class="nav-text">开启php载入mysql拓展函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9Aphp%E6%8B%93%E5%B1%95%E8%B7%AF%E5%BE%84"><span class="nav-number">4.5.2.</span> <span class="nav-text">指定php拓展路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E9%AA%8Cmysql%E6%8B%93%E5%B1%95%E5%87%BD%E6%95%B0%E8%BD%BD%E5%85%A5%E7%8A%B6%E6%80%81%EF%BC%9A%E9%87%8D%E5%90%AFapache%E7%A8%8B%E5%BA%8F"><span class="nav-number">4.5.3.</span> <span class="nav-text">检验mysql拓展函数载入状态：重启apache程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%97%B6%E5%8C%BA%EF%BC%9A%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">4.5.4.</span> <span class="nav-text">设置时区：安全性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA"><span class="nav-number">5.</span> <span class="nav-text">虚拟主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E6%9C%AC%E5%9C%B0dns%E6%98%A0%E5%B0%84%E8%A7%A3%E6%9E%90"><span class="nav-number">5.1.</span> <span class="nav-text">指定本地dns映射解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E7%94%A8apache%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E6%A8%A1%E5%9D%97"><span class="nav-number">5.2.</span> <span class="nav-text">启用apache虚拟主机模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%85%A5%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">5.3.</span> <span class="nav-text">写入虚拟主机配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E7%9B%AE%E5%BD%95%E8%AE%BF%E9%97%AE%E6%9D%83"><span class="nav-number">5.4.</span> <span class="nav-text">控制目录访问权</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tyson_H</p>
+  <div class="site-description" itemprop="description">tyson's_1point3acres</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tyson_H</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
