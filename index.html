@@ -149,6 +149,202 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day3_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day3_php/" class="post-title-link" itemprop="url">day3_php</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-04 19:41:32 / Modified: 19:42:13" itemprop="dateCreated datePublished" datetime="2022-04-04T19:41:32+08:00">2022-04-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h1><h2 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h2><p>自上而下的代码执行结构</p>
+<h2 id="条件判断结构：分支"><a href="#条件判断结构：分支" class="headerlink" title="条件判断结构：分支"></a>条件判断结构：分支</h2><p>给定条件，使多种代码块根据多种条件执行代码</p>
+<h3 id="单分支"><a href="#单分支" class="headerlink" title="单分支"></a>单分支</h3><h4 id="if"><a href="#if" class="headerlink" title="if"></a>if</h4><p>if(条件){<br>输出;<br>} </p>
+<h3 id="双分支"><a href="#双分支" class="headerlink" title="双分支"></a>双分支</h3><h4 id="if-else"><a href="#if-else" class="headerlink" title="if_else"></a>if_else</h4><p><img src="https://s2.loli.net/2022/03/27/VEFeI2i51lrfmjp.png"><br>定义赋值<br>if(条件){<br>输出;<br>}else {<br>输出;<br>}</p>
+<h3 id="多分支"><a href="#多分支" class="headerlink" title="多分支"></a>多分支</h3><h4 id="if-elif-else"><a href="#if-elif-else" class="headerlink" title="if_elif_else"></a>if_elif_else</h4><p><img src="https://s2.loli.net/2022/03/27/q4jYCayxNEp83Lc.png"><br>定义赋值<br>if(条件){<br>输出;<br>}elif(条件){<br>输出;<br>}elif(条件){<br>输出;<br>}else {<br>默认输出;<br>}</p>
+<h4 id="switch-case-default"><a href="#switch-case-default" class="headerlink" title="switch_case_default"></a>switch_case_default</h4><p><img src="https://s2.loli.net/2022/03/27/KLMnBPQDORVxkg4.png"><br>//使多种代码块根据某一条件执行代码<br>定义赋值<br>switch(定义条件$){<br>case 赋值1:<br>输出;<br>break;<br>case 赋值2:<br>输出;<br>break;<br>default:<br>默认输出;<br>}<br>** 类似于：**<br>定义赋值<br>if(条件){<br>输出;<br>}elif(重复条件){<br>输出;<br>}elif(重复条件){<br>输出;<br>}else {<br>默认输出;<br>}</p>
+<h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构?"></a>循环结构?</h2><p>在给定条件范围内，指定代码块重复执行<br>//判断结束边界类似于布尔运算true/false决定循环体是否继续执行</p>
+<h3 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h3><p><img src="https://s2.loli.net/2022/03/27/PW4a2wqSMyHYFRf.png"><br>//以,分隔条件表达1：初始化条件定义多个<br>for(条件表达1:开始初始化(定赋值=); 条件表达2:结束判定边界(true/false); 条件表达3:操作式){<br>输出;<br>}</p>
+<p>或</p>
+<p>初始化：定义赋值 //条件表达1<br>for(:条件表达2:结束判断边界(true/false);条件表达3:操作式){<br>输出;<br>}</p>
+<p>实现原理：</p>
+<ol>
+<li>执行一次：条件表达1 开始初始化</li>
+<li>执行N次：条件表达2 结束循环体判断边界(true/false)</li>
+<li>执行N次：输出(循环体)</li>
+<li>执行N次：条件表达3 进入自操作变化</li>
+<li>重复循环342</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/03/26/zChRyFoXNnMEKvS.png"><br><img src="https://s2.loli.net/2022/03/26/76Qf8qmFGHZuBsC.png"></p>
+<h3 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h3><p><img src="https://s2.loli.net/2022/03/27/cV8H4FbO93hjRCB.png"><br>定义赋值; //条件表达1:开始初始化(定赋值=)<br>while(条件表达2:结束判断边界(true/false)){<br>输出(循环体);<br>条件表达3:操作式 //循环条件的变更;<br>}<br><img src="https://s2.loli.net/2022/03/26/hxBsjEVXFTp7lSy.png"></p>
+<h3 id="do-while循环"><a href="#do-while循环" class="headerlink" title="do_while循环"></a>do_while循环</h3><p><img src="https://s2.loli.net/2022/03/27/BYH9NjprDgyx71t.png"><br>//先做一次执行再判断 区别于while(){}先判断后执行<br>定义赋值; //条件表达1:开始初始化(定赋值=)<br>do{<br>//输出(循环体)<br>if(){<br>//条件表达3:操作式;<br>}<br>}while(条件表达2:结束判断边界(true/false));<br><img src="https://s2.loli.net/2022/03/26/5KF69gqE2WpPtcy.png"><br><img src="https://s2.loli.net/2022/03/31/ldsaHvWAxS4PGrC.png"></p>
+<h3 id="循环控制"><a href="#循环控制" class="headerlink" title="循环控制"></a>循环控制</h3><p>针对循环体本身内部的循环控制</p>
+<h4 id="break"><a href="#break" class="headerlink" title="break"></a>break</h4><p>结束所有循环<br>终止跳出嵌套循环break n;</p>
+<h4 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h4><p>结束本次循环，进入下一循环<br>暂停跳转嵌套循环continue n;<br><img src="https://s2.loli.net/2022/03/27/tajVn8FduAzCq6O.png"></p>
+<h3 id="分支循环替代语法"><a href="#分支循环替代语法" class="headerlink" title="分支循环替代语法"></a>分支循环替代语法</h3><p>php代码常作为后端数据输出，为了优化与前端代码的美观可读，在分支循环结构中使用替代语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">替代语法常出现在分支循环结构中：</span><br><span class="line">&#123; = :</span><br><span class="line">&#125; = end+对应标签</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">//if</span><br><span class="line">if()&#123;</span><br><span class="line">;</span><br><span class="line">&#125;</span><br><span class="line">替代</span><br><span class="line">if():</span><br><span class="line">;</span><br><span class="line">endfor;</span><br><span class="line"></span><br><span class="line">//switch</span><br><span class="line">switch()&#123;</span><br><span class="line">case n:</span><br><span class="line">break;</span><br><span class="line">default:</span><br><span class="line">;</span><br><span class="line">&#125;</span><br><span class="line">替代</span><br><span class="line">switch():</span><br><span class="line">case n:</span><br><span class="line">break;</span><br><span class="line">default:</span><br><span class="line">;</span><br><span class="line">endswitch;</span><br><span class="line"></span><br><span class="line">//for</span><br><span class="line">for(;;)&#123;</span><br><span class="line">输出;</span><br><span class="line">&#125;</span><br><span class="line">替代</span><br><span class="line">for(;;):</span><br><span class="line">输出;</span><br><span class="line">endfor;</span><br><span class="line"></span><br><span class="line">//while</span><br><span class="line">;</span><br><span class="line">while()&#123;</span><br><span class="line">输出;</span><br><span class="line">操作式;</span><br><span class="line">&#125;</span><br><span class="line">替代</span><br><span class="line">;</span><br><span class="line">while():</span><br><span class="line">输出;</span><br><span class="line">操作式;</span><br><span class="line">endwhile;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/03/27/3CyUhbHxdfOqnQM.png"><br><img src="https://s2.loli.net/2022/03/27/ySMFIoWJcXsEd9N.png"><br>for(;;){ = for(;;):<br>} = endfor;</p>
+<h1 id="文件加载：数据包含"><a href="#文件加载：数据包含" class="headerlink" title="文件加载：数据包含"></a>文件加载：数据包含</h1><p>在php脚本中拉取使用另一php脚本的代码，共同开发php功能实现代码共享</p>
+<h2 id="包含实现形式"><a href="#包含实现形式" class="headerlink" title="包含实现形式"></a>包含实现形式</h2><ol>
+<li>向上索取：先定义后索取使用输出 //可重复解释文件：通常用于流程控制</li>
+<li><ol>
+<li>include “”; //包含页定义 输出页包含展示输出：作为定义赋值((定义)输出多次执行多次)</li>
+</ol>
+</li>
+<li>2 include_once “”:; //包含页定义包含展示 输出页输出：作为输出((定义)输出多次执行一次)</li>
+<li>向下给予： //区别于报错形式：代码执行较严谨</li>
+<li><ol>
+<li>require “”;</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>require_once “”:;<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//page1.php</span><br><span class="line">$a = 1;</span><br><span class="line">//page2.php</span><br><span class="line">include &quot;page1.php&quot;; //作为定义赋值</span><br><span class="line">echo &quot;$a&quot;;</span><br><span class="line"></span><br><span class="line">//page3.php</span><br><span class="line">$a = 1; </span><br><span class="line">include_once &quot;page4.php&quot;; //作为输出</span><br><span class="line">//page.4.php</span><br><span class="line">echo &quot;$a&quot;;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/03/27/sth76m1Qra4wUvf.png"><br><img src="https://s2.loli.net/2022/03/27/pKhuDsygmXHoPTv.png"><h2 id="php代码实现逻辑"><a href="#php代码实现逻辑" class="headerlink" title="php代码实现逻辑"></a>php代码实现逻辑</h2></li>
+</ol>
+</li>
+<li>读取：在代码段中读取程序代码</li>
+<li>编译：把代码段中代码转入数据段以字节存储 即 生成opcode</li>
+<li>解析：使用zendengine引擎解析代码opcode后在栈区以二进制执行</li>
+<li>输出可读写代码：堆区回收内存<h2 id="包含实现原理"><a href="#包含实现原理" class="headerlink" title="包含实现原理"></a>包含实现原理</h2></li>
+<li>执行文件加载时会把包含文件中代码嵌入到当前文件</li>
+<li>文件包含位置即为当前文件加载位置</li>
+<li>文件包含中代码作为php单独编译执行：包含代码段被输出执行时才报错<h2 id="文件加载路径"><a href="#文件加载路径" class="headerlink" title="文件加载路径"></a>文件加载路径</h2>绝对路径：相对于系统磁盘/<br>相对路径：相对于当前文件夹./</li>
+</ol>
+<h2 id="文件加载：嵌套包含-索引页输出"><a href="#文件加载：嵌套包含-索引页输出" class="headerlink" title="文件加载：嵌套包含(索引页输出)"></a>文件加载：嵌套包含(索引页输出)</h2><p>通常指文件的加载包含中包含另一包含文件：索引页输出<br>//作为索引页可输出索引其他整个定义赋值输出页面<br><img src="https://s2.loli.net/2022/03/27/TGBhxfMy8jWnCFQ.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//即访问include6.php可展现include3.php的定义赋值内容和include4.php的输出内容;</span><br><span class="line">1. include6.php指向索取</span><br><span class="line">   1. include3.php中输出代码从</span><br><span class="line">      1. include4.php获取</span><br></pre></td></tr></table></figure>
+<h1 id="函数function"><a href="#函数function" class="headerlink" title="函数function ?(,){}"></a>函数function ?(,){}</h1><p>作为一本基本语法结构，将某功能代码块封装到结构中实现功能的复用</p>
+<h2 id="函数语法结构"><a href="#函数语法结构" class="headerlink" title="函数语法结构"></a>函数语法结构</h2><p>function关键字 函数名? 参数$/“”：形参,/实参 函数体 return返回值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">funtion ?([参数$/&quot;&quot;])&#123;</span><br><span class="line">函数体;</span><br><span class="line">返回值：return</span><br><span class="line">;&#125;</span><br><span class="line"></span><br><span class="line">//定义实参?</span><br><span class="line">//调用</span><br><span class="line">?($/&quot;&quot;);</span><br><span class="line">?();</span><br></pre></td></tr></table></figure>
+<ol>
+<li>为实现函数复用，一个功能一个函数</li>
+<li>函数参数在调用时需包含参数</li>
+<li>函数定义与调用没有顺序要求：执行时在内存址中找到对应函数</li>
+</ol>
+<h2 id="函数执行实现逻辑"><a href="#函数执行实现逻辑" class="headerlink" title="函数执行实现逻辑"></a>函数执行实现逻辑</h2><p>先编译后再执行</p>
+<ol>
+<li>读取代码块</li>
+<li>编译代码转到数据段(内存)以字节存储</li>
+<li>栈区以二进制逐行执行</li>
+<li>堆区回收</li>
+</ol>
+<h2 id="函数命名：字母-数字-下划线"><a href="#函数命名：字母-数字-下划线" class="headerlink" title="函数命名：字母/数字/下划线"></a>函数命名：字母/数字/下划线</h2><p>驼峰法：AaBbCc();<br>下划线法：a_b_c();</p>
+<h2 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数()"></a>函数参数()</h2><p>形式参数：命名无意义<br>实际参数：调用实际参与内存址执行 //变量 有值表达式(变量/常量/运算符值)<br>//调用函数时：形参是实参的载体，需要在函数内部找到实参内存址的对应位置，将实参内存址上数据传值给形参赋值后执行代码；<br>//形参实参不一定同名；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function a($b,$c)&#123;</span><br><span class="line">echo $b + $c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$d = 1; //定义实参</span><br><span class="line">a($d,2); //1+2=3</span><br></pre></td></tr></table></figure>
+<h3 id="形参默认值"><a href="#形参默认值" class="headerlink" title="形参默认值"></a>形参默认值</h3><p>指形参在没有调用实参内存址参与执行时的默认定义赋值输出；<br>独立存在：</p>
+<ol>
+<li>仅在函数内部执行不与外部实参变量冲突；</li>
+<li>内部形参与外部实参重名不冲突；<br><img src="https://s2.loli.net/2022/03/27/yOkTufFzVPQBr4X.png"></li>
+</ol>
+<h3 id="参数执行的实现逻辑："><a href="#参数执行的实现逻辑：" class="headerlink" title="参数执行的实现逻辑："></a>参数执行的实现逻辑：</h3><ol>
+<li>调用函数：寻找函数内存址是否存在</li>
+<li>栈区执行：代码段转入数据段后作为索引开辟栈区执行</li>
+<li>判断形参是否存在；调用的实参是否存在</li>
+<li>执行函数体：调用实参内存址数据值传值给形参</li>
+<li>执行返回函数值</li>
+</ol>
+<h3 id="参数传递模式：引用传值-amp"><a href="#参数传递模式：引用传值-amp" class="headerlink" title="参数传递模式：引用传值&amp;$"></a>参数传递模式：引用传值&amp;$</h3><p>实参调用时通过引用传递传值给形参；形参与外部传入赋值无关联；<br>引用传值&amp;$：函数内部形参从外部实参获取数据时，要明确&amp;$才会使内部函数主动获取外部内存址，之后外部赋值才会绑定内部形参同步运算<br>关于绑定： //内部运算引用传值绑定外部内存址</p>
+<ol>
+<li>函数内部形参指向绑定外部内存址，之后会同步内外赋值；</li>
+<li>引用传值不得传入实体数据值，只有变量可以使用引用传值(变量存在内存址)<br><img src="https://s2.loli.net/2022/04/02/nU3iJcdsCBxDfGh.png"></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,&amp;$b)&#123; //$b调用外部实参赋值绑定内存址</span><br><span class="line">    $a = $a * 2;</span><br><span class="line">    $b = $b * 2;</span><br><span class="line">    echo $a;</span><br><span class="line">    echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">    echo $b;</span><br><span class="line">&#125;</span><br><span class="line">$a = 1;</span><br><span class="line">$b = 2;</span><br><span class="line">abc($a,$b); //$b同步内部形参运算; //2 4</span><br><span class="line">echo &quot;&lt;hr/&gt;&quot;;</span><br><span class="line">echo $a,&quot;&lt;br/&gt;&quot;,$b; //$a外部实参赋值输出：$a = 1；$b绑定内部形参同步运算后输出：&amp;$b= 2*2 = 4 //1 4</span><br></pre></td></tr></table></figure>
+<h2 id="函数体"><a href="#函数体" class="headerlink" title="函数体{}"></a>函数体{}</h2><p>实现：定义变量/常量/流程控制/调用函数</p>
+<h2 id="返回值return-作为结束符"><a href="#返回值return-作为结束符" class="headerlink" title="返回值return 作为结束符"></a>返回值return 作为结束符</h2><p>函数实现返回结果给外部调用：默认返回空值NULL<br>代码结束符：函数体内终止函数；函数体外终止代码；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function qqq()&#123;</span><br><span class="line">echo __FUNCTION__;</span><br><span class="line">&#125;</span><br><span class="line">var_dump(qqq()); //返回函数体：输出函数名 返回return默认值NULL</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">return $a + $b;</span><br><span class="line">&#125;</span><br><span class="line">$zxc = abc(1,2); //外部定义赋值为函数abc，接收返回结果：实参赋值给内部运算</span><br><span class="line">echo $zxc; //3 echo无法直接输出return</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//return返回结果给外部文件实现文件加载包含</span><br><span class="line">//function.php</span><br><span class="line">function abc($a,$b)&#123;</span><br><span class="line">return $a + $b;</span><br><span class="line">&#125;</span><br><span class="line">$load = abc(1,2); //echo无法直接输出return返回值</span><br><span class="line">echo $load; //3 输出定义赋值后调用接收的返回结果</span><br><span class="line">return &quot;this_is_functionload&quot;; //外部返回自定义值后终止</span><br><span class="line"></span><br><span class="line">//load.php</span><br><span class="line">include_once &quot;function.php&quot;; //接收输出加载$load</span><br><span class="line">$z = include_once &quot;function.php&quot;; </span><br><span class="line">var_dump($z); //接收输出加载$load；echo无法接收加载return返回值：通过定义赋值后接收外部文件加载return返回的自定义赋值string(20) &quot;this_is_functionload&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/02/dbtqhYCmGvLsA6M.png"></p>
+<h1 id="定义作用域：变量常量"><a href="#定义作用域：变量常量" class="headerlink" title="定义作用域：变量常量"></a>定义作用域：变量常量</h1><p>指能够被访问的区域</p>
+<ol>
+<li>全局变量：函数外部 用户自定义<br> 所属空间：仅在全局空间访问，函数体内不可访问全局变量；区别于js可在函数体内访问全局空间变量 //脚本周期为代码结束<br> //函数内部访问输出不了全局变量<br> <img src="https://s2.loli.net/2022/04/02/9m8E2uUdbVpCWyh.png"></li>
+<li>局部变量：函数体内部<br> 所属空间：允许函数本身内部访问 //函数周期为函数结束(栈区开辟独立内存空间)<br> //全局空间访问输出不了局部变量<br> <img src="https://s2.loli.net/2022/04/02/pekxPXBu2wb9UWv.png"></li>
+<li>超全局变量：系统自定义 预定义<br> 所属空间：无访问限制<br> //局部变量访问全局空间：<ol>
+<li>内部通过超全局$GLOBALS[“数组”]方式访问全局变量<br><img src="https://s2.loli.net/2022/04/02/s1bF2tEpKgcik9J.png"></li>
+<li>形实参数传值</li>
+<li>引用传值&amp;$</li>
+<li>global $关键字?：实现内外(函数体内空间/外部全局空间)变量跨域互访；特殊使用时；<br> global $?;<br> $? = ?;<ol>
+<li>global定义赋值在外部存在且同名，内部定义赋值指向外部内存址；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">     $outside = 123; //外部定义赋值</span><br><span class="line">     function abc()&#123;</span><br><span class="line">     global $outside; //声明跨域 赋值外部同名的内部变量</span><br><span class="line">     echo $outside; //1.函数体内空间输出外部变量</span><br><span class="line">     var_dump($outside); //2.函数体内空间解析输出外部变量</span><br><span class="line">     &#125;</span><br><span class="line">abc(); //调用 123 int(123)</span><br></pre></td></tr></table></figure></li>
+<li>global定义赋值在外部不存在，内部绑定外部自动生成外部同名内存址；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">//同函数体跨域</span><br><span class="line">$outside = 123;</span><br><span class="line">function abc()&#123;</span><br><span class="line">global $outside;</span><br><span class="line">var_dump($outside);</span><br><span class="line">global $inner;</span><br><span class="line">$inner = &quot;cross_inner&quot;;</span><br><span class="line">&#125;</span><br><span class="line">abc(); </span><br><span class="line">echo $inner; //cross_inner</span><br><span class="line"></span><br><span class="line">//函数体间跨域</span><br><span class="line">function abc()&#123;</span><br><span class="line">global $outside;//声明跨域 升级$outside为外部自动生成全局变量</span><br><span class="line">$outside = &quot;cross_o&quot;;</span><br><span class="line">&#125;</span><br><span class="line">function def()&#123;</span><br><span class="line">global $outside; //声明跨域 输出函数abc()的已存在外部全局变量</span><br><span class="line">var_dump($outside); //函数体内解析输出abc()自动生成外部全局变量</span><br><span class="line">&#125;</span><br><span class="line">abc(); //首先调用执行函数abc()自动生成外部全局变量，否则def()输出不存在为NULL</span><br><span class="line">def(); //string(7) &quot;cross_o&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h1><h2 id="静态变量static"><a href="#静态变量static" class="headerlink" title="静态变量static?"></a>静态变量static?</h2><p>在函数内部声明实现定义赋值多次调用时：初始化一次，不被内存回收；<br>//即编译时自行生成定义赋值存在后多次调用初始化一次：依据上一次结果赋值进行运算(后自增赋值)；<br>//通常用于：统计函数调用次数：统筹函数多次递归调用的结果；<br>static $? = ?;<br><img src="https://s2.loli.net/2022/04/04/uqks8I6ZQzAxDy5.png"><br><img src="https://s2.loli.net/2022/04/04/6vhnaYTMQeWc85N.png"></p>
+<h2 id="可变函数：回调"><a href="#可变函数：回调" class="headerlink" title="可变函数：回调?"></a>可变函数：回调?</h2><p>当定义赋值为函数名时，调用定义赋值同名()可调用函数()<br>//通常为外部自定义函数调用系统函数时使用；<br>$? = ?函数;<br>echo ?();</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function abc()&#123;</span><br><span class="line">echo &quot;__FUNCTION__&quot;; //输出函数名</span><br><span class="line">&#125;</span><br><span class="line">$zzz = &quot;abc&quot;; //定义赋值为函数名 实现定义赋值可调用函数</span><br><span class="line">zzz(); //调用赋值同名函数 abc</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/04/AlBPpu6tOe3QifX.png"></p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>定义赋值为没有名字的函数；实际存储值为对象</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$? = function&#123;</span><br><span class="line">&#125;;</span><br><span class="line">$?(); //调用</span><br><span class="line">var_dump($?); //object(Closure)#1 (0) &#123; &#125; 实际类型为对象 </span><br></pre></td></tr></table></figure>
+<h3 id="闭包函数"><a href="#闭包函数" class="headerlink" title="闭包函数?"></a>闭包函数?</h3><p>闭包closure是函数体内部变量中，内层被定义赋值(匿名函数)引用绑定未释放所形成<br>//保留外层函数定义赋值给内部函数定义赋值(匿名函数)使用<br>use($外层定义赋值)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function ?()&#123;</span><br><span class="line">$? = ?;</span><br><span class="line">$?2 = function() **use($?外层定义赋值)**&#123; //保留外层</span><br><span class="line">echo $?; //输出外层</span><br><span class="line">&#125;;</span><br><span class="line">$?2(); //调用内层</span><br><span class="line">?(); //调用外层函数</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/04/6ionhm8AsUS5GH2.png"><br><img src="https://s2.loli.net/2022/04/04/QdzJqRWxwuAKZSo.png"></p>
+<h2 id="伪类型"><a href="#伪类型" class="headerlink" title="伪类型"></a>伪类型</h2><p>php中实际不存在：辅助学习查看操作手册而存在；</p>
+<ol>
+<li>mixed混合型：多种数据类型</li>
+<li>number数值型：整型浮点型</li>
+</ol>
+<p><img src="https://s2.loli.net/2022/04/04/hGbpaO6LRwEXMQo.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day2_php/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -971,7 +1167,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
