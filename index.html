@@ -180,7 +180,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-05 19:52:26" itemprop="dateModified" datetime="2022-04-05T19:52:26+08:00">2022-04-05</time>
+                <time title="Modified: 2022-04-06 13:29:21" itemprop="dateModified" datetime="2022-04-06T13:29:21+08:00">2022-04-06</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,8 +260,8 @@
 <h2 id="文件加载：嵌套包含-索引页输出"><a href="#文件加载：嵌套包含-索引页输出" class="headerlink" title="文件加载：嵌套包含(索引页输出)"></a>文件加载：嵌套包含(索引页输出)</h2><p>通常指文件的加载包含中包含另一包含文件：索引页输出<br>//作为索引页可输出索引其他整个定义赋值输出页面<br><img src="https://s2.loli.net/2022/03/27/TGBhxfMy8jWnCFQ.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//即访问include6.php可展现include3.php的定义赋值内容和include4.php的输出内容;</span><br><span class="line">1. include6.php指向索取</span><br><span class="line">   1. include3.php中输出代码从</span><br><span class="line">      1. include4.php获取</span><br></pre></td></tr></table></figure>
 <h1 id="函数function"><a href="#函数function" class="headerlink" title="函数function ?(,){}"></a>函数function ?(,){}</h1><p>作为一本基本语法结构，将某功能代码块封装到结构中实现功能的复用</p>
-<h2 id="函数语法结构"><a href="#函数语法结构" class="headerlink" title="函数语法结构"></a>函数语法结构</h2><p>function关键字 函数名? 参数$/“”：形参,/实参 函数体 return返回值</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">funtion ?([参数$/&quot;&quot;])&#123;</span><br><span class="line">函数体;</span><br><span class="line">返回值：return</span><br><span class="line">;&#125;</span><br><span class="line"></span><br><span class="line">//定义实参?</span><br><span class="line">//调用</span><br><span class="line">?($/&quot;&quot;);</span><br><span class="line">?();</span><br></pre></td></tr></table></figure>
+<h2 id="函数语法结构"><a href="#函数语法结构" class="headerlink" title="函数语法结构"></a>函数语法结构</h2><p>function关键字 函数名? 参数$/“”：形参$,/实参”” 函数体 return返回值</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">funtion ?([参数$/&quot;&quot;])&#123;</span><br><span class="line">函数体;</span><br><span class="line">返回值：return</span><br><span class="line">;&#125;</span><br><span class="line"></span><br><span class="line">//定义实参&quot;?&quot;</span><br><span class="line">//调用</span><br><span class="line">?($/&quot;&quot;);</span><br><span class="line">?();</span><br></pre></td></tr></table></figure>
 <ol>
 <li>为实现函数复用，一个功能一个函数</li>
 <li>函数参数在调用时需包含参数</li>
@@ -296,7 +296,7 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,&amp;$b)&#123; //$b调用外部实参赋值绑定内存址</span><br><span class="line">    $a = $a * 2;</span><br><span class="line">    $b = $b * 2;</span><br><span class="line">    echo $a;</span><br><span class="line">    echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">    echo $b;</span><br><span class="line">&#125;</span><br><span class="line">$a = 1;</span><br><span class="line">$b = 2;</span><br><span class="line">abc($a,$b); //$b同步内部形参运算; //2 4</span><br><span class="line">echo &quot;&lt;hr/&gt;&quot;;</span><br><span class="line">echo $a,&quot;&lt;br/&gt;&quot;,$b; //$a外部实参赋值输出：$a = 1；$b绑定内部形参同步运算后输出：&amp;$b= 2*2 = 4 //1 4</span><br></pre></td></tr></table></figure>
 <h2 id="函数体"><a href="#函数体" class="headerlink" title="函数体{}"></a>函数体{}</h2><p>实现：定义变量/常量/流程控制/调用函数</p>
-<h2 id="返回值return-作为结束符"><a href="#返回值return-作为结束符" class="headerlink" title="返回值return 作为结束符"></a>返回值return 作为结束符</h2><p>函数实现返回结果给外部调用：默认返回空值NULL<br>代码结束符：函数体内终止函数；函数体外终止代码；</p>
+<h2 id="返回值return-作为结束符"><a href="#返回值return-作为结束符" class="headerlink" title="返回值return 作为结束符"></a>返回值return 作为结束符</h2><p>函数实现返回结果给外部调用：默认返回空值NULL ;<br>//把函数return输出结果返回给函数外部，通过定义赋值接收后可输出echo内部函数；<br>代码结束符：函数体内终止函数；函数体外终止代码；</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function qqq()&#123;</span><br><span class="line">echo __FUNCTION__;</span><br><span class="line">&#125;</span><br><span class="line">var_dump(qqq()); //返回函数体：输出函数名 返回return默认值NULL</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">return $a + $b;</span><br><span class="line">&#125;</span><br><span class="line">$zxc = abc(1,2); //外部定义赋值为函数abc，接收返回结果：实参赋值给内部运算</span><br><span class="line">echo $zxc; //3 echo无法直接输出return</span><br></pre></td></tr></table></figure>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//return返回结果给外部文件实现文件加载包含</span><br><span class="line">//function.php</span><br><span class="line">function abc($a,$b)&#123;</span><br><span class="line">return $a + $b;</span><br><span class="line">&#125;</span><br><span class="line">$load = abc(1,2); //echo无法直接输出return返回值</span><br><span class="line">echo $load; //3 输出定义赋值后调用接收的返回结果</span><br><span class="line">return &quot;this_is_functionload&quot;; //外部返回自定义值后终止</span><br><span class="line"></span><br><span class="line">//load.php</span><br><span class="line">include_once &quot;function.php&quot;; //接收输出加载$load</span><br><span class="line">$z = include_once &quot;function.php&quot;; </span><br><span class="line">var_dump($z); //接收输出加载$load；echo无法接收加载return返回值：通过定义赋值后接收外部文件加载return返回的自定义赋值string(20) &quot;this_is_functionload&quot;</span><br></pre></td></tr></table></figure>
@@ -317,13 +317,14 @@
 </ol>
 </li>
 </ol>
-<h1 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h1><h2 id="静态变量static"><a href="#静态变量static" class="headerlink" title="静态变量static?"></a>静态变量static?</h2><p>在函数内部声明实现定义赋值多次调用时：初始化一次，不被内存回收；<br>//即编译时自行生成定义赋值存在后多次调用初始化一次：依据上一次结果赋值进行运算(后自增赋值)；<br>//通常用于：统计函数调用次数：统筹函数多次递归调用的结果；<br>static $? = ?;<br><img src="https://s2.loli.net/2022/04/04/uqks8I6ZQzAxDy5.png"><br><img src="https://s2.loli.net/2022/04/04/6vhnaYTMQeWc85N.png"></p>
-<h2 id="可变函数：回调"><a href="#可变函数：回调" class="headerlink" title="可变函数：回调?"></a>可变函数：回调?</h2><p>当定义赋值为函数名时，调用定义赋值同名()可调用函数()<br>//通常为外部自定义函数调用系统函数时使用；<br>$? = ?函数;<br>echo ?();</p>
+<h1 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h1><h2 id="静态变量static"><a href="#静态变量static" class="headerlink" title="静态变量static?"></a>静态变量static?</h2><p>在函数内部声明实现定义赋值多次调用时：初始化一次，不被内存回收(固定内存址)<br>//即编译时自行生成定义赋值存在后多次调用初始化一次：依据上一次结果赋值进行运算(后自增赋值)；<br>//通常用于：统计函数调用次数：统筹函数多次递归调用的结果；<br>static $? = ?;<br><img src="https://s2.loli.net/2022/04/04/uqks8I6ZQzAxDy5.png"><br><img src="https://s2.loli.net/2022/04/04/6vhnaYTMQeWc85N.png"></p>
+<h2 id="可变函数：回调"><a href="#可变函数：回调" class="headerlink" title="可变函数：回调?"></a>可变函数：回调?</h2><p>当定义赋值为函数名时，调用定义赋值同名()可调用函数()<br>//通常为外部自定义函数调用系统函数时使用；<br>//作为参数传递的函数；<br>Function ?函数(){<br>;}<br>$?定义赋值 = ?函数;<br>echo ?定义赋值();</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function abc()&#123;</span><br><span class="line">echo &quot;__FUNCTION__&quot;; //输出函数名</span><br><span class="line">&#125;</span><br><span class="line">$zzz = &quot;abc&quot;; //定义赋值为函数名 实现定义赋值可调用函数</span><br><span class="line">zzz(); //调用赋值同名函数 abc</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.loli.net/2022/04/04/AlBPpu6tOe3QifX.png"></p>
-<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>定义赋值为没有名字的函数；实际存储值为对象</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$? = function&#123;</span><br><span class="line">&#125;;</span><br><span class="line">$?(); //调用</span><br><span class="line">var_dump($?); //object(Closure)#1 (0) &#123; &#125; 实际类型为对象 </span><br></pre></td></tr></table></figure>
-<h3 id="闭包函数"><a href="#闭包函数" class="headerlink" title="闭包函数?"></a>闭包函数?</h3><p>闭包closure是函数体内部变量中，内层被定义赋值(匿名函数)引用绑定未释放所形成<br>//保留外层函数定义赋值给内部函数定义赋值(匿名函数)使用<br>use($外层定义赋值)</p>
+<h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>定义赋值为没有名字的函数；实际存储值为对象<br>//用作回调函数参数值<br>$?定义赋值 = function(){<br>;<br>};<br>$?定义赋值();</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$? = function()&#123;</span><br><span class="line">&#125;;</span><br><span class="line">$?(); //调用</span><br><span class="line">var_dump($?); //object(Closure)#1 (0) &#123; &#125; 实际类型为对象 </span><br></pre></td></tr></table></figure>
+<p>匿名函数体使用外层变量<strong>use($?外层定义赋值)</strong><br><img src="https://s2.loli.net/2022/04/06/VewmIl1Da2Yt43W.png"></p>
+<h3 id="闭包函数"><a href="#闭包函数" class="headerlink" title="闭包函数?"></a>闭包函数?</h3><p>闭包closure是函数体内部变量中，内层被定义赋值(匿名函数)引用绑定未释放所形成<br>//保留外层函数定义赋值给内部函数定义赋值(匿名函数)使用<br><strong>use($外层定义赋值)</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function ?()&#123;</span><br><span class="line">$? = ?;</span><br><span class="line">$?2 = function() **use($?外层定义赋值)**&#123; //保留外层</span><br><span class="line">echo $?; //输出外层</span><br><span class="line">&#125;;</span><br><span class="line">$?2(); //调用内层</span><br><span class="line">?(); //调用外层函数</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.loli.net/2022/04/04/6ionhm8AsUS5GH2.png"><br><img src="https://s2.loli.net/2022/04/04/QdzJqRWxwuAKZSo.png"></p>
 <h2 id="伪类型"><a href="#伪类型" class="headerlink" title="伪类型"></a>伪类型</h2><p>php中实际不存在：辅助学习查看操作手册而存在；</p>
@@ -374,10 +375,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-03-28 12:57:27 / Modified: 12:58:20" itemprop="dateCreated datePublished" datetime="2022-03-28T12:57:27+08:00">2022-03-28</time>
+              <time title="Created: 2022-03-28 12:57:27" itemprop="dateCreated datePublished" datetime="2022-03-28T12:57:27+08:00">2022-03-28</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-06 13:28:17" itemprop="dateModified" datetime="2022-04-06T13:28:17+08:00">2022-04-06</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -405,6 +412,8 @@
 <h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>//单行注释<br>#单行注释<br>/*<br>多行块注释<br>*/</p>
 <h2 id="分割结束符；"><a href="#分割结束符；" class="headerlink" title="分割结束符；"></a>分割结束符；</h2><p>;<br><code> $a = 1;</code></p>
 <h2 id="连接符"><a href="#连接符" class="headerlink" title="连接符."></a>连接符.</h2><p>.<br><code> echo &#39;asd&#39;.&#39;zxcv&#39;; //asdzxcv</code> </p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h3 id="普通输出"><a href="#普通输出" class="headerlink" title="普通输出"></a>普通输出</h3><p><code>echo $?/&quot;&quot;;</code></p>
+<h3 id="数组输出"><a href="#数组输出" class="headerlink" title="数组输出"></a>数组输出</h3><p><code>print_r();</code></p>
 <h1 id="基本变量"><a href="#基本变量" class="headerlink" title="基本变量"></a>基本变量</h1><p>基本概念：</p>
 <ol>
 <li>变量在内存中存储数据</li>
