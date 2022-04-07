@@ -180,7 +180,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-04-06 13:29:21" itemprop="dateModified" datetime="2022-04-06T13:29:21+08:00">2022-04-06</time>
+                <time title="Modified: 2022-04-07 14:49:31" itemprop="dateModified" datetime="2022-04-07T14:49:31+08:00">2022-04-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -318,7 +318,7 @@
 </li>
 </ol>
 <h1 id="函数类型"><a href="#函数类型" class="headerlink" title="函数类型"></a>函数类型</h1><h2 id="静态变量static"><a href="#静态变量static" class="headerlink" title="静态变量static?"></a>静态变量static?</h2><p>在函数内部声明实现定义赋值多次调用时：初始化一次，不被内存回收(固定内存址)<br>//即编译时自行生成定义赋值存在后多次调用初始化一次：依据上一次结果赋值进行运算(后自增赋值)；<br>//通常用于：统计函数调用次数：统筹函数多次递归调用的结果；<br>static $? = ?;<br><img src="https://s2.loli.net/2022/04/04/uqks8I6ZQzAxDy5.png"><br><img src="https://s2.loli.net/2022/04/04/6vhnaYTMQeWc85N.png"></p>
-<h2 id="可变函数：回调"><a href="#可变函数：回调" class="headerlink" title="可变函数：回调?"></a>可变函数：回调?</h2><p>当定义赋值为函数名时，调用定义赋值同名()可调用函数()<br>//通常为外部自定义函数调用系统函数时使用；<br>//作为参数传递的函数；<br>Function ?函数(){<br>;}<br>$?定义赋值 = ?函数;<br>echo ?定义赋值();</p>
+<h2 id="可变函数：回调"><a href="#可变函数：回调" class="headerlink" title="可变函数：回调?"></a>可变函数：回调?</h2><p>当定义赋值为函数名时，调用定义赋值同名()可调用函数()<br>//通常为外部自定义函数调用系统函数时使用；<br>//作为参数传递的函数；<br>//回调函数可理解为用户自定义的函数：应用于可变函数/匿名闭包函数；<br>Function ?函数(){<br>;}<br>$?定义赋值 = ?函数;<br>echo ?定义赋值();</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function abc()&#123;</span><br><span class="line">echo &quot;__FUNCTION__&quot;; //输出函数名</span><br><span class="line">&#125;</span><br><span class="line">$zzz = &quot;abc&quot;; //定义赋值为函数名 实现定义赋值可调用函数</span><br><span class="line">zzz(); //调用赋值同名函数 abc</span><br></pre></td></tr></table></figure>
 <p><img src="https://s2.loli.net/2022/04/04/AlBPpu6tOe3QifX.png"></p>
 <h2 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h2><p>定义赋值为没有名字的函数；实际存储值为对象<br>//用作回调函数参数值<br>$?定义赋值 = function(){<br>;<br>};<br>$?定义赋值();</p>
