@@ -65,7 +65,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/04/08/SYyFpe6KczlOdkE.png">
 <meta property="og:image" content="https://s2.loli.net/2022/04/08/mGkXW5isPR7fBjY.png">
 <meta property="article:published_time" content="2022-04-08T12:03:20.954Z">
-<meta property="article:modified_time" content="2022-04-08T12:20:46.538Z">
+<meta property="article:modified_time" content="2022-04-08T12:38:26.603Z">
 <meta property="article:author" content="tyson_H">
 <meta property="article:tag" content="hexo,tyson">
 <meta name="twitter:card" content="summary">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-04-08 20:03:20 / Modified: 20:20:46" itemprop="dateCreated datePublished" datetime="2022-04-08T20:03:20+08:00">2022-04-08</time>
+              <time title="Created: 2022-04-08 20:03:20 / Modified: 20:38:26" itemprop="dateCreated datePublished" datetime="2022-04-08T20:03:20+08:00">2022-04-08</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -347,7 +347,7 @@
 <li>获取数组元素总长个数count($?数组函数)作为边界符；</li>
 <li>下标key为数字索引数组有规律；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//轮询初始化，边界，循环体输出，操作后自增；</span><br><span class="line">for($i = 0; $i &lt; count($?数组函数); $i++)&#123;</span><br><span class="line">echo $i, $?数组函数[$i下标访问元素];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <img src="https://s2.loli.net/2022/04/08/eE1f37cYsSKRylL.png"><h4 id="遍历循环while"><a href="#遍历循环while" class="headerlink" title="遍历循环while(){}"></a>遍历循环while(){}</h4><h5 id="each-函数"><a href="#each-函数" class="headerlink" title="each()函数"></a>each()函数</h5>通过数组内部指针<strong>自动移动</strong>获取下标和元素赋值，针对元素<strong>每次</strong>返回四个返回值：索引返回值/关联返回值；<br>//若末尾不存在则return返回布尔false；<br>//php7.2+不支持；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print_r(each($?数组函数));</span><br><span class="line">//四个返回值输出</span><br><span class="line">array&#123;</span><br><span class="line">[1] =&gt; ? //索引返回元素赋值?</span><br><span class="line">[value] =&gt; ? //关联返回元素赋值?</span><br><span class="line">[0] =&gt; ? //索引返回下标值?</span><br><span class="line">[key] =&gt; ? //关联返回下标值?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/whZkuB8bztJCTF4.png"><h5 id="list-函数"><a href="#list-函数" class="headerlink" title="list()函数"></a>list()函数</h5>作为一种结构<strong>批量</strong>获取索引数组元素赋值后<strong>依序传值</strong>给对应$变量存储；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list($?存储变量,) = $?数组函数;</span><br><span class="line">var_dump($?存储变量,$?存储变量n);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/08/whZkuB8bztJCTF4.png"><h5 id="list-函数"><a href="#list-函数" class="headerlink" title="list()函数"></a>list()函数</h5>作为一种结构<strong>批量</strong>获取索引数组元素赋值后<strong>从0依序传值</strong>给对应$变量存储；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list($?存储变量,) = $?数组函数;</span><br><span class="line">var_dump($?存储变量,$?存储变量n);</span><br></pre></td></tr></table></figure>
 <img src="https://s2.loli.net/2022/04/08/6vf2O7CRqWMjpVh.png"><br><img src="https://s2.loli.net/2022/04/08/SYyFpe6KczlOdkE.png"><h5 id="while循环-配合each-list-函数实现遍历"><a href="#while循环-配合each-list-函数实现遍历" class="headerlink" title="while循环(){}配合each()list()函数实现遍历?"></a>while循环(){}配合each()list()函数实现遍历?</h5><img src="https://s2.loli.net/2022/04/08/mGkXW5isPR7fBjY.png"></li>
 </ol>
 
