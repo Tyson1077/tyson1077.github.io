@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tyson1077.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="系统常用函数输出函数print()输出内容结构与echo输出相似，输出后强制返回值1；括号可有可无； 12echo print(&quot;wtf&quot;); &#x2F;&#x2F;wtf1print &quot;wtf&quot;; &#x2F;&#x2F;wtf print_r()输出结构内容：数组与var_dump()相似；不输出数据类型； 12$a &#x3D; 123;print_r($a); &#x2F;&#x2F;123 date()按照指定格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day4_php">
+<meta property="og:url" content="https://tyson1077.github.io/day4_php/index.html">
+<meta property="og:site_name" content="tyson自留地">
+<meta property="og:description" content="系统常用函数输出函数print()输出内容结构与echo输出相似，输出后强制返回值1；括号可有可无； 12echo print(&quot;wtf&quot;); &#x2F;&#x2F;wtf1print &quot;wtf&quot;; &#x2F;&#x2F;wtf print_r()输出结构内容：数组与var_dump()相似；不输出数据类型； 12$a &#x3D; 123;print_r($a); &#x2F;&#x2F;123 date()按照指定格式">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/04/05/YrTjavpkfzcHSNX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/05/RenC7WjJVTByPkA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/05/ocHGOFh6tQwjCTm.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/05/fH9ygaRkjF3ZXUW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/lzLqR7X6FiPCM8D.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/XMdSmsfE9pyt2CQ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/4OIxya7pV2efSnF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/xGPbYvg8qnsrdKB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/sdP1MxbTzFrhYIu.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/05/SUmKWYvHpNZa8rs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/zxSwDdJjhBqtgAY.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/g1qxrVashetdyPO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/wdLJ6lBrsSPpTuh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/UdoilWtvK9RTOZw.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/5gS4ZqEYLcJl1fK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/lFCcDv9Nd3rm5ih.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/YBwTzSWXc45VneO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/6loJvNp9q4QFty3.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/8GJc9iPSWXCevmA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/3dxyoVkGhgXDcFj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/agoGcPYLqxzvehK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/ZOfsNpS48GeHM9z.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/8LJtU6RZhXTcMrH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/klsmKWH8TXiUMYq.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/6jlpW491f2Gx5o8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/SIH7ia8due2m4F3.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/Oaudp1gyscbXUDM.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/07/IzjC9B8lFMyakGR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/xNmBsH4OUiulyfZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/zXCB9ueISLUPDrv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/nQsIL9MEPAqKp8i.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/Y8u53BsKAzbhQ1M.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/eE1f37cYsSKRylL.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/whZkuB8bztJCTF4.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/6vf2O7CRqWMjpVh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/SYyFpe6KczlOdkE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/08/mGkXW5isPR7fBjY.png">
+<meta property="article:published_time" content="2022-04-08T12:03:20.954Z">
+<meta property="article:modified_time" content="2022-04-08T12:03:55.903Z">
+<meta property="article:author" content="tyson_H">
+<meta property="article:tag" content="hexo,tyson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/04/05/YrTjavpkfzcHSNX.png">
+
+<link rel="canonical" href="https://tyson1077.github.io/day4_php/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day4_php | tyson自留地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">tyson自留地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hello_world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day4_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day4_php
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-08 20:03:20 / Modified: 20:03:55" itemprop="dateCreated datePublished" datetime="2022-04-08T20:03:20+08:00">2022-04-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="系统常用函数"><a href="#系统常用函数" class="headerlink" title="系统常用函数"></a>系统常用函数</h1><h2 id="输出函数"><a href="#输出函数" class="headerlink" title="输出函数"></a>输出函数</h2><h3 id="print-输出内容结构"><a href="#print-输出内容结构" class="headerlink" title="print()输出内容结构"></a>print()输出内容结构</h3><p>与echo输出相似，输出后强制返回值1；括号可有可无；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo print(&quot;wtf&quot;); //wtf1</span><br><span class="line">print &quot;wtf&quot;; //wtf</span><br></pre></td></tr></table></figure>
+<h3 id="print-r-输出结构内容：数组"><a href="#print-r-输出结构内容：数组" class="headerlink" title="print_r()输出结构内容：数组"></a>print_r()输出结构内容：数组</h3><p>与var_dump()相似；不输出数据类型；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = 123;</span><br><span class="line">print_r($a); //123</span><br></pre></td></tr></table></figure>
+<h3 id="date"><a href="#date" class="headerlink" title="date()"></a>date()</h3><p>按照指定格式输出时间戳：以格林威治时间起始计算秒数；<br>指定格式不存在时：默认指定当前时间戳；<br><img src="https://s2.loli.net/2022/04/05/YrTjavpkfzcHSNX.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo date(&quot;Y m d M:i:s&quot;); //2022 04 05 Apr:48:03</span><br></pre></td></tr></table></figure>
+<h3 id="time"><a href="#time" class="headerlink" title="time()"></a>time()</h3><p>获取当前时间时间戳：以格林威治时间起始；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo time(); //1649126989</span><br></pre></td></tr></table></figure>
+<h3 id="microtime"><a href="#microtime" class="headerlink" title="microtime()"></a>microtime()</h3><p>获取微秒级时间戳 时间戳</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo microtime(); //0.35315400 1649127293</span><br></pre></td></tr></table></figure>
+<h3 id="strtotime"><a href="#strtotime" class="headerlink" title="strtotime()"></a>strtotime()</h3><p>将字符串转换成时间戳：按照指定的格式；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo strtotime(&quot;now&quot;); //1649127293</span><br><span class="line">echo strtotime(&quot;5 apr 2022&quot;); //1649088000</span><br><span class="line">echo strtotime(&quot;+ 1day&quot;); //1649213833</span><br></pre></td></tr></table></figure>
+<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><h3 id="max-指定参数最大值-指定数组"><a href="#max-指定参数最大值-指定数组" class="headerlink" title="max()指定参数最大值/指定数组"></a>max()指定参数最大值/指定数组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo max(123,321,1000); //1000</span><br></pre></td></tr></table></figure>
+<h3 id="min-获取参数较小值-指定数组"><a href="#min-获取参数较小值-指定数组" class="headerlink" title="min()获取参数较小值/指定数组"></a>min()获取参数较小值/指定数组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo min(123,321,1000); //123</span><br></pre></td></tr></table></figure>
+<h3 id="rand-获取随机数"><a href="#rand-获取随机数" class="headerlink" title="rand()获取随机数"></a>rand()获取随机数</h3><p>指定区间获取随机数min,max；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rand(1,10); //7</span><br></pre></td></tr></table></figure>
+<p>无指定区间min,max：生成伪随机区间0,rand_max之间随机数；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo rand(); //51942467356</span><br></pre></td></tr></table></figure>
+<h3 id="mt-rand-高效获取随机数"><a href="#mt-rand-高效获取随机数" class="headerlink" title="mt_rand()高效获取随机数"></a>mt_rand()高效获取随机数</h3><p>突破windows平台rand_max=32768的限制；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo mt_rand(); //983704302</span><br></pre></td></tr></table></figure>
+<h3 id="round-四舍五入"><a href="#round-四舍五入" class="headerlink" title="round()四舍五入"></a>round()四舍五入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo round(2.4); //2</span><br><span class="line">echo round(2.5); //3</span><br><span class="line">echo round(2.6); //3</span><br></pre></td></tr></table></figure>
+<h3 id="ceil-向大取整"><a href="#ceil-向大取整" class="headerlink" title="ceil()向大取整"></a>ceil()向大取整</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo ceil(1.1); //2</span><br></pre></td></tr></table></figure>
+<h3 id="floor-向小取整"><a href="#floor-向小取整" class="headerlink" title="floor()向小取整"></a>floor()向小取整</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo floor(3.1); //3</span><br></pre></td></tr></table></figure>
+<h3 id="pow-指定数字的指数结果"><a href="#pow-指定数字的指数结果" class="headerlink" title="pow()指定数字的指数结果"></a>pow()指定数字的指数结果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo pow(2,9); //2^9 = 512;</span><br></pre></td></tr></table></figure>
+<h3 id="abs-绝对值"><a href="#abs-绝对值" class="headerlink" title="abs()绝对值"></a>abs()绝对值</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo abs(-2); //2</span><br><span class="line">echo abs(2); //2</span><br></pre></td></tr></table></figure>
+<h3 id="sqrt-平方根"><a href="#sqrt-平方根" class="headerlink" title="sqrt()平方根"></a>sqrt()平方根</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo sqrt(1024); //32</span><br></pre></td></tr></table></figure>
+<h2 id="判断函数的函数"><a href="#判断函数的函数" class="headerlink" title="判断函数的函数"></a>判断函数的函数</h2><h3 id="function-exists-“-”"><a href="#function-exists-“-”" class="headerlink" title="function_exists(“?”)"></a>function_exists(“?”)</h3><p>判断某个函数名内存是否存在</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function abc($a)&#123;</span><br><span class="line">&#125;</span><br><span class="line">function_exist(&quot;abc&quot;); //int(1)</span><br></pre></td></tr></table></figure>
+<h3 id="func-get-arg-位数-：起始0"><a href="#func-get-arg-位数-：起始0" class="headerlink" title="func_get_arg(位数)：起始0"></a>func_get_arg(位数)：起始0</h3><p>获取自定义函数指定位数参数<br>//参数标识起始值为0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">var_dump(func_get_arg(0)); //调用输出int(1)</span><br><span class="line">var_dump(func_get_arg(1)); //调用输出int(2)</span><br><span class="line">var_dump(func_get_arg(2)); //调用输出int(3)</span><br><span class="line">&#125;</span><br><span class="line">abc(1,2,3); </span><br></pre></td></tr></table></figure>
+<h3 id="func-get-args"><a href="#func-get-args" class="headerlink" title="func_get_args()"></a>func_get_args()</h3><p>统计获取自定义函数所有实参：数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">var_dump(func_get_args()); //array(2) &#123; [0]=&gt; int(1) [1]=&gt; string(1) &quot;2&quot; &#125; </span><br><span class="line">&#125;</span><br><span class="line">abc(1,&quot;2&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="func-num-args"><a href="#func-num-args" class="headerlink" title="func_num_args()"></a>func_num_args()</h3><p>统计自定义函数实参数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">var_dump(func_num_args()); //int(3)</span><br><span class="line">&#125;</span><br><span class="line">abc(0,&quot;1&quot;,2);</span><br></pre></td></tr></table></figure>
+<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>执行程序代码出现报错通过错误处理形式告知展现；</p>
+<h2 id="错误分类"><a href="#错误分类" class="headerlink" title="错误分类"></a>错误分类</h2><h3 id="语法错误parse-error"><a href="#语法错误parse-error" class="headerlink" title="语法错误parse error"></a>语法错误parse error</h3><h3 id="运行错误runtime-error：编译通过，执行条件不满足"><a href="#运行错误runtime-error：编译通过，执行条件不满足" class="headerlink" title="运行错误runtime error：编译通过，执行条件不满足"></a>运行错误runtime error：编译通过，执行条件不满足</h3><h3 id="逻辑错误：代码规范性错误，执行正常输出结果出错"><a href="#逻辑错误：代码规范性错误，执行正常输出结果出错" class="headerlink" title="逻辑错误：代码规范性错误，执行正常输出结果出错"></a>逻辑错误：代码规范性错误，执行正常输出结果出错</h3><h2 id="错误代号"><a href="#错误代号" class="headerlink" title="错误代号"></a>错误代号</h2><p>系统默认定义为系统常量</p>
+<h3 id="系统错误"><a href="#系统错误" class="headerlink" title="系统错误"></a>系统错误</h3><h4 id="E-PARSE编译错误"><a href="#E-PARSE编译错误" class="headerlink" title="E_PARSE编译错误"></a>E_PARSE编译错误</h4><p>编译错误，代码无法执行</p>
+<h4 id="E-ERROR致命错误"><a href="#E-ERROR致命错误" class="headerlink" title="E_ERROR致命错误"></a>E_ERROR致命错误</h4><p>fatal error致命错误，代码无法继续执行</p>
+<h4 id="E-WARNING警告错误"><a href="#E-WARNING警告错误" class="headerlink" title="E_WARNING警告错误"></a>E_WARNING警告错误</h4><p>警告错误，影响输出结果</p>
+<h4 id="E-NOTICE通知错误"><a href="#E-NOTICE通知错误" class="headerlink" title="E_NOTICE通知错误"></a>E_NOTICE通知错误</h4><p>通知错误，不影响执行</p>
+<h3 id="用户错误：自定义"><a href="#用户错误：自定义" class="headerlink" title="用户错误：自定义"></a>用户错误：自定义</h3><h4 id="E-USER-ERROR"><a href="#E-USER-ERROR" class="headerlink" title="E_USER_ERROR"></a>E_USER_ERROR</h4><h4 id="E-USER-WARNING"><a href="#E-USER-WARNING" class="headerlink" title="E_USER_WARNING"></a>E_USER_WARNING</h4><h4 id="E-USER-NOTICE"><a href="#E-USER-NOTICE" class="headerlink" title="E_USER_NOTICE"></a>E_USER_NOTICE</h4><h3 id="其他错误：E-ALL所有错误"><a href="#其他错误：E-ALL所有错误" class="headerlink" title="其他错误：E_ALL所有错误"></a>其他错误：E_ALL所有错误</h3><p>开发环境下启用，进行错误控制</p>
+<h2 id="错误控制操作"><a href="#错误控制操作" class="headerlink" title="错误控制操作"></a>错误控制操作</h2><p>错误代号由单字节存储，一种错误对应一个位；<br>开发环境下，使用<strong>位运算</strong>对错误进行控制操作；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">排除通知notice：</span><br><span class="line">E_ALL &amp; ~E_NOTICE //所有错误与notice之外的错误</span><br><span class="line">只允许警告通知存在：</span><br><span class="line">E_WARNING | E_NOTICE //允许警告或通知错误</span><br></pre></td></tr></table></figure>
+<h2 id="错误触发"><a href="#错误触发" class="headerlink" title="错误触发"></a>错误触发</h2><h3 id="运行自动触发"><a href="#运行自动触发" class="headerlink" title="运行自动触发"></a>运行自动触发</h3><p>系统自动触发后输出：针对语法错误/运行错误；<br><img src="https://s2.loli.net/2022/04/05/RenC7WjJVTByPkA.png"></p>
+<h3 id="人为触发trigger-error-“”"><a href="#人为触发trigger-error-“”" class="headerlink" title="人为触发trigger_error(“”,)"></a>人为触发trigger_error(“”,)</h3><p>预判逻辑错误：通过判断代码触发错误响应；<br>trigger_error(“”); //不阻止系统报错；<br><img src="https://s2.loli.net/2022/04/05/ocHGOFh6tQwjCTm.png"><br>加强错误等级：严谨性用户参数：trigger_error(“”,E_USER_ERROR);<br><img src="https://s2.loli.net/2022/04/05/fH9ygaRkjF3ZXUW.png"></p>
+<h3 id="自定义错误处理set-error-handler"><a href="#自定义错误处理set-error-handler" class="headerlink" title="自定义错误处理set_error_handler()"></a>自定义错误处理set_error_handler()</h3><ol>
+<li>自定义错误处理提权：<br>set_error_handler()函数将错误触发处理提升为系统级别，出现报错使用自定义报错来处理；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set_error_handler($error_handler回调自定义,[$error_types错误类型等级])</span><br><span class="line">//自定义回调函数作为参数使用：&quot;&quot;/$;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/lzLqR7X6FiPCM8D.png"></li>
+<li>设置回调传参error_handler()<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_handler($error错误代码,$errstr,[$errfile,$errline,$errcontext])</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/XMdSmsfE9pyt2CQ.png"></li>
+<li>自定义报错处理：代码实现<br> //嵌入页面：应用于页面报错控制；优先级高于系统全局报错控制；<ol>
+<li>自定义报错处理机制<br>//error_reporting()获取系统所有报错类型等级；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function ?自定义回调函数($errno,$errstr,$errfile,$errline,$errcontext)&#123; //导入自定义回调报错函数类型；</span><br><span class="line">//轮询判断系统遇到的错误：不存在系统本身既存报错则不执行代码；</span><br><span class="line">if(!(error_reporting() &amp; $errno))&#123; //获取的系统所有报错类型和错误代码不存在，返回值return外部不存在false；</span><br><span class="line">return false;</span><br><span class="line">//如果报错代码存在继续执行代码；</span><br><span class="line">&#125;</span><br><span class="line">//匹配报错代码类型；/</span><br><span class="line">switch($errno)&#123;</span><br><span class="line">case E_ERROR:</span><br><span class="line">case E_USER_ERROR: //两个赋值同时匹配，则输出；</span><br><span class="line">echo &quot;fatal error in file&quot; . $errfile . &quot;on line&quot; . $errline . &quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo &quot;error info:&quot; . $errstr;</span><br><span class="line">break; //匹配通过终止所有匹配；</span><br><span class="line">case E_WARNING:</span><br><span class="line">case E_USER_WARNING:</span><br><span class="line">echo &quot;Warning in file&quot; . $errfile . &quot;on line&quot; . $errline . &quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo &quot;error info:&quot; . $errstr;</span><br><span class="line">break; //匹配通过终止所有匹配；</span><br><span class="line">&#125;</span><br><span class="line">return true; //匹配报错代码成功，返回值外部true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/4OIxya7pV2efSnF.png"></li>
+<li>注册自定义报错函数：导入系统并提权<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_error_handler(?自定义回调函数);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/xGPbYvg8qnsrdKB.png"><br><img src="https://s2.loli.net/2022/04/07/sdP1MxbTzFrhYIu.png"><h2 id="错误设置"><a href="#错误设置" class="headerlink" title="错误设置"></a>错误设置</h2><h3 id="错误显示"><a href="#错误显示" class="headerlink" title="错误显示"></a>错误显示</h3>脚本错误处理：</li>
+</ol>
+</li>
+<li>php.ini配置文件：默认全局控制<br> 错误显示开关display_errors<br> 错误显示类型error_reporting<br> <img src="https://s2.loli.net/2022/04/05/SUmKWYvHpNZa8rs.png"></li>
+<li>php脚本函数控制错误：优先级更高(用于页面)<ol>
+<li>设置错误显示级别：Error_reporting()</li>
+<li>ini_set(“配置文件配置项”,”配置值”);<br> ini_set(“error_reporting”,E_ALL);<br> ini_set(“display_errors”,1);<h3 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h3>生产环境下展示错误：不友好用户/不安全暴露；<br>保留错误输出给错误日志文件：</li>
+</ol>
+</li>
+<li>php.ini配置文件：开启log_errors;设置错误日志路径 error_log = “”;</li>
+<li>php脚本函数控制：ini_set();<h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义 $? = ?"></a>定义 $? = ?</h2><h3 id="引号定义"><a href="#引号定义" class="headerlink" title="引号定义"></a>引号定义</h3></li>
+<li>‘’单引号定义； //无结构要求单行定义</li>
+<li>“”双引号定义：可解析定义赋值$；识别($?)变量； //无结构要求单行定义<h3 id="结构化定义：保留结构"><a href="#结构化定义：保留结构" class="headerlink" title="结构化定义：保留结构"></a>结构化定义：保留结构</h3>//要求：上下边界尾椎无内容/下边界顶格；</li>
+<li>nowdoc <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$? = &lt;&lt;&lt; &#x27;?边界结束符&#x27;</span><br><span class="line">?字符串</span><br><span class="line">?边界结束符;</span><br></pre></td></tr></table></figure></li>
+<li>heredoc<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$? = &lt;&lt;&lt; ?边界结束符</span><br><span class="line">?字符串</span><br><span class="line">?边界结束符;</span><br></pre></td></tr></table></figure>
+<h2 id="转义"><a href="#转义" class="headerlink" title="转义 +?"></a>转义 +?</h2>计算机通用协议中，处理特定方式定义字母即为转义<br>常见转义符：</li>
+<li>&#39; 单引号中显示转义单引号</li>
+<li>&quot; 双引号中显示转义双引号</li>
+<li>\r 回车换行：回到当前行首位</li>
+<li>\n 回车新增行</li>
+<li>\t 缩进补全四空格：TAB</li>
+<li>$ 特定识别变量符<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2>获取字符串长度strlen() 单字节单位 //中文三字节<br>多字节拓展:开启mbstring //multi string bytes</li>
+<li>php.ini</li>
+<li>php_mbstring.dll</li>
+<li>mb_string(“?”/$?,?字集)函数：指定字符集以统计字符串<br><img src="https://s2.loli.net/2022/04/07/zxSwDdJjhBqtgAY.png"><h2 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h2><h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3>implode(“?分隔符”,$?数组) 以分隔符合并数组连接成字符串<br><img src="https://s2.loli.net/2022/04/07/g1qxrVashetdyPO.png"><br>explode(“?分隔符”,$?) 以分隔符拆分字符串<br><img src="https://s2.loli.net/2022/04/07/wdLJ6lBrsSPpTuh.png"><br>str_split($?,$长度) 以指定长度拆分字符串为数组<br><img src="https://s2.loli.net/2022/04/07/UdoilWtvK9RTOZw.png"><h3 id="截取函数"><a href="#截取函数" class="headerlink" title="截取函数"></a>截取函数</h3>trim($?,[“”]) 去除首尾空白/指定的字符 //ltrim()左 rtrim()右<br><img src="https://s2.loli.net/2022/04/07/5gS4ZqEYLcJl1fK.png"><br>substr($?,起始位数值,截取长度) 截取指定位置字符串 //标识符起始于0<br><img src="https://s2.loli.net/2022/04/07/lFCcDv9Nd3rm5ih.png"><br>strstr($?,”匹配字符”) 截取匹配字符后字符串<h3 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h3>strtoupper($?) 转大写<br>strtolower($?) 转小写<br>ucfirst($?) 首字符转大<h3 id="搜索函数"><a href="#搜索函数" class="headerlink" title="搜索函数"></a>搜索函数</h3>strpos($?/””,搜索起始位) 获取子字符串初始位置 //标识符初始位值为0<br><img src="https://s2.loli.net/2022/04/07/YBwTzSWXc45VneO.png"><br>strrpos($?/””,搜索起始位) 获取子字符串最后出现位置<br><img src="https://s2.loli.net/2022/04/07/6loJvNp9q4QFty3.png"><h3 id="替换函数"><a href="#替换函数" class="headerlink" title="替换函数"></a>替换函数</h3>str_replace(“替换值”,“被替换值”,$?) 替换字符串字符<br><img src="https://s2.loli.net/2022/04/07/8GJc9iPSWXCevmA.png"><h3 id="格式化函数"><a href="#格式化函数" class="headerlink" title="格式化函数"></a>格式化函数</h3>printf(“?%?”,传入$?) //嵌入变量传参以源格式化输出占位字符和字符串<br><img src="https://s2.loli.net/2022/04/07/3dxyoVkGhgXDcFj.png"><br>sprintf(“?%?”,传入$?) //嵌入变量传参以源格式化输出占位字符和字符串,之后写入进变量<br><img src="https://s2.loli.net/2022/04/07/agoGcPYLqxzvehK.png" alt=" "></li>
+</ol>
+<h3 id="重复函数"><a href="#重复函数" class="headerlink" title="重复函数"></a>重复函数</h3><p>str_repeat($?,重复次数) //重复打印输出字符串<br><img src="https://s2.loli.net/2022/04/07/ZOfsNpS48GeHM9z.png"></p>
+<h3 id="糅杂函数"><a href="#糅杂函数" class="headerlink" title="糅杂函数"></a>糅杂函数</h3><p>str_shuffle($?) //打乱字符串顺序<br><img src="https://s2.loli.net/2022/04/07/8LJtU6RZhXTcMrH.png"></p>
+<h3 id="比较函数"><a href="#比较函数" class="headerlink" title="比较函数"></a>比较函数</h3><p>strcmp($?前,$?后)比较两个字符串大小 //返回0相等,1前大,-1后大<br><img src="https://s2.loli.net/2022/04/07/klsmKWH8TXiUMYq.png"></p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数据的组合：把单多个数据存储为一个容器，通过定义赋值指向获得该容器中所有数据；</p>
+<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ol>
+<li>array关键字<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$? = array(元素1 , 元素2 , 元素n); //索引数组</span><br><span class="line">$? = array(&quot;下标key?&quot; =&gt; 元素1 , &quot;下标key?&quot; =&gt; 元素2 , &quot;下标key?&quot; =&gt; 元素n); //关联数组</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/6jlpW491f2Gx5o8.png"></li>
+<li>[]中括号覆盖数据<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$? = [元素1 , 元素2 , 元素n];</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/SIH7ia8due2m4F3.png"></li>
+<li>[]中括号自动合成隐形数组<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$?[] = ?; //自动生成下标key 始于0</span><br><span class="line">$?[下标key序号] = ?;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/07/Oaudp1gyscbXUDM.png"><h3 id="关于：数组-下标"><a href="#关于：数组-下标" class="headerlink" title="关于：数组/下标"></a>关于：数组/下标</h3></li>
+<li>索引数组：下标为整型</li>
+<li>关联数组：下标字符串</li>
+<li>数组下标无顺序</li>
+<li>下标标识符自增始于0</li>
+<li>下标特殊值自动转换：布尔值true/false;空值NULL;<br><img src="https://s2.loli.net/2022/04/07/IzjC9B8lFMyakGR.png"></li>
+<li>一维下标为数字；二维下标为字符串；</li>
+<li>数组元素类型/长度无限制</li>
+<li>数组存储大数据：内存堆区中连续存储<h2 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h2><h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3>数组中元素也是数组：数组中加层数组；<br>//php数组无维度限制；超过三层会降低代码访问效率；<h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//下标key自动生成</span><br><span class="line">$? = array(</span><br><span class="line">array(&quot;&quot; =&gt; &quot;&quot; , &quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">array(&quot;&quot; =&gt; &quot;&quot; , &quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">array(&quot;&quot; =&gt; &quot;&quot; , &quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">);</span><br><span class="line">print_r($?); //输出二维数组</span><br><span class="line"></span><br><span class="line">//下标key手动生成</span><br><span class="line">$? = array(</span><br><span class="line">? =&gt; array(&quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">? =&gt; array(&quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">);</span><br><span class="line">print_r(array[?]); //指定下标key?输出二维数组</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/08/xNmBsH4OUiulyfZ.png"><h4 id="异形数组"><a href="#异形数组" class="headerlink" title="异形数组"></a>异形数组</h4>//数组中元素不规则<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3>自动获取下标输出访问元素<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print_r($?[下标key?]); //访问输出一维数组</span><br><span class="line">print_r($?[下标key?][二维下标key?]); //访问输出二维数组</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/08/zXCB9ueISLUPDrv.png"><h4 id="遍历循环foreach"><a href="#遍历循环foreach" class="headerlink" title="遍历循环foreach(){}"></a>遍历循环foreach(){}</h4>//一维下标为数字；二维下标为字符串；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//自动遍历</span><br><span class="line">foreach($?数组函数 as [$?下标 =&gt;] $?元素赋值)&#123;</span><br><span class="line">echo $?下标, $?元素赋值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/08/nQsIL9MEPAqKp8i.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//手动遍历：多维数组</span><br><span class="line">foreach($?数组函数 as $?一维下标)&#123;</span><br><span class="line">echo $?一维下标[&quot;?二维下标key&quot;], $?一维下标[&quot;?二维下标key&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/08/Y8u53BsKAzbhQ1M.png"><h4 id="遍历原理："><a href="#遍历原理：" class="headerlink" title="遍历原理："></a>遍历原理：</h4>通过内部可移动指针获取数据；</li>
+<li>foreach重置指针：指向第一个元素；</li>
+<li>进入foreach循环：获取第一个元素，移动指针取出[$?下标函数]及对应$?元素赋值函数，移动至末端停止；</li>
+<li>执行循环体：轮询23；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach($? as $?下标 =&gt; $?元素赋值)&#123;</span><br><span class="line">循环体输出echo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="遍历循环for"><a href="#遍历循环for" class="headerlink" title="遍历循环for(){}"></a>遍历循环for(){}</h4>基于已知数组边界始末进行有条件规律变化；<h5 id="for遍历条件："><a href="#for遍历条件：" class="headerlink" title="for遍历条件："></a>for遍历条件：</h5></li>
+<li>获取数组元素总长个数count($?数组函数)作为边界符；</li>
+<li>下标key为数字索引数组有规律；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//轮询初始化，边界，循环体输出，操作后自增；</span><br><span class="line">for($i = 0; $i &lt; count($?数组函数); $i++)&#123;</span><br><span class="line">echo $i, $?数组函数[$i下标访问元素];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/04/08/eE1f37cYsSKRylL.png"><h4 id="遍历循环while"><a href="#遍历循环while" class="headerlink" title="遍历循环while(){}"></a>遍历循环while(){}</h4><h5 id="each-函数"><a href="#each-函数" class="headerlink" title="each()函数"></a>each()函数</h5>通过数组内部指针<strong>自动移动</strong>获取下标和元素赋值，针对元素<strong>每次</strong>返回四个返回值：索引返回值/关联返回值；<br>//若末尾不存在则return返回布尔false；</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print_r(each($?数组函数));</span><br><span class="line">//四个返回值输出</span><br><span class="line">array&#123;</span><br><span class="line">[1] =&gt; ? //索引返回元素赋值?</span><br><span class="line">[value] =&gt; ? //关联返回元素赋值?</span><br><span class="line">[0] =&gt; ? //索引返回下标值?</span><br><span class="line">[key] =&gt; ? //关联返回下标值?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/08/whZkuB8bztJCTF4.png"></p>
+<h5 id="list-函数"><a href="#list-函数" class="headerlink" title="list()函数"></a>list()函数</h5><p>作为一种结构<strong>批量</strong>获取索引数组元素赋值后<strong>依序传值</strong>给对应$变量存储；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list($?存储变量,) = $?数组函数;</span><br><span class="line">var_dump($?存储变量,$?存储变量n);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/08/6vf2O7CRqWMjpVh.png"><br><img src="https://s2.loli.net/2022/04/08/SYyFpe6KczlOdkE.png"></p>
+<h5 id="while循环-配合each-list-函数实现遍历"><a href="#while循环-配合each-list-函数实现遍历" class="headerlink" title="while循环(){}配合each()list()函数实现遍历?"></a>while循环(){}配合each()list()函数实现遍历?</h5><p><img src="https://s2.loli.net/2022/04/08/mGkXW5isPR7fBjY.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/day3_php/" rel="prev" title="day3_php">
+      <i class="fa fa-chevron-left"></i> day3_php
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">系统常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">输出函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#print-%E8%BE%93%E5%87%BA%E5%86%85%E5%AE%B9%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">print()输出内容结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#print-r-%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%84%E5%86%85%E5%AE%B9%EF%BC%9A%E6%95%B0%E7%BB%84"><span class="nav-number">1.1.2.</span> <span class="nav-text">print_r()输出结构内容：数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#date"><span class="nav-number">1.1.3.</span> <span class="nav-text">date()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time"><span class="nav-number">1.1.4.</span> <span class="nav-text">time()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#microtime"><span class="nav-number">1.1.5.</span> <span class="nav-text">microtime()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strtotime"><span class="nav-number">1.1.6.</span> <span class="nav-text">strtotime()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">数学函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#max-%E6%8C%87%E5%AE%9A%E5%8F%82%E6%95%B0%E6%9C%80%E5%A4%A7%E5%80%BC-%E6%8C%87%E5%AE%9A%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">max()指定参数最大值&#x2F;指定数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-%E8%8E%B7%E5%8F%96%E5%8F%82%E6%95%B0%E8%BE%83%E5%B0%8F%E5%80%BC-%E6%8C%87%E5%AE%9A%E6%95%B0%E7%BB%84"><span class="nav-number">1.2.2.</span> <span class="nav-text">min()获取参数较小值&#x2F;指定数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rand-%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.2.3.</span> <span class="nav-text">rand()获取随机数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mt-rand-%E9%AB%98%E6%95%88%E8%8E%B7%E5%8F%96%E9%9A%8F%E6%9C%BA%E6%95%B0"><span class="nav-number">1.2.4.</span> <span class="nav-text">mt_rand()高效获取随机数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#round-%E5%9B%9B%E8%88%8D%E4%BA%94%E5%85%A5"><span class="nav-number">1.2.5.</span> <span class="nav-text">round()四舍五入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ceil-%E5%90%91%E5%A4%A7%E5%8F%96%E6%95%B4"><span class="nav-number">1.2.6.</span> <span class="nav-text">ceil()向大取整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#floor-%E5%90%91%E5%B0%8F%E5%8F%96%E6%95%B4"><span class="nav-number">1.2.7.</span> <span class="nav-text">floor()向小取整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pow-%E6%8C%87%E5%AE%9A%E6%95%B0%E5%AD%97%E7%9A%84%E6%8C%87%E6%95%B0%E7%BB%93%E6%9E%9C"><span class="nav-number">1.2.8.</span> <span class="nav-text">pow()指定数字的指数结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#abs-%E7%BB%9D%E5%AF%B9%E5%80%BC"><span class="nav-number">1.2.9.</span> <span class="nav-text">abs()绝对值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sqrt-%E5%B9%B3%E6%96%B9%E6%A0%B9"><span class="nav-number">1.2.10.</span> <span class="nav-text">sqrt()平方根</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E5%87%BD%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">判断函数的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#function-exists-%E2%80%9C-%E2%80%9D"><span class="nav-number">1.3.1.</span> <span class="nav-text">function_exists(“?”)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#func-get-arg-%E4%BD%8D%E6%95%B0-%EF%BC%9A%E8%B5%B7%E5%A7%8B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">func_get_arg(位数)：起始0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#func-get-args"><span class="nav-number">1.3.3.</span> <span class="nav-text">func_get_args()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#func-num-args"><span class="nav-number">1.3.4.</span> <span class="nav-text">func_num_args()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">错误处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">错误分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E9%94%99%E8%AF%AFparse-error"><span class="nav-number">2.1.1.</span> <span class="nav-text">语法错误parse error</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%94%99%E8%AF%AFruntime-error%EF%BC%9A%E7%BC%96%E8%AF%91%E9%80%9A%E8%BF%87%EF%BC%8C%E6%89%A7%E8%A1%8C%E6%9D%A1%E4%BB%B6%E4%B8%8D%E6%BB%A1%E8%B6%B3"><span class="nav-number">2.1.2.</span> <span class="nav-text">运行错误runtime error：编译通过，执行条件不满足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E9%94%99%E8%AF%AF%EF%BC%9A%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83%E6%80%A7%E9%94%99%E8%AF%AF%EF%BC%8C%E6%89%A7%E8%A1%8C%E6%AD%A3%E5%B8%B8%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C%E5%87%BA%E9%94%99"><span class="nav-number">2.1.3.</span> <span class="nav-text">逻辑错误：代码规范性错误，执行正常输出结果出错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E4%BB%A3%E5%8F%B7"><span class="nav-number">2.2.</span> <span class="nav-text">错误代号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">系统错误</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#E-PARSE%E7%BC%96%E8%AF%91%E9%94%99%E8%AF%AF"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">E_PARSE编译错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-ERROR%E8%87%B4%E5%91%BD%E9%94%99%E8%AF%AF"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">E_ERROR致命错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-WARNING%E8%AD%A6%E5%91%8A%E9%94%99%E8%AF%AF"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">E_WARNING警告错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-NOTICE%E9%80%9A%E7%9F%A5%E9%94%99%E8%AF%AF"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">E_NOTICE通知错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E9%94%99%E8%AF%AF%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89"><span class="nav-number">2.2.2.</span> <span class="nav-text">用户错误：自定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#E-USER-ERROR"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">E_USER_ERROR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-USER-WARNING"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">E_USER_WARNING</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#E-USER-NOTICE"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">E_USER_NOTICE</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%94%99%E8%AF%AF%EF%BC%9AE-ALL%E6%89%80%E6%9C%89%E9%94%99%E8%AF%AF"><span class="nav-number">2.2.3.</span> <span class="nav-text">其他错误：E_ALL所有错误</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%8E%A7%E5%88%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.3.</span> <span class="nav-text">错误控制操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E8%A7%A6%E5%8F%91"><span class="nav-number">2.4.</span> <span class="nav-text">错误触发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E8%87%AA%E5%8A%A8%E8%A7%A6%E5%8F%91"><span class="nav-number">2.4.1.</span> <span class="nav-text">运行自动触发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%BA%E4%B8%BA%E8%A7%A6%E5%8F%91trigger-error-%E2%80%9C%E2%80%9D"><span class="nav-number">2.4.2.</span> <span class="nav-text">人为触发trigger_error(“”,)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86set-error-handler"><span class="nav-number">2.4.3.</span> <span class="nav-text">自定义错误处理set_error_handler()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.5.</span> <span class="nav-text">错误设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%98%BE%E7%A4%BA"><span class="nav-number">2.5.1.</span> <span class="nav-text">错误显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E6%97%A5%E5%BF%97"><span class="nav-number">2.5.2.</span> <span class="nav-text">错误日志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%A4%84%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">字符串处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">3.1.</span> <span class="nav-text">定义 $? &#x3D; ?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E5%8F%B7%E5%AE%9A%E4%B9%89"><span class="nav-number">3.1.1.</span> <span class="nav-text">引号定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E5%AE%9A%E4%B9%89%EF%BC%9A%E4%BF%9D%E7%95%99%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.2.</span> <span class="nav-text">结构化定义：保留结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AC%E4%B9%89"><span class="nav-number">3.2.</span> <span class="nav-text">转义 +?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%95%BF%E5%BA%A6"><span class="nav-number">3.3.</span> <span class="nav-text">长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">相关函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.1.</span> <span class="nav-text">转换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.2.</span> <span class="nav-text">截取函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="nav-number">3.4.3.</span> <span class="nav-text">大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.4.</span> <span class="nav-text">搜索函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.5.</span> <span class="nav-text">替换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.6.</span> <span class="nav-text">格式化函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%A4%8D%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.7.</span> <span class="nav-text">重复函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%85%E6%9D%82%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.8.</span> <span class="nav-text">糅杂函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.9.</span> <span class="nav-text">比较函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%EF%BC%9A%E6%95%B0%E7%BB%84-%E4%B8%8B%E6%A0%87"><span class="nav-number">4.1.1.</span> <span class="nav-text">关于：数组&#x2F;下标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">数组类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.1.</span> <span class="nav-text">多维数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">二维数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%82%E5%BD%A2%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">异形数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="nav-number">4.2.2.</span> <span class="nav-text">遍历数组</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%BE%AA%E7%8E%AFforeach"><span class="nav-number">4.2.2.1.</span> <span class="nav-text">遍历循环foreach(){}</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%8E%9F%E7%90%86%EF%BC%9A"><span class="nav-number">4.2.2.2.</span> <span class="nav-text">遍历原理：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%BE%AA%E7%8E%AFfor"><span class="nav-number">4.2.2.3.</span> <span class="nav-text">遍历循环for(){}</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#for%E9%81%8D%E5%8E%86%E6%9D%A1%E4%BB%B6%EF%BC%9A"><span class="nav-number">4.2.2.3.1.</span> <span class="nav-text">for遍历条件：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%BE%AA%E7%8E%AFwhile"><span class="nav-number">4.2.2.4.</span> <span class="nav-text">遍历循环while(){}</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#each-%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.2.4.1.</span> <span class="nav-text">each()函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#list-%E5%87%BD%E6%95%B0"><span class="nav-number">4.2.2.4.2.</span> <span class="nav-text">list()函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF-%E9%85%8D%E5%90%88each-list-%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E9%81%8D%E5%8E%86"><span class="nav-number">4.2.2.4.3.</span> <span class="nav-text">while循环(){}配合each()list()函数实现遍历?</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tyson_H</p>
+  <div class="site-description" itemprop="description">tyson's_1point3acres</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tyson_H</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
