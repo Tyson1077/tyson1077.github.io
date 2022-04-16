@@ -149,6 +149,151 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day5_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day5_php/" class="post-title-link" itemprop="url">php_day5</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-16 19:43:12 / Modified: 19:43:53" itemprop="dateCreated datePublished" datetime="2022-04-16T19:43:12+08:00">2022-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="数组函数"><a href="#数组函数" class="headerlink" title="数组函数"></a>数组函数</h1><h2 id="排序函数"><a href="#排序函数" class="headerlink" title="排序函数"></a>排序函数</h2><p>基于首字符ASCII码对数组元素赋值排序；<br>//排序函数返回值为布尔，定义赋值接收后print_r()打印输出&amp;$原绑定数组；<br>//元素赋值标识符始于0；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$?数组函数 = array(3,2,1,4,5);</span><br><span class="line">$?接收函数 = sort(?数组函数); //排序完成 接收返回值</span><br><span class="line">print_r($?数组函数); //输出原数组</span><br></pre></td></tr></table></figure>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>基于元素，重置索引下标从小到大正向排序；<br><img src="https://s2.loli.net/2022/04/10/zJoUkVRLDt1hgE4.png"></p>
+<h3 id="rsort"><a href="#rsort" class="headerlink" title="rsort()"></a>rsort()</h3><p>基于元素，重置索引下标从大到小逆向排序；<br><img src="https://s2.loli.net/2022/04/10/Hv1VlNPRqMISA7p.png"></p>
+<h3 id="asort"><a href="#asort" class="headerlink" title="asort()"></a>asort()</h3><p>基于元素，保留下标key正向排序；<br><img src="https://s2.loli.net/2022/04/10/SKjfom14TglVcrO.png"></p>
+<h3 id="arsort"><a href="#arsort" class="headerlink" title="arsort()"></a>arsort()</h3><p>基于元素，保留下标key逆向排序；<br><img src="https://s2.loli.net/2022/04/10/2hfZa9qAJz5NRrp.png"></p>
+<h3 id="ksort"><a href="#ksort" class="headerlink" title="ksort()"></a>ksort()</h3><p>基于重置下标key序号正向排序；<br><img src="https://s2.loli.net/2022/04/10/ai7ZE38HhjT9z6u.png"></p>
+<h3 id="krsort"><a href="#krsort" class="headerlink" title="krsort()"></a>krsort()</h3><p>基于重置下标key序号逆向排序；<br><img src="https://s2.loli.net/2022/04/10/vM3aUX4EJRHd7Fo.png"></p>
+<h3 id="shuffle"><a href="#shuffle" class="headerlink" title="shuffle()"></a>shuffle()</h3><p>基于重置正序下标杂糅排序，打乱掉元素赋值；<br><img src="https://s2.loli.net/2022/04/10/zfFmT49j3XNLRVl.png"></p>
+<h2 id="指针函数"><a href="#指针函数" class="headerlink" title="指针函数"></a>指针函数</h2><p>针对数组内部移动指针操作；<br>//指针位置对应空值不存在返回布尔false；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(&quot;this_1&quot;,&quot;this_2&quot;,&quot;this_3&quot;);</span><br><span class="line">echo current($aaa); //this_1 当前元素赋值</span><br><span class="line">echo key($aaa); //0 当前下标key</span><br><span class="line">echo next($aaa); //this_2 下位元素赋值</span><br><span class="line">echo key($aaa); //1 当前下标key</span><br><span class="line">next($aaa); //移动下位元素赋值</span><br><span class="line">echo key($aaa); //2 当前下标key</span><br><span class="line">echo end($aaa); //this_3 末位元素赋值</span><br><span class="line">echo reset($aaa); //this_1 首位元素赋值</span><br><span class="line">next($aaa); //移动下位元素赋值</span><br><span class="line">echo prev($aaa); //this_1 //上位元素赋值</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/10/sd5Mk9lrA7YBwNf.png"></p>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset()"></a>reset()</h3><p>移动内部指针到数组首位：输出返回下标值和元素赋值，不存在返回布尔false；</p>
+<h3 id="end"><a href="#end" class="headerlink" title="end()"></a>end()</h3><p>移动内部指针到数组末尾：输出返回下标值和元素赋值，不存在返回布尔false；</p>
+<h3 id="next"><a href="#next" class="headerlink" title="next()"></a>next()</h3><p>移动内部指针下一位数组：输出返回下标值和元素赋值；</p>
+<h3 id="prev"><a href="#prev" class="headerlink" title="prev()"></a>prev()</h3><p>移动内部指针上一位数组：输出返回下标值和元素赋值；</p>
+<h3 id="current"><a href="#current" class="headerlink" title="current()"></a>current()</h3><p>获取当前数组内部指针位置：输出返回当前下标值和元素赋值；</p>
+<h3 id="key"><a href="#key" class="headerlink" title="key()"></a>key()</h3><p>获取当前数组内部指针位置：输出返回对应下标值；</p>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><p>操作后原数组发生变化：生成新数组；不存在返回空值NULL；</p>
+<h3 id="模拟数据结构：栈队列操作"><a href="#模拟数据结构：栈队列操作" class="headerlink" title="模拟数据结构：栈队列操作"></a>模拟数据结构：栈队列操作</h3><p><strong>压栈：先进后出FILO first in last out</strong><br>//栈操作同端进出；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(); //定义赋值空数组</span><br><span class="line">array_push($aaa,3); //末追3</span><br><span class="line">array_push($aaa,2); //末追3</span><br><span class="line">array_push($aaa,1); //末追1</span><br><span class="line">print_r($aaa); //Array ( [0] =&gt; 3 [1] =&gt; 2 [2] =&gt; 1 ) 压栈完成 打印输出</span><br><span class="line">echo array_pop($aaa),array_pop($aaa),array_pop($aaa); //123 出栈 提取操作栈</span><br><span class="line">print_r($aaa); //Array ( ) 出栈完 数组清空</span><br></pre></td></tr></table></figure>
+<p><strong>队列：先进先出FIFO first in first out</strong><br>//队列操作首进后出；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(); //定义赋值空数组</span><br><span class="line">array_unshift($aaa,3); //首增3</span><br><span class="line">array_unshift($aaa,2); //首增2</span><br><span class="line">array_unshift($aaa,1); //首增1</span><br><span class="line">print_r($aaa); //Array ( [0] =&gt; 1 [1] =&gt; 2 [2] =&gt; 3 ) 入队列完成 打印输出</span><br><span class="line">echo array_pop($aaa),array_pop($aaa),array_pop($aaa); //321 出队 提取操作的队列</span><br><span class="line">print_r($aaa); //Array ( ) 出队完成 数组清空</span><br></pre></td></tr></table></figure>
+<h4 id="array-unshift"><a href="#array-unshift" class="headerlink" title="array_unshift($?,?)"></a>array_unshift($?,?)</h4><p>首端新增元素赋值；</p>
+<h4 id="array-shift"><a href="#array-shift" class="headerlink" title="array_shift($?,?)"></a>array_shift($?,?)</h4><p>首端提取元素赋值；</p>
+<h4 id="array-push"><a href="#array-push" class="headerlink" title="array_push($?,?)"></a>array_push($?,?)</h4><p>末尾追加元素赋值；</p>
+<h4 id="array-pop"><a href="#array-pop" class="headerlink" title="array_pop($?,?)"></a>array_pop($?,?)</h4><p>末尾提取元素赋值；</p>
+<h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>统计数组元素赋值数量；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print_r(count($?));</span><br><span class="line">var_dump(count($?));</span><br></pre></td></tr></table></figure>
+<h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array(?,$?)"></a>in_array(?,$?)</h3><p>判断数组是否存在元素赋值，以布尔返回；<br><img src="https://s2.loli.net/2022/04/10/ZEw7rBfHlP3qRJc.png"></p>
+<h3 id="array-reverse"><a href="#array-reverse" class="headerlink" title="array_reverse()"></a>array_reverse()</h3><p>颠倒数组的元素赋值：逆向反转排序；<br><img src="https://s2.loli.net/2022/04/10/FZpHzjS4dQKiRvD.png"></p>
+<h3 id="array-keys"><a href="#array-keys" class="headerlink" title="array_keys()"></a>array_keys()</h3><p>获取数组所有下标key；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r(array_keys($?));</span><br></pre></td></tr></table></figure>
+<h3 id="array-values"><a href="#array-values" class="headerlink" title="array_values()"></a>array_values()</h3><p>获取数组所有元素赋值；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r(array_values($?));</span><br></pre></td></tr></table></figure>
+<h1 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h1><p>利用数学模型实现代码数据模型解决对应需求；<br>算法：任意代码实现数学模型；</p>
+<h2 id="递推算法"><a href="#递推算法" class="headerlink" title="递推算法"></a>递推算法</h2><p>通过已知条件演绎规律推出计算结果：顺推/逆推；<br><strong>算法举例：</strong><br>斐波那契数列：求任意位置对应值；<br><img src="https://s2.loli.net/2022/04/10/JyCEetZGcoWBFlg.png"><br><strong>代码实现：</strong><br>已知前两个数值，第三值之后为前两个值取和；得前三的值演绎规律<br>//定义赋值指定数组输出循环体后实现；<br><img src="https://s2.loli.net/2022/04/10/b3tli7aEmIZGVHg.png"><br><img src="https://s2.loli.net/2022/04/10/eAJU9Ki6pjwcuFh.png"></p>
+<h2 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h2><p>划小简化问题归类为同类子问题，调用函数过程解决问题；<br>//递归函数<br><strong>代码实现：</strong></p>
+<ol>
+<li>简化问题找到<strong>递归点</strong>；</li>
+<li>调用解决问题的函数实现递归：本质上<strong>调用多次</strong>相同函数内存空间，利用空间换时间；</li>
+<li>找到<strong>递归出口</strong>结束死循环；</li>
+</ol>
+<p><strong>算法举例：</strong><br>斐波那契数列：求任意位置对应值；<br><img src="https://s2.loli.net/2022/04/16/DxvaK7qesGdB3hn.png"><br>//判断定义赋值输出后实现前两层数值累加；<br><img src="https://s2.loli.net/2022/04/16/tcfgSbqsl5YNeZv.png"><br><img src="https://s2.loli.net/2022/04/16/JMbxmEiZvSNB91A.png"></p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>重复轮询按照规定大小比较两个相邻数组元素赋值后<strong>交换</strong>；<br><img src="https://s2.loli.net/2022/04/16/gTXrQU1c2yHKNS7.png"><br><strong>代码实现：</strong></p>
+<ol>
+<li>按规定比较相邻前一个数组元素实现交换；</li>
+<li>轮询数组元素比较至末端终止；<br><img src="https://s2.loli.net/2022/04/16/3hlnxdJRmLXPIts.png"><br><img src="https://s2.loli.net/2022/04/16/2gHoMaxXsh41pPZ.png"><br><img src="https://s2.loli.net/2022/04/16/riyKgkXV9fHxmhz.png"><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3>按规定大小选择每个数组元素赋值<strong>插入</strong>数组起始序列位置；<br>//不稳定排序<br><img src="https://s2.loli.net/2022/04/16/BDizrQ6esGRJLTE.png"></li>
+</ol>
+<p><strong>代码实现：</strong></p>
+<ol>
+<li><p>按要求获取数组元素下标和元素赋值；</p>
+</li>
+<li><p>要求符合：每次轮询交换分别插入序首位置；<br><img src="https://s2.loli.net/2022/04/16/8MgtHxlGOqJo7US.png"></p>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>按规定大小把数组每个元素赋值<strong>插入已完成</strong>排序的数组元素赋值序列中；<br><img src="https://s2.loli.net/2022/04/16/xHZemfl3sPaMGYB.png"><br>//稳定排序<br>代码实现：</p>
+</li>
+<li><p>记录已完成排序数组；</p>
+</li>
+<li><p>获取待排数组元素赋值按规定插入前序数组正确下标位置后比较交换；</p>
+</li>
+<li><p>轮询操作每个数组元素赋值；<br><img src="https://s2.loli.net/2022/04/16/5TKHCsNrYloSiP6.png"><br><img src="https://s2.loli.net/2022/04/16/zyBdZt7VshXoOrD.png"><br><img src="https://s2.loli.net/2022/04/16/3f2vTKXGbHnlmIW.png"></p>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>按规定大小多次比较<strong>拆分</strong>指定数组赋值元素为独立两份后交换<strong>合并递归</strong>成为有序数组；<br>//不稳定排序<br><img src="https://s2.loli.net/2022/04/16/HeL8ynDQKlduwE5.png"><br>代码实现：</p>
+</li>
+<li><p>获取数组元素赋值后多次拆分为独立两个数组；</p>
+</li>
+<li><p>按规定比较交换两数组元素赋值；</p>
+</li>
+<li><p>轮询后多次合并递归(递归点/结束递归)多份数组为整个有序数组；<br><img src="https://s2.loli.net/2022/04/16/OuZHk2QKFRCWXoM.png"><br><img src="https://s2.loli.net/2022/04/16/NTYQzde5f6RiW2j.png"></p>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>采用分治法按规定大小把多个最小单位有序<strong>子数组</strong>元素赋值<strong>二路归并</strong>合并为整个有序数组表；<br><img src="https://s2.loli.net/2022/04/16/73VafdmWnyBHeGY.png"></p>
+</li>
+</ol>
+<p><strong>二路归并：</strong><br><img src="https://s2.loli.net/2022/04/16/Isy4exFGJihNtob.png"><br><img src="https://s2.loli.net/2022/04/16/9nRDepILjO57Qfr.png"><br>代码实现：</p>
+<ol>
+<li>拆分数组为最小单位有序子数组元素赋值；</li>
+<li>子数组元素赋值指向整个空数组空间；</li>
+<li>轮询移动指针操作比较合并序列尾；<br><img src="https://s2.loli.net/2022/04/16/YGVaC58Z6JkiQDs.png"><br><img src="https://s2.loli.net/2022/04/16/YJgbDCSKjnUt7PI.png"><h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2>大型数组中快速查找实现定位代码块元素；<h3 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h3>数据结构从一端顺序扫描到另一端<strong>查找匹配</strong>获取定位关键字与给定值；<br><img src="https://s2.loli.net/2022/04/16/iroBGfLMplD1zEj.png"></li>
+</ol>
+<h3 id="二分查找：折半算法"><a href="#二分查找：折半算法" class="headerlink" title="二分查找：折半算法"></a>二分查找：折半算法</h3><p>给定关键字与数值<strong>拆分</strong>线形升降数组序列后<strong>递归匹配</strong>中间值后<strong>比较交换</strong>子数组；<br><strong>折半算法：</strong><br><img src="https://s2.loli.net/2022/04/16/UhESVLfyQzbqeTH.png"><br><img src="https://s2.loli.net/2022/04/16/KbqenBF7X1sIi4P.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day4_php/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1369,7 +1514,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

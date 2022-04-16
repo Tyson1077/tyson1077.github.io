@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tyson1077.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="数组函数排序函数基于首字符ASCII码对数组元素赋值排序；&#x2F;&#x2F;排序函数返回值为布尔，定义赋值接收后print_r()打印输出&amp;$原绑定数组；&#x2F;&#x2F;元素赋值标识符始于0； 123$?数组函数 &#x3D; array(3,2,1,4,5);$?接收函数 &#x3D; sort(?数组函数); &#x2F;&#x2F;排序完成 接收返回值print_r($?数组函数); &#x2F;&#x2F;输出原数组 sort()基于元素，重置索引下标从小到大正向排">
+<meta property="og:type" content="article">
+<meta property="og:title" content="php_day5">
+<meta property="og:url" content="https://tyson1077.github.io/day5_php/index.html">
+<meta property="og:site_name" content="tyson自留地">
+<meta property="og:description" content="数组函数排序函数基于首字符ASCII码对数组元素赋值排序；&#x2F;&#x2F;排序函数返回值为布尔，定义赋值接收后print_r()打印输出&amp;$原绑定数组；&#x2F;&#x2F;元素赋值标识符始于0； 123$?数组函数 &#x3D; array(3,2,1,4,5);$?接收函数 &#x3D; sort(?数组函数); &#x2F;&#x2F;排序完成 接收返回值print_r($?数组函数); &#x2F;&#x2F;输出原数组 sort()基于元素，重置索引下标从小到大正向排">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/zJoUkVRLDt1hgE4.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/Hv1VlNPRqMISA7p.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/SKjfom14TglVcrO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/2hfZa9qAJz5NRrp.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/ai7ZE38HhjT9z6u.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/vM3aUX4EJRHd7Fo.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/zfFmT49j3XNLRVl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/sd5Mk9lrA7YBwNf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/ZEw7rBfHlP3qRJc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/FZpHzjS4dQKiRvD.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/JyCEetZGcoWBFlg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/b3tli7aEmIZGVHg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/10/eAJU9Ki6pjwcuFh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/DxvaK7qesGdB3hn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/tcfgSbqsl5YNeZv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/JMbxmEiZvSNB91A.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/gTXrQU1c2yHKNS7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/3hlnxdJRmLXPIts.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/2gHoMaxXsh41pPZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/riyKgkXV9fHxmhz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/BDizrQ6esGRJLTE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/8MgtHxlGOqJo7US.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/xHZemfl3sPaMGYB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/5TKHCsNrYloSiP6.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/zyBdZt7VshXoOrD.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/3f2vTKXGbHnlmIW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/HeL8ynDQKlduwE5.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/OuZHk2QKFRCWXoM.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/NTYQzde5f6RiW2j.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/73VafdmWnyBHeGY.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/Isy4exFGJihNtob.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/9nRDepILjO57Qfr.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/YGVaC58Z6JkiQDs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/YJgbDCSKjnUt7PI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/iroBGfLMplD1zEj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/UhESVLfyQzbqeTH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/04/16/KbqenBF7X1sIi4P.png">
+<meta property="article:published_time" content="2022-04-16T11:43:12.402Z">
+<meta property="article:modified_time" content="2022-04-16T11:43:53.494Z">
+<meta property="article:author" content="tyson_H">
+<meta property="article:tag" content="hexo,tyson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/04/10/zJoUkVRLDt1hgE4.png">
+
+<link rel="canonical" href="https://tyson1077.github.io/day5_php/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>php_day5 | tyson自留地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">tyson自留地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hello_world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day5_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          php_day5
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-16 19:43:12 / Modified: 19:43:53" itemprop="dateCreated datePublished" datetime="2022-04-16T19:43:12+08:00">2022-04-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数组函数"><a href="#数组函数" class="headerlink" title="数组函数"></a>数组函数</h1><h2 id="排序函数"><a href="#排序函数" class="headerlink" title="排序函数"></a>排序函数</h2><p>基于首字符ASCII码对数组元素赋值排序；<br>//排序函数返回值为布尔，定义赋值接收后print_r()打印输出&amp;$原绑定数组；<br>//元素赋值标识符始于0；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$?数组函数 = array(3,2,1,4,5);</span><br><span class="line">$?接收函数 = sort(?数组函数); //排序完成 接收返回值</span><br><span class="line">print_r($?数组函数); //输出原数组</span><br></pre></td></tr></table></figure>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>基于元素，重置索引下标从小到大正向排序；<br><img src="https://s2.loli.net/2022/04/10/zJoUkVRLDt1hgE4.png"></p>
+<h3 id="rsort"><a href="#rsort" class="headerlink" title="rsort()"></a>rsort()</h3><p>基于元素，重置索引下标从大到小逆向排序；<br><img src="https://s2.loli.net/2022/04/10/Hv1VlNPRqMISA7p.png"></p>
+<h3 id="asort"><a href="#asort" class="headerlink" title="asort()"></a>asort()</h3><p>基于元素，保留下标key正向排序；<br><img src="https://s2.loli.net/2022/04/10/SKjfom14TglVcrO.png"></p>
+<h3 id="arsort"><a href="#arsort" class="headerlink" title="arsort()"></a>arsort()</h3><p>基于元素，保留下标key逆向排序；<br><img src="https://s2.loli.net/2022/04/10/2hfZa9qAJz5NRrp.png"></p>
+<h3 id="ksort"><a href="#ksort" class="headerlink" title="ksort()"></a>ksort()</h3><p>基于重置下标key序号正向排序；<br><img src="https://s2.loli.net/2022/04/10/ai7ZE38HhjT9z6u.png"></p>
+<h3 id="krsort"><a href="#krsort" class="headerlink" title="krsort()"></a>krsort()</h3><p>基于重置下标key序号逆向排序；<br><img src="https://s2.loli.net/2022/04/10/vM3aUX4EJRHd7Fo.png"></p>
+<h3 id="shuffle"><a href="#shuffle" class="headerlink" title="shuffle()"></a>shuffle()</h3><p>基于重置正序下标杂糅排序，打乱掉元素赋值；<br><img src="https://s2.loli.net/2022/04/10/zfFmT49j3XNLRVl.png"></p>
+<h2 id="指针函数"><a href="#指针函数" class="headerlink" title="指针函数"></a>指针函数</h2><p>针对数组内部移动指针操作；<br>//指针位置对应空值不存在返回布尔false；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(&quot;this_1&quot;,&quot;this_2&quot;,&quot;this_3&quot;);</span><br><span class="line">echo current($aaa); //this_1 当前元素赋值</span><br><span class="line">echo key($aaa); //0 当前下标key</span><br><span class="line">echo next($aaa); //this_2 下位元素赋值</span><br><span class="line">echo key($aaa); //1 当前下标key</span><br><span class="line">next($aaa); //移动下位元素赋值</span><br><span class="line">echo key($aaa); //2 当前下标key</span><br><span class="line">echo end($aaa); //this_3 末位元素赋值</span><br><span class="line">echo reset($aaa); //this_1 首位元素赋值</span><br><span class="line">next($aaa); //移动下位元素赋值</span><br><span class="line">echo prev($aaa); //this_1 //上位元素赋值</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/04/10/sd5Mk9lrA7YBwNf.png"></p>
+<h3 id="reset"><a href="#reset" class="headerlink" title="reset()"></a>reset()</h3><p>移动内部指针到数组首位：输出返回下标值和元素赋值，不存在返回布尔false；</p>
+<h3 id="end"><a href="#end" class="headerlink" title="end()"></a>end()</h3><p>移动内部指针到数组末尾：输出返回下标值和元素赋值，不存在返回布尔false；</p>
+<h3 id="next"><a href="#next" class="headerlink" title="next()"></a>next()</h3><p>移动内部指针下一位数组：输出返回下标值和元素赋值；</p>
+<h3 id="prev"><a href="#prev" class="headerlink" title="prev()"></a>prev()</h3><p>移动内部指针上一位数组：输出返回下标值和元素赋值；</p>
+<h3 id="current"><a href="#current" class="headerlink" title="current()"></a>current()</h3><p>获取当前数组内部指针位置：输出返回当前下标值和元素赋值；</p>
+<h3 id="key"><a href="#key" class="headerlink" title="key()"></a>key()</h3><p>获取当前数组内部指针位置：输出返回对应下标值；</p>
+<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><p>操作后原数组发生变化：生成新数组；不存在返回空值NULL；</p>
+<h3 id="模拟数据结构：栈队列操作"><a href="#模拟数据结构：栈队列操作" class="headerlink" title="模拟数据结构：栈队列操作"></a>模拟数据结构：栈队列操作</h3><p><strong>压栈：先进后出FILO first in last out</strong><br>//栈操作同端进出；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(); //定义赋值空数组</span><br><span class="line">array_push($aaa,3); //末追3</span><br><span class="line">array_push($aaa,2); //末追3</span><br><span class="line">array_push($aaa,1); //末追1</span><br><span class="line">print_r($aaa); //Array ( [0] =&gt; 3 [1] =&gt; 2 [2] =&gt; 1 ) 压栈完成 打印输出</span><br><span class="line">echo array_pop($aaa),array_pop($aaa),array_pop($aaa); //123 出栈 提取操作栈</span><br><span class="line">print_r($aaa); //Array ( ) 出栈完 数组清空</span><br></pre></td></tr></table></figure>
+<p><strong>队列：先进先出FIFO first in first out</strong><br>//队列操作首进后出；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(); //定义赋值空数组</span><br><span class="line">array_unshift($aaa,3); //首增3</span><br><span class="line">array_unshift($aaa,2); //首增2</span><br><span class="line">array_unshift($aaa,1); //首增1</span><br><span class="line">print_r($aaa); //Array ( [0] =&gt; 1 [1] =&gt; 2 [2] =&gt; 3 ) 入队列完成 打印输出</span><br><span class="line">echo array_pop($aaa),array_pop($aaa),array_pop($aaa); //321 出队 提取操作的队列</span><br><span class="line">print_r($aaa); //Array ( ) 出队完成 数组清空</span><br></pre></td></tr></table></figure>
+<h4 id="array-unshift"><a href="#array-unshift" class="headerlink" title="array_unshift($?,?)"></a>array_unshift($?,?)</h4><p>首端新增元素赋值；</p>
+<h4 id="array-shift"><a href="#array-shift" class="headerlink" title="array_shift($?,?)"></a>array_shift($?,?)</h4><p>首端提取元素赋值；</p>
+<h4 id="array-push"><a href="#array-push" class="headerlink" title="array_push($?,?)"></a>array_push($?,?)</h4><p>末尾追加元素赋值；</p>
+<h4 id="array-pop"><a href="#array-pop" class="headerlink" title="array_pop($?,?)"></a>array_pop($?,?)</h4><p>末尾提取元素赋值；</p>
+<h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>统计数组元素赋值数量；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print_r(count($?));</span><br><span class="line">var_dump(count($?));</span><br></pre></td></tr></table></figure>
+<h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array(?,$?)"></a>in_array(?,$?)</h3><p>判断数组是否存在元素赋值，以布尔返回；<br><img src="https://s2.loli.net/2022/04/10/ZEw7rBfHlP3qRJc.png"></p>
+<h3 id="array-reverse"><a href="#array-reverse" class="headerlink" title="array_reverse()"></a>array_reverse()</h3><p>颠倒数组的元素赋值：逆向反转排序；<br><img src="https://s2.loli.net/2022/04/10/FZpHzjS4dQKiRvD.png"></p>
+<h3 id="array-keys"><a href="#array-keys" class="headerlink" title="array_keys()"></a>array_keys()</h3><p>获取数组所有下标key；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r(array_keys($?));</span><br></pre></td></tr></table></figure>
+<h3 id="array-values"><a href="#array-values" class="headerlink" title="array_values()"></a>array_values()</h3><p>获取数组所有元素赋值；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r(array_values($?));</span><br></pre></td></tr></table></figure>
+<h1 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h1><p>利用数学模型实现代码数据模型解决对应需求；<br>算法：任意代码实现数学模型；</p>
+<h2 id="递推算法"><a href="#递推算法" class="headerlink" title="递推算法"></a>递推算法</h2><p>通过已知条件演绎规律推出计算结果：顺推/逆推；<br><strong>算法举例：</strong><br>斐波那契数列：求任意位置对应值；<br><img src="https://s2.loli.net/2022/04/10/JyCEetZGcoWBFlg.png"><br><strong>代码实现：</strong><br>已知前两个数值，第三值之后为前两个值取和；得前三的值演绎规律<br>//定义赋值指定数组输出循环体后实现；<br><img src="https://s2.loli.net/2022/04/10/b3tli7aEmIZGVHg.png"><br><img src="https://s2.loli.net/2022/04/10/eAJU9Ki6pjwcuFh.png"></p>
+<h2 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h2><p>划小简化问题归类为同类子问题，调用函数过程解决问题；<br>//递归函数<br><strong>代码实现：</strong></p>
+<ol>
+<li>简化问题找到<strong>递归点</strong>；</li>
+<li>调用解决问题的函数实现递归：本质上<strong>调用多次</strong>相同函数内存空间，利用空间换时间；</li>
+<li>找到<strong>递归出口</strong>结束死循环；</li>
+</ol>
+<p><strong>算法举例：</strong><br>斐波那契数列：求任意位置对应值；<br><img src="https://s2.loli.net/2022/04/16/DxvaK7qesGdB3hn.png"><br>//判断定义赋值输出后实现前两层数值累加；<br><img src="https://s2.loli.net/2022/04/16/tcfgSbqsl5YNeZv.png"><br><img src="https://s2.loli.net/2022/04/16/JMbxmEiZvSNB91A.png"></p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>重复轮询按照规定大小比较两个相邻数组元素赋值后<strong>交换</strong>；<br><img src="https://s2.loli.net/2022/04/16/gTXrQU1c2yHKNS7.png"><br><strong>代码实现：</strong></p>
+<ol>
+<li>按规定比较相邻前一个数组元素实现交换；</li>
+<li>轮询数组元素比较至末端终止；<br><img src="https://s2.loli.net/2022/04/16/3hlnxdJRmLXPIts.png"><br><img src="https://s2.loli.net/2022/04/16/2gHoMaxXsh41pPZ.png"><br><img src="https://s2.loli.net/2022/04/16/riyKgkXV9fHxmhz.png"><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3>按规定大小选择每个数组元素赋值<strong>插入</strong>数组起始序列位置；<br>//不稳定排序<br><img src="https://s2.loli.net/2022/04/16/BDizrQ6esGRJLTE.png"></li>
+</ol>
+<p><strong>代码实现：</strong></p>
+<ol>
+<li><p>按要求获取数组元素下标和元素赋值；</p>
+</li>
+<li><p>要求符合：每次轮询交换分别插入序首位置；<br><img src="https://s2.loli.net/2022/04/16/8MgtHxlGOqJo7US.png"></p>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>按规定大小把数组每个元素赋值<strong>插入已完成</strong>排序的数组元素赋值序列中；<br><img src="https://s2.loli.net/2022/04/16/xHZemfl3sPaMGYB.png"><br>//稳定排序<br>代码实现：</p>
+</li>
+<li><p>记录已完成排序数组；</p>
+</li>
+<li><p>获取待排数组元素赋值按规定插入前序数组正确下标位置后比较交换；</p>
+</li>
+<li><p>轮询操作每个数组元素赋值；<br><img src="https://s2.loli.net/2022/04/16/5TKHCsNrYloSiP6.png"><br><img src="https://s2.loli.net/2022/04/16/zyBdZt7VshXoOrD.png"><br><img src="https://s2.loli.net/2022/04/16/3f2vTKXGbHnlmIW.png"></p>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>按规定大小多次比较<strong>拆分</strong>指定数组赋值元素为独立两份后交换<strong>合并递归</strong>成为有序数组；<br>//不稳定排序<br><img src="https://s2.loli.net/2022/04/16/HeL8ynDQKlduwE5.png"><br>代码实现：</p>
+</li>
+<li><p>获取数组元素赋值后多次拆分为独立两个数组；</p>
+</li>
+<li><p>按规定比较交换两数组元素赋值；</p>
+</li>
+<li><p>轮询后多次合并递归(递归点/结束递归)多份数组为整个有序数组；<br><img src="https://s2.loli.net/2022/04/16/OuZHk2QKFRCWXoM.png"><br><img src="https://s2.loli.net/2022/04/16/NTYQzde5f6RiW2j.png"></p>
+<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>采用分治法按规定大小把多个最小单位有序<strong>子数组</strong>元素赋值<strong>二路归并</strong>合并为整个有序数组表；<br><img src="https://s2.loli.net/2022/04/16/73VafdmWnyBHeGY.png"></p>
+</li>
+</ol>
+<p><strong>二路归并：</strong><br><img src="https://s2.loli.net/2022/04/16/Isy4exFGJihNtob.png"><br><img src="https://s2.loli.net/2022/04/16/9nRDepILjO57Qfr.png"><br>代码实现：</p>
+<ol>
+<li>拆分数组为最小单位有序子数组元素赋值；</li>
+<li>子数组元素赋值指向整个空数组空间；</li>
+<li>轮询移动指针操作比较合并序列尾；<br><img src="https://s2.loli.net/2022/04/16/YGVaC58Z6JkiQDs.png"><br><img src="https://s2.loli.net/2022/04/16/YJgbDCSKjnUt7PI.png"><h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2>大型数组中快速查找实现定位代码块元素；<h3 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h3>数据结构从一端顺序扫描到另一端<strong>查找匹配</strong>获取定位关键字与给定值；<br><img src="https://s2.loli.net/2022/04/16/iroBGfLMplD1zEj.png"></li>
+</ol>
+<h3 id="二分查找：折半算法"><a href="#二分查找：折半算法" class="headerlink" title="二分查找：折半算法"></a>二分查找：折半算法</h3><p>给定关键字与数值<strong>拆分</strong>线形升降数组序列后<strong>递归匹配</strong>中间值后<strong>比较交换</strong>子数组；<br><strong>折半算法：</strong><br><img src="https://s2.loli.net/2022/04/16/UhESVLfyQzbqeTH.png"><br><img src="https://s2.loli.net/2022/04/16/KbqenBF7X1sIi4P.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/day4_php/" rel="prev" title="day4_php">
+      <i class="fa fa-chevron-left"></i> day4_php
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E7%BB%84%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">数组函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">排序函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sort"><span class="nav-number">1.1.1.</span> <span class="nav-text">sort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rsort"><span class="nav-number">1.1.2.</span> <span class="nav-text">rsort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#asort"><span class="nav-number">1.1.3.</span> <span class="nav-text">asort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arsort"><span class="nav-number">1.1.4.</span> <span class="nav-text">arsort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ksort"><span class="nav-number">1.1.5.</span> <span class="nav-text">ksort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#krsort"><span class="nav-number">1.1.6.</span> <span class="nav-text">krsort()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shuffle"><span class="nav-number">1.1.7.</span> <span class="nav-text">shuffle()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E9%92%88%E5%87%BD%E6%95%B0"><span class="nav-number">1.2.</span> <span class="nav-text">指针函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#reset"><span class="nav-number">1.2.1.</span> <span class="nav-text">reset()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#end"><span class="nav-number">1.2.2.</span> <span class="nav-text">end()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next"><span class="nav-number">1.2.3.</span> <span class="nav-text">next()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prev"><span class="nav-number">1.2.4.</span> <span class="nav-text">prev()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#current"><span class="nav-number">1.2.5.</span> <span class="nav-text">current()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#key"><span class="nav-number">1.2.6.</span> <span class="nav-text">key()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">其他函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E6%A0%88%E9%98%9F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.1.</span> <span class="nav-text">模拟数据结构：栈队列操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#array-unshift"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">array_unshift($?,?)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array-shift"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">array_shift($?,?)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array-push"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">array_push($?,?)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array-pop"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">array_pop($?,?)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count"><span class="nav-number">1.3.2.</span> <span class="nav-text">count()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in-array"><span class="nav-number">1.3.3.</span> <span class="nav-text">in_array(?,$?)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-reverse"><span class="nav-number">1.3.4.</span> <span class="nav-text">array_reverse()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-keys"><span class="nav-number">1.3.5.</span> <span class="nav-text">array_keys()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array-values"><span class="nav-number">1.3.6.</span> <span class="nav-text">array_values()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3"><span class="nav-number">2.</span> <span class="nav-text">编程思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E6%8E%A8%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">递推算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E7%AE%97%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">递归算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F"><span class="nav-number">2.3.2.</span> <span class="nav-text">选择排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F"><span class="nav-number">2.3.3.</span> <span class="nav-text">插入排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F"><span class="nav-number">2.3.4.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F"><span class="nav-number">2.3.5.</span> <span class="nav-text">归并排序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.</span> <span class="nav-text">查找算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE"><span class="nav-number">2.4.1.</span> <span class="nav-text">顺序查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%EF%BC%9A%E6%8A%98%E5%8D%8A%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">二分查找：折半算法</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tyson_H</p>
+  <div class="site-description" itemprop="description">tyson's_1point3acres</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tyson_H</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
