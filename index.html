@@ -149,6 +149,138 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day6_mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day6_mysql/" class="post-title-link" itemprop="url">day6_mysql</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-04-23 18:16:22 / Modified: 18:16:58" itemprop="dateCreated datePublished" datetime="2022-04-23T18:16:22+08:00">2022-04-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><p>按数据结构管理存储计算机单元仓库；</p>
+<h1 id="数据库分类"><a href="#数据库分类" class="headerlink" title="数据库分类"></a>数据库分类</h1><h2 id="网络数据库"><a href="#网络数据库" class="headerlink" title="网络数据库"></a>网络数据库</h2><p>借助计算机网络技术存储数据；</p>
+<h2 id="层级数据库"><a href="#层级数据库" class="headerlink" title="层级数据库"></a>层级数据库</h2><p>无回路单定向有序树层级数据图；</p>
+<h2 id="关系数据库：主要"><a href="#关系数据库：主要" class="headerlink" title="关系数据库：主要"></a>关系数据库：主要</h2><p>基于集合线性代数建立于关系模型中处理数据关系；</p>
+<h3 id="区分于存储介质"><a href="#区分于存储介质" class="headerlink" title="区分于存储介质"></a>区分于存储介质</h3><h4 id="非关系数据库：内存存储"><a href="#非关系数据库：内存存储" class="headerlink" title="非关系数据库：内存存储"></a>非关系数据库：内存存储</h4><h4 id="关系型数据库：磁盘存储"><a href="#关系型数据库：磁盘存储" class="headerlink" title="关系型数据库：磁盘存储"></a>关系型数据库：磁盘存储</h4><p>关系数据结构：以<strong>二维表</strong>形式存储数据；<br>|姓名|年龄|<br>|—|—|<br>|B1|B2|</p>
+<p>关系操作集合：指某方式<strong>操作</strong>关联管理的存储数据，如增删改查(sql指令集)；<br>    获取年龄：通过已知条件；<br>    select 年龄 from 二维表 where 已知条件表 = 已知条件；<br>关系完整性约束：数据内部实体，数据间实体一一关联对应；<br>    表内约束：对应行列存放对应类型数据(内部严谨联系)；<br>    表间约束：关系表各式体存在对应关联(外键外联);</p>
+<h5 id="常见关系数据库"><a href="#常见关系数据库" class="headerlink" title="常见关系数据库"></a>常见关系数据库</h5><p>小型：微软access/sqlite<br>中型：微软sqlserver/mysql<br>大型：oracle/db2</p>
+<h1 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h1><p>structured query language结构化查询语言，皆为编程关系表数据管理检索而设计；</p>
+<h2 id="sql语言分类"><a href="#sql语言分类" class="headerlink" title="sql语言分类"></a>sql语言分类</h2><h3 id="数据查询语言data-query-language-DQL"><a href="#数据查询语言data-query-language-DQL" class="headerlink" title="数据查询语言data query language:DQL"></a>数据查询语言data query language:DQL</h3><p>通过dql保留字与sql操作语句：确定<strong>获取</strong>表数据，如何输出给程序；<br>常见保留字：where/order by/group by/having<br>保留指令集：select/show</p>
+<h3 id="数据操作语言data-manipulation-language-DML"><a href="#数据操作语言data-manipulation-language-DML" class="headerlink" title="数据操作语言data manipulation language:DML"></a>数据操作语言data manipulation language:DML</h3><p><strong>增删改</strong>数据中行；<br>指令集：insert/delete/update</p>
+<h3 id="事务处理语言transaction-TPL"><a href="#事务处理语言transaction-TPL" class="headerlink" title="事务处理语言transaction:TPL"></a>事务处理语言transaction:TPL</h3><p>确保dml操作表所有数据的更新得到<strong>安全记录</strong>；<br>指令集：BEGIN TRANSACTION/COMMIT/ROLLBACK</p>
+<h3 id="数据控制语言DCL"><a href="#数据控制语言DCL" class="headerlink" title="数据控制语言DCL"></a>数据控制语言DCL</h3><p>通过grant授权分配/revoke回收授权确定用户与用户组访问数据库对象的<strong>权限管理</strong>控制；<br>指令集：grant/revoke</p>
+<h3 id="数据定义语言DDL"><a href="#数据定义语言DDL" class="headerlink" title="数据定义语言DDL"></a>数据定义语言DDL</h3><p>通过数据<strong>结构表管理</strong>进行索引alter改变：新建create table数据表/删除drop table数据表<br>指令集：create table/drop table</p>
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><p>基于C/S结构的关系型数据库管理系统RDBMS；</p>
+<h3 id="mysql基本操作"><a href="#mysql基本操作" class="headerlink" title="mysql基本操作"></a>mysql基本操作</h3><h4 id="数据库启停操作"><a href="#数据库启停操作" class="headerlink" title="数据库启停操作"></a>数据库启停操作</h4><ol>
+<li>net start mysql</li>
+<li>net stop mysql</li>
+<li>windows系统自启：计算机管理服务/cmd:services.msc<br><img src="https://s2.loli.net/2022/04/17/qliLzxZyO4Ug62G.png"><h4 id="数据库登录退出"><a href="#数据库登录退出" class="headerlink" title="数据库登录退出"></a>数据库登录退出</h4>通过客户端mysql与服务端mysqld寻址(主机端口)连接(账户密)认证<h5 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h5>mysql 寻址操作 连接操作<br>//mysql -hlocalhost -P3306 -uroot -proot<br>寻址操作：-h指定主机 -P监听端口<br>连接操作：-u用户名 -p密码<br><img src="https://s2.loli.net/2022/04/17/JhNs25D4eQgZTpz.png"><h5 id="退出"><a href="#退出" class="headerlink" title="退出"></a>退出</h5>指令集操作：</li>
+<li>Exit;</li>
+<li>\q;<h3 id="服务端架构"><a href="#服务端架构" class="headerlink" title="服务端架构"></a>服务端架构</h3></li>
+<li>数据库管理系统DBMS：管理服务端内容； //最外层</li>
+<li>数据库DB：分支存储多个数据仓库； //主单位</li>
+<li>二维数据表TABLE：存储数据实体；</li>
+<li>字段FIELD：具体类型数据实体单元； //最小单位<br>常用关键字单位：</li>
+<li>row行</li>
+<li>column列field<h2 id="sql基本库操作"><a href="#sql基本库操作" class="headerlink" title="sql基本库操作"></a>sql基本库操作</h2><h3 id="–-注释"><a href="#–-注释" class="headerlink" title="– ?注释"></a>– ?注释</h3><h3 id="结束符-g-横排结束展示-G-纵排展示"><a href="#结束符-g-横排结束展示-G-纵排展示" class="headerlink" title=";结束符/\g //横排结束展示 \G //纵排展示"></a>;结束符/\g //横排结束展示 \G //纵排展示</h3><h3 id="创建数据库create"><a href="#创建数据库create" class="headerlink" title="创建数据库create"></a>创建数据库create</h3><h4 id="create-database-库名-库选项"><a href="#create-database-库名-库选项" class="headerlink" title="create database 库名 [库选项];"></a>create database 库名 [库选项];</h4><img src="https://s2.loli.net/2022/04/17/OC6xUGP2Kr5TZoq.png"><br>库选项：数据库相关属性；</li>
+<li>字符集charset：指定库所有表存储数据默认字符集，无指定采用DBMS默认值；<br>//create database mydb charset gbk;</li>
+<li>校对集collate：随字符集而生成；<h3 id="显示展示数据库show"><a href="#显示展示数据库show" class="headerlink" title="显示展示数据库show"></a>显示展示数据库show</h3>每个sql指令操作系统自动生成对应结构数据存储文件夹opt：保存在data；<h4 id="show-databases-展示所有"><a href="#show-databases-展示所有" class="headerlink" title="show databases; //展示所有"></a>show databases; //展示所有</h4><img src="https://s2.loli.net/2022/04/17/odtgxeSivC6cnN7.png"><br>information_schema：保存结构化组织信息(库表数据)；<br>nysql：保存用户核心权限关系；<br>performance_schema：数据运行效率库；<br>test：开发测试数据库；<h4 id="show-databases-like-“匹配类型”-展示匹配"><a href="#show-databases-like-“匹配类型”-展示匹配" class="headerlink" title="show databases like “匹配类型”; //展示匹配"></a>show databases like “匹配类型”; //展示匹配</h4>_? 匹配单字符<br>%? 匹配多字符<br><img src="https://s2.loli.net/2022/04/17/KPkpIGw6JRdUD5Y.png"><h4 id="show-create-database-库名-展示创建命令信息"><a href="#show-create-database-库名-展示创建命令信息" class="headerlink" title="show create database 库名; //展示创建命令信息"></a>show create database 库名; //展示创建命令信息</h4><img src="https://s2.loli.net/2022/04/17/Aqr8I1CoO3lekVv.png"><h3 id="选择数据库use"><a href="#选择数据库use" class="headerlink" title="选择数据库use"></a>选择数据库use</h3>通过进入数据库操作数据表中数据单元；<h4 id="use-库名-选择进入数据库"><a href="#use-库名-选择进入数据库" class="headerlink" title="use 库名; //选择进入数据库"></a>use 库名; //选择进入数据库</h4><h3 id="修改数据库选项alter"><a href="#修改数据库选项alter" class="headerlink" title="修改数据库选项alter"></a>修改数据库选项alter</h3>修改数据库库选项：字符集/校对集； //非库名；<h4 id="alter-database-库名-charset-字符集"><a href="#alter-database-库名-charset-字符集" class="headerlink" title="alter database 库名 charset = ?字符集;"></a>alter database 库名 charset = ?字符集;</h4><img src="https://s2.loli.net/2022/04/17/mpw84PlLWgrRZSF.png"><br><img src="https://s2.loli.net/2022/04/17/YKLbHlSe3Founcy.png"><h3 id="删除数据库drop"><a href="#删除数据库drop" class="headerlink" title="删除数据库drop"></a>删除数据库drop</h3><h4 id="drop-database-库名"><a href="#drop-database-库名" class="headerlink" title="drop database 库名;"></a>drop database 库名;</h4><img src="https://s2.loli.net/2022/04/17/m1ZRokNv7Or6cen.png"><h2 id="sql基本表操作"><a href="#sql基本表操作" class="headerlink" title="sql基本表操作"></a>sql基本表操作</h2><h3 id="创建数据表create"><a href="#创建数据表create" class="headerlink" title="创建数据表create"></a>创建数据表create</h3>创建新表/复制表结构；<br>//数据表字段不可分割<br>表选项：表相关属性；</li>
+<li>engine存储引擎：具体数据存储默认方式(innodb/5.5myisam)；</li>
+<li>charset字符集：对当前表本身有效，优先级高于库字符集；</li>
+<li>collate校对集；<h4 id="create-table-表名-字段名-段类型-段属性-表选项"><a href="#create-table-表名-字段名-段类型-段属性-表选项" class="headerlink" title="create table 表名(字段名 段类型 [段属性],)[表选项(? = ?)];"></a>create table 表名(字段名 段类型 [段属性],)[表选项(? = ?)];</h4>数据表挂载数据库：<br>create table 库名.表名(字段名 段类型 [段属性],);<br><img src="https://s2.loli.net/2022/04/18/dKceRYX9vMnC5sI.png"><br>数据库新建数据表：<br>create table 表名(字段名 段类型 [段属性],);<br><img src="https://s2.loli.net/2022/04/18/x9uNIhTOrEoRHSm.png"><br>指定表选项：<br>create table 表名(字段名 段类型 [段属性],)engine = ? charset = ?;<br><img src="https://s2.loli.net/2022/04/18/W7n91l4EkHSdLQT.png"></li>
+</ol>
+<h4 id="create-table-新表名-like-表名-库名-表名"><a href="#create-table-新表名-like-表名-库名-表名" class="headerlink" title="create table 新表名 like 表名/库名.表名;"></a>create table 新表名 like 表名/库名.表名;</h4><p><img src="https://s2.loli.net/2022/04/18/CmIi4ABnRyH3qOE.png"><br><img src="https://s2.loli.net/2022/04/18/HIFbe2DNQ1wj6si.png"></p>
+<h3 id="显示展示数据表show-desc"><a href="#显示展示数据表show-desc" class="headerlink" title="显示展示数据表show desc"></a>显示展示数据表show desc</h3><p>数据表创建自动生成innodb引擎表结构文件frm与外部数据存储ibdata；<br><img src="https://s2.loli.net/2022/04/18/mADt94i1hIvQuGE.png"></p>
+<h4 id="show-tables-展示所有"><a href="#show-tables-展示所有" class="headerlink" title="show tables; //展示所有"></a>show tables; //展示所有</h4><p><img src="https://s2.loli.net/2022/04/18/ZrHGhnd2IiktPEy.png"></p>
+<h4 id="show-tables-like-“匹配类型”-展示匹配"><a href="#show-tables-like-“匹配类型”-展示匹配" class="headerlink" title="show tables like “匹配类型”; //展示匹配"></a>show tables like “匹配类型”; //展示匹配</h4><p>_? 匹配单字符<br>%? 匹配多字符<br><img src="https://s2.loli.net/2022/04/18/1TDRQLCd69ONwFY.png"></p>
+<h4 id="describe-表名-desc-表名-show-columns-from-表名-展示表结构行"><a href="#describe-表名-desc-表名-show-columns-from-表名-展示表结构行" class="headerlink" title="describe 表名;/desc 表名;/show columns from 表名; //展示表结构行"></a>describe 表名;/desc 表名;/show columns from 表名; //展示表结构行</h4><ol>
+<li>field字段名</li>
+<li>type字段类型</li>
+<li>null空值允许</li>
+<li>key索引</li>
+<li>default默认值</li>
+<li>extra额外属性<br><img src="https://s2.loli.net/2022/04/18/hi6TsUw4lkWI71G.png"><h4 id="show-create-table-表名-展示创建命令信息"><a href="#show-create-table-表名-展示创建命令信息" class="headerlink" title="show create table 表名; //展示创建命令信息"></a>show create table 表名; //展示创建命令信息</h4><img src="https://s2.loli.net/2022/04/18/TFjIiGn6hyMCorQ.png"><h3 id="设置表选项：属性alter"><a href="#设置表选项：属性alter" class="headerlink" title="设置表选项：属性alter"></a>设置表选项：属性alter</h3>修改数据表选项：引擎engine/字符集charset/校对集collate；<h4 id="alter-table-表名-表选项"><a href="#alter-table-表名-表选项" class="headerlink" title="alter table 表名 表选项(? = ?);"></a>alter table 表名 表选项(? = ?);</h4><img src="https://s2.loli.net/2022/04/18/TCzkt8PlvQG3KVI.png"><h3 id="修改表结构rename-alter"><a href="#修改表结构rename-alter" class="headerlink" title="修改表结构rename alter"></a>修改表结构rename alter</h3><h4 id="rename-table-旧表名-to-新表名-修改表名"><a href="#rename-table-旧表名-to-新表名-修改表名" class="headerlink" title="rename table 旧表名 to 新表名; //修改表名"></a>rename table 旧表名 to 新表名; //修改表名</h4>//以便于区分数据表：数据表名前缀为数据库前两字母+下划线；<br><img src="https://s2.loli.net/2022/04/18/Hzb4aFNr53YR6mo.png"></li>
+</ol>
+<h4 id="alter-table-表名-表选项-修改表选项"><a href="#alter-table-表名-表选项-修改表选项" class="headerlink" title="alter table 表名 表选项(? = ?); //修改表选项"></a>alter table 表名 表选项(? = ?); //修改表选项</h4><p>修改数据表选项：引擎engine/字符集charset/校对集collate；<br><img src="https://s2.loli.net/2022/04/18/TCzkt8PlvQG3KVI.png"></p>
+<h4 id="alter-table-表名-add-column-字段名-段列类型-列属性-位置first-after-新增字段"><a href="#alter-table-表名-add-column-字段名-段列类型-列属性-位置first-after-新增字段" class="headerlink" title="alter table 表名 add [column] 字段名 段列类型 [列属性] [位置first/after]; //新增字段"></a>alter table 表名 add [column] 字段名 段列类型 [列属性] [位置first/after]; //新增字段</h4><p>字段位置：</p>
+<ol>
+<li>新增first</li>
+<li>追加after 追加名(默认)<br><img src="https://s2.loli.net/2022/04/18/SBT2AUQNhHza8fn.png"><br><img src="https://s2.loli.net/2022/04/18/z9W821emFHq7ocn.png"><h4 id="alter-table-表名-change-旧字段-新字段-段列类型-列属性-位置-修改字段名"><a href="#alter-table-表名-change-旧字段-新字段-段列类型-列属性-位置-修改字段名" class="headerlink" title="alter table 表名 change 旧字段 新字段 段列类型 [列属性] [位置]; //修改字段名"></a>alter table 表名 change 旧字段 新字段 段列类型 [列属性] [位置]; //修改字段名</h4><img src="https://s2.loli.net/2022/04/22/9GVuvrSjOdsCwEq.png"><h4 id="alter-table-表名-modify-字段名-新段列类型-列属性-位置-修改字段类型"><a href="#alter-table-表名-modify-字段名-新段列类型-列属性-位置-修改字段类型" class="headerlink" title="alter table 表名 modify 字段名 新段列类型 [列属性] [位置]; //修改字段类型"></a>alter table 表名 modify 字段名 新段列类型 [列属性] [位置]; //修改字段类型</h4><img src="https://s2.loli.net/2022/04/22/qOxJNFnQVvlEMtf.png"><h4 id="alter-table-表名-drop-字段名-删除字段"><a href="#alter-table-表名-drop-字段名-删除字段" class="headerlink" title="alter table 表名 drop 字段名; //删除字段"></a>alter table 表名 drop 字段名; //删除字段</h4><img src="https://s2.loli.net/2022/04/22/hAKekSQHIJCtfxs.png"><h3 id="删除表结构drop"><a href="#删除表结构drop" class="headerlink" title="删除表结构drop"></a>删除表结构drop</h3><h4 id="drop-table-表名-表名-删除表结构"><a href="#drop-table-表名-表名-删除表结构" class="headerlink" title="drop table 表名 [表名?],; //删除表结构"></a>drop table 表名 [表名?],; //删除表结构</h4><img src="https://s2.loli.net/2022/04/22/WyjNAYTrULJ6pMm.png"><h2 id="sql数据操作"><a href="#sql数据操作" class="headerlink" title="sql数据操作"></a>sql数据操作</h2>把sql数据存储指定数据表字段列中；<br><img src="https://s2.loli.net/2022/04/22/I7DdoKsSW32QLiA.png"><h3 id="插入字段数据insert"><a href="#插入字段数据insert" class="headerlink" title="插入字段数据insert"></a>插入字段数据insert</h3>//字段值与字段列一一对应对齐；<h4 id="insert-into-表名-字段-values-对应字段值-指定字段插入值"><a href="#insert-into-表名-字段-values-对应字段值-指定字段插入值" class="headerlink" title="insert into 表名 [(字段?,)] values(对应字段值?,); //指定字段插入值"></a>insert into 表名 [(字段?,)] values(对应字段值?,); //指定字段插入值</h4><img src="https://s2.loli.net/2022/04/22/koGV1QRCmhlBexO.png"><br><img src="https://s2.loli.net/2022/04/22/6YxgJF5DUO9GHTN.png"><h4 id="insert-into-表名-values-对应结构字段值-所有字段插入值"><a href="#insert-into-表名-values-对应结构字段值-所有字段插入值" class="headerlink" title="insert into 表名 values(对应结构字段值?,) //所有字段插入值"></a>insert into 表名 values(对应结构字段值?,) //所有字段插入值</h4>//值列表与字段表类型结构对应对齐；<br><img src="https://s2.loli.net/2022/04/22/7QvtBClEMLrZyGc.png"><h3 id="查询字段数据select"><a href="#查询字段数据select" class="headerlink" title="查询字段数据select"></a>查询字段数据select</h3><h4 id="select-from-表名-查询-匹配所有字段数据"><a href="#select-from-表名-查询-匹配所有字段数据" class="headerlink" title="select * from 表名; //查询*匹配所有字段数据"></a>select * from 表名; //查询*匹配所有字段数据</h4><img src="https://s2.loli.net/2022/04/23/2GI6JhVbdOH3itf.png"><h4 id="select-字段列-from-表名-查询指定字段列表数据"><a href="#select-字段列-from-表名-查询指定字段列表数据" class="headerlink" title="select 字段列, from 表名; //查询指定字段列表数据"></a>select 字段列, from 表名; //查询指定字段列表数据</h4><img src="https://s2.loli.net/2022/04/23/MdpDsNmkh8iz6Av.png"><h4 id="select-匹配附字段-from-表名-where-条件字段-字段值-查询条件列字段匹配附字段数据"><a href="#select-匹配附字段-from-表名-where-条件字段-字段值-查询条件列字段匹配附字段数据" class="headerlink" title="|select 匹配附字段,/* from 表名 where 条件字段? = 字段值?; //查询条件列字段匹配附字段数据"></a>|select 匹配附字段,/* from 表名 where 条件字段? = 字段值?; //查询条件列字段匹配附字段数据</h4>//查询条件字段age为30中匹配附字段为name的名字数据；<br><img src="https://s2.loli.net/2022/04/23/5Tj3vZJAWXqgiGs.png"><br>//查询条件字段age为20中匹配符合条件所有字段数据；<br><img src="https://s2.loli.net/2022/04/23/ocaIRSMYHKm6Zp4.png"></li>
+</ol>
+<h3 id="删除字段数据delete"><a href="#删除字段数据delete" class="headerlink" title="删除字段数据delete"></a>删除字段数据delete</h3><h4 id="delete-from-表名-where-条件字段-从条件字段-删除数据"><a href="#delete-from-表名-where-条件字段-从条件字段-删除数据" class="headerlink" title="delete from 表名 [where 条件字段? = ?]; //从条件字段?/*删除数据"></a>delete from 表名 [where 条件字段? = ?]; //从条件字段?/*删除数据</h4><p>//高危操作需谨慎；<br>//删除表中[条件字段age为20]的匹配符合条件所有数据；<br><img src="https://s2.loli.net/2022/04/23/ETgZIqSQNmvC3lj.png"></p>
+<h3 id="修改更新字段数据update"><a href="#修改更新字段数据update" class="headerlink" title="修改更新字段数据update"></a>修改更新字段数据update</h3><h4 id="update-表名-set-条件修改字段-新值-where-匹配附字段-修改条件字段数据从匹配附字段"><a href="#update-表名-set-条件修改字段-新值-where-匹配附字段-修改条件字段数据从匹配附字段" class="headerlink" title="|update 表名 set 条件修改字段? = 新值? [where 匹配附字段? = ?]; //修改条件字段数据从匹配附字段"></a>|update 表名 set 条件修改字段? = 新值? [where 匹配附字段? = ?]; //修改条件字段数据从匹配附字段</h4><p>//若无where匹配附条件?，则会修改所有一级字段数据为条件字段值，因此需限定匹配附字段；<br>//修改更新从条件字段age为20数据中匹配附字段name为jerry；<br><img src="https://s2.loli.net/2022/04/23/5ZN3DYCFLIRpcte.png"></p>
+<h1 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h1><p>字符character包含文字和符号：国文/标点/图形/数字；<br>字符编码：通过特定规范解释编排字符集的二进制存储方式代码； //unicode/ascii/gb2312/big5/gb18030;</p>
+<h2 id="设置字符集"><a href="#设置字符集" class="headerlink" title="设置字符集"></a>设置字符集</h2><p>出错案例：通过cmd操作mysql客户端直接插入数据给字段出现报错；<br>出错原因：</p>
+<ol>
+<li>用户通过mysql客户端执行命令数据操作mysqld服务端执行sql数据；</li>
+<li>mysqld服务端接收命令数据无法判断数据字符集，默认字符集接收解释编排；<h3 id="set-names-字符集"><a href="#set-names-字符集" class="headerlink" title="set names 字符集;"></a>set names 字符集;</h3>解决实现：发送告知mysql客户端默认指定字符集给mysqld服务端； //变量建立统一保存三层关系；<br>连接实现： //三层关系show variables like “character_set%”;</li>
+<li>client：mysql客户端发送命令数据给mysqld服务端； //character_set_client</li>
+<li>conection：mysql客户端和mysqld服务端之间建立中间层连接； //character_set_connection</li>
+<li>server：mysqld服务端返回数据给mysql客户端； //character_set_results<br><img src="https://s2.loli.net/2022/04/23/gRCwXlyDevtPj8x.png"><br><img src="https://s2.loli.net/2022/04/23/L1da7B6eq3Cv5Tr.png"><h3 id="单独操作：修改字符集变量set-character-set"><a href="#单独操作：修改字符集变量set-character-set" class="headerlink" title="单独操作：修改字符集变量set character_set_? = ?;"></a>单独操作：修改字符集变量set character_set_? = ?;</h3><img src="https://s2.loli.net/2022/04/23/Ou5DqPcbI9gxroj.png"></li>
+<li>修改发送字符集set character_set_client = ?;</li>
+<li>修改连接字符集character_set_connection = ?;</li>
+<li>修改存储字符集character_set_database  = ?;</li>
+<li>修改返回字符集character_set_results = ?;</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day5_php/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1384,79 +1516,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tyson_H">
-      <meta itemprop="description" content="tyson's_1point3acres">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tyson自留地">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-13 22:13:04 / Modified: 21:51:44" itemprop="dateCreated datePublished" datetime="2022-03-13T22:13:04+08:00">2022-03-13</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1521,12 +1585,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">categories</span>
       </div>
   </nav>
