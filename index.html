@@ -149,6 +149,172 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day7_mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day7_mysql/" class="post-title-link" itemprop="url">day7_mysql</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-02 22:30:29 / Modified: 22:31:12" itemprop="dateCreated datePublished" datetime="2022-05-02T22:30:29+08:00">2022-05-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="mysql数据类型"><a href="#mysql数据类型" class="headerlink" title="mysql数据类型"></a>mysql数据类型</h1><p>计算机数据单位：1byte比特 = 8bit位</p>
+<h2 id="列字段类型"><a href="#列字段类型" class="headerlink" title="列字段类型"></a>列字段类型</h2><h3 id="int整型"><a href="#int整型" class="headerlink" title="int整型"></a>int整型</h3><ol>
+<li>tinyint()迷你整形：保存一字节8位，最大表示数值255/-127到128；<br><img src="https://s2.loli.net/2022/05/01/jGLZqNTAo2zrxmD.png"><br>//最大表示三位数值时为0-255；<br>//最大表示四位数值时为负127-正128；</li>
+<li>smallint()小整形：保存两字节16位，最大表示数值65535；</li>
+<li>mediumint()中整形：保存三字节24位；</li>
+<li>int()标准整型：保存四字节32位；</li>
+<li>bigint()大整型：保存八字节64位；<br><img src="https://s2.loli.net/2022/04/25/k7AQEtwNgqF96rb.png"><br><img src="https://s2.loli.net/2022/04/25/RG1h3AcmqseKCi4.png"><h4 id="列属性：无负数符号标识unsigned"><a href="#列属性：无负数符号标识unsigned" class="headerlink" title="列属性：无负数符号标识unsigned"></a>列属性：无负数符号标识unsigned</h4>无符号又称无负数标识，存储数据到当前<strong>字段</strong>没有负数表示；<br>alter table myint add int_6 tinyint unsigned first;<br>insert into myint values(255,100,255,255,255,255);<br><img src="https://s2.loli.net/2022/04/25/TNhBPHc3lWdzyG4.png"><br><img src="https://s2.loli.net/2022/04/25/Iq7oldzG9bT38Qp.png"><h4 id="列属性：类型尾椎数-zerofill"><a href="#列属性：类型尾椎数-zerofill" class="headerlink" title="列属性：类型尾椎数()zerofill"></a>列属性：类型尾椎数()zerofill</h4>表示当前数据类型最多显示<strong>长度</strong>；<br>即显示长度可自定：超出长度以默认最值表示显示，不足长度可自定显示范围<br><img src="https://s2.loli.net/2022/05/01/jGLZqNTAo2zrxmD.png"><br>//通过指定列属性unsigned后，tinyint迷你整型数据<strong>最多表示</strong>三位长度；<br><img src="https://s2.loli.net/2022/05/01/y7LOrvzJ1CZ3oDk.png"><br>//指定列属性zerofill左侧<strong>填充0</strong>补进数位；(自动同步添加无标识属性)<br><img src="https://s2.loli.net/2022/05/01/rcKknMHtwgiEyWJ.png"><br>//指定列属性长度<strong>最少表示</strong>显示范围 数据类型(?)；<h3 id="小数数据型"><a href="#小数数据型" class="headerlink" title="小数数据型"></a>小数数据型</h3></li>
+<li>浮点型：有失精度类型；<br> <img src="https://s2.loli.net/2022/05/01/olCLI7gs4PGcA1N.png"><br> 基本语法： //数据类型<br> float():不指定浮点小数位；<br> float(整数位?,小数位?):分开存储整数小数位；</li>
+</ol>
+<p>  <img src="https://s2.loli.net/2022/05/01/XxjGHa1s4K52IOS.png"><br>  //四舍五入处理非法数据；<br>  <img src="https://s2.loli.net/2022/05/01/FLBXOJrg5P76upM.png"><br>  //无法存储指定非法数据，通过四舍五入处理自动存储；<br>  <img src="https://s2.loli.net/2022/05/01/LdSpjU8DEm4gkfA.png"><br>  //支持科学计数法?e?；<br>  1.1 float()单精浮点：单精度存储4字节数据，最大保留7位精度；<br>  1.2 double()双精浮点：双精度存储8字节数据，最大保留15位精度；</p>
+<ol start="2">
+<li><p>定点型：有失小数精度，保证整数精度；<br>decimal()定点型：4字节存储9位数动态分配，分开存储整数小数位；<br>基本语法： //数据类型<br>decimal(整数位65?,小数位30?) //整数位无法四舍五入最值；<br><img src="https://s2.loli.net/2022/05/01/eYi1XwWMURyGL4x.png"></p>
+<h3 id="时间日期型"><a href="#时间日期型" class="headerlink" title="时间日期型"></a>时间日期型</h3></li>
+<li><p>date日期类型：3字节存储数据；<br>格式：yyyy-mm-dd 年月日<br>范围：1000-01-01到9999-12-12</p>
+</li>
+<li><p>time时间类型：3字节存储数据；<br>格式HH:ii:ss 时分秒<br>范围：-838:59:59到正838:59:59<br>//表示时间点或时间区间；</p>
+</li>
+<li><p>datetime日期时间型：8字节存储合并日期时间数据；<br>格式：YYYY-mm-dd HH:ii:ss 年月日时分秒<br>范围：1000-01-01 00:00:00到9999-12-12 23:59:59</p>
+</li>
+<li><p>timestamp时间戳型：保留格林威治时间；<br>格式：YYYY-mm-dd HH:ii:ss 年月日时分秒<br>//对应数据被手动修改会自动更新为系统生成时间戳数据；</p>
+</li>
+<li><p>Year年类型：单字节存储数据；<br>格式：抽象0-99年或具体四位年 抽象简写/具体年<br>范围：1900-2155<br>//匹配两位抽象简写年时，小于69匹配20/大于70匹配19；</p>
+<h3 id="字符串型"><a href="#字符串型" class="headerlink" title="字符串型"></a>字符串型</h3></li>
+<li><p>char()定长字符：自动分配非空值空间指定字节存储数据；<br> 格式：char(?)<br> 范围：0-255</p>
+</li>
+<li><p>varchar()变长字符：根据实际数据字节分配空间存储数据；<br>格式：varchar(?)<br>范围：0-65535理论上<br><img src="https://s2.loli.net/2022/05/01/KXr4uwUcpGhRNgs.png"></p>
+</li>
+<li><p>text()文本类型：存储普通字符文本；<br> 3.1 tinytext()：单字节存储数据，实际存储2^8+1；</p>
+</li>
+<li><p>2 text()：双字节存储数据，实际存储2^16+2；</p>
+</li>
+<li><p>3 mediumtext()：三字节存储数据，实际存储2^24+3；</p>
+</li>
+<li><p>4 longtext()：四字节存储数据，实际存储2^32+4；</p>
+</li>
+<li><p>blob()二进制文本类型：存储二进制文本，通常以链接指向文本本身；</p>
+</li>
+<li><p>enum()枚举类型：手动指定预设值存储数据； //单选<br> 格式：enum(预设数据值?,预设数据值?,预设数据值?)<br> 范围：单字节存储255数据值/两字节存储65535数据值；<br> <img src="https://s2.loli.net/2022/05/01/ClfWmKojVS9JnvU.png"><br> 存储原理：存储数据并非预设数据值，而是系统自动生成始于1的下标值对应存储元素数据值；<br> <img src="https://s2.loli.net/2022/05/01/DA2IaNFRZJnkPmX.png"></p>
+</li>
+<li><p>set()集合型：同时保存多个数据存储； //复选<br> 格式：set(数据值1,数据值2,数据值n)<br> <img src="https://s2.loli.net/2022/05/01/AEsC5BIcqdOlQZv.png"><br> //通过多个数据值选项自动生成存储多个字节空间；<br> 存储原理：</p>
+<ol>
+<li>同enum()枚举类型类似；</li>
+<li>实际数据存储值为系统自动生成的下标值对应0/1占位值；</li>
+<li>实际存储值查看表示为0/1占位值颠倒转换成十进制的和；<br><img src="https://s2.loli.net/2022/05/02/ls38XNePrth4ZRK.png"></li>
+<li>以数值方式查看集合数据值；<br><img src="https://s2.loli.net/2022/05/02/PAtB61lY8jORVGm.png"></li>
+<li>可通过数据值方式代位添加存储数据项；<br><img src="https://s2.loli.net/2022/05/02/BYclnVrACg9WEhO.png"><br>##mysql记录最值长度<br>记录最值长度为varchar()长度；</li>
+</ol>
+</li>
+<li><p>mysql记录长度为record == 行row；</p>
+</li>
+<li><p>存储结构：数据存储空间+记录大小长度空间；</p>
+</li>
+<li><p>理论记录最值为65535；utf8存储记录最值为21844，gbk存储记录最值为32766；</p>
+</li>
+<li><p>不同字符集占用多个字节不同；<br><img src="https://s2.loli.net/2022/05/02/MYGc7lmEXJDwCvz.png"></p>
+<h2 id="列字段属性"><a href="#列字段属性" class="headerlink" title="列字段属性"></a>列字段属性</h2><p>[空值操作] [列描述] [字段默认值] [额外属性]<br><img src="https://s2.loli.net/2022/05/02/DI9doWuABGSEvP1.png"></p>
+</li>
+</ol>
+<h3 id="NULL空值属性"><a href="#NULL空值属性" class="headerlink" title="NULL空值属性"></a>NULL空值属性</h3><p>代表字段为空值；<br>//判断操作是否允许该字段为空值：能为空/不能为空；<br>mysql记录长度最值为65535字节：</p>
+<ol>
+<li>若表字段属性为NULL则实际存储数据长度大小=65534；</li>
+<li>保留一字节存储NULL空值；<br>选项：</li>
+<li>NULL</li>
+<li>NOT NULL<h3 id="default预设默认值"><a href="#default预设默认值" class="headerlink" title="default预设默认值"></a>default预设默认值</h3>默认条件下用户不指定操作数据时的预设数据值：通常为NULL；<br>//预设该字段必选默认值；<h4 id="添加：预设default默认值"><a href="#添加：预设default默认值" class="headerlink" title="添加：预设default默认值"></a>添加：预设default默认值</h4>create table 表名?(<br>字段? 列类型? NOT NULL, –非空值<br>预设字段? 预设列类型? default ? –用户没插入数据值则使用预设默认值?<br>)charset utf8;<br><img src="https://s2.loli.net/2022/05/02/SHNxJD6pFukKZbm.png"><h4 id="使用default预设默认值"><a href="#使用default预设默认值" class="headerlink" title="使用default预设默认值"></a>使用default预设默认值</h4>insert into 表? (字段?) values(“数据值?”);<br><img src="https://s2.loli.net/2022/05/02/Yy3jCD7Z5zlTPrs.png"><br>insert into 表? values(“数据值?”,default);<br><img src="https://s2.loli.net/2022/05/02/zmeSNEAC28ivFR5.png"><h3 id="comment列描述"><a href="#comment列描述" class="headerlink" title="comment列描述"></a>comment列描述</h3>为开发人员提供注释说明；<h4 id="添加：comment列描述"><a href="#添加：comment列描述" class="headerlink" title="添加：comment列描述"></a>添加：comment列描述</h4>create table 表名?(<br>字段? 列类型? NOT NULL comment “列描述?”<br>)charset utf8;<br><img src="https://s2.loli.net/2022/05/02/TFxHyYlLWs8egJn.png"><h4 id="查看：comment列描述"><a href="#查看：comment列描述" class="headerlink" title="查看：comment列描述"></a>查看：comment列描述</h4>通过表结构创建命令：查看列描述；<br>show create table 表名?;<br><img src="https://s2.loli.net/2022/05/02/Iqo9PTyiexGgtmc.png"><h3 id="KEY主键"><a href="#KEY主键" class="headerlink" title="KEY主键"></a>KEY主键</h3>primary key主键指表中有且有字段中有唯一数据值； //不允许重复；<h4 id="创建主键"><a href="#创建主键" class="headerlink" title="创建主键"></a>创建主键</h4></li>
+<li>随表创建</li>
+<li>1 主键字段后+primary key属性关键字<br><img src="https://s2.loli.net/2022/05/02/QZCy3ih2fnE5t4a.png"></li>
+<li>2 所有字段后+primary key属性选项:primary key(主键字段?)<br><img src="https://s2.loli.net/2022/05/02/rfwC9HodYlvStgi.png"></li>
+<li>表后增加<br>通过修改表字段属性：新增字段列属性；<br>alter table 表名? add primary key(主键字段?)<br><img src="https://s2.loli.net/2022/05/02/xqSdbcjHWuXNoQC.png"><h4 id="查看主键"><a href="#查看主键" class="headerlink" title="查看主键"></a>查看主键</h4>通过表结构创建命令：查看表主键；<br>show create table 表名?;<br><img src="https://s2.loli.net/2022/05/02/t6BiElJovdxPqML.png"><h4 id="删除主键"><a href="#删除主键" class="headerlink" title="删除主键"></a>删除主键</h4>通过删除表字段：删除primary key属性关键字；<br>alter table 表名? drop primary key;<br><img src="https://s2.loli.net/2022/05/02/LiBOybh9qT8XCN2.png"><h4 id="复合主键"><a href="#复合主键" class="headerlink" title="复合主键"></a>复合主键</h4>指多个主键互相关联关系；<br><img src="https://s2.loli.net/2022/05/02/MxyKfX8tC9vqBGd.png"><h4 id="主键约束"><a href="#主键约束" class="headerlink" title="主键约束"></a>主键约束</h4></li>
+<li>字段数据不为空；</li>
+<li>字段数据不重复；<h4 id="主键分类"><a href="#主键分类" class="headerlink" title="主键分类"></a>主键分类</h4>指主键对应字段的业务实现意义；</li>
+<li>业务主键：主键所在字段拥有业务意义；</li>
+<li>逻辑主键：自然增长的整型确保唯一意义；<h3 id="EXTRA额外属性：自动增长auto-increment"><a href="#EXTRA额外属性：自动增长auto-increment" class="headerlink" title="EXTRA额外属性：自动增长auto_increment"></a>EXTRA额外属性：自动增长auto_increment</h3>当字段没有确定数据值时获得自动增长属性，系统根据前面既存数据进行逻辑增长填充数据值；<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4></li>
+<li>定义符合自动增长属性字段的维护数据值以及原始步长；</li>
+<li>用户新增数据时没指定数据值，则系统自动通过维护数据值加上步长生成新数据值； //按指定规律递归操作；</li>
+<li>触发自动增长：给定属性字段无数据值；<h4 id="创建自增长"><a href="#创建自增长" class="headerlink" title="创建自增长"></a>创建自增长</h4>//随表创建自增长：auto_increment属性关键字；<br>create table atc(<br>id int primary key auto_increment,<br>name varchar(10) not null comment “user”,<br>pswd varchar(10) not null comment “password”<br>)charset utf8;<br><img src="https://s2.loli.net/2022/05/02/6RiwTXN5rbAlZVY.png"><br>//通过修改表字段属性：新增字段列属性；<br>alter table 表名? add auto_increment;</li>
+</ol>
+<h4 id="查看自增长：触发"><a href="#查看自增长：触发" class="headerlink" title="查看自增长：触发"></a>查看自增长：触发</h4><p>插入空数据触发； //表中自增长有且只有一个；<br>insert into 表名? values(null空数据值?,”数值1”,”数值2”);<br><img src="https://s2.loli.net/2022/05/02/gFLnOSWiHRs7XAc.png"></p>
+<h4 id="修改自增长"><a href="#修改自增长" class="headerlink" title="修改自增长"></a>修改自增长</h4><p>通过修改表选项结构：修改自增长的值；<br>alter table 表名? auto_increment = 自增长值?;<br><img src="https://s2.loli.net/2022/05/02/A9FX3PpfmbGuTJc.png"></p>
+<h4 id="删除自增长"><a href="#删除自增长" class="headerlink" title="删除自增长"></a>删除自增长</h4><p>修改字段自增长属性后系统自动删除表中自增长；<br>alter table 表名? modify 自增段字段? 字段类型?;<br><img src="https://s2.loli.net/2022/05/02/cHsSjiAvgYN4aTC.png"></p>
+<h4 id="自增长初始设置"><a href="#自增长初始设置" class="headerlink" title="自增长初始设置"></a>自增长初始设置</h4><ol>
+<li>自增长变量分类<br>auto_increment_increment步长值；<br>auto_increment_offset初始值；</li>
+<li>查看初始变量：自增长<br>show variables like “auto_increment%”;<br><img src="https://s2.loli.net/2022/05/02/D4ixBMhInQR8zLe.png"></li>
+<li>修改初始变量：自增长<br>set auto_increment_increment = ?; //修改步长；<br>set auto_increment_offset = ?; //修改初始值；<h4 id="自增长基本规则"><a href="#自增长基本规则" class="headerlink" title="自增长基本规则"></a>自增长基本规则</h4></li>
+<li>表中有且只有一个自增长字段属性； //表选项限定绑定；</li>
+<li>数据插入未触发自增长则需要手动新增自增长属性；<br>alter table 表名? modify 自增长字段 字段类型 auto_increment;<br><img src="https://s2.loli.net/2022/05/02/VxAnhHoMG5FkfS3.png"></li>
+<li>用户数据值优先级大于自增长的数据值；<br><img src="https://s2.loli.net/2022/05/02/7eih1AOmxBQ4Nsb.png"><h3 id="EXTRA额外属性：唯一键unique-key"><a href="#EXTRA额外属性：唯一键unique-key" class="headerlink" title="EXTRA额外属性：唯一键unique [key]"></a>EXTRA额外属性：唯一键unique [key]</h3>指用于保证指定字段唯一性；</li>
+<li>类似于主键，表中允许多个唯一键</li>
+<li>数据允许为NULL；</li>
+<li>非空数据唯一键不允许重复；<h4 id="创建唯一键"><a href="#创建唯一键" class="headerlink" title="创建唯一键"></a>创建唯一键</h4></li>
+<li>随表创建</li>
+<li>1 唯一字段后+unique key属性关键字<br><img src="https://s2.loli.net/2022/05/02/drELVuiIpyFBMDb.png"></li>
+<li>2 所有字段后+unique key属性选项:unique key(唯一字段?)<br><img src="https://s2.loli.net/2022/05/02/KC4aEoyvGqnJxjz.png"></li>
+<li>表后增加<br>通过修改表字段属性：新增字段列属性；<br>alter table 表名? add unique key(唯一字段?)<br><img src="https://s2.loli.net/2022/05/02/dDZKVOcamTSj4t5.png"><h4 id="查看唯一键"><a href="#查看唯一键" class="headerlink" title="查看唯一键"></a>查看唯一键</h4>通过表结构创建命令：查看唯一键；<br>show create table 表名?;<br><img src="https://s2.loli.net/2022/05/02/HOiBxptRvU3ow5q.png"><br><img src="https://s2.loli.net/2022/05/02/OU7RyaPpvLkQ4Ao.png"><br>//唯一键自动生成数据同名索引唯一标识符?；</li>
+</ol>
+<h4 id="删除唯一键"><a href="#删除唯一键" class="headerlink" title="删除唯一键"></a>删除唯一键</h4><p>表中允许多个唯一键；<br>删除语法：<br>alter table 表名 drop index 唯一标识符?</p>
+<h4 id="修改唯一键"><a href="#修改唯一键" class="headerlink" title="修改唯一键"></a>修改唯一键</h4><ol>
+<li>先删除后</li>
+<li>再添加<h4 id="复合唯一键"><a href="#复合唯一键" class="headerlink" title="复合唯一键"></a>复合唯一键</h4><img src="https://s2.loli.net/2022/05/02/wgnY4QyXA7Of8xz.png"><h2 id="表关系"><a href="#表关系" class="headerlink" title="表关系"></a>表关系</h2>指表之间实体存在的关系；<h3 id="一对一关系"><a href="#一对一关系" class="headerlink" title="一对一关系"></a>一对一关系</h3>表中数据与另表数据有且只有匹配一条关系；<br>设计思路：两表中使用<strong>相同主键</strong>；<br><img src="https://s2.loli.net/2022/05/02/8rtL1NHEGSObFjy.png"><h3 id="一对多关系：一对多-多对一"><a href="#一对多关系：一对多-多对一" class="headerlink" title="一对多关系：一对多/多对一"></a>一对多关系：一对多/多对一</h3>在多关系表中维护(新增插入)作为主键的单一关系字段；<br>设计思路：在多关系中维护<strong>指定的主键单一</strong>关系字段；<br><img src="https://s2.loli.net/2022/05/02/7spt9rCM4FjB6dw.png"><h3 id="多对多关系"><a href="#多对多关系" class="headerlink" title="多对多关系"></a>多对多关系</h3>在多表中多条数据可以匹配多条数据，反之相同；<br>设计思路：通过第三表数据记录两张<strong>多表的联系数据</strong>记录；<br><img src="https://s2.loli.net/2022/05/02/asPDhOWx4ZN9Spq.png"><br><img src="https://s2.loli.net/2022/05/02/riR27GxW8Ed9UnT.png"></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day6_mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1411,121 +1577,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hexo_git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tyson_H">
-      <meta itemprop="description" content="tyson's_1point3acres">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tyson自留地">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/hexo_git/" class="post-title-link" itemprop="url">hexo_git</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-03-14 22:47:33" itemprop="dateCreated datePublished" datetime="2022-03-14T22:47:33+08:00">2022-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-03-15 00:37:06" itemprop="dateModified" datetime="2022-03-15T00:37:06+08:00">2022-03-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="git创建仓库"><a href="#git创建仓库" class="headerlink" title="git创建仓库"></a>git创建仓库</h1><h2 id="创建与git账户同名公有仓库"><a href="#创建与git账户同名公有仓库" class="headerlink" title="创建与git账户同名公有仓库"></a>创建与git账户同名公有仓库</h2><h3 id="repository仓库名称：-github-io"><a href="#repository仓库名称：-github-io" class="headerlink" title="repository仓库名称：.github.io"></a>repository仓库名称：.github.io</h3><h3 id="git绑定github账户"><a href="#git绑定github账户" class="headerlink" title="git绑定github账户"></a>git绑定github账户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;github账户名&quot;</span><br><span class="line">git config --global user.email &quot;github邮箱&quot;</span><br></pre></td></tr></table></figure>
-<p>//<code>git config</code>命令的<code>--global</code>参数表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址</p>
-<h3 id="生成ssh公钥绑定github-sshkey"><a href="#生成ssh公钥绑定github-sshkey" class="headerlink" title="生成ssh公钥绑定github_sshkey"></a>生成ssh公钥绑定github_sshkey</h3><p><code>ssh-keygen -t rsa -C &quot;github邮箱&quot;</code><br>//由于github要求推送同步需要验证是否为合法用户，为省时间采用配对公私钥验证账户密码保证推送同步的合法性</p>
-<h2 id="通过密钥登录连接github"><a href="#通过密钥登录连接github" class="headerlink" title="通过密钥登录连接github"></a>通过密钥登录连接github</h2><p><code>ssh git@github.com</code><br>gitbash连接后出现以下表示git与github账户连接成功</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">This key is not known by any other names</span><br><span class="line">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span><br><span class="line">Warning: Permanently added &#x27;github.com&#x27; (ED25519) to the list of known hosts.</span><br><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi Tyson1077! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
-<h1 id="nodejs安装"><a href="#nodejs安装" class="headerlink" title="nodejs安装"></a>nodejs安装</h1><p>//hexo基于nodejs，安装后自动添加环境变量和npm<br>检验nodejs和npm是否安装<br><code>node -v </code><br><code>npm -v </code></p>
-<h1 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h1><h2 id="创建文件夹作为hexo根目录绝对路径"><a href="#创建文件夹作为hexo根目录绝对路径" class="headerlink" title="创建文件夹作为hexo根目录绝对路径"></a>创建文件夹作为hexo根目录绝对路径</h2><p>进入hexo根目录操作<br><code> cd hexo/</code> </p>
-<h3 id="通过windows-powershell安装hexo：shift-右键"><a href="#通过windows-powershell安装hexo：shift-右键" class="headerlink" title="通过windows powershell安装hexo：shift+右键"></a>通过windows powershell安装hexo：shift+右键</h3><p><code>npm install -g hexo-cli</code><br>成功</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">added 59 packages, and audited 60 packages in 28s</span><br><span class="line"></span><br><span class="line">14 packages are looking for funding</span><br><span class="line">  run `npm fund` for details</span><br><span class="line"></span><br><span class="line">found 0 vulnerabilities</span><br><span class="line">npm notice</span><br><span class="line">npm notice New minor version of npm available! 8.3.1 -&gt; 8.5.4</span><br><span class="line">npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.5.4</span><br><span class="line">npm notice Run npm install -g npm@8.5.4 to update!</span><br><span class="line">npm notice</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>出现报错：</p>
-</blockquote>
-<ul>
-<li>win10默认策略下无法执行powershell脚本，需要更改<code>设置</code>允许本地powershell在不签名情况下运行 参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/a12355556/article/details/115856367">https://blog.csdn.net/a12355556/article/details/115856367</a></li>
-</ul>
-<p>成功</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/hexojs/hexo-starter.git/&#x27;: OpenSSL SSL_read: Connection was reset, errno 10054</span><br><span class="line">WARN  git clone failed. Copying data instead</span><br><span class="line">INFO  Install dependencies</span><br><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure>
-
-<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><p>//本地hexo预览地址 localhost:4000<br>//新建一个网站。如果没有指定文件夹，hexo默认在目前的文件夹建立网站。<br><code>hexo init</code><br><code>hexo -v </code><br>新建页面//new<br><code>hexo n xxx</code><br>生成静态页//generate<br><code>hexo g</code><br>启动本地预览//server<br><code>hexo s</code><br>关闭本地服务器<br><code>ctrl+c</code><br>列出网站结构信息<br><code> hexo list xxx</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage: hexo list &lt;type&gt;</span><br><span class="line">Description:</span><br><span class="line">List the information of the site.</span><br><span class="line">Arguments:</span><br><span class="line">  type  Available types: page, post, route, tag, category</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="配置hexo网页"><a href="#配置hexo网页" class="headerlink" title="配置hexo网页"></a>配置hexo网页</h2><p>安装hexo git模块拓展<br><code> npm i hexo-deployer-git</code><br>关联github：站点_config.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: 仓库路径.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
-
-<h2 id="部署hexo上线"><a href="#部署hexo上线" class="headerlink" title="部署hexo上线"></a>部署hexo上线</h2><p>安装git部署插件 同步本地部署到仓库<br><code> npm install hexo-deployer-git --save</code><br>更新hexo缓存<br><code>hexo clean</code><br>生成静态页//generate<br><code> hexo g</code><br>部署操作//deploy<br><code> hexo d</code></p>
-<h1 id="hexo自定义"><a href="#hexo自定义" class="headerlink" title="hexo自定义"></a>hexo自定义</h1><h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>克隆主题到hexo根目录中<br><code>cd hexo/hexo </code><br><code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code><br>修改站点_config.yml主题名<br><code>theme:主题名</code><br>修改主题_config.yml样式<br><code> Scheme Settings</code></p>
-<h2 id="主题更新"><a href="#主题更新" class="headerlink" title="主题更新"></a>主题更新</h2><p><code>cd themes/next</code><br><code>git pull</code></p>
-<h2 id="网站个性化"><a href="#网站个性化" class="headerlink" title="网站个性化"></a>网站个性化</h2><p>修改基本信息配置：站点_config.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: &quot;tyson自留地&quot;</span><br><span class="line">subtitle: &#x27;hello_world&#x27;</span><br><span class="line">description: &quot;tyson&#x27;s_1point3acres&quot;</span><br><span class="line">keywords: hexo,tyson</span><br><span class="line">author: tyson_H</span><br><span class="line">language: en</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://tyson1077.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure>
-<h2 id="seo优化"><a href="#seo优化" class="headerlink" title="seo优化"></a>seo优化</h2><h3 id="永久url结构"><a href="#永久url结构" class="headerlink" title="永久url结构"></a>永久url结构</h3><p>//搜索引擎优化认为最佳的网站结构是用户点击三次到达任何页面，因此过于复杂的网站分层结构不利于引擎蜘蛛爬取内容<br>修改url为sitename/title结构：配置站点_config.yml</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># permalink: :year/:month/:day/:title/</span><br><span class="line">permalink: :title/</span><br></pre></td></tr></table></figure>
-<h2 id="文章头配置"><a href="#文章头配置" class="headerlink" title="文章头配置"></a>文章头配置</h2><p>//如果没有指定新建页面的post模板参数，那么系统在scaffolds文件中使用post.md作为默认页面模板。<br>//修改<code> hexo\scaffolds\post.md</code>模板中的默认参数，之后生成文章页面时可以修改每个页面中引用参数内容。其中<code> title</code>和<code> date</code> 可自动生成引用<br>参考<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cd623d82c00a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">https://www.jianshu.com/p/cd623d82c00a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation</a><br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89">https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89</a><br>增加<code> categories</code>和<code> tag</code>参数引用：修改scaffolds\post.md</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-<p>引用时</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: hexo_git</span><br><span class="line">categories: codes</span><br><span class="line">tag:</span><br><span class="line"> - hexo</span><br><span class="line"> - git</span><br></pre></td></tr></table></figure>
-<h2 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h2><p>参考<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter.html#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE">https://hexo.io/zh-cn/docs/front-matter.html#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE</a><br><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/theme-settings.html#categories-page">http://theme-next.iissnan.com/theme-settings.html#categories-page</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33857230/article/details/91474562">https://blog.csdn.net/weixin_33857230/article/details/91474562</a><br>生成”分类”页并添加type属性<br><code> hexo n categories</code> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2022-03-15 00:15:34</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
-<p>菜单添加”分类页”：修改主题_config.yml，添加categories到menu下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br></pre></td></tr></table></figure>
-<p>本文参考<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496">https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">https://zhuanlan.zhihu.com/p/26625249</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35668237">https://zhuanlan.zhihu.com/p/35668237</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1595,7 +1646,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

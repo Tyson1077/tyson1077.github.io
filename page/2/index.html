@@ -149,6 +149,121 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hexo_git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/hexo_git/" class="post-title-link" itemprop="url">hexo_git</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-14 22:47:33" itemprop="dateCreated datePublished" datetime="2022-03-14T22:47:33+08:00">2022-03-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-03-15 00:37:06" itemprop="dateModified" datetime="2022-03-15T00:37:06+08:00">2022-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="git创建仓库"><a href="#git创建仓库" class="headerlink" title="git创建仓库"></a>git创建仓库</h1><h2 id="创建与git账户同名公有仓库"><a href="#创建与git账户同名公有仓库" class="headerlink" title="创建与git账户同名公有仓库"></a>创建与git账户同名公有仓库</h2><h3 id="repository仓库名称：-github-io"><a href="#repository仓库名称：-github-io" class="headerlink" title="repository仓库名称：.github.io"></a>repository仓库名称：.github.io</h3><h3 id="git绑定github账户"><a href="#git绑定github账户" class="headerlink" title="git绑定github账户"></a>git绑定github账户</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;github账户名&quot;</span><br><span class="line">git config --global user.email &quot;github邮箱&quot;</span><br></pre></td></tr></table></figure>
+<p>//<code>git config</code>命令的<code>--global</code>参数表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址</p>
+<h3 id="生成ssh公钥绑定github-sshkey"><a href="#生成ssh公钥绑定github-sshkey" class="headerlink" title="生成ssh公钥绑定github_sshkey"></a>生成ssh公钥绑定github_sshkey</h3><p><code>ssh-keygen -t rsa -C &quot;github邮箱&quot;</code><br>//由于github要求推送同步需要验证是否为合法用户，为省时间采用配对公私钥验证账户密码保证推送同步的合法性</p>
+<h2 id="通过密钥登录连接github"><a href="#通过密钥登录连接github" class="headerlink" title="通过密钥登录连接github"></a>通过密钥登录连接github</h2><p><code>ssh git@github.com</code><br>gitbash连接后出现以下表示git与github账户连接成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">This key is not known by any other names</span><br><span class="line">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes</span><br><span class="line">Warning: Permanently added &#x27;github.com&#x27; (ED25519) to the list of known hosts.</span><br><span class="line">PTY allocation request failed on channel 0</span><br><span class="line">Hi Tyson1077! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.</span><br><span class="line">Connection to github.com closed.</span><br></pre></td></tr></table></figure>
+<h1 id="nodejs安装"><a href="#nodejs安装" class="headerlink" title="nodejs安装"></a>nodejs安装</h1><p>//hexo基于nodejs，安装后自动添加环境变量和npm<br>检验nodejs和npm是否安装<br><code>node -v </code><br><code>npm -v </code></p>
+<h1 id="hexo安装"><a href="#hexo安装" class="headerlink" title="hexo安装"></a>hexo安装</h1><h2 id="创建文件夹作为hexo根目录绝对路径"><a href="#创建文件夹作为hexo根目录绝对路径" class="headerlink" title="创建文件夹作为hexo根目录绝对路径"></a>创建文件夹作为hexo根目录绝对路径</h2><p>进入hexo根目录操作<br><code> cd hexo/</code> </p>
+<h3 id="通过windows-powershell安装hexo：shift-右键"><a href="#通过windows-powershell安装hexo：shift-右键" class="headerlink" title="通过windows powershell安装hexo：shift+右键"></a>通过windows powershell安装hexo：shift+右键</h3><p><code>npm install -g hexo-cli</code><br>成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">added 59 packages, and audited 60 packages in 28s</span><br><span class="line"></span><br><span class="line">14 packages are looking for funding</span><br><span class="line">  run `npm fund` for details</span><br><span class="line"></span><br><span class="line">found 0 vulnerabilities</span><br><span class="line">npm notice</span><br><span class="line">npm notice New minor version of npm available! 8.3.1 -&gt; 8.5.4</span><br><span class="line">npm notice Changelog: https://github.com/npm/cli/releases/tag/v8.5.4</span><br><span class="line">npm notice Run npm install -g npm@8.5.4 to update!</span><br><span class="line">npm notice</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>出现报错：</p>
+</blockquote>
+<ul>
+<li>win10默认策略下无法执行powershell脚本，需要更改<code>设置</code>允许本地powershell在不签名情况下运行 参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/a12355556/article/details/115856367">https://blog.csdn.net/a12355556/article/details/115856367</a></li>
+</ul>
+<p>成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INFO  Cloning hexo-starter https://github.com/hexojs/hexo-starter.git</span><br><span class="line">fatal: unable to access &#x27;https://github.com/hexojs/hexo-starter.git/&#x27;: OpenSSL SSL_read: Connection was reset, errno 10054</span><br><span class="line">WARN  git clone failed. Copying data instead</span><br><span class="line">INFO  Install dependencies</span><br><span class="line">INFO  Start blogging with Hexo!</span><br></pre></td></tr></table></figure>
+
+<h2 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h2><p>//本地hexo预览地址 localhost:4000<br>//新建一个网站。如果没有指定文件夹，hexo默认在目前的文件夹建立网站。<br><code>hexo init</code><br><code>hexo -v </code><br>新建页面//new<br><code>hexo n xxx</code><br>生成静态页//generate<br><code>hexo g</code><br>启动本地预览//server<br><code>hexo s</code><br>关闭本地服务器<br><code>ctrl+c</code><br>列出网站结构信息<br><code> hexo list xxx</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage: hexo list &lt;type&gt;</span><br><span class="line">Description:</span><br><span class="line">List the information of the site.</span><br><span class="line">Arguments:</span><br><span class="line">  type  Available types: page, post, route, tag, category</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="配置hexo网页"><a href="#配置hexo网页" class="headerlink" title="配置hexo网页"></a>配置hexo网页</h2><p>安装hexo git模块拓展<br><code> npm i hexo-deployer-git</code><br>关联github：站点_config.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repo: 仓库路径.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+
+<h2 id="部署hexo上线"><a href="#部署hexo上线" class="headerlink" title="部署hexo上线"></a>部署hexo上线</h2><p>安装git部署插件 同步本地部署到仓库<br><code> npm install hexo-deployer-git --save</code><br>更新hexo缓存<br><code>hexo clean</code><br>生成静态页//generate<br><code> hexo g</code><br>部署操作//deploy<br><code> hexo d</code></p>
+<h1 id="hexo自定义"><a href="#hexo自定义" class="headerlink" title="hexo自定义"></a>hexo自定义</h1><h2 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h2><p>克隆主题到hexo根目录中<br><code>cd hexo/hexo </code><br><code>git clone https://github.com/theme-next/hexo-theme-next themes/next</code><br>修改站点_config.yml主题名<br><code>theme:主题名</code><br>修改主题_config.yml样式<br><code> Scheme Settings</code></p>
+<h2 id="主题更新"><a href="#主题更新" class="headerlink" title="主题更新"></a>主题更新</h2><p><code>cd themes/next</code><br><code>git pull</code></p>
+<h2 id="网站个性化"><a href="#网站个性化" class="headerlink" title="网站个性化"></a>网站个性化</h2><p>修改基本信息配置：站点_config.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># Site</span><br><span class="line">title: &quot;tyson自留地&quot;</span><br><span class="line">subtitle: &#x27;hello_world&#x27;</span><br><span class="line">description: &quot;tyson&#x27;s_1point3acres&quot;</span><br><span class="line">keywords: hexo,tyson</span><br><span class="line">author: tyson_H</span><br><span class="line">language: en</span><br><span class="line">timezone: &#x27;Asia/Shanghai&#x27;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span><br><span class="line">url: https://tyson1077.github.io</span><br><span class="line">permalink: :year/:month/:day/:title/</span><br><span class="line">permalink_defaults:</span><br><span class="line">pretty_urls:</span><br><span class="line">  trailing_index: true # Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br><span class="line">  trailing_html: true # Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></pre></td></tr></table></figure>
+<h2 id="seo优化"><a href="#seo优化" class="headerlink" title="seo优化"></a>seo优化</h2><h3 id="永久url结构"><a href="#永久url结构" class="headerlink" title="永久url结构"></a>永久url结构</h3><p>//搜索引擎优化认为最佳的网站结构是用户点击三次到达任何页面，因此过于复杂的网站分层结构不利于引擎蜘蛛爬取内容<br>修改url为sitename/title结构：配置站点_config.yml</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># permalink: :year/:month/:day/:title/</span><br><span class="line">permalink: :title/</span><br></pre></td></tr></table></figure>
+<h2 id="文章头配置"><a href="#文章头配置" class="headerlink" title="文章头配置"></a>文章头配置</h2><p>//如果没有指定新建页面的post模板参数，那么系统在scaffolds文件中使用post.md作为默认页面模板。<br>//修改<code> hexo\scaffolds\post.md</code>模板中的默认参数，之后生成文章页面时可以修改每个页面中引用参数内容。其中<code> title</code>和<code> date</code> 可自动生成引用<br>参考<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cd623d82c00a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation">https://www.jianshu.com/p/cd623d82c00a?utm_campaign=maleskine&amp;utm_content=note&amp;utm_medium=seo_notes&amp;utm_source=recommendation</a><br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89">https://hexo.io/zh-cn/docs/writing#%E6%A8%A1%E7%89%88%EF%BC%88Scaffold%EF%BC%89</a><br>增加<code> categories</code>和<code> tag</code>参数引用：修改scaffolds\post.md</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123;&#123; title &#125;&#125;</span><br><span class="line">date: &#123;&#123; date &#125;&#125;</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>引用时</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: hexo_git</span><br><span class="line">categories: codes</span><br><span class="line">tag:</span><br><span class="line"> - hexo</span><br><span class="line"> - git</span><br></pre></td></tr></table></figure>
+<h2 id="添加分类"><a href="#添加分类" class="headerlink" title="添加分类"></a>添加分类</h2><p>参考<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter.html#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE">https://hexo.io/zh-cn/docs/front-matter.html#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE</a><br><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/theme-settings.html#categories-page">http://theme-next.iissnan.com/theme-settings.html#categories-page</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_33857230/article/details/91474562">https://blog.csdn.net/weixin_33857230/article/details/91474562</a><br>生成”分类”页并添加type属性<br><code> hexo n categories</code> </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: categories</span><br><span class="line">date: 2022-03-15 00:15:34</span><br><span class="line">tags:</span><br><span class="line">categories:</span><br><span class="line">type: &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+<p>菜单添加”分类页”：修改主题_config.yml，添加categories到menu下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">  home: / || fa fa-home</span><br><span class="line">  archives: /archives/ || fa fa-archive</span><br><span class="line">  categories: /categories/ || fa fa-th</span><br></pre></td></tr></table></figure>
+<p>本文参考<br><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a><br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496">https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/26625249">https://zhuanlan.zhihu.com/p/26625249</a><br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35668237">https://zhuanlan.zhihu.com/p/35668237</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -285,7 +400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
