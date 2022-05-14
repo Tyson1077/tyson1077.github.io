@@ -149,6 +149,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/git_error/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/git_error/" class="post-title-link" itemprop="url">git_error</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-15 00:36:16 / Modified: 00:37:26" itemprop="dateCreated datePublished" datetime="2022-03-15T00:36:16+08:00">2022-03-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="报错1-Could-not-resolve-host-github-com"><a href="#报错1-Could-not-resolve-host-github-com" class="headerlink" title="报错1 Could not resolve host: github.com"></a>报错1 Could not resolve host: github.com</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: Could not resolve host: github.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: Failed to connect to github.com port 443 after 21105 ms: Timed out</span><br></pre></td></tr></table></figure>
+<p>//通常是网络问题，没有解析到github的主机地址。</p>
+<ol>
+<li>通过ping获取主机后在hosts中手动指定解析即可</li>
+<li>git取消全局通过http/https代理连接<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy </span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
+参考</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a18792627168/article/details/106132041/">https://blog.csdn.net/a18792627168/article/details/106132041/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/han-1034683568/p/6457894.html">https://www.cnblogs.com/han-1034683568/p/6457894.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44296929/article/details/111242452">https://blog.csdn.net/weixin_44296929/article/details/111242452</a></p>
+<h1 id="报错2-OpenSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#报错2-OpenSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="报错2 OpenSSL SSL_read: Connection was reset, errno 10054"></a>报错2 OpenSSL SSL_read: Connection was reset, errno 10054</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: OpenSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
+<p>//网络不稳定连接超时，取消ssl证书连接验证后再连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
+<p>cmd更新dns缓存<code> ipconfig /flushdns</code><br>参考<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fairylyl/p/15059437.html">https://www.cnblogs.com/fairylyl/p/15059437.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/110882074">https://blog.csdn.net/weixin_43945983/article/details/110882074</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/hosts_error/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -471,7 +553,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

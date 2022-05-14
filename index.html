@@ -149,6 +149,201 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day9_mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day9_mysql/" class="post-title-link" itemprop="url">Untitled</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-14 15:54:04 / Modified: 15:53:29" itemprop="dateCreated datePublished" datetime="2022-05-14T15:54:04+08:00">2022-05-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="子查询sub-query"><a href="#子查询sub-query" class="headerlink" title="子查询sub query"></a>子查询sub query</h1><h2 id="子查询概念"><a href="#子查询概念" class="headerlink" title="子查询概念"></a>子查询概念</h2><p>计算机sql查询中嵌入查询下层模块，子查询命令语句被当作另一命令查询条件使用；</p>
+<h2 id="主查询概念"><a href="#主查询概念" class="headerlink" title="主查询概念"></a>主查询概念</h2><p>第一条作为主要查询的select命令语句，用于确定获取数据源；</p>
+<h2 id="查询关系"><a href="#查询关系" class="headerlink" title="查询关系"></a>查询关系</h2><p>子查询是<strong>独立</strong>存在<strong>完整</strong>select查询命令语句，作为辅助查询<strong>条件或者数据源</strong>嵌入主查询命令语句中。</p>
+<h2 id="子查询分类"><a href="#子查询分类" class="headerlink" title="子查询分类"></a>子查询分类</h2><p><strong>功能划分：</strong></p>
+<ol>
+<li>标量子查询<br>返回值一个数据：一行一列；</li>
+<li>列子查询<br>返回值一列：一列多行；</li>
+<li>行子查询<br>返回值一行：一行多列；</li>
+<li>表子查询<br>返回值多行多列；</li>
+<li>exists子查询<br>返回值代替布尔值0/1;</li>
+</ol>
+<p><strong>位置划分：</strong></p>
+<ol>
+<li>where 子查询<br>where 条件子查询；</li>
+<li>from 子查询<br>from 动态数据源子查询；<h3 id="标量子查询"><a href="#标量子查询" class="headerlink" title="标量子查询"></a>标量子查询</h3><h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4>select */字段? from 数据表? where 条件判断字段? =/&lt;&gt; 值:子查询(select 字段? from 数据表? where 条件判断字段?)<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4>已知学生名，求学生所在所有班级名字；</li>
+<li>通过学生表获取学生班级ID； //条件决定子查询；</li>
+<li>通过学生班级ID获取班级名字; //需求决定主查询：首先查询；<br>select * from my_class where class_id = (select class_id from my_student where student_name = “学生名”);<br><img src="https://s2.loli.net/2022/05/07/8ZurHeJbpOUT7kw.png"><h3 id="列子查询"><a href="#列子查询" class="headerlink" title="列子查询"></a>列子查询</h3>返回一列多行集合；<h4 id="基本语法-1"><a href="#基本语法-1" class="headerlink" title="基本语法"></a>基本语法</h4>主查询 where 条件 in (列子查询);<br>select */字段? from 数据表? where 条件字段? in (select 条件字段? from 数据表?);<h4 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h4>求存在学生的所有班级名字；</li>
+<li>通过学生表获取所有班级ID； //条件子查询；</li>
+<li>通过班级表获取所有班级ID对应班级名字； //需求主查询：首先查询；<br>select name from my_class where class_id in (select class_id from my_student);<br><img src="https://s2.loli.net/2022/05/07/3ksDVxdlJGHK87f.png"><h3 id="行子查询"><a href="#行子查询" class="headerlink" title="行子查询"></a>行子查询</h3>返回一行多列集合；<br>行元素：行元素为对应多个字段成为合并元素，一个字段对应一个字段元素值；<h4 id="基本语法-2"><a href="#基本语法-2" class="headerlink" title="基本语法"></a>基本语法</h4>主查询 where 条件[(构造合并行元素:字段1?,字段n?)];<br>select */字段? from 数据表? where (构造合并行元素:条件字段1?,条件字段n?) = (select 对应条件字段1?,对应条件字段n? from 数据表?);<h4 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h4>求班级年龄最大，身高最高的学生名；</li>
+<li>通过班级表获取班级年龄最大值；</li>
+<li>通过班级表获取班级身高最高值；</li>
+<li>求构造合并行元素获取对应学生名；<br>错误写法：<br>select * from my_student having stu_age = max(stu_age) and stu_height = max(stu_height);<br>//having位于group by之后，group by执行代表having执行一次返回一行数据；<br>select * from my_student where (stu_age,stu_height) = (select max(max_age),max(stu_height) from my_student);<br><img src="https://s2.loli.net/2022/05/07/CDGnKUWRfwyZqIo.png"><h3 id="表子查询"><a href="#表子查询" class="headerlink" title="表子查询"></a>表子查询</h3>返回多行多列集合；<br>表子查询不用产生行元素：行子查询用于where 条件判断；表子查询用于from 数据表；<h4 id="基本语法-3"><a href="#基本语法-3" class="headerlink" title="基本语法"></a>基本语法</h4>select 字段表 from (表子查询) as 别名 [where] [group by] [having] [order by] [limit];<br>select */字段? from (select * from 数据表? order by 字段?) as 别名? group by 班级字段?;<h4 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h4>求班级身高最高学生名；</li>
+<li>通过order by排序降序把每个班身高最高学生名排在最前；</li>
+<li>通过group by对获取结果保存每组第一个；<br>错误写法：<br>select * from my_student group by class_id having stu_height = max(stu_height);<br>//group by仅返回每组第一条数据；<br>select * from (select * from my_student order by stu_height desc) as temp group by class_id;<br><img src="https://s2.loli.net/2022/05/07/gwPhEONx43b7UCl.png"><h3 id="exist子查询"><a href="#exist子查询" class="headerlink" title="exist子查询"></a>exist子查询</h3>返回代替布尔值0false/1true；<h4 id="基本语法-4"><a href="#基本语法-4" class="headerlink" title="基本语法"></a>基本语法</h4>where exists(查询语句); //exists判断查询结果真与假；<br>select */字段? from 数据表? where exists(select 条件字段? from 数据表? where 匹配字段1? = 匹配字段n?);<h4 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h4>求存在学生的所有班级名字；<br>select * from my_class as c where exists(select stu_id from my_student as s where s.class_id = c.class_id);<br><img src="https://s2.loli.net/2022/05/07/U27MPHafWn6EVIA.png"><h3 id="子查询：特定关键字"><a href="#子查询：特定关键字" class="headerlink" title="子查询：特定关键字"></a>子查询：特定关键字</h3><h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4>基本语法：主查询 where 条件 in (列子查询);<br><img src="https://s2.loli.net/2022/05/07/qPnt87M1gFOGLux.png"><h4 id="any-任意一个"><a href="#any-任意一个" class="headerlink" title="any 任意一个"></a>any 任意一个</h4>基本语法：<br>= any(列子查询); //匹配任意一个条件，类似于in；<br>&lt;&gt; any(列子查询); //不匹配任意一个条件；<br>实例：<br>1 = any(1,2,3) == true<br>1 &lt;&gt; any(1,2,3) == true<br><img src="https://s2.loli.net/2022/05/07/Uh3knzveEtbC4y6.png"><h4 id="some"><a href="#some" class="headerlink" title="some"></a>some</h4>类似于肯定any，否定不相同not any/not some；<h4 id="all"><a href="#all" class="headerlink" title="all"></a>all</h4>基本语法：<br>= all(列子查询); //所有相等；<br>&lt;&gt; all(列子查询); //所有不相等；<br><img src="https://s2.loli.net/2022/05/07/xgMcXFHLdUVQJuZ.png"><br><img src="https://s2.loli.net/2022/05/07/3ZUV9mI7Apd1iGx.png"><br>//匹配字段存在NULL空值不参与匹配输出；<br><img src="https://s2.loli.net/2022/05/07/zGODxboMQJSds8h.png"><h1 id="数据库备份还原"><a href="#数据库备份还原" class="headerlink" title="数据库备份还原"></a>数据库备份还原</h1>mysqldump.exe客户端用于sql数据备份与还原；<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2></li>
+<li>备份数据；<br><img src="https://s2.loli.net/2022/05/07/VtXMOIg9CoAfwQ1.png"></li>
+<li>备份还原数据结构：表结构sql指令；<h2 id="应用方案"><a href="#应用方案" class="headerlink" title="应用方案"></a>应用方案</h2></li>
+</ol>
+<p><strong>备份操作：</strong></p>
+<ol>
+<li>mysqldump客户端备份； //离线备份；<br>基本语法：<br>mysqldump/mysqldump.exe -h主机 -P端口 -u用户名 -p密码 库名? [[表名?],] &gt; 备份路径.sql</li>
+<li>1 整库备份<br><img src="https://s2.loli.net/2022/05/07/42qzJKRAadT3x1W.png"></li>
+<li>2 单表备份：数据库名 数据表</li>
+<li>3 多表备份：数据库名 数据表1 数据表n<br><img src="https://s2.loli.net/2022/05/07/q5OWGvfwbuQM69p.png"></li>
+</ol>
+<p><strong>还原操作：</strong><br>2. mysql.exe客户端还原； //离线还原(针对表操作指定库进行sql还原)；<br>基本语法：<br>mysql.exe -h主机 -P端口 -u用户名 -p密码 库名? &lt; 还原路径.sql<br><img src="https://s2.loli.net/2022/05/07/srzSRdymqCcHLV9.png"><br>3. sql指令导入还原； //数据库中进行还原操作；<br>source 还原路径.sql<br><img src="https://s2.loli.net/2022/05/07/TFmQ1ehCtljGYI2.png"><br>4. 手工操作：打开备份sql文件，复制所有指令在mysql客户端中执行命令操作；</p>
+<h1 id="数据库用户权限管理"><a href="#数据库用户权限管理" class="headerlink" title="数据库用户权限管理"></a>数据库用户权限管理</h1><p>针对不同客户端的用户对象指定不同权限管理，保证数据安全性；</p>
+<h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><p>通过用户连接认证操作服务端；<br>用户信息存储位置：mysql数据库/user数据表；<br>基本结构：</p>
+<ol>
+<li><p>host主机名：指允许访问客户端白名单； //字段数据*为允许所有访问；</p>
+</li>
+<li><p>user用户对象； //安装时不生成别名匿名用户时，只生成超管root用户；<br><img src="https://s2.loli.net/2022/05/14/HbQrNkZAmp5MO9T.png"></p>
+</li>
+<li><p>mysql中user表host字段与user字段组成复合主键针对<strong>区分不同</strong>用户管理；<br><img src="https://s2.loli.net/2022/05/14/zVXdcCRKnuveqbL.png"></p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3></li>
+<li><p>超管root用户对数据库mysql中user表操作：插入字段数据?；</p>
+</li>
+<li><p>sql指令命令操作： //主要操作；<br> 2.1 创建用户：<br> 基本语法：create user “用户名?”@”主机址?” identified by “明文密码?”;<br> 2.2 简化创建：无密码；<br> 基本语法：create user “用户名?”;</p>
+<h3 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h3><p>mysql中用户名user和主机地址host为复合主键合并存在<strong>唯一性</strong>；<br>基本语法：drop user “用户名?”@”主机址?”;</p>
+<h3 id="修改密码"><a href="#修改密码" class="headerlink" title="修改密码"></a>修改密码</h3><p>通过系统函数password()对密码进行加密；</p>
+</li>
+<li><p>sql指令命令操作： //主要操作；<br>基本语法：set password for 用户名? = password(“明文密码?”);</p>
+</li>
+<li><p>对字段数据?进行update更新操作；<br>基本语法：update mysql.user set password = password(“明文密码?”) where user = “用户名?” and host = “主机址?”;</p>
+<h2 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h2></li>
+<li><p>数据权限：数据?增删改查insert/delete/update/select</p>
+</li>
+<li><p>结构权限：表结构操作create/drop</p>
+</li>
+<li><p>管理权限：超管权限管理create user/grant/revoke</p>
+<h3 id="分配权限grant"><a href="#分配权限grant" class="headerlink" title="分配权限grant"></a>分配权限grant</h3><p>分配权限给指定用户对象；<br>基本语法：grant 权限列表? on 库表对象:<em>.</em>/库名?.*/库名?.表名? to “用户名?”@”主机址?”;<br> 权限列表?：逗号,分隔符；</p>
+<pre><code> 所有权限all privileges；
+ 数据权限：增insert删delete改update查select；
+ 结构权限：建表create删表drop；
+ 管理超管权限；
+</code></pre>
+<p> 库表对象：</p>
+<pre><code> 单库：库名?.*
+ 单表：库名?.表名?
+ 整库：*.*
+</code></pre>
+<p><img src="https://s2.loli.net/2022/05/14/cCykw2o4iZmdxQO.png"></p>
+<h3 id="取消权限revoke"><a href="#取消权限revoke" class="headerlink" title="取消权限revoke"></a>取消权限revoke</h3><p>回收用户对象指定权限；<br>基本语法：revoke 权限列表? on 库表对象:<em>.</em>/库名?.*/库名?.表名? from “用户名?”@”主机址?”;<br><img src="https://s2.loli.net/2022/05/14/QzBajrwiAcY7Ged.png"></p>
+<h3 id="刷新权限flush"><a href="#刷新权限flush" class="headerlink" title="刷新权限flush"></a>刷新权限flush</h3><p>针对用户对象指定权限，同步写入对应表；<br>基本语法：flush privileges;</p>
+<h2 id="用户密码丢失方案"><a href="#用户密码丢失方案" class="headerlink" title="用户密码丢失方案"></a>用户密码丢失方案</h2><p>对密码找回/重置；<br>基本操作：</p>
+</li>
+<li><p>停止mysql服务：net stop mysql;</p>
+</li>
+<li><p>绕权限重启服务：mysqld.exe –skip-grant-tables;</p>
+</li>
+<li><p>无权限服务 登录：解锁所有用户对象所有超管权限，客户端极度危险；</p>
+</li>
+<li><p>对密码修改操作；</p>
+</li>
+<li><p>关闭服务强制重启：net start mysql;</p>
+<h1 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h1><p>公共关键字为另一关系的主键字段，那么公共关键字为另一关系外键；<br>外键表示指定两表关系相关联系：另一关系外键主键为主表；存在外键数据表为主表下从表；<br>外键foreign key：**数据表1?(从表)<strong>存在字段?的数据?指向另一</strong>数据表2?(主表)**的主键字段?数据?；</p>
+<h2 id="外键操作"><a href="#外键操作" class="headerlink" title="外键操作"></a>外键操作</h2><h3 id="增加外键"><a href="#增加外键" class="headerlink" title="增加外键"></a>增加外键</h3></li>
+<li><p>建表时增加外键(如主键)： //增加后<strong>为mul多索引</strong>，自动生成普通索引字段?；<br>基本语法：<br>[constraint “外键?”] foreign key(外键字段?:主键?) references 主表?(主键?);<br><img src="https://s2.loli.net/2022/05/14/xEJceHv2pTVFhM7.png"><br><img src="https://s2.loli.net/2022/05/14/3iuKaOqITtPUW6R.png"></p>
+</li>
+<li><p>建表后增加外键；<br>基本语法：<br>alter table 从表? add [constraint `外键?`] foreign key(外键字段?:主键?) references 主表?(主键?);<br><img src="https://s2.loli.net/2022/05/14/B2tMq3ukVgPjQLy.png"></p>
+<h3 id="修改删除外键"><a href="#修改删除外键" class="headerlink" title="修改删除外键"></a>修改删除外键</h3><p>从表，外键仅允许删除增加；<br>基本语法：<br>alter table 从表? drop foreign key 外键字段?;<br><img src="https://s2.loli.net/2022/05/14/Z1LkEBj2Oxeolwc.png"><br><img src="https://s2.loli.net/2022/05/14/4GJK5muLfr3cshk.png"><br>强制删除普通索引字段?<br>alter table 表名? drop index 普通索引字段?;</p>
+<h2 id="外键规范要求"><a href="#外键规范要求" class="headerlink" title="外键规范要求"></a>外键规范要求</h2></li>
+<li><p>外键字段与关联主表主键字段<strong>类型</strong>相同；</p>
+</li>
+<li><p>外键字段与关键主表主键字段<strong>属性</strong>相同；</p>
+</li>
+<li><p>建表后增加外键，从主表<strong>关联数据</strong>存在要求；</p>
+</li>
+<li><p>外键仅支持存储引擎innodb；</p>
+<h2 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h2><p>建立外键约束关系对从主表存在效率数据约束；</p>
+<h3 id="约束"><a href="#约束" class="headerlink" title="约束"></a>约束</h3></li>
+<li><p>数据关联：产生外键时，存在外键从表字段?<strong>受限于</strong>主表字段?数据存在，无法进行不规范操作； //如无法插入主表字段?不存在数据；<br><img src="https://s2.loli.net/2022/05/14/LFcs7exSzp6DJR2.png"><br><img src="https://s2.loli.net/2022/05/14/inrFub7CBlVLtWh.png"></p>
+</li>
+<li><p>主从保证：当主表被其他从表作为外键引入，那么主表数据?需要<strong>保证有效性</strong>不能随意操作； //如不能删除作为外键字段?被其他从表引入的字段数据?；<br><img src="https://s2.loli.net/2022/05/14/dIoQtUJk9jEY3iv.png"></p>
+<h3 id="外键约束-1"><a href="#外键约束-1" class="headerlink" title="外键约束"></a>外键约束</h3><p>创建外键时，针对约束<strong>选择性</strong>操作；<br>外键约束对象<strong>针对主表</strong>操作； //如从表无法插入主表不存在数据；<br>基本语法：<br>alter table 从表? add foreign by(外键字段?) references 主表?(主键?) on 约束模式?;<br>约束模式：</p>
+</li>
+<li><p>district严格模式：默认不允许操作；</p>
+</li>
+<li><p>cascade级联模式：主从变化，同步操作；</p>
+</li>
+<li><p>set null置空模式：主从变化删除，主表外键字段允许为NULL空值时对应从表变化操作置空；</p>
+</li>
+</ol>
+<p>常见指定约束操作：update/delete；<br><img src="https://s2.loli.net/2022/05/14/2vyDTdG5Msm6HLl.png"></p>
+<ol>
+<li>on update cascade 更新级联，同步操作<br><img src="https://s2.loli.net/2022/05/14/yFgVYrvp5PJiBdC.png"></li>
+<li>on delete set null 主从变化，删除置空<br><img src="https://s2.loli.net/2022/05/14/AHolGcBPp6swvkd.png"><h3 id="约束作用"><a href="#约束作用" class="headerlink" title="约束作用"></a>约束作用</h3></li>
+<li>保证数据完整性：主从变化一致性；</li>
+<li>保证数据关联性：逻辑关联性强大，导致<strong>底层数据逻辑不可控</strong>；底层逻辑设计开发时无法把握数据业务逻辑，因此是<strong>较少使用</strong>；<br><img src="https://s2.loli.net/2022/05/14/yeU8S56RoI9Xc7g.png"></li>
+</ol>
+<h1 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h1><h2 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h2><p>本质是sql指令命令中select查询操作；<br>基本语法：<br>create view 视图? as select 查询操作?:单表/连接/联合/子查询;<br><img src="https://s2.loli.net/2022/05/14/oLgiw2T8RYOjyEX.png"></p>
+<h2 id="查看视图"><a href="#查看视图" class="headerlink" title="查看视图"></a>查看视图</h2><p>视图本身是虚拟表，同样适配表操作指令命令；<br>基本语法：<br>show view 视图?/show create view 视图?/desc 视图?;<br><img src="https://s2.loli.net/2022/05/14/fUzhBTwjQLCmp5e.png"></p>
+<h2 id="使用视图"><a href="#使用视图" class="headerlink" title="使用视图"></a>使用视图</h2><ol>
+<li>本质上是<strong>虚拟表</strong>，内部无数据；</li>
+<li>作为<strong>表的映射</strong>同样执行select查询操作得到对应<strong>临时数据</strong>结果；<br>基本语法：<br>select */字段? from 视图? [子查询操作?];<h2 id="修改视图"><a href="#修改视图" class="headerlink" title="修改视图"></a>修改视图</h2>修改视图对应临时查询操作；<br>基本语法：<br>alter view 视图? as select查询操作?;<br><img src="https://s2.loli.net/2022/05/14/D1uZyCFM36eO4kS.png"><h2 id="删除视图"><a href="#删除视图" class="headerlink" title="删除视图"></a>删除视图</h2>基本语法：<br>drop view 视图?;<br><img src="https://s2.loli.net/2022/05/14/xEFRT8bGdjcO7oI.png"><h1 id="事务安全"><a href="#事务安全" class="headerlink" title="事务安全"></a>事务安全</h1>事务transaction是访问可能更新的数据库中数据项的<strong>程序执行事务单元unit</strong>；<br>通常是高级数据库操纵语言dml或者编程程序所引发，一个单元unit由事务开始begin transaction和事务结束end transaction之间<strong>全体操作执行过程</strong>组成；<h2 id="事务基本原理"><a href="#事务基本原理" class="headerlink" title="事务基本原理"></a>事务基本原理</h2>mysql事务由innode存储引擎统一存储管理：在日志表中<strong>分别存储</strong>一个事务单元/用户操作指令命令，通过<strong>二次更新</strong>确认后把事务单元和操作指令进行<strong>同步合并</strong>数据表；<br><img src="https://s2.loli.net/2022/05/14/SCgWF1EOrb8aXLj.png"><h2 id="mysql事务分类"><a href="#mysql事务分类" class="headerlink" title="mysql事务分类"></a>mysql事务分类</h2><h3 id="修改事务同步方式"><a href="#修改事务同步方式" class="headerlink" title="修改事务同步方式"></a>修改事务同步方式</h3>show variable “autocommit%”;<br>set autocommit = on/off;<br>手动同步操作指令：</li>
+<li>commit提交：分别存储 日志表同步提交到数据表，事务清空；</li>
+<li>rollback回滚：sql指令命令操作清空，事务清空；<h3 id="自动事务autocommit"><a href="#自动事务autocommit" class="headerlink" title="自动事务autocommit"></a>自动事务autocommit</h3>客户端发送sql指令命令(增删改操作)给服务端时，服务端无需反馈自动同步数据表；<br><img src="https://s2.loli.net/2022/05/14/Hgakt1RATjsIP2Y.png"></li>
+<li>自动同步操作；<br><img src="https://s2.loli.net/2022/05/14/EiFAe2rOHfWC6cL.png"></li>
+<li>手动提交commit同步操作；<br>手动同步操作指令：</li>
+<li>commit提交：分别存储 日志表提交同步到数据表，事务清空；</li>
+<li>rollback回滚：sql指令命令操作清空，事务清空；<br><img src="https://s2.loli.net/2022/05/14/CsuRfUcyMGod8AQ.png"><h3 id="手动事务"><a href="#手动事务" class="headerlink" title="手动事务"></a>手动事务</h3>事务的开始，过程，结束操作均由手动发送指令命令实现；<h4 id="开启事务"><a href="#开启事务" class="headerlink" title="开启事务"></a>开启事务</h4>start transaction; //操作保存日志表；<h4 id="执行指令"><a href="#执行指令" class="headerlink" title="执行指令"></a>执行指令</h4>逐一执行指令命令行：多个sql指令命令；</li>
+<li>事务操作1：新增数据；<br><img src="https://s2.loli.net/2022/05/14/JmpxL5fOq4lAgr7.png"></li>
+<li>事务操作2：更新数据；<br>//客户端1；<br><img src="https://s2.loli.net/2022/05/14/EFG6XcPUwhZgy1j.png"><br>//客户端2；<br><img src="https://s2.loli.net/2022/05/14/6WyNKFQ8daIko4i.png"><h4 id="提交事务：结束点"><a href="#提交事务：结束点" class="headerlink" title="提交事务：结束点"></a>提交事务：结束点</h4></li>
+<li>确认提交commit：日志表提交同步到数据表，事务清空；<br><img src="https://s2.loli.net/2022/05/14/a8CAtJyVuxGsYWM.png"></li>
+<li>回滚操作rollback：sql指令命令操作清空，事务点无效清空；<h5 id="回滚点savepoint"><a href="#回滚点savepoint" class="headerlink" title="回滚点savepoint"></a>回滚点savepoint</h5>按分步骤执行sql指令，设置成功操作执行位置以便失败后回滚到成功操作执行位置；</li>
+<li>增加回滚点：savepoint 回滚点?;</li>
+<li>回到回滚点：rollback to 回滚点?; //<strong>多个回滚点</strong>操作回滚到前置回滚点时后置回滚点<strong>全部失效</strong>；<h2 id="事务特点"><a href="#事务特点" class="headerlink" title="事务特点"></a>事务特点</h2><h3 id="原子性atomioity"><a href="#原子性atomioity" class="headerlink" title="原子性atomioity"></a>原子性atomioity</h3>一个事务单元<strong>不可分割</strong>：整个事务操作流程从开始到提交执行成功/执行失败；<h3 id="一致性consistency"><a href="#一致性consistency" class="headerlink" title="一致性consistency"></a>一致性consistency</h3>一个事务单元<strong>状态一次性改变</strong>：所有操作一次性修改/所有操作无修改；<h3 id="隔离性isolation"><a href="#隔离性isolation" class="headerlink" title="隔离性isolation"></a>隔离性isolation</h3>一个事务单元各执行过程互相隔离<strong>不冲突干扰</strong><br><img src="https://s2.loli.net/2022/05/14/2p5QaCASExvlqK9.png"><br>触发点：行隔离/表隔离；<br>条件中使用<strong>索引主键</strong>时，系统自动隔离主键字段?数据?；<br>否则，系统通过<strong>全表检索</strong>查询数据时全表锁定所有字段?数据?；<br><img src="https://s2.loli.net/2022/05/14/weSnCDlpR2HrKvk.png"><h3 id="持久永久性durability-permanence"><a href="#持久永久性durability-permanence" class="headerlink" title="持久永久性durability/permanence"></a>持久永久性durability/permanence</h3>修改操作永久性；</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day8_mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1576,88 +1771,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/git_error/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tyson_H">
-      <meta itemprop="description" content="tyson's_1point3acres">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tyson自留地">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/git_error/" class="post-title-link" itemprop="url">git_error</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-15 00:36:16 / Modified: 00:37:26" itemprop="dateCreated datePublished" datetime="2022-03-15T00:36:16+08:00">2022-03-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="报错1-Could-not-resolve-host-github-com"><a href="#报错1-Could-not-resolve-host-github-com" class="headerlink" title="报错1 Could not resolve host: github.com"></a>报错1 Could not resolve host: github.com</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: Could not resolve host: github.com</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: Failed to connect to github.com port 443 after 21105 ms: Timed out</span><br></pre></td></tr></table></figure>
-<p>//通常是网络问题，没有解析到github的主机地址。</p>
-<ol>
-<li>通过ping获取主机后在hosts中手动指定解析即可</li>
-<li>git取消全局通过http/https代理连接<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global --unset http.proxy </span><br><span class="line">git config --global --unset https.proxy</span><br></pre></td></tr></table></figure>
-参考</li>
-</ol>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/a18792627168/article/details/106132041/">https://blog.csdn.net/a18792627168/article/details/106132041/</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/han-1034683568/p/6457894.html">https://www.cnblogs.com/han-1034683568/p/6457894.html</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44296929/article/details/111242452">https://blog.csdn.net/weixin_44296929/article/details/111242452</a></p>
-<h1 id="报错2-OpenSSL-SSL-read-Connection-was-reset-errno-10054"><a href="#报错2-OpenSSL-SSL-read-Connection-was-reset-errno-10054" class="headerlink" title="报错2 OpenSSL SSL_read: Connection was reset, errno 10054"></a>报错2 OpenSSL SSL_read: Connection was reset, errno 10054</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fatal: unable to access &#x27;https://github.com/Tyson1077/tyson1077.github.io.git/&#x27;: OpenSSL SSL_read: Connection was reset, errno 10054</span><br></pre></td></tr></table></figure>
-<p>//网络不稳定连接超时，取消ssl证书连接验证后再连接</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global http.sslVerify &quot;false&quot;</span><br></pre></td></tr></table></figure>
-<p>cmd更新dns缓存<code> ipconfig /flushdns</code><br>参考<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/fairylyl/p/15059437.html">https://www.cnblogs.com/fairylyl/p/15059437.html</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43945983/article/details/110882074">https://blog.csdn.net/weixin_43945983/article/details/110882074</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1727,7 +1840,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
