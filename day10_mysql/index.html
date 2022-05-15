@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tyson1077.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="变量mysql本质为编程语言，通过变量存储数据&#x2F;控制mysql属性实现具体功能； 系统变量系统内部变量针对mysql客户端所有用户定义； 查看 查看所有系统变量：show variables [like “变量数据值?:?%&#x2F;?_”]; 通过$$select查看变量数据值：select @@变量?;修改 修改局部变量(会话)：针对当前客户端，当前连接会话；set 变量? &#x3D; 新值?; 全局修改：针">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day10_mysql">
+<meta property="og:url" content="https://tyson1077.github.io/day10_mysql/index.html">
+<meta property="og:site_name" content="tyson自留地">
+<meta property="og:description" content="变量mysql本质为编程语言，通过变量存储数据&#x2F;控制mysql属性实现具体功能； 系统变量系统内部变量针对mysql客户端所有用户定义； 查看 查看所有系统变量：show variables [like “变量数据值?:?%&#x2F;?_”]; 通过$$select查看变量数据值：select @@变量?;修改 修改局部变量(会话)：针对当前客户端，当前连接会话；set 变量? &#x3D; 新值?; 全局修改：针">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/5HVFN3mr91upbos.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/sLWH1hjkGVNEdYD.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/7GyHptC8wzJdr12.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/HOKr9GlcJRv8MAu.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/gPGfM2qkHxaSX1b.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/BeQqfP1F8TSA9tz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/usF5GyXW9gnDSYj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/bshECk3KGNxX78q.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/RZ2B1wHYWUltq3O.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/KZ2u8EMFzyoYOQj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/QbjFLe8qHsM2xwJ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/zFG8jI3OUa5cwve.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/KOeVb5JaXLcsBqn.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/opr4JO8sIx2iMBF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/lt7B3HLJ6xuycNz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/nzJSk9Z31lmVyE5.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/IB8TUYjMG6QCXS9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/dQq74aD1Z8VEUm9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/r2RTu1AENHSw9dh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/2hroXskaOJGIjmD.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/d5qxrZ7nhQkEp2V.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/UKEFBw14ruG5jSc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/F8aQJSDdzV4BpiU.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/rkyKQRu1Gj8xiDB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/xJqkdnT9Vp7N1Il.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/FN1OQTqsxEba6lf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/r8Fx3vDRkOX9NmS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/bDpFGkuTIZSoL3U.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/iplNQH2yoeGX6cv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/P5VjwSnobc2Cx1W.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/vUR1dzSAf8qtPKV.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/hqNyWjo7DFREUCb.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/IGoVJuFc4i5hRBk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/ZGRUn3T2Xq7gJur.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/dEGzeyUj7Xnm9HO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/gT3UKwGEVLXseSD.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/xjNEOYUf7R2XAkB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/EJH6PceQWImL1XZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/GfOWMDqB5N6ZdjP.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/12scUudhgxvPtyY.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/14/5aYL9HrDh2vRFKj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/jni925YpxZJRyfW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/JZShsoq361M5LVl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/rpD2n6UzbgwJCBx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/B54mupxIWhRqLad.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/anDye1WEluSvcwV.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/t91XdLJ3CrNeanh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/W7l4aNzyvcYt9BO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/LiJR2vhyksj5UPA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/WlwFRHUNvVes8MG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/kdeI8nb4gGSKRmP.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/15/gf6dAWatV5ZhH2B.png">
+<meta property="article:published_time" content="2022-05-15T03:15:03.124Z">
+<meta property="article:modified_time" content="2022-05-15T03:15:49.128Z">
+<meta property="article:author" content="tyson_H">
+<meta property="article:tag" content="hexo,tyson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/14/5HVFN3mr91upbos.png">
+
+<link rel="canonical" href="https://tyson1077.github.io/day10_mysql/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day10_mysql | tyson自留地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">tyson自留地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hello_world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day10_mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day10_mysql
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-15 11:15:03 / Modified: 11:15:49" itemprop="dateCreated datePublished" datetime="2022-05-15T11:15:03+08:00">2022-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>mysql本质为编程语言，通过变量存储数据/控制mysql属性实现具体功能；</p>
+<h2 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h2><p>系统内部变量针对mysql客户端所有用户定义；</p>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ol>
+<li>查看所有系统变量：show variables [like “变量数据值?:?%/?_”];<br><img src="https://s2.loli.net/2022/05/14/5HVFN3mr91upbos.png"></li>
+<li>通过$$select查看变量数据值：select @@变量?;<br><img src="https://s2.loli.net/2022/05/14/sLWH1hjkGVNEdYD.png"><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3></li>
+<li>修改局部变量(会话)：针对<strong>当前</strong>客户端，当前连接会话；<br>set 变量? = 新值?;</li>
+<li>全局修改：针对<strong>新开</strong>客户端生效；<br>set global 变量? = 新值?;<br>set @@global.变量? = 新值?;<br><img src="https://s2.loli.net/2022/05/14/7GyHptC8wzJdr12.png"><h2 id="会话变量"><a href="#会话变量" class="headerlink" title="会话变量"></a>会话变量</h2>针对用户与mysql客户端互相绑定，仅对当前客户端/当前用户生效；<br>基本语法：</li>
+<li>set @变量? = 新值?;<br><img src="https://s2.loli.net/2022/05/14/HOKr9GlcJRv8MAu.png"></li>
+<li>set @变量? := 新值?; //特殊符定定义赋值；</li>
+<li>获取表数据存储赋值变量： //mysql无数组逐一存储；</li>
+<li>1 定义赋值并输出过程：select @变量1? := 字段1?, @变量n? := 字段n? from 表名? where 条件?;<br><img src="https://s2.loli.net/2022/05/14/gPGfM2qkHxaSX1b.png"></li>
+<li>2 定义赋值无过程：select 字段1?, 字段n? from 数据源?:表名? where 条件? into @变量1?, @变量n?;<br><img src="https://s2.loli.net/2022/05/14/BeQqfP1F8TSA9tz.png"><h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2>通过declare声明语句定义赋值，作用于begin/end语句块之间的局部变量；</li>
+<li>通过declare关键字声明定义；</li>
+<li>大型语句块：函数/存储过程/触发器begin/end中使用；</li>
+<li>基本语法：declare 变量? 字段类型? [属性?];<h1 id="流程结构"><a href="#流程结构" class="headerlink" title="流程结构"></a>流程结构</h1>代码的执行顺序；默认为顺序结构；<h2 id="if分支结构：条件判断"><a href="#if分支结构：条件判断" class="headerlink" title="if分支结构：条件判断"></a>if分支结构：条件判断</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3></li>
+<li>select查询中进行条件判断：if(条件,”符合条件1?”,”不符条件2?”)；<br> <img src="https://s2.loli.net/2022/05/14/usF5GyXW9gnDSYj.png"></li>
+<li>作用于复杂语句块：函数/存储过程/触发器；<br>基本语法：<br>if 条件表达? then<br> 满足执行?;<br>end if;<h3 id="复合结构"><a href="#复合结构" class="headerlink" title="复合结构"></a>复合结构</h3>分判断两种情况输出对应代码执行；<br>基本语法：<br>if 条件表达? then<br>满足执行?;<br>else<br>不满足执行?<br> if 条件表达? then //多层细分条件n?;<br> 满足执行?; //细分执行?;<br> end if; //细分结束?;<br>end if;<h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2>基本语法：<br>while 条件表达? do<br> 循环体执行?;<br>end while;<h3 id="结构标识符"><a href="#结构标识符" class="headerlink" title="结构标识符"></a>结构标识符</h3></li>
+<li>针对特定结构命名于特定地方(大型代码块)直接使用便于循环控制；<br> 基本语法：<br> 标识符?:while 条件表达? do<pre><code> 循环体执行?;
+</code></pre>
+ end while [标识符?];</li>
+<li>循环控制替代符lterate迭代/leave离开；<br>lterate迭代：之后代码不执行，重新新循环continue；<br>leave离开：终止整个循环break；</li>
+</ol>
+<p>基本语法： //标识符参与循环控制；<br>标识符?:while 条件表达? do<br>if 条件判断? then<br>循环体执行?;<br>    lterate/leave 标识符?; //循环控制；<br>    end if<br>循环体执行?;<br>end while [标识符?];</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>通过select 函数?(参数?);调用访问；</p>
+<h2 id="系统内置函数"><a href="#系统内置函数" class="headerlink" title="系统内置函数"></a>系统内置函数</h2><h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><p>char_length(“”); 判断输出字符串字符长度；<br><img src="https://s2.loli.net/2022/05/14/bshECk3KGNxX78q.png"><br>length(“”); 判断字符串字节长度/字符位长度；<br><img src="https://s2.loli.net/2022/05/14/RZ2B1wHYWUltq3O.png"><br>coucat(“”); 连接字符串；<br><img src="https://s2.loli.net/2022/05/14/KZ2u8EMFzyoYOQj.png"><br>lnstr(“”); 判断目标字符串是否存在，返回布尔”存在值?”/不存在0；<br><img src="https://s2.loli.net/2022/05/14/QbjFLe8qHsM2xwJ.png"><br>lcase(“”); 转换小写;<br><img src="https://s2.loli.net/2022/05/14/zFG8jI3OUa5cwve.png"><br>left(“”); 左侧指定位截取字符串；<br><img src="https://s2.loli.net/2022/05/14/KOeVb5JaXLcsBqn.png"><br>ltrim(“”); 消除左侧空字符空格;<br><img src="https://s2.loli.net/2022/05/14/opr4JO8sIx2iMBF.png"><br>mid(“”); 中间指定位截取字符串，不指定默认截取全部；<br><img src="https://s2.loli.net/2022/05/14/lt7B3HLJ6xuycNz.png"></p>
+<h3 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h3><p>now(); 返回当前日期时间；<br>curdare(); 返回当前日期；<br>curtime(); 返回当前时间；<br><img src="https://s2.loli.net/2022/05/14/nzJSk9Z31lmVyE5.png"><br>datediff(); 判断两日期天数差距，日期格式为引号字符串；<br><img src="https://s2.loli.net/2022/05/14/IB8TUYjMG6QCXS9.png"><br>date_add(日期, interval 时间数字 type:year/day/minute/second); 增加时间；<br><img src="https://s2.loli.net/2022/05/14/dQq74aD1Z8VEUm9.png"><br>unix_timestamp(); 获取时间戳；<br><img src="https://s2.loli.net/2022/05/14/r2RTu1AENHSw9dh.png"><br>from_unixtime(); 指定时间戳转换时间；<br><img src="https://s2.loli.net/2022/05/14/2hroXskaOJGIjmD.png"></p>
+<h3 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h3><p>abs(); 绝对值；<br>ceiling(); 向上取整；<br>floor(); 向下取整；<br>pow(?,指?); 求指数计算；<br>rand(); 01之间取随机；<br>round(); 四舍五入；<br><img src="https://s2.loli.net/2022/05/14/d5qxrZ7nhQkEp2V.png"></p>
+<h3 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h3><p>md5(); 数据md5加密；<br>version(); 获取版本号；<br>databse();获取当前所在库；<br>uuid(); 生成唯一标识符，自增长单表唯一/uuid整库唯一；<br><img src="https://s2.loli.net/2022/05/14/UKEFBw14ruG5jSc.png"></p>
+<h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><p>用户自定义实现某功能的多n语句块；</p>
+<ol>
+<li>函数内部指令互相独立，规范语句以分号;分隔结束；</li>
+<li>函数独立整体调用时才执行，意味函数整体设计无法中断；</li>
+<li>mysql通过分号;分隔结束符开始执行；<br> 解决方案：<ol>
+<li>通过delimiter修改临时结束符：delimiter 新结束符;</li>
+<li>中间正常sql指令命令以分号;分隔结束(系统不执行无法识别)；</li>
+<li>新结束符结束后，修改回原结束符：delimiter 原结束符;</li>
+</ol>
+</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>自定义函数从属于会话用户级别：当前客户端对应数据库使用；</li>
+<li>不同数据库下函数无法调用；</li>
+<li>多n代码集合解决实现某功能重复问题；</li>
+<li>规范函数返回值标志代码的执行结束；</li>
+<li>函数体内部无法使用select指令命令，仅可为变量赋值select 字段? into @变量?;<h3 id="创建函数"><a href="#创建函数" class="headerlink" title="创建函数"></a>创建函数</h3>函数的基本要素结构：</li>
+<li>function关键字</li>
+<li>函数名? </li>
+<li>参数?(形参?/[实参?]) //手动指定数据类型?；<br>基本语法：参数? 字段类型?<br><img src="https://s2.loli.net/2022/05/14/F8aQJSDdzV4BpiU.png"></li>
+<li>returns函数返回值类型?</li>
+<li>函数体?</li>
+<li>return返回值?</li>
+<li>结束符?</li>
+</ol>
+<p>基本语法：<br>delimiter修改新的语句结束符?<br>create function 函数名?(形参?) returns 返回值类型?<br>begin<br>    函数体;<br>    return 返回值?;<br>end<br>语句结束符?<br>delimiter修正原本语句结束符?<br><img src="https://s2.loli.net/2022/05/14/rkyKQRu1Gj8xiDB.png"></p>
+<h3 id="查看函数"><a href="#查看函数" class="headerlink" title="查看函数"></a>查看函数</h3><p>查看所有函数show function status\G<br><img src="https://s2.loli.net/2022/05/14/xJqkdnT9Vp7N1Il.png"><br>查看创建函数结构show create function 函数?\G<br><img src="https://s2.loli.net/2022/05/14/FN1OQTqsxEba6lf.png"></p>
+<h3 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h3><p>select 函数?([实参?]);<br><img src="https://s2.loli.net/2022/05/14/r8Fx3vDRkOX9NmS.png"></p>
+<h3 id="删除函数"><a href="#删除函数" class="headerlink" title="删除函数"></a>删除函数</h3><p>drop function 函数?;<br><img src="https://s2.loli.net/2022/05/14/bDpFGkuTIZSoL3U.png"></p>
+<h2 id="函数-流程结构综合实例"><a href="#函数-流程结构综合实例" class="headerlink" title="函数/流程结构综合实例"></a>函数/流程结构综合实例</h2><h3 id="流程结构实例"><a href="#流程结构实例" class="headerlink" title="流程结构实例"></a>流程结构实例</h3><p>需求：初始1开始直到用户传入对应值终止自动求和，排除5的倍数；<br><img src="https://s2.loli.net/2022/05/14/iplNQH2yoeGX6cv.png"><br>设计：</p>
+<ol>
+<li>创建函数；</li>
+<li>定义赋值形参，确定累加位置；<h4 id="自动求和函数"><a href="#自动求和函数" class="headerlink" title="自动求和函数"></a>自动求和函数</h4> delimiter $$ //修改新的语句结束符?；<br> create funtion my_sum(end_value int) returns int<br> begin<br> //函数循环体；<br> end<br> $$ //语句结束符?<br> delimiter ; //修正原本语句结束符?；</li>
+<li>定义赋值变量，保存对应结果值?；<br> set @变量? = 新值?;<br> declare 变量? 类型? [= 默认值?]; //声明局部变量为主；</li>
+<li>内部执行循环体，实现迭代累加；<br> declare i 类型? default 1; //构建循环初始自增变量；<br> while i &lt;= end_value do<pre><code> set 变量? = 变量? + i; //mysql不存在++；
+ set i = i + 1;
+</code></pre>
+ end while;<br> <img src="https://s2.loli.net/2022/05/14/P5VjwSnobc2Cx1W.png"></li>
+<li>循环体执行控制条件判断：5倍数；<br><img src="https://s2.loli.net/2022/05/14/vUR1dzSAf8qtPKV.png"></li>
+<li>函数必存返回值?；<br><img src="https://s2.loli.net/2022/05/14/hqNyWjo7DFREUCb.png"><h4 id="调用函数-1"><a href="#调用函数-1" class="headerlink" title="调用函数"></a>调用函数</h4><img src="https://s2.loli.net/2022/05/14/IGoVJuFc4i5hRBk.png"><h1 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h1>指变量可以作用实现功能范围； //通常在sql中使用局部/会话作用域解决实际问题；<h2 id="局部作用域"><a href="#局部作用域" class="headerlink" title="局部作用域"></a>局部作用域</h2>通过declare关键字声明；</li>
+<li>在大型代码块结构体(函数/存储过程/触发器)内部使用；</li>
+<li>外部访问该变量?，系统自动识别为字段；<h2 id="会话作用域"><a href="#会话作用域" class="headerlink" title="会话作用域"></a>会话作用域</h2>用户通过set @变量? = 新值?; 定义赋值；</li>
+<li>仅限当前用户/当前连接生效；</li>
+<li>全域可用：结构体内部/跨库；<br><img src="https://s2.loli.net/2022/05/14/ZGRUn3T2Xq7gJur.png"><h2 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h2>所有客户端所有连接所有用户可以使用，通过全局符号关键字定义；<br>set global 变量? = 新值?;<br>set @@global.变量? = 新值?;<h1 id="存储过程stored-procedure"><a href="#存储过程stored-procedure" class="headerlink" title="存储过程stored procedure"></a>存储过程stored procedure</h1>过程：大型数据库系统中完成特地功能的sql语句指令命令集合体；</li>
+<li>高效率，通过首次编译后无需再次编译执行；</li>
+<li>用户指定存储过程名指定参数执行；<h2 id="过程区别于函数"><a href="#过程区别于函数" class="headerlink" title="过程区别于函数"></a>过程区别于函数</h2><h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3></li>
+<li>目的为执行重复sql语句指令命令集合实现某功能；</li>
+<li>仅编译一次；<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3></li>
+<li>标识符：函数function/过程procedure；</li>
+<li>返回值：过程没有返回值；</li>
+<li>函数通过select调用；<h2 id="存储过程：基本操作"><a href="#存储过程：基本操作" class="headerlink" title="存储过程：基本操作"></a>存储过程：基本操作</h2><h3 id="创建过程"><a href="#创建过程" class="headerlink" title="创建过程"></a>创建过程</h3>基本语法：<br>delimiter修改新的语句结束符?<br>create procedure 过程名?([过程类型? 参数? 字段类型?]) //手动指定过程类型?/字段类型?；<br>begin<br> 过程执行体<br>end<br>结束符?<br>delimiter修正原本语句结束符?<br><img src="https://s2.loli.net/2022/05/14/dEGzeyUj7Xnm9HO.png"></li>
+</ol>
+<h3 id="查看过程"><a href="#查看过程" class="headerlink" title="查看过程"></a>查看过程</h3><p>查看全部存储过程：show procefure status [like “?%/?_”]\G<br><img src="https://s2.loli.net/2022/05/14/gT3UKwGEVLXseSD.png"><br>查看创建过程结构：create show procedure 过程名?\G<br><img src="https://s2.loli.net/2022/05/14/xjNEOYUf7R2XAkB.png"></p>
+<h3 id="调用过程"><a href="#调用过程" class="headerlink" title="调用过程"></a>调用过程</h3><p>过程没有返回值，无法通过select调用；<br>call 过程名?([实参?]);</p>
+<h3 id="删除过程"><a href="#删除过程" class="headerlink" title="删除过程"></a>删除过程</h3><p>drop procedure 过程名?;<br><img src="https://s2.loli.net/2022/05/14/EJH6PceQWImL1XZ.png"></p>
+<h2 id="过程形参类型：过程类型-参数类型"><a href="#过程形参类型：过程类型-参数类型" class="headerlink" title="?过程形参类型：过程类型/参数类型"></a>?过程形参类型：过程类型/参数类型</h2><p>存储过程支持指定参数(形参/实参)：同时指定参数类型；</p>
+<h3 id="过程类型"><a href="#过程类型" class="headerlink" title="过程类型"></a>过程类型</h3><h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p>参数外传进入内部使用：直接数据/保存数据的变量?；<br>//类似于php值传递；</p>
+<h4 id="out"><a href="#out" class="headerlink" title="out"></a>out</h4><p>参数由内部存储数据为变量?，之后变量?交由外部使用；<br>若传入out参数变量?存在外部数据，则传入过程内部被清空数据值置为null空值；<br>//类似于php引用传递；</p>
+<h4 id="inout"><a href="#inout" class="headerlink" title="inout"></a>inout</h4><p>外部数据传入内部使用，内部操作后返回数据值给外部；<br>//类似于php引用传递；<br><img src="https://s2.loli.net/2022/05/14/GfOWMDqB5N6ZdjP.png"><br>内部执行：<br><img src="https://s2.loli.net/2022/05/14/12scUudhgxvPtyY.png"><br>外部执行：<br><img src="https://s2.loli.net/2022/05/14/5aYL9HrDh2vRFKj.png"></p>
+<h1 id="触发器trigger"><a href="#触发器trigger" class="headerlink" title="触发器trigger"></a>触发器trigger</h1><p>特殊类型的存储过程，通过事件触发而执行；<br>类似于js触发事件，通过指定表字段数据?<strong>绑定</strong>对应代码块，若满足操作条件而自动触发执行；</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ol>
+<li><p>保证数据安全性：写入数据前强制检验/转换数据；</p>
+</li>
+<li><p>保证事务安全性：触发器执行报错，异常结果随执行结果全部撤销；</p>
+</li>
+<li><p>统一管理：管理系统针对数据定义语言ddl执行触发器；</p>
+</li>
+<li><p>自动替换：根据异常指令执行自动替换instead of； //mysql不支持</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3></li>
+<li><p>实现级联更改功能：表修改自动同步；</p>
+</li>
+<li><p>自动校验数据安全；</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li><p>维护复杂：过分依赖影响数据库结构；</p>
+</li>
+<li><p>程序层面不可控：php数据执行复杂；</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><p>基本语法：<br>create trigger 触发器? 触发时机? 触发事件? on 表名? for each row<br>begin<br>end<br> 触发对象：on 表 for each row 绑定实质是表<strong>所有行</strong>(当行数据发生改变即触发)；<br> 触发时机：before操作前/after操作后(表中行状态发生变化)；<br> 触发事件：mysql触发器针对操作数据变化(insert增delete删update改)触发；<br> 注意：表中每个触发时机绑定的触发事件类型只有一个，合并成六个触发器(增前+增后/删前+删后/改前+改后)；<br>//实例：存在一商品表与一订单表，商品表随订单表发生变化触发触发器而更新；</p>
+</li>
+<li><p>创建两张表：商品表/订单表；<br><img src="https://s2.loli.net/2022/05/15/jni925YpxZJRyfW.png"><br><img src="https://s2.loli.net/2022/05/15/JZShsoq361M5LVl.png"></p>
+</li>
+<li><p>生成触发器：订单表数据插入时，商品表库存数据减少；<br>create trigger 触发器? after insert on my_orders for each row<br>begin<br>update my_goods set inv = inv - 1 where id = 1;<br>end<br><img src="https://s2.loli.net/2022/05/15/rpD2n6UzbgwJCBx.png"></p>
+<h3 id="查看触发器"><a href="#查看触发器" class="headerlink" title="查看触发器"></a>查看触发器</h3><p>查看所有触发器：show triggers\G<br><img src="https://s2.loli.net/2022/05/15/B54mupxIWhRqLad.png"><br>查看创建触发器结构：show create trigger 触发器?\G<br><img src="https://s2.loli.net/2022/05/15/anDye1WEluSvcwV.png"></p>
+<h3 id="触发触发器"><a href="#触发触发器" class="headerlink" title="触发触发器"></a>触发触发器</h3><p>触发器指定表在对应时机发生对应操作；</p>
+</li>
+<li><p>指定表my_orders</p>
+</li>
+<li><p>my_orders插入数据后；</p>
+</li>
+<li><p>触发时机my_goods中inv库存字段发生减少；<br><img src="https://s2.loli.net/2022/05/15/t91XdLJ3CrNeanh.png"></p>
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><p>drop trigger 触发器?;<br><img src="https://s2.loli.net/2022/05/15/W7l4aNzyvcYt9BO.png"></p>
+<h2 id="触发器实例应用"><a href="#触发器实例应用" class="headerlink" title="触发器实例应用"></a>触发器实例应用</h2><p>触发器操作针对表中**行数据?**；<br>通过获取行数据状态(前/后)存储绑定old/now关键字后执行对应操作；</p>
+<h3 id="绑定状态关键字：old-new"><a href="#绑定状态关键字：old-new" class="headerlink" title="绑定状态关键字：old/new"></a>绑定状态关键字：old/new</h3><p>基本语法：关键字?.字段?<br>insert增：不存在old，插入前置空；<br>delete删：不存在new，清空数据；</p>
+<h3 id="实例：自动删除商品库存触发器；"><a href="#实例：自动删除商品库存触发器；" class="headerlink" title="实例：自动删除商品库存触发器；"></a>实例：自动删除商品库存触发器；</h3><p>delimiter $$<br>create trigger 触发器? after insert on my_orders for each row<br>begin<br>update my_goods set inv = inv - new.goods_num where id = new.goods_id;<br>end<br>$$<br>delimiter ;<br><img src="https://s2.loli.net/2022/05/15/LiJR2vhyksj5UPA.png"><br><img src="https://s2.loli.net/2022/05/15/WlwFRHUNvVes8MG.png"></p>
+<h3 id="订单表库存数量少于商品表"><a href="#订单表库存数量少于商品表" class="headerlink" title="订单表库存数量少于商品表"></a>订单表库存数量少于商品表</h3><p>判断订单表库存数据数量：创建判断触发器暴力出错；<br><img src="https://s2.loli.net/2022/05/15/kdeI8nb4gGSKRmP.png"><br><img src="https://s2.loli.net/2022/05/15/gf6dAWatV5ZhH2B.png"></p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/day9_mysql/" rel="prev" title="day9_mysql">
+      <i class="fa fa-chevron-left"></i> day9_mysql
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">1.</span> <span class="nav-text">变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%8F%98%E9%87%8F"><span class="nav-number">1.1.</span> <span class="nav-text">系统变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">1.1.2.</span> <span class="nav-text">修改</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E5%8F%98%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">会话变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">局部变量</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">流程结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#if%E5%88%86%E6%94%AF%E7%BB%93%E6%9E%84%EF%BC%9A%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="nav-number">2.1.</span> <span class="nav-text">if分支结构：条件判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.1.</span> <span class="nav-text">基本结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%8D%E5%90%88%E7%BB%93%E6%9E%84"><span class="nav-number">2.1.2.</span> <span class="nav-text">复合结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="nav-number">2.2.</span> <span class="nav-text">while循环</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%93%E6%9E%84%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">2.2.1.</span> <span class="nav-text">结构标识符</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">系统内置函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.1.</span> <span class="nav-text">字符串函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.2.</span> <span class="nav-text">时间函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.3.</span> <span class="nav-text">数学函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.4.</span> <span class="nav-text">其他函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.</span> <span class="nav-text">自定义函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">创建函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.2.</span> <span class="nav-text">查看函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.3.</span> <span class="nav-text">调用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.4.</span> <span class="nav-text">删除函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0-%E6%B5%81%E7%A8%8B%E7%BB%93%E6%9E%84%E7%BB%BC%E5%90%88%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">函数&#x2F;流程结构综合实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%E7%BB%93%E6%9E%84%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.3.1.</span> <span class="nav-text">流程结构实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%B1%82%E5%92%8C%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">自动求和函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0-1"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">调用函数</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.</span> <span class="nav-text">变量作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.1.</span> <span class="nav-text">局部作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.2.</span> <span class="nav-text">会话作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">4.3.</span> <span class="nav-text">全局作用域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8Bstored-procedure"><span class="nav-number">5.</span> <span class="nav-text">存储过程stored procedure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E5%8C%BA%E5%88%AB%E4%BA%8E%E5%87%BD%E6%95%B0"><span class="nav-number">5.1.</span> <span class="nav-text">过程区别于函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="nav-number">5.1.1.</span> <span class="nav-text">相同点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="nav-number">5.1.2.</span> <span class="nav-text">不同点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">5.2.</span> <span class="nav-text">存储过程：基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.1.</span> <span class="nav-text">创建过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.2.</span> <span class="nav-text">查看过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.3.</span> <span class="nav-text">调用过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%BF%87%E7%A8%8B"><span class="nav-number">5.2.4.</span> <span class="nav-text">删除过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E5%BD%A2%E5%8F%82%E7%B1%BB%E5%9E%8B%EF%BC%9A%E8%BF%87%E7%A8%8B%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.3.</span> <span class="nav-text">?过程形参类型：过程类型&#x2F;参数类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E7%A8%8B%E7%B1%BB%E5%9E%8B"><span class="nav-number">5.3.1.</span> <span class="nav-text">过程类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#in"><span class="nav-number">5.3.1.1.</span> <span class="nav-text">in</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#out"><span class="nav-number">5.3.1.2.</span> <span class="nav-text">out</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inout"><span class="nav-number">5.3.1.3.</span> <span class="nav-text">inout</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8trigger"><span class="nav-number">6.</span> <span class="nav-text">触发器trigger</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">6.1.</span> <span class="nav-text">作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E7%82%B9"><span class="nav-number">6.1.1.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%BA%E7%82%B9"><span class="nav-number">6.1.2.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">6.2.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">6.2.1.</span> <span class="nav-text">创建触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">6.2.2.</span> <span class="nav-text">查看触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">6.2.3.</span> <span class="nav-text">触发触发器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E8%A7%A6%E5%8F%91%E5%99%A8"><span class="nav-number">6.2.4.</span> <span class="nav-text">删除触发器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E5%99%A8%E5%AE%9E%E4%BE%8B%E5%BA%94%E7%94%A8"><span class="nav-number">6.3.</span> <span class="nav-text">触发器实例应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%91%E5%AE%9A%E7%8A%B6%E6%80%81%E5%85%B3%E9%94%AE%E5%AD%97%EF%BC%9Aold-new"><span class="nav-number">6.3.1.</span> <span class="nav-text">绑定状态关键字：old&#x2F;new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%EF%BC%9A%E8%87%AA%E5%8A%A8%E5%88%A0%E9%99%A4%E5%95%86%E5%93%81%E5%BA%93%E5%AD%98%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%9B"><span class="nav-number">6.3.2.</span> <span class="nav-text">实例：自动删除商品库存触发器；</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A2%E5%8D%95%E8%A1%A8%E5%BA%93%E5%AD%98%E6%95%B0%E9%87%8F%E5%B0%91%E4%BA%8E%E5%95%86%E5%93%81%E8%A1%A8"><span class="nav-number">6.3.3.</span> <span class="nav-text">订单表库存数量少于商品表</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tyson_H</p>
+  <div class="site-description" itemprop="description">tyson's_1point3acres</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tyson_H</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

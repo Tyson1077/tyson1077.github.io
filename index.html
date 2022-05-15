@@ -149,6 +149,198 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day10_mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day10_mysql/" class="post-title-link" itemprop="url">day10_mysql</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-15 11:15:03 / Modified: 11:15:49" itemprop="dateCreated datePublished" datetime="2022-05-15T11:15:03+08:00">2022-05-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><p>mysql本质为编程语言，通过变量存储数据/控制mysql属性实现具体功能；</p>
+<h2 id="系统变量"><a href="#系统变量" class="headerlink" title="系统变量"></a>系统变量</h2><p>系统内部变量针对mysql客户端所有用户定义；</p>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><ol>
+<li>查看所有系统变量：show variables [like “变量数据值?:?%/?_”];<br><img src="https://s2.loli.net/2022/05/14/5HVFN3mr91upbos.png"></li>
+<li>通过$$select查看变量数据值：select @@变量?;<br><img src="https://s2.loli.net/2022/05/14/sLWH1hjkGVNEdYD.png"><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3></li>
+<li>修改局部变量(会话)：针对<strong>当前</strong>客户端，当前连接会话；<br>set 变量? = 新值?;</li>
+<li>全局修改：针对<strong>新开</strong>客户端生效；<br>set global 变量? = 新值?;<br>set @@global.变量? = 新值?;<br><img src="https://s2.loli.net/2022/05/14/7GyHptC8wzJdr12.png"><h2 id="会话变量"><a href="#会话变量" class="headerlink" title="会话变量"></a>会话变量</h2>针对用户与mysql客户端互相绑定，仅对当前客户端/当前用户生效；<br>基本语法：</li>
+<li>set @变量? = 新值?;<br><img src="https://s2.loli.net/2022/05/14/HOKr9GlcJRv8MAu.png"></li>
+<li>set @变量? := 新值?; //特殊符定定义赋值；</li>
+<li>获取表数据存储赋值变量： //mysql无数组逐一存储；</li>
+<li>1 定义赋值并输出过程：select @变量1? := 字段1?, @变量n? := 字段n? from 表名? where 条件?;<br><img src="https://s2.loli.net/2022/05/14/gPGfM2qkHxaSX1b.png"></li>
+<li>2 定义赋值无过程：select 字段1?, 字段n? from 数据源?:表名? where 条件? into @变量1?, @变量n?;<br><img src="https://s2.loli.net/2022/05/14/BeQqfP1F8TSA9tz.png"><h2 id="局部变量"><a href="#局部变量" class="headerlink" title="局部变量"></a>局部变量</h2>通过declare声明语句定义赋值，作用于begin/end语句块之间的局部变量；</li>
+<li>通过declare关键字声明定义；</li>
+<li>大型语句块：函数/存储过程/触发器begin/end中使用；</li>
+<li>基本语法：declare 变量? 字段类型? [属性?];<h1 id="流程结构"><a href="#流程结构" class="headerlink" title="流程结构"></a>流程结构</h1>代码的执行顺序；默认为顺序结构；<h2 id="if分支结构：条件判断"><a href="#if分支结构：条件判断" class="headerlink" title="if分支结构：条件判断"></a>if分支结构：条件判断</h2><h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3></li>
+<li>select查询中进行条件判断：if(条件,”符合条件1?”,”不符条件2?”)；<br> <img src="https://s2.loli.net/2022/05/14/usF5GyXW9gnDSYj.png"></li>
+<li>作用于复杂语句块：函数/存储过程/触发器；<br>基本语法：<br>if 条件表达? then<br> 满足执行?;<br>end if;<h3 id="复合结构"><a href="#复合结构" class="headerlink" title="复合结构"></a>复合结构</h3>分判断两种情况输出对应代码执行；<br>基本语法：<br>if 条件表达? then<br>满足执行?;<br>else<br>不满足执行?<br> if 条件表达? then //多层细分条件n?;<br> 满足执行?; //细分执行?;<br> end if; //细分结束?;<br>end if;<h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2>基本语法：<br>while 条件表达? do<br> 循环体执行?;<br>end while;<h3 id="结构标识符"><a href="#结构标识符" class="headerlink" title="结构标识符"></a>结构标识符</h3></li>
+<li>针对特定结构命名于特定地方(大型代码块)直接使用便于循环控制；<br> 基本语法：<br> 标识符?:while 条件表达? do<pre><code> 循环体执行?;
+</code></pre>
+ end while [标识符?];</li>
+<li>循环控制替代符lterate迭代/leave离开；<br>lterate迭代：之后代码不执行，重新新循环continue；<br>leave离开：终止整个循环break；</li>
+</ol>
+<p>基本语法： //标识符参与循环控制；<br>标识符?:while 条件表达? do<br>if 条件判断? then<br>循环体执行?;<br>    lterate/leave 标识符?; //循环控制；<br>    end if<br>循环体执行?;<br>end while [标识符?];</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p>通过select 函数?(参数?);调用访问；</p>
+<h2 id="系统内置函数"><a href="#系统内置函数" class="headerlink" title="系统内置函数"></a>系统内置函数</h2><h3 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h3><p>char_length(“”); 判断输出字符串字符长度；<br><img src="https://s2.loli.net/2022/05/14/bshECk3KGNxX78q.png"><br>length(“”); 判断字符串字节长度/字符位长度；<br><img src="https://s2.loli.net/2022/05/14/RZ2B1wHYWUltq3O.png"><br>coucat(“”); 连接字符串；<br><img src="https://s2.loli.net/2022/05/14/KZ2u8EMFzyoYOQj.png"><br>lnstr(“”); 判断目标字符串是否存在，返回布尔”存在值?”/不存在0；<br><img src="https://s2.loli.net/2022/05/14/QbjFLe8qHsM2xwJ.png"><br>lcase(“”); 转换小写;<br><img src="https://s2.loli.net/2022/05/14/zFG8jI3OUa5cwve.png"><br>left(“”); 左侧指定位截取字符串；<br><img src="https://s2.loli.net/2022/05/14/KOeVb5JaXLcsBqn.png"><br>ltrim(“”); 消除左侧空字符空格;<br><img src="https://s2.loli.net/2022/05/14/opr4JO8sIx2iMBF.png"><br>mid(“”); 中间指定位截取字符串，不指定默认截取全部；<br><img src="https://s2.loli.net/2022/05/14/lt7B3HLJ6xuycNz.png"></p>
+<h3 id="时间函数"><a href="#时间函数" class="headerlink" title="时间函数"></a>时间函数</h3><p>now(); 返回当前日期时间；<br>curdare(); 返回当前日期；<br>curtime(); 返回当前时间；<br><img src="https://s2.loli.net/2022/05/14/nzJSk9Z31lmVyE5.png"><br>datediff(); 判断两日期天数差距，日期格式为引号字符串；<br><img src="https://s2.loli.net/2022/05/14/IB8TUYjMG6QCXS9.png"><br>date_add(日期, interval 时间数字 type:year/day/minute/second); 增加时间；<br><img src="https://s2.loli.net/2022/05/14/dQq74aD1Z8VEUm9.png"><br>unix_timestamp(); 获取时间戳；<br><img src="https://s2.loli.net/2022/05/14/r2RTu1AENHSw9dh.png"><br>from_unixtime(); 指定时间戳转换时间；<br><img src="https://s2.loli.net/2022/05/14/2hroXskaOJGIjmD.png"></p>
+<h3 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h3><p>abs(); 绝对值；<br>ceiling(); 向上取整；<br>floor(); 向下取整；<br>pow(?,指?); 求指数计算；<br>rand(); 01之间取随机；<br>round(); 四舍五入；<br><img src="https://s2.loli.net/2022/05/14/d5qxrZ7nhQkEp2V.png"></p>
+<h3 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h3><p>md5(); 数据md5加密；<br>version(); 获取版本号；<br>databse();获取当前所在库；<br>uuid(); 生成唯一标识符，自增长单表唯一/uuid整库唯一；<br><img src="https://s2.loli.net/2022/05/14/UKEFBw14ruG5jSc.png"></p>
+<h2 id="自定义函数"><a href="#自定义函数" class="headerlink" title="自定义函数"></a>自定义函数</h2><p>用户自定义实现某功能的多n语句块；</p>
+<ol>
+<li>函数内部指令互相独立，规范语句以分号;分隔结束；</li>
+<li>函数独立整体调用时才执行，意味函数整体设计无法中断；</li>
+<li>mysql通过分号;分隔结束符开始执行；<br> 解决方案：<ol>
+<li>通过delimiter修改临时结束符：delimiter 新结束符;</li>
+<li>中间正常sql指令命令以分号;分隔结束(系统不执行无法识别)；</li>
+<li>新结束符结束后，修改回原结束符：delimiter 原结束符;</li>
+</ol>
+</li>
+</ol>
+<p>注意：</p>
+<ol>
+<li>自定义函数从属于会话用户级别：当前客户端对应数据库使用；</li>
+<li>不同数据库下函数无法调用；</li>
+<li>多n代码集合解决实现某功能重复问题；</li>
+<li>规范函数返回值标志代码的执行结束；</li>
+<li>函数体内部无法使用select指令命令，仅可为变量赋值select 字段? into @变量?;<h3 id="创建函数"><a href="#创建函数" class="headerlink" title="创建函数"></a>创建函数</h3>函数的基本要素结构：</li>
+<li>function关键字</li>
+<li>函数名? </li>
+<li>参数?(形参?/[实参?]) //手动指定数据类型?；<br>基本语法：参数? 字段类型?<br><img src="https://s2.loli.net/2022/05/14/F8aQJSDdzV4BpiU.png"></li>
+<li>returns函数返回值类型?</li>
+<li>函数体?</li>
+<li>return返回值?</li>
+<li>结束符?</li>
+</ol>
+<p>基本语法：<br>delimiter修改新的语句结束符?<br>create function 函数名?(形参?) returns 返回值类型?<br>begin<br>    函数体;<br>    return 返回值?;<br>end<br>语句结束符?<br>delimiter修正原本语句结束符?<br><img src="https://s2.loli.net/2022/05/14/rkyKQRu1Gj8xiDB.png"></p>
+<h3 id="查看函数"><a href="#查看函数" class="headerlink" title="查看函数"></a>查看函数</h3><p>查看所有函数show function status\G<br><img src="https://s2.loli.net/2022/05/14/xJqkdnT9Vp7N1Il.png"><br>查看创建函数结构show create function 函数?\G<br><img src="https://s2.loli.net/2022/05/14/FN1OQTqsxEba6lf.png"></p>
+<h3 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h3><p>select 函数?([实参?]);<br><img src="https://s2.loli.net/2022/05/14/r8Fx3vDRkOX9NmS.png"></p>
+<h3 id="删除函数"><a href="#删除函数" class="headerlink" title="删除函数"></a>删除函数</h3><p>drop function 函数?;<br><img src="https://s2.loli.net/2022/05/14/bDpFGkuTIZSoL3U.png"></p>
+<h2 id="函数-流程结构综合实例"><a href="#函数-流程结构综合实例" class="headerlink" title="函数/流程结构综合实例"></a>函数/流程结构综合实例</h2><h3 id="流程结构实例"><a href="#流程结构实例" class="headerlink" title="流程结构实例"></a>流程结构实例</h3><p>需求：初始1开始直到用户传入对应值终止自动求和，排除5的倍数；<br><img src="https://s2.loli.net/2022/05/14/iplNQH2yoeGX6cv.png"><br>设计：</p>
+<ol>
+<li>创建函数；</li>
+<li>定义赋值形参，确定累加位置；<h4 id="自动求和函数"><a href="#自动求和函数" class="headerlink" title="自动求和函数"></a>自动求和函数</h4> delimiter $$ //修改新的语句结束符?；<br> create funtion my_sum(end_value int) returns int<br> begin<br> //函数循环体；<br> end<br> $$ //语句结束符?<br> delimiter ; //修正原本语句结束符?；</li>
+<li>定义赋值变量，保存对应结果值?；<br> set @变量? = 新值?;<br> declare 变量? 类型? [= 默认值?]; //声明局部变量为主；</li>
+<li>内部执行循环体，实现迭代累加；<br> declare i 类型? default 1; //构建循环初始自增变量；<br> while i &lt;= end_value do<pre><code> set 变量? = 变量? + i; //mysql不存在++；
+ set i = i + 1;
+</code></pre>
+ end while;<br> <img src="https://s2.loli.net/2022/05/14/P5VjwSnobc2Cx1W.png"></li>
+<li>循环体执行控制条件判断：5倍数；<br><img src="https://s2.loli.net/2022/05/14/vUR1dzSAf8qtPKV.png"></li>
+<li>函数必存返回值?；<br><img src="https://s2.loli.net/2022/05/14/hqNyWjo7DFREUCb.png"><h4 id="调用函数-1"><a href="#调用函数-1" class="headerlink" title="调用函数"></a>调用函数</h4><img src="https://s2.loli.net/2022/05/14/IGoVJuFc4i5hRBk.png"><h1 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h1>指变量可以作用实现功能范围； //通常在sql中使用局部/会话作用域解决实际问题；<h2 id="局部作用域"><a href="#局部作用域" class="headerlink" title="局部作用域"></a>局部作用域</h2>通过declare关键字声明；</li>
+<li>在大型代码块结构体(函数/存储过程/触发器)内部使用；</li>
+<li>外部访问该变量?，系统自动识别为字段；<h2 id="会话作用域"><a href="#会话作用域" class="headerlink" title="会话作用域"></a>会话作用域</h2>用户通过set @变量? = 新值?; 定义赋值；</li>
+<li>仅限当前用户/当前连接生效；</li>
+<li>全域可用：结构体内部/跨库；<br><img src="https://s2.loli.net/2022/05/14/ZGRUn3T2Xq7gJur.png"><h2 id="全局作用域"><a href="#全局作用域" class="headerlink" title="全局作用域"></a>全局作用域</h2>所有客户端所有连接所有用户可以使用，通过全局符号关键字定义；<br>set global 变量? = 新值?;<br>set @@global.变量? = 新值?;<h1 id="存储过程stored-procedure"><a href="#存储过程stored-procedure" class="headerlink" title="存储过程stored procedure"></a>存储过程stored procedure</h1>过程：大型数据库系统中完成特地功能的sql语句指令命令集合体；</li>
+<li>高效率，通过首次编译后无需再次编译执行；</li>
+<li>用户指定存储过程名指定参数执行；<h2 id="过程区别于函数"><a href="#过程区别于函数" class="headerlink" title="过程区别于函数"></a>过程区别于函数</h2><h3 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h3></li>
+<li>目的为执行重复sql语句指令命令集合实现某功能；</li>
+<li>仅编译一次；<h3 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h3></li>
+<li>标识符：函数function/过程procedure；</li>
+<li>返回值：过程没有返回值；</li>
+<li>函数通过select调用；<h2 id="存储过程：基本操作"><a href="#存储过程：基本操作" class="headerlink" title="存储过程：基本操作"></a>存储过程：基本操作</h2><h3 id="创建过程"><a href="#创建过程" class="headerlink" title="创建过程"></a>创建过程</h3>基本语法：<br>delimiter修改新的语句结束符?<br>create procedure 过程名?([过程类型? 参数? 字段类型?]) //手动指定过程类型?/字段类型?；<br>begin<br> 过程执行体<br>end<br>结束符?<br>delimiter修正原本语句结束符?<br><img src="https://s2.loli.net/2022/05/14/dEGzeyUj7Xnm9HO.png"></li>
+</ol>
+<h3 id="查看过程"><a href="#查看过程" class="headerlink" title="查看过程"></a>查看过程</h3><p>查看全部存储过程：show procefure status [like “?%/?_”]\G<br><img src="https://s2.loli.net/2022/05/14/gT3UKwGEVLXseSD.png"><br>查看创建过程结构：create show procedure 过程名?\G<br><img src="https://s2.loli.net/2022/05/14/xjNEOYUf7R2XAkB.png"></p>
+<h3 id="调用过程"><a href="#调用过程" class="headerlink" title="调用过程"></a>调用过程</h3><p>过程没有返回值，无法通过select调用；<br>call 过程名?([实参?]);</p>
+<h3 id="删除过程"><a href="#删除过程" class="headerlink" title="删除过程"></a>删除过程</h3><p>drop procedure 过程名?;<br><img src="https://s2.loli.net/2022/05/14/EJH6PceQWImL1XZ.png"></p>
+<h2 id="过程形参类型：过程类型-参数类型"><a href="#过程形参类型：过程类型-参数类型" class="headerlink" title="?过程形参类型：过程类型/参数类型"></a>?过程形参类型：过程类型/参数类型</h2><p>存储过程支持指定参数(形参/实参)：同时指定参数类型；</p>
+<h3 id="过程类型"><a href="#过程类型" class="headerlink" title="过程类型"></a>过程类型</h3><h4 id="in"><a href="#in" class="headerlink" title="in"></a>in</h4><p>参数外传进入内部使用：直接数据/保存数据的变量?；<br>//类似于php值传递；</p>
+<h4 id="out"><a href="#out" class="headerlink" title="out"></a>out</h4><p>参数由内部存储数据为变量?，之后变量?交由外部使用；<br>若传入out参数变量?存在外部数据，则传入过程内部被清空数据值置为null空值；<br>//类似于php引用传递；</p>
+<h4 id="inout"><a href="#inout" class="headerlink" title="inout"></a>inout</h4><p>外部数据传入内部使用，内部操作后返回数据值给外部；<br>//类似于php引用传递；<br><img src="https://s2.loli.net/2022/05/14/GfOWMDqB5N6ZdjP.png"><br>内部执行：<br><img src="https://s2.loli.net/2022/05/14/12scUudhgxvPtyY.png"><br>外部执行：<br><img src="https://s2.loli.net/2022/05/14/5aYL9HrDh2vRFKj.png"></p>
+<h1 id="触发器trigger"><a href="#触发器trigger" class="headerlink" title="触发器trigger"></a>触发器trigger</h1><p>特殊类型的存储过程，通过事件触发而执行；<br>类似于js触发事件，通过指定表字段数据?<strong>绑定</strong>对应代码块，若满足操作条件而自动触发执行；</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><ol>
+<li><p>保证数据安全性：写入数据前强制检验/转换数据；</p>
+</li>
+<li><p>保证事务安全性：触发器执行报错，异常结果随执行结果全部撤销；</p>
+</li>
+<li><p>统一管理：管理系统针对数据定义语言ddl执行触发器；</p>
+</li>
+<li><p>自动替换：根据异常指令执行自动替换instead of； //mysql不支持</p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3></li>
+<li><p>实现级联更改功能：表修改自动同步；</p>
+</li>
+<li><p>自动校验数据安全；</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3></li>
+<li><p>维护复杂：过分依赖影响数据库结构；</p>
+</li>
+<li><p>程序层面不可控：php数据执行复杂；</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><h3 id="创建触发器"><a href="#创建触发器" class="headerlink" title="创建触发器"></a>创建触发器</h3><p>基本语法：<br>create trigger 触发器? 触发时机? 触发事件? on 表名? for each row<br>begin<br>end<br> 触发对象：on 表 for each row 绑定实质是表<strong>所有行</strong>(当行数据发生改变即触发)；<br> 触发时机：before操作前/after操作后(表中行状态发生变化)；<br> 触发事件：mysql触发器针对操作数据变化(insert增delete删update改)触发；<br> 注意：表中每个触发时机绑定的触发事件类型只有一个，合并成六个触发器(增前+增后/删前+删后/改前+改后)；<br>//实例：存在一商品表与一订单表，商品表随订单表发生变化触发触发器而更新；</p>
+</li>
+<li><p>创建两张表：商品表/订单表；<br><img src="https://s2.loli.net/2022/05/15/jni925YpxZJRyfW.png"><br><img src="https://s2.loli.net/2022/05/15/JZShsoq361M5LVl.png"></p>
+</li>
+<li><p>生成触发器：订单表数据插入时，商品表库存数据减少；<br>create trigger 触发器? after insert on my_orders for each row<br>begin<br>update my_goods set inv = inv - 1 where id = 1;<br>end<br><img src="https://s2.loli.net/2022/05/15/rpD2n6UzbgwJCBx.png"></p>
+<h3 id="查看触发器"><a href="#查看触发器" class="headerlink" title="查看触发器"></a>查看触发器</h3><p>查看所有触发器：show triggers\G<br><img src="https://s2.loli.net/2022/05/15/B54mupxIWhRqLad.png"><br>查看创建触发器结构：show create trigger 触发器?\G<br><img src="https://s2.loli.net/2022/05/15/anDye1WEluSvcwV.png"></p>
+<h3 id="触发触发器"><a href="#触发触发器" class="headerlink" title="触发触发器"></a>触发触发器</h3><p>触发器指定表在对应时机发生对应操作；</p>
+</li>
+<li><p>指定表my_orders</p>
+</li>
+<li><p>my_orders插入数据后；</p>
+</li>
+<li><p>触发时机my_goods中inv库存字段发生减少；<br><img src="https://s2.loli.net/2022/05/15/t91XdLJ3CrNeanh.png"></p>
+<h3 id="删除触发器"><a href="#删除触发器" class="headerlink" title="删除触发器"></a>删除触发器</h3><p>drop trigger 触发器?;<br><img src="https://s2.loli.net/2022/05/15/W7l4aNzyvcYt9BO.png"></p>
+<h2 id="触发器实例应用"><a href="#触发器实例应用" class="headerlink" title="触发器实例应用"></a>触发器实例应用</h2><p>触发器操作针对表中**行数据?**；<br>通过获取行数据状态(前/后)存储绑定old/now关键字后执行对应操作；</p>
+<h3 id="绑定状态关键字：old-new"><a href="#绑定状态关键字：old-new" class="headerlink" title="绑定状态关键字：old/new"></a>绑定状态关键字：old/new</h3><p>基本语法：关键字?.字段?<br>insert增：不存在old，插入前置空；<br>delete删：不存在new，清空数据；</p>
+<h3 id="实例：自动删除商品库存触发器；"><a href="#实例：自动删除商品库存触发器；" class="headerlink" title="实例：自动删除商品库存触发器；"></a>实例：自动删除商品库存触发器；</h3><p>delimiter $$<br>create trigger 触发器? after insert on my_orders for each row<br>begin<br>update my_goods set inv = inv - new.goods_num where id = new.goods_id;<br>end<br>$$<br>delimiter ;<br><img src="https://s2.loli.net/2022/05/15/LiJR2vhyksj5UPA.png"><br><img src="https://s2.loli.net/2022/05/15/WlwFRHUNvVes8MG.png"></p>
+<h3 id="订单表库存数量少于商品表"><a href="#订单表库存数量少于商品表" class="headerlink" title="订单表库存数量少于商品表"></a>订单表库存数量少于商品表</h3><p>判断订单表库存数据数量：创建判断触发器暴力出错；<br><img src="https://s2.loli.net/2022/05/15/kdeI8nb4gGSKRmP.png"><br><img src="https://s2.loli.net/2022/05/15/gf6dAWatV5ZhH2B.png"></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day9_mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1670,116 +1862,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/typora_Untitled/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tyson_H">
-      <meta itemprop="description" content="tyson's_1point3acres">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tyson自留地">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/typora_Untitled/" class="post-title-link" itemprop="url">typora_Untitled</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-03-15 12:53:18 / Modified: 12:53:07" itemprop="dateCreated datePublished" datetime="2022-03-15T12:53:18+08:00">2022-03-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="标题"><a href="#标题" class="headerlink" title="标题#"></a>标题#</h1><h1 id="一级"><a href="#一级" class="headerlink" title="一级"></a>一级</h1><h2 id="二级"><a href="#二级" class="headerlink" title="二级"></a>二级</h2><h3 id="三级"><a href="#三级" class="headerlink" title="三级"></a>三级</h3><h4 id="四级"><a href="#四级" class="headerlink" title="四级"></a>四级</h4><h5 id="五级"><a href="#五级" class="headerlink" title="五级"></a>五级</h5><h6 id="六级"><a href="#六级" class="headerlink" title="六级"></a>六级</h6><h1 id="字体"><a href="#字体" class="headerlink" title="字体*"></a>字体*</h1><p>** <strong>加粗</strong> **</p>
-<ul>
-<li>*倾斜 * *</li>
-<li><strong>加粗倾斜</strong>*</li>
-</ul>
-<h1 id="列表"><a href="#列表" class="headerlink" title="列表+"></a>列表+</h1><ul>
-<li>+无序列表<ul>
-<li>+无序列表<ul>
-<li>+无序列表</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>1.有序列表<br>2.有序列表<br>3.有序列表</p>
-<h1 id="分割线——"><a href="#分割线——" class="headerlink" title="分割线——-"></a>分割线——-</h1><hr>
-<h1 id="引用-gt"><a href="#引用-gt" class="headerlink" title="引用&gt;"></a>引用&gt;</h1><blockquote>
-<p>引用</p>
-<blockquote>
-<p>引用</p>
-<blockquote>
-<p>引用</p>
-</blockquote>
-</blockquote>
-</blockquote>
-<h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><table>
-<thead>
-<tr>
-<th>表格</th>
-<th>表格</th>
-</tr>
-</thead>
-<tbody><tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p><code>反引号</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">代码块</span><br><span class="line">···</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h1 id="外链"><a href="#外链" class="headerlink" title="外链"></a>外链</h1><h2 id="链接-http"><a href="#链接-http" class="headerlink" title="链接 [?](http://)"></a>链接 <code>[?](http://)</code></h2><p><a target="_blank" rel="noopener" href="https://baidu.com/">baidu</a></p>
-<h2 id="图片-http"><a href="#图片-http" class="headerlink" title="图片 ![?](http://)"></a>图片 <code>![?](http://)</code></h2><p><img src="https://cdn.sspai.com/attachment/origin/2014/04/15/69495.jpg?imageView2/2/w/1120/q/90/interlace/1/ignore-error/1" alt="jpg"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1849,7 +1931,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
