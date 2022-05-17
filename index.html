@@ -796,7 +796,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-10 23:01:39" itemprop="dateModified" datetime="2022-05-10T23:01:39+08:00">2022-05-10</time>
+                <time title="Modified: 2022-05-17 23:21:33" itemprop="dateModified" datetime="2022-05-17T23:21:33+08:00">2022-05-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -890,16 +890,24 @@
 <h3 id="交叉连接cross-join"><a href="#交叉连接cross-join" class="headerlink" title="交叉连接cross join"></a>交叉连接cross join</h3><p>两张表数据相互交叉匹配后保存数据；<br>//获取结果为笛卡尔积：前表各数据相乘另表所有数据的和，无实际意义；<br>//本质上为from获取多数据源表：from 数据表1?, 数据表n?;</p>
 </li>
 </ol>
+<p><strong>(行行连接)</strong></p>
 <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><ol>
 <li><strong>依次获取</strong>第一表数据；</li>
 <li>每条数据与第二表所有数据<strong>相互匹配</strong>；</li>
 <li>不通过匹配条件<strong>保存所有</strong>数据结果；</li>
-<li>保存结果：<br> 字段结果：表1?字段数n? + 表2?字段数n?<br> 数据结果：表1?数据n? * 表2?数据n? //数学上笛卡尔积：计算机高压负载；<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4>select */字段? from 数据表1? cross join 数据表n?;<br><img src="https://s2.loli.net/2022/05/05/wlIuJXcHiCpo6ZA.png"><h3 id="内连接inner-join"><a href="#内连接inner-join" class="headerlink" title="内连接inner join"></a>内连接inner join</h3>第一表所有数据<strong>通过条件匹配</strong>第二表所有数据；符合匹配则保存，不符则丢弃；<h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4></li>
+<li>保存结果：<br> 字段结果：表1?字段数n? + 表2?字段数n?<br> 数据结果：表1?数据n? * 表2?数据n? //数学上笛卡尔积：计算机高压负载；<h4 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h4>select */字段? from 数据表1? cross join 数据表n?;<br><img src="https://s2.loli.net/2022/05/05/wlIuJXcHiCpo6ZA.png"><h3 id="内连接inner-join"><a href="#内连接inner-join" class="headerlink" title="内连接inner join"></a>内连接inner join</h3>第一表所有数据<strong>通过条件匹配</strong>第二表所有数据；符合匹配则保存，不符则丢弃；</li>
+</ol>
+<p><strong>(字段连接)</strong></p>
+<h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><ol>
 <li>第一标获取字段数据<strong>依次向下</strong>通过<strong>条件匹配</strong>第二表字段数据；</li>
 <li>符合匹配则成功保存，不符合匹配失败丢弃；<h4 id="基本语法-1"><a href="#基本语法-1" class="headerlink" title="基本语法"></a>基本语法</h4>select */字段？ from 数据表1? [inner] join 数据表n? on 匹配条件(前表对应关系n?=后表对应关系n?); //无匹配条件：自动转换交叉连接(笛卡尔积)；<br><img src="https://s2.loli.net/2022/05/05/uyD7l5IXPhWBoVR.png"><br>语法规范：需注意</li>
 <li>确保字段唯一性：表名.字段名；<br><img src="https://s2.loli.net/2022/05/05/RwnigpVf5IBYoMc.png"></li>
 <li>长表名设置别名[as]以替换；<br><img src="https://s2.loli.net/2022/05/05/xW59kucR1UsNCGt.png"></li>
-<li>匹配条件无顺序要求，成功匹配则保存；<br><img src="https://s2.loli.net/2022/05/05/uLqI2OSZR9e3HFV.png"><br>//内连接条件匹配on与条件匹配限制where效果相同，内连接on效果更为精确；<h3 id="外连接outer-join"><a href="#外连接outer-join" class="headerlink" title="外连接outer join"></a>外连接outer join</h3>确定数据表其一主表保存所有数据，匹配条件连接第二表获取对应数据；<br>//常见操作：作为数据主表关联获取其他数据；<h4 id="左外连接：左表主left-join"><a href="#左外连接：左表主left-join" class="headerlink" title="左外连接：左表主left join"></a>左外连接：左表主left join</h4><h4 id="右外连接：右表主right-join"><a href="#右外连接：右表主right-join" class="headerlink" title="右外连接：右表主right join"></a>右外连接：右表主right join</h4><h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4></li>
+<li>匹配条件无顺序要求，成功匹配则保存；<br><img src="https://s2.loli.net/2022/05/05/uLqI2OSZR9e3HFV.png"><br>//内连接条件匹配on与条件匹配限制where效果相同，内连接on效果更为精确；<h3 id="外连接outer-join"><a href="#外连接outer-join" class="headerlink" title="外连接outer join"></a>外连接outer join</h3>确定数据表其一主表保存所有数据，匹配条件连接第二表获取对应数据；<br>//常见操作：作为数据主表关联获取其他数据；<h4 id="左外连接：左表主left-join"><a href="#左外连接：左表主left-join" class="headerlink" title="左外连接：左表主left join"></a>左外连接：左表主left join</h4></li>
+</ol>
+<p><strong>(左字段连接)</strong></p>
+<h4 id="右外连接：右表主right-join"><a href="#右外连接：右表主right-join" class="headerlink" title="右外连接：右表主right join"></a>右外连接：右表主right join</h4><p><strong>(右字段连接)</strong></p>
+<h4 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h4><ol>
 <li><strong>确定</strong>主表：左/右；</li>
 <li>主表所有数据<strong>匹配从表</strong>所有数据；满足匹配则保存，不满足丢弃；</li>
 <li>如果主表所有数据无法匹配任一从表数据：同样保存主表字段数据；从表字段数据置为空值null；<h4 id="基本语法：-1"><a href="#基本语法：-1" class="headerlink" title="基本语法："></a>基本语法：</h4>左连接：<br>select */字段? from 数据主表? left join 数据从表? on 匹配连接条件?(前表对应关系n?);<br><img src="https://s2.loli.net/2022/05/05/D1OFQ5v6P9RmanZ.png"><br>右连接：<br>select */字段? from 数据从表? right join 数据主表? on 匹配连接条件?(后表对应关系n?);<br><img src="https://s2.loli.net/2022/05/05/DbQn3jzWou2Exig.png"><h3 id="自然连接"><a href="#自然连接" class="headerlink" title="自然连接"></a>自然连接</h3>自然连接自动匹配；<h4 id="基本语法-2"><a href="#基本语法-2" class="headerlink" title="基本语法"></a>基本语法</h4>select */字段? from 数据表? natural join 条件匹配数据表?;<h3 id="using关键字：连接查询中替代on进行条件匹配操作"><a href="#using关键字：连接查询中替代on进行条件匹配操作" class="headerlink" title="using关键字：连接查询中替代on进行条件匹配操作"></a>using关键字：连接查询中替代on进行条件匹配操作</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4>应用于两表中对应<strong>字段相同</strong>，on替换进行连接操作；<h4 id="基本语法-3"><a href="#基本语法-3" class="headerlink" title="基本语法"></a>基本语法</h4>select */字段? from 数据表1? inner join/left join/right join 数据表n? using(<strong>从表n?相同字段?,</strong>);<br><img src="https://s2.loli.net/2022/05/05/JfgyXGmQ15dkNYn.png"></li>
