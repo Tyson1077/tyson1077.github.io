@@ -149,6 +149,215 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day2_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day2_php/" class="post-title-link" itemprop="url">day2_php</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-03-28 12:57:27" itemprop="dateCreated datePublished" datetime="2022-03-28T12:57:27+08:00">2022-03-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-04-13 10:44:59" itemprop="dateModified" datetime="2022-04-13T10:44:59+08:00">2022-04-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h1><p>php是运行在服务器端的动态弱脚本语言</p>
+<h2 id="php标记"><a href="#php标记" class="headerlink" title="php标记"></a>php标记</h2><p>asp标记&lt;% ‘php’ $&gt; //php7不支持<br>短标记<? 'php' ?><br>脚本标记<script language="php">'php'</script><br>标准标记<?php 'php' ?><br>开启<br><code> C:\web\php7428\php.ini</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">short_open_tag = On</span><br><span class="line">asp_tags = On</span><br></pre></td></tr></table></figure>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p>//单行注释<br>#单行注释<br>/*<br>多行块注释<br>*/</p>
+<h2 id="分割结束符；"><a href="#分割结束符；" class="headerlink" title="分割结束符；"></a>分割结束符；</h2><p>;<br><code> $a = 1;</code></p>
+<h2 id="连接符"><a href="#连接符" class="headerlink" title="连接符."></a>连接符.</h2><p>.<br><code> echo &#39;asd&#39;.&#39;zxcv&#39;; //asdzxcv</code> </p>
+<h2 id="转义符"><a href="#转义符" class="headerlink" title="转义符?"></a>转义符?</h2><p>?</p>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><h3 id="普通输出"><a href="#普通输出" class="headerlink" title="普通输出"></a>普通输出</h3><p><code>echo $?/&quot;&quot;;</code></p>
+<h3 id="数组输出"><a href="#数组输出" class="headerlink" title="数组输出"></a>数组输出</h3><p><code>print_r();</code></p>
+<h1 id="基本变量"><a href="#基本变量" class="headerlink" title="基本变量"></a>基本变量</h1><p>基本概念：</p>
+<ol>
+<li>变量在内存中存储数据</li>
+<li>变量存在名字</li>
+<li>变量通过名字访问数据</li>
+<li>变量可改变：数据</li>
+</ol>
+<p>使用变量：</p>
+<ol>
+<li>定义变量：不需要任何关键字定义变量：即php不用声明数据类型$</li>
+<li>访问输出变量：通过变量名在内存中找到存储值后输出echo</li>
+<li>修改变量</li>
+<li>删除变量unset($)</li>
+</ol>
+<p>变量标识符规则：<br><img src="https://s2.loli.net/2022/03/20/PtX6nBfl72b9Dqs.png"></p>
+<h2 id="预定义变量"><a href="#预定义变量" class="headerlink" title="预定义变量"></a>预定义变量</h2><p>//即关键字，提前定义的变量，存储系统中频繁使用的数据。都是数组<br>//不能作为常量，函数名，类名使用。<br><img src="https://s2.loli.net/2022/03/20/5pxDYwqARO7rzog.png"><br><img src="https://s2.loli.net/2022/03/20/njHEPZgYmJ3qfV6.png"></p>
+<h2 id="可变变量-继承性"><a href="#可变变量-继承性" class="headerlink" title="可变变量 继承性"></a>可变变量 继承性</h2><p>//若一个变量的赋值是另一个变量的名字，则可以通过变量前多加$访问一个变量得到另一个变量的值<br>//不推荐在生产环境下使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$a = &quot;b&quot;;</span><br><span class="line">$b = &quot;c&quot;;</span><br><span class="line">echo &quot;$a&quot;; //b</span><br><span class="line">echo &quot;$$a&quot; //c</span><br></pre></td></tr></table></figure>
+<p>原理：</p>
+<ol>
+<li>寻址变量$a，解析变量$a得结果：b</li>
+<li>变量标识符$ 绑定结果b：$b</li>
+<li>解析变量$b</li>
+</ol>
+<h2 id="传值变量"><a href="#传值变量" class="headerlink" title="传值变量"></a>传值变量</h2><h3 id="传统赋值：值传递"><a href="#传统赋值：值传递" class="headerlink" title="传统赋值：值传递$"></a>传统赋值：值传递$</h3><p>//原变量赋值保存，新变量赋新值保存。两个变量指向两个数据段内存址，占两个数据段；两个变量无关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$q = 10;</span><br><span class="line">$w = $b;</span><br><span class="line">$q = 20;</span><br><span class="line">echo &quot;$w&quot;; //10</span><br></pre></td></tr></table></figure>
+<p>原理：<br><img src="https://s2.loli.net/2022/03/21/UZXQmytNf5SiGEV.png"></p>
+<h3 id="引用赋值：引用传递-amp"><a href="#引用赋值：引用传递-amp" class="headerlink" title="引用赋值：引用传递&amp;$"></a>引用赋值：引用传递&amp;$</h3><p>//原变量赋值内存地址传递给新变量。两个变量指向同一个内存附位址；两个变量是<strong>动态</strong>同值，同一个数据段内存址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$q = 10;</span><br><span class="line">$w = &amp;$q;</span><br><span class="line">$q = 20;</span><br><span class="line">echo &quot;$w&quot;; //20</span><br></pre></td></tr></table></figure>
+<p>原理：<br><img src="https://s2.loli.net/2022/03/21/H4Tad26bk81Jgfc.png"></p>
+<h3 id="内存址分区"><a href="#内存址分区" class="headerlink" title="内存址分区"></a>内存址分区</h3><ul>
+<li>代码段：存储代码的<strong>内存区域</strong> //不执行</li>
+<li>数据段：存储(预)分配的普通数据代码<strong>内存地址</strong> //可执行 分全局区静态区</li>
+<li>栈区stack：内存操作<strong>运行</strong>程序区域。范围小m速度快 //仅执行</li>
+<li>堆区heap：内存中操作<strong>管理</strong>动态分配回收内存区域。存储复杂数据，范围大速度慢</li>
+</ul>
+<p>参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1KE411a7cz?spm_id_from=333.337.search-card.all.click">https://www.bilibili.com/video/BV1KE411a7cz?spm_id_from=333.337.search-card.all.click</a></p>
+<h2 id="常量-不变量"><a href="#常量-不变量" class="headerlink" title="常量 不变量"></a>常量 不变量</h2><h3 id="函数定义常量define"><a href="#函数定义常量define" class="headerlink" title="函数定义常量define"></a>函数定义常量define</h3><p>//define(‘’,’’);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;CON&#x27;,&#x27;abc&#x27;);</span><br><span class="line">echo CON; //abc</span><br><span class="line">echo constant(&#x27;CON&#x27;); //abc</span><br></pre></td></tr></table></figure>
+<h3 id="关键字定义常量const"><a href="#关键字定义常量const" class="headerlink" title="关键字定义常量const"></a>关键字定义常量const</h3><p>//const ? = ‘’;</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const A = 3.14;</span><br><span class="line">echo A; //3.14</span><br></pre></td></tr></table></figure>
+<h3 id="特殊常量定义-与访问输出"><a href="#特殊常量定义-与访问输出" class="headerlink" title="特殊常量定义 与访问输出"></a>特殊常量定义 与访问输出</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(&#x27;-_-&#x27;,&#x27;smile&#x27;);</span><br><span class="line">echo constant(&#x27;-_-&#x27;); //-_-</span><br></pre></td></tr></table></figure>
+<p>规则：</p>
+<ol>
+<li>常量定义不需要变量$标识符</li>
+<li>不以数字开头</li>
+<li>常量定义以大写字母为主 区别于变量$</li>
+<li>定义不严谨 define定义常量名允许特殊字符</li>
+<li>常量无法unset删除释放</li>
+</ol>
+<h3 id="常见常量"><a href="#常见常量" class="headerlink" title="常见常量"></a>常见常量</h3><h4 id="系统常量"><a href="#系统常量" class="headerlink" title="系统常量?_?"></a>系统常量?_?</h4><p>//系统预定义，用户直接使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PHP_VERSION //PHP版本</span><br><span class="line">PHP_INT_SIZE //整形大小</span><br><span class="line">PHP_INT_MAX //整形表示的最大字节值</span><br></pre></td></tr></table></figure>
+<h4 id="魔术常量"><a href="#魔术常量" class="headerlink" title="魔术常量__?__"></a>魔术常量__?__</h4><p>//赋值随环境变化而变化，用户无法改变</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">__DIR__ //文件绝对路径</span><br><span class="line">__FILE__ //文件带名绝对路径</span><br><span class="line">__LINE__ //所属行数</span><br><span class="line">__NAMESPACE__ //所属命名空间</span><br><span class="line">__CLASS__ //所属类</span><br><span class="line">__METHOD__ //所属方法</span><br></pre></td></tr></table></figure>
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p>php是一种弱类型语言，数据类型特指(赋值)存储的数据类型<br>//1字节B=2节b=8位bit;</p>
+<h2 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h2><p>int整型：表示整数，包含+-表示八O十D十六进制H数，内存中4个字节存储 //共32位二进制数最多存储42亿个正负数值<br>float浮点型：表示小数，超过字符的整型，8个字节存储<br>string字符串型：‘’与””中表示，”“可解析变量<br>bool布尔型：输出true与false，进行布尔运算输出true为1 false为0</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">布尔判断</span><br><span class="line">empty() //判断变量内存址数值是否为空</span><br><span class="line">isset() //判断变量数值是否被定义 </span><br><span class="line">is_null() //判断变量数值是否没被定义 </span><br></pre></td></tr></table></figure>
+<h2 id="复合类型"><a href="#复合类型" class="headerlink" title="复合类型"></a>复合类型</h2><p>object对象型：存放面向对象<br>array数组型：存放多个数据合成为组</p>
+<h2 id="特殊型"><a href="#特殊型" class="headerlink" title="特殊型"></a>特殊型</h2><p>resource资源型：索引php外部资源<br>NULL空型</p>
+<h1 id="数据转换-判断"><a href="#数据转换-判断" class="headerlink" title="数据转换 判断"></a>数据转换 判断</h1><h2 id="自动转换"><a href="#自动转换" class="headerlink" title="自动转换"></a>自动转换</h2><p><img src="https://s2.loli.net/2022/03/24/9Ee5nmqo6zfvBHD.png"><br>常见的：<br>//转布尔bool：用于判断<br><img src="https://s2.loli.net/2022/03/24/aktzCmqcufGDXOY.png"><br>//转数值int/float：用于运算<br><img src="https://s2.loli.net/2022/03/24/gv8L4WoEDYHsrbz.png"><br>布尔运算转数值 输出true为1 false为0;<br>字符串转数值 字母开头取0 数字开头取数字且取一个小数点;</p>
+<h2 id="强制转换-类型"><a href="#强制转换-类型" class="headerlink" title="强制转换(类型)$?"></a>强制转换(类型)$?</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = &quot;asd1234567&quot;;</span><br><span class="line">(int)$a;</span><br><span class="line">echo $a; //1234567</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/03/24/deYnKDwTP1XIgE7.png"><br><img src="https://s2.loli.net/2022/03/24/JGY4ITBiUEr5gF6.png"></p>
+<h2 id="判断类型"><a href="#判断类型" class="headerlink" title="判断类型"></a>判断类型</h2><h3 id="判断时：不改变原数据"><a href="#判断时：不改变原数据" class="headerlink" title="判断时：不改变原数据"></a>判断时：不改变原数据</h3><p>gettype($?/“”)函数：输出数据类型</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$a = &quot;asd&quot;;</span><br><span class="line">echo gettype($a); //string</span><br><span class="line">echo gettyoe(1.1); //double即float浮点型</span><br></pre></td></tr></table></figure>
+<p>判断函数is_类型($?/“”)：输出数据类型<br>布尔运算判断数据类型var_dump($?/“”)：判断 这是什么数据类型？<br>布尔运算判断指定数据类型var_dump(is_类型($?/“”))：判断 指定的数据类型对不对？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$a = 123;</span><br><span class="line">var_dump(true); //bool(true)</span><br><span class="line">var_dump($a); //int(123)</span><br><span class="line">var_dump(is_bool($a)); //bool(false)</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/03/24/lxWm7RIKL1OaTvZ.png"></p>
+<h3 id="判断时：改变原数据"><a href="#判断时：改变原数据" class="headerlink" title="判断时：改变原数据"></a>判断时：改变原数据</h3><p><img src="https://s2.loli.net/2022/03/24/BqOhTUX4Ex5CoJp.png"><br>settype($?,类型)函数：设定变量为指定数据类型<br>//区别于强制转换(类型)$?仅对<strong>复制赋值后的数据值</strong>操作，settype函数对<strong>内存存储值</strong>操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$z = &quot;asd1234567&quot;;</span><br><span class="line">var_dump($z); //string(10) &quot;asd1234567&quot;</span><br><span class="line">echo gettype($z); //string </span><br><span class="line">settype($z,&quot;int&quot;); //转换内存存储值：对原数据值操作</span><br><span class="line">echo gettype($z); //integer </span><br><span class="line">var_dump($z); //int(0)</span><br></pre></td></tr></table></figure>
+<h2 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h2><ul>
+<li>十转二：除2倒取余/取2最大幂<br><img src="https://s2.loli.net/2022/03/25/GXakVI5DxTjypFv.png"></li>
+</ul>
+<h3 id="进制转换函数："><a href="#进制转换函数：" class="headerlink" title="进制转换函数："></a>进制转换函数：</h3><ul>
+<li>BIN二进制：bindec($?/“”)转十 binoct($?/“”)转八 binhex($?/“”)转十六</li>
+<li>OCT八进制：octbin($?/“”)转二 octdec($?/“”)转十 octhex($?/“”)转十六</li>
+<li>DEC十进制：decbin($?/“”)转二 decoct($?/“”)转八 dechex($?/“”)转十六</li>
+<li>HEX十六进制：hexbin($?/“”)转二 hexoct($?/“”)转八 hexdec($?/“”)转十 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = 10;</span><br><span class="line">echo decbin($a); //1010</span><br><span class="line">echo decbin(&quot;123&quot;); //1111011</span><br><span class="line">echo decbin(123); //1111011</span><br><span class="line">var_dump(decbin(123)); //string(7) &quot;1111011&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="赋值运算"><a href="#赋值运算" class="headerlink" title="赋值运算="></a>赋值运算=</h2>将右边赋值内存址给左边变量<br>//即赋并运算：涉及左边本身变量运算，将右边变量赋值给左边变量运算</li>
+</ul>
+<ol>
+<li>赋值=<br><code> $? = ?;</code></li>
+<li>加并赋值+=<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$a = 1;</span><br><span class="line">$b = 2;</span><br><span class="line">$c = 3;</span><br><span class="line">$a += $b + $c;</span><br><span class="line">echo &quot;$a&quot;; //6</span><br><span class="line">$d = $a + $b + $c;</span><br><span class="line">echo &quot;$d&quot;; //同为6</span><br></pre></td></tr></table></figure></li>
+<li>减并赋值-=</li>
+<li>乘并赋值*=</li>
+<li>除并赋值/= </li>
+<li>模并赋值%= </li>
+<li>连接并赋值.=<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$q = &quot;asd&quot;;</span><br><span class="line">$q .= &quot;1234567&quot;;</span><br><span class="line">echo $q; //asd1234567</span><br></pre></td></tr></table></figure>
+<h2 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h2></li>
+</ol>
+<p>+加/-减/*乘//除/%求模余数</p>
+<h2 id="比较运算"><a href="#比较运算" class="headerlink" title="比较运算"></a>比较运算</h2><p>判断数据类型与运算结果<br>//以布尔输出结果≈类似于逻辑运算<br><img src="https://s2.loli.net/2022/03/25/OR9uCgtwnFaQcpz.png"></p>
+<h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><p>//逻辑与或又称短路运算，优化代码中子表达式条件更符合放前面</p>
+<ol>
+<li>&amp;&amp;与</li>
+<li>||或</li>
+<li>!非</li>
+<li>xor异或</li>
+<li>and //优先级较低</li>
+<li>or //优先级较低<br>//以布尔类型输出<br>//两个表达式作为操作数合并创建为一个操作表达式 当子表达式为true操作表达式为true<br><img src="https://s2.loli.net/2022/03/25/JAlgGzPtXyc17aZ.png"><h2 id="连接运算"><a href="#连接运算" class="headerlink" title="连接运算."></a>连接运算.</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">以字符串连拼接两边</span><br><span class="line">$a = &quot;asd&quot; . &quot;zxcv&quot;;</span><br><span class="line">echo &quot;$a&quot;; //asdzxcv</span><br><span class="line">以字符串将右边变量赋值给左边连接</span><br><span class="line">$b = &quot;qwe&quot;;</span><br><span class="line">$c = &quot;vbng&quot;;</span><br><span class="line">$c .= $b;</span><br><span class="line">echo &quot;$c&quot;; //qwevbng</span><br><span class="line">$d = $b . $c; //等同于</span><br><span class="line">echo &quot;$d&quot; //qwevbng</span><br></pre></td></tr></table></figure>
+<h2 id="错误抑制运算"><a href="#错误抑制运算" class="headerlink" title="错误抑制运算@($?)"></a>错误抑制运算@($?)</h2>忽略错误后输出 针对就近表达式<br>//生产环境下避免一个错误导致整个页面出现报错<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$a = 10;</span><br><span class="line">$b = 0;</span><br><span class="line">echo $a / $b; //Warning: Division by zero in </span><br><span class="line">echo @($a / $b); //INF</span><br></pre></td></tr></table></figure>
+<h2 id="合并运算"><a href="#合并运算" class="headerlink" title="合并运算"></a>合并运算</h2>条件表达 ?? 赋值<br>//php7+判断存在：条件表达存在则返回条件值，不存在则返回赋值<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$a = 123;</span><br><span class="line">$b = $b ?? $a;</span><br><span class="line">echo $b; //123</span><br><span class="line">$c = $c ?? 321;</span><br><span class="line">echo $c; //321</span><br></pre></td></tr></table></figure>
+<h2 id="三目运算"><a href="#三目运算" class="headerlink" title="三目运算"></a>三目运算</h2>条件表达 ? “符合执行输出_条件表达1” : “不符执行输出_条件表达2”;<br>//如果条件表达成立，那么执行_符合条件表达1，否则执行_不符条件表达2<br>//简单的分支结构<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$age = 10;</span><br><span class="line">$b = $age &gt;= 18 ? &quot;ok&quot;:&quot;not&quot;;</span><br><span class="line">echo $b; //not</span><br></pre></td></tr></table></figure>
+<h2 id="自增自减运算"><a href="#自增自减运算" class="headerlink" title="自增自减运算"></a>自增自减运算</h2></li>
+</ol>
+<p>++–$? / $?++–<br>//(前置)自增自减在前：先执行本身运算(内存址)操作，后赋值操作给被赋值变量<br>//(后置)自增自减在后：仅执行本身运算(内存址)操作，被赋值变量不动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">前置</span><br><span class="line">$a = 10;</span><br><span class="line">$b = ++$a; //≈$a + 1后传值给$b</span><br><span class="line">echo $b; //11</span><br><span class="line">echo $a; //11</span><br><span class="line"></span><br><span class="line">后置</span><br><span class="line">$c = 100;</span><br><span class="line">$d = $c--; //≈仅操作$c = $c - 1</span><br><span class="line">echo $d; //100</span><br><span class="line">echo $c; //99</span><br></pre></td></tr></table></figure>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><p>对数据值内存址32全位进行<strong>二进制运算</strong><br>//赋值十进制输入 二进制运算 后以十进制输出</p>
+<h3 id="计算机码"><a href="#计算机码" class="headerlink" title="计算机码"></a>计算机码</h3><p>计算机存储数据时的编码规则(二进制)<br>//首位：正数取0负数取1；<br>//计算机正数存储原码，负数存储补码</p>
+<ul>
+<li>码运算后转换：</li>
+</ul>
+<ol>
+<li>经由判断符号“正取0负取1”后;</li>
+<li>正数以原码十进制输出；</li>
+<li>涉及负数以补码运算再以补码十进制输出；负数本为补码，要逆向转为原码输出；</li>
+</ol>
+<p>原码：赋值的二进制结果；输出十进制<br>反码：针对补码操作；符号位不变，其他取反<br>补码：针对补码操作；反码+1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">系统中存在两个0：+0与-0</span><br><span class="line">+0：00000000</span><br><span class="line">-0：10000000</span><br><span class="line">-0反码：11111111 //符号位不变，其他位取反</span><br><span class="line">-0补码：00000000 //反码+1</span><br><span class="line"></span><br><span class="line">码操作举例</span><br><span class="line">5原码：00000101</span><br><span class="line">-5原码：10000101</span><br><span class="line">-5反码：11111010 //符号位不变，其他位取反</span><br><span class="line">-5补码：11111011 //反码+1</span><br><span class="line">//计算机中正数存储二进制原码；负数存储二进制补码；</span><br><span class="line">如5：是正数存储二进制原码00000101；-5是负数存储二进制补码11111011；</span><br></pre></td></tr></table></figure>
+<h3 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h3><p>针对计算机最小存储单位：bit8位进行运算<br>//正数进行位运算以原码操作<br>//负数进行位运算以补码操作，运算结果需要由补码转回原码<br><img src="https://s2.loli.net/2022/03/26/EVgcL5ptnMTN2Wy.png"><br><img src="https://s2.loli.net/2022/03/26/dTmsLGrFytMXqO3.png"></p>
+<h4 id="amp-与：都和1为1-有0为0"><a href="#amp-与：都和1为1-有0为0" class="headerlink" title="&amp;与：都和1为1 有0为0"></a><strong>&amp;与</strong>：都和1为1 有0为0</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$a = 5;</span><br><span class="line">$b = -5;</span><br><span class="line">$c = $a &amp; $b;</span><br><span class="line">/*</span><br><span class="line">5原码：00000101</span><br><span class="line">-5原码：10000101</span><br><span class="line">-5反码：11111010</span><br><span class="line">-5补码：11111011</span><br><span class="line">操作运算：都和1为1，有0为0</span><br><span class="line">$a是正数以原码参与运算，而$b是负数以补码参与运算</span><br><span class="line">5：00000101</span><br><span class="line">-5：11111011</span><br><span class="line">&amp;：00000001 </span><br><span class="line">最终输出：转换成原码“判断符号位0为正””以原码输出十进制为1”</span><br><span class="line">*/</span><br><span class="line">echo $c; //以十进制输出1</span><br></pre></td></tr></table></figure>
+<h4 id="或：有1为1"><a href="#或：有1为1" class="headerlink" title="|或：有1为1"></a>|或：有1为1</h4><p><img src="https://s2.loli.net/2022/03/26/ZgRstAmkrDxBojQ.png"></p>
+<h4 id="非：按位取反值"><a href="#非：按位取反值" class="headerlink" title="~非：按位取反值"></a>~非：按位取反值</h4><p><img src="https://s2.loli.net/2022/03/26/hmftqzQniXS8Zx1.png"></p>
+<h4 id="异或：运算数位异同为1true-相同为0false"><a href="#异或：运算数位异同为1true-相同为0false" class="headerlink" title="^异或：运算数位异同为1true 相同为0false"></a>^异或：运算数位异同为1true 相同为0false</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$q = 2;</span><br><span class="line">$w = 3;</span><br><span class="line">00000010</span><br><span class="line">00000011</span><br><span class="line">00000001 //^异或：运算数位异同为1true 相同为0false</span><br><span class="line">echo $q ^ $w; //1</span><br></pre></td></tr></table></figure>
+<h4 id="位移运算：二进制首位正取0负取1"><a href="#位移运算：二进制首位正取0负取1" class="headerlink" title="位移运算：二进制首位正取0负取1"></a>位移运算：二进制首位正取0负取1</h4><p><img src="https://s2.loli.net/2022/03/26/ap6CVh9uR1DqsJI.png"><br>左移运算：向左移&lt;&lt;$?/?位：左边弃用 右0补位 ≈ 本位乘2<br>右移运算：向右移&gt;&gt;$?/?位：右边弃用 左负1补位/正0补位 ≈ 本位除2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//-5 &gt;&gt; 2</span><br><span class="line">$a = -5;</span><br><span class="line">$b = $a &gt;&gt; 2;</span><br><span class="line">-5补：11111011</span><br><span class="line">&gt;&gt;2：11111110 //右边弃用 左负1补位：得位移后的补码</span><br><span class="line">11111101 //负数补码减1：得反码</span><br><span class="line">10000010 //负数反码转原码：符号不变，其他位取反</span><br><span class="line">echo $b; //-2</span><br></pre></td></tr></table></figure>
+<h2 id="运算符优先级"><a href="#运算符优先级" class="headerlink" title="运算符优先级"></a>运算符优先级</h2><p><img src="https://s2.loli.net/2022/03/26/PkWVdTqZAMH5FGr.png"></p>
+<h3 id="优先级转换"><a href="#优先级转换" class="headerlink" title="优先级转换"></a>优先级转换</h3><p><img src="https://s2.loli.net/2022/03/26/VFESwLIGQyhUetP.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day1_wamp_dev_install/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -781,7 +990,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

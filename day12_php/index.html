@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tyson1077.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="mysql扩展针对mysql数据库提供操作的扩展：支持php通过脚本指令作为客户端对mysql服务器端进行连接操作；扩展路径：php5为&#x2F;ext&#x2F;php_mysql.dll；php7+为&#x2F;ext&#x2F;php_mysqli.dll； &#x2F;&#x2F;mysqli_query([连接资源?],)必须**指定连接资源?**； php连库操作建立连接：超全局资源 支持前提：开启php.ini配置mysql对应扩展插件；">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day12_php">
+<meta property="og:url" content="https://tyson1077.github.io/day12_php/index.html">
+<meta property="og:site_name" content="tyson自留地">
+<meta property="og:description" content="mysql扩展针对mysql数据库提供操作的扩展：支持php通过脚本指令作为客户端对mysql服务器端进行连接操作；扩展路径：php5为&#x2F;ext&#x2F;php_mysql.dll；php7+为&#x2F;ext&#x2F;php_mysqli.dll； &#x2F;&#x2F;mysqli_query([连接资源?],)必须**指定连接资源?**； php连库操作建立连接：超全局资源 支持前提：开启php.ini配置mysql对应扩展插件；">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/03/18/6bWS4kMsN1uaCry.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/TWyzOE87evJ2j5g.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/lh9MPZ1Ipcx2CFr.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/i3fYeETjgUcBDhr.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/AayLDwGZV9xjrsb.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/PJc21mZG6Nv8rnB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/2AXV8ybDvKL7ZEU.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/Z19LAH6bdeq5DEC.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/FG7IhyVLXS59b1m.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/2AXV8ybDvKL7ZEU.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/pXPbZaYLCHyEecx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/EGlmNKRDcT9rwZW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/FqIHK5LhovTZwzl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/HkOCD8VUSB16zQs.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/E4KqCcz9MgYy7Gj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/tSosH9nj3MvIWhR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/pEWuSbwKrxBmZqh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/hDLbsWQ5VFzR9ku.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/5gLj98Mbo4TKFuA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/KWSmJ4j385ClpYw.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/oGQZHY4zeiqOCyI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/po6BrwKqDiIksLG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/16/6oWcfhZxtbXGYMA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/47nUh65fgxbvLcE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/2EfSUkwN7DHKiJt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/EYZDNvtK1H9xzlk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/ZmN9TG3gHA8VD5l.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/mKONU2caT5QvZBW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/4X8p1BfgxWmM3TF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/Q6Bmk1KqzSV9Ycu.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/LdNRVSa6YTDtPMh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/RsH6WEgZypQ14kS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/U4oIlXTk9shenH7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/zNZsMgUEF6nKySh.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/eBMdwNL1K3tmz5O.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/yhNGmLil36dAjPS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/iuwIhSb5KYgQTF9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/HK7cuxphVC4gaYL.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/G2sZjd4EaRyQ8xI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/FU9zRjYg4nIHcqK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/1AsNHfJB3mzF9Il.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/H8zeg5wt4OPUmJI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/wyhmaMuBoTJbCqF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/PWoNjXcnQgrJk1A.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/ZKH5Njig8MrDE3L.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/ASRiaTgh47ctmqM.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/aTeHxzMFRoJWriS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/HqE3uWaVS6FMKzg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/lBGU7HeQYWCqkfO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/pN7KMa8dgnj9ZA2.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/q6NXf5kDAPgrS8p.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/ba78AjV9nQiuoYF.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/F2MLfY1RHQv6Xpi.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/dPMvFi2fyobrh73.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/XJrxVdRkU8YvuBl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/2DM5iqz3S6yIQWg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/gr1Rij7k9M5SlwL.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/cVaqOhXed7Ci8Hf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/eyprNw8KRcsTZlM.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/9wiZT1RgrPBVhvt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/rXl1Cht9v4Gqk2S.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/NL9YbucRhKZoJX7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/cqWnRE6owFzlLBG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/PD3jS4GYlNzrMC7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/21/tQ18W9hbMY6rwzP.png">
+<meta property="article:published_time" content="2022-05-21T10:35:13.073Z">
+<meta property="article:modified_time" content="2022-05-21T10:39:29.160Z">
+<meta property="article:author" content="tyson_H">
+<meta property="article:tag" content="hexo,tyson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/03/18/6bWS4kMsN1uaCry.png">
+
+<link rel="canonical" href="https://tyson1077.github.io/day12_php/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day12_php | tyson自留地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">tyson自留地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hello_world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day12_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day12_php
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-21 18:35:13 / Modified: 18:39:29" itemprop="dateCreated datePublished" datetime="2022-05-21T18:35:13+08:00">2022-05-21</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="mysql扩展"><a href="#mysql扩展" class="headerlink" title="mysql扩展"></a>mysql扩展</h1><p>针对mysql数据库提供操作的扩展：支持php<strong>通过脚本</strong>指令作为客户端对mysql服务器端进行连接操作；<br>扩展路径：<br>php5为/ext/php_mysql.dll；<br>php7+为/ext/php_mysqli.dll； //mysqli_query([连接资源?],)必须**指定连接资源?**；<br><img src="https://s2.loli.net/2022/03/18/6bWS4kMsN1uaCry.png"></p>
+<h2 id="php连库操作"><a href="#php连库操作" class="headerlink" title="php连库操作"></a>php连库操作</h2><h3 id="建立连接：超全局资源"><a href="#建立连接：超全局资源" class="headerlink" title="建立连接：超全局资源"></a>建立连接：超全局资源</h3><ol>
+<li>支持前提：开启php.ini配置mysql对应扩展插件；</li>
+<li><strong>连接函数</strong>：php5为mysql_connect()；php7+为mysqli_connect()；</li>
+<li>mysql默认建立<strong>单通道</strong>连接后自动关闭，通过true指定第四参数对同资源建立<strong>新客户端通道</strong>连接：mysqli_connect(?,?,?,true);<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">连接资源?：</span><br><span class="line">资源定义赋值? = mysqli_connect(&quot;主机址?:端口?&quot;,&quot;用户对象?&quot;,&quot;密码?&quot;);</span><br><span class="line">资源定义赋值? = mysqli_connect(&quot;主机址?:端口?&quot;,&quot;用户对象?&quot;,&quot;密码?&quot;);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/05/16/TWyzOE87evJ2j5g.png"></li>
+</ol>
+<h3 id="设置连接编码"><a href="#设置连接编码" class="headerlink" title="设置连接编码"></a>设置连接编码</h3><p>通过统一语言保持客户端与服务端正常交流；<br>编码字符集：uft8/gbk；</p>
+<ol>
+<li>定义赋值? = mysql_query(连接资源?,”set names utf8”);<br><img src="https://s2.loli.net/2022/05/16/lh9MPZ1Ipcx2CFr.png"><br><img src="https://s2.loli.net/2022/05/16/i3fYeETjgUcBDhr.png"></li>
+<li>定义赋值? = mysql_set_charset(连接资源?,”字符集?”);<br><img src="https://s2.loli.net/2022/05/16/AayLDwGZV9xjrsb.png"><br><img src="https://s2.loli.net/2022/05/16/PJc21mZG6Nv8rnB.png"><h3 id="选择数据库"><a href="#选择数据库" class="headerlink" title="选择数据库"></a>选择数据库</h3>通过var_dump(确认定义赋值?)对定义赋值返回的<strong>布尔确认</strong>来判断sql执行状态：0false/1true；<br><img src="https://s2.loli.net/2022/05/16/2AXV8ybDvKL7ZEU.png"></li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//mysqli中连接资源?为必须；</span><br><span class="line">定义赋值? = mysql_query(连接资源?,&quot;sql指令命令:use 数据库?&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/16/Z19LAH6bdeq5DEC.png"></p>
+<h3 id="关闭连接：主动释放"><a href="#关闭连接：主动释放" class="headerlink" title="关闭连接：主动释放"></a>关闭连接：主动释放</h3><p>php脚本执行完毕后会自动释放资源；<br>手动<strong>主动释放</strong>资源：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">定义赋值? = mysqli_close(连接资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/16/FG7IhyVLXS59b1m.png"></p>
+<h2 id="数据库操作：增删改查"><a href="#数据库操作：增删改查" class="headerlink" title="数据库操作：增删改查"></a>数据库操作：增删改查</h2><p>通过mysql_query(连接资源?,”sql指令命令?”);/mysqli_query(连接资源?,”sql指令命令?”)执行sql操作；<br>判断<strong>返回值</strong>结果：sql执行结果(<strong>无法判断</strong>数据是否存在)；</p>
+<ol>
+<li>0false失败：语法错误/执行失败；</li>
+<li>1true成功：sql查询操作<strong>成功返回</strong>通过<strong>结果集资源</strong>mysqli_num_rows()展示数据；<br><img src="https://s2.loli.net/2022/05/16/2AXV8ybDvKL7ZEU.png"></li>
+</ol>
+<ol>
+<li><p>建库并连接选择：初始化(通过文件包含<strong>载引入</strong>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">建库?：</span><br><span class="line">create database 库名? charset utf8;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//sql数据库初始化页.php(通过文件包含载引入)；</span><br><span class="line">连接选择：</span><br><span class="line">mysqli_connect(&quot;主机?:端口?&quot;,&quot;用户对象?&quot;,&quot;密码?&quot;) or die(&quot;连接失败&quot;); //短路判断；</span><br><span class="line">设置字符集：</span><br><span class="line">mysqli_query(&quot;set charset utf8&quot;);</span><br><span class="line">选择数据库：</span><br><span class="line">mysqli_query(&quot;use 数据库?&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/16/pXPbZaYLCHyEecx.png"></p>
+</li>
+<li><p>建表；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">create table 表名?(</span><br><span class="line">字段? id primary key auto_increment,</span><br><span class="line">字段? varchar(50) not null comment &quot;注释描述?&quot;,</span><br><span class="line">istop tinyint not null comment &quot;注释描述?:是否置顶&quot;,</span><br><span class="line">content text comment &quot;注释描述?:内容&quot;,</span><br><span class="line">publiser varchar(20) not null comment &quot;注释描述?:发布人&quot;,</span><br><span class="line">pub_time int not null comment &quot;注释描述?:发布时间&quot;</span><br><span class="line">)charset utf8;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/16/EGlmNKRDcT9rwZW.png"></p>
+</li>
+<li><p>操作页：载入初始化；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//sql数据库操作也.php；</span><br><span class="line">include_once &quot;sql数据库初始化页.php&quot;;</span><br></pre></td></tr></table></figure>
+<h3 id="增insert"><a href="#增insert" class="headerlink" title="增insert"></a>增insert</h3><p><img src="https://s2.loli.net/2022/05/16/FqIHK5LhovTZwzl.png"></p>
+</li>
+<li><p>载入初始化；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_once &quot;sql数据库初始化页.php&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>sql指令命令；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql定义赋值? = &quot;insert into 字段? values(&quot;数据?,&quot;)&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>执行操作：判断；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(mysqli_query(sql定义赋值?))&#123;</span><br><span class="line">	echo &quot;执行插入成功&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;执行插入失败&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="改update"><a href="#改update" class="headerlink" title="改update"></a>改update</h3><p><img src="https://s2.loli.net/2022/05/16/HkOCD8VUSB16zQs.png"></p>
+</li>
+<li><p>载入初始化；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_once &quot;sql数据库初始化页.php&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>sql指令命令；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql定义赋值? = &quot;update 表名? set 修改字段? = 新值? [where 匹配字段? = ?]&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>执行操作：判断；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(mysqli_query(sql定义赋值?))&#123;</span><br><span class="line">	echo &quot;执行更新成功&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;执行更新失败&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="删delete"><a href="#删delete" class="headerlink" title="删delete"></a>删delete</h3><p><img src="https://s2.loli.net/2022/05/16/E4KqCcz9MgYy7Gj.png"></p>
+</li>
+<li><p>载入初始化；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_once &quot;sql数据库初始化页.php&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>sql指令命令；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql定义赋值? = &quot;delete from 表名? [where 条件字段? = ?]&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>执行操作：判断；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(mysqli_query(sql定义赋值?))&#123;</span><br><span class="line">	echo &quot;执行删除成功&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;执行删除失败&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="查show-desc-select：查询结果集资源"><a href="#查show-desc-select：查询结果集资源" class="headerlink" title="查show/desc/select：查询结果集资源"></a>查show/desc/select：查询结果集资源</h3><p>查询判断返回值：sql执行结果(<strong>无法判断</strong>数据是否存在)；</p>
+</li>
+<li><p>1true成功：sql查询操作<strong>成功返回</strong>通过<strong>结果集资源</strong>mysqli_num_rows()展示数据；执行成功；</p>
+<p> <img src="https://s2.loli.net/2022/05/16/tSosH9nj3MvIWhR.png"></p>
+<ol>
+<li>载入初始化；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_onec &quot;sql数据库初始化页.php&quot;;</span><br></pre></td></tr></table></figure></li>
+<li>sql指令命令；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql定义赋值? = &quot;select */字段? from 表?&quot;;</span><br></pre></td></tr></table></figure></li>
+<li>执行操作：判断<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if(mysqli_query(sql定义赋值?))&#123;</span><br><span class="line">	echo &quot;执行查询成功&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo &quot;执行查询失败&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">查询定义赋值? = mysqli_query(sql定义赋值?);</span><br></pre></td></tr></table></figure></li>
+<li>获取结果集资源：数据?数量；<br><img src="https://s2.loli.net/2022/05/16/pEWuSbwKrxBmZqh.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定义赋值? = mysqli_num_rows(查询定义赋值?);</span><br><span class="line">echo 定义赋值?;</span><br></pre></td></tr></table></figure></li>
+<li>解析结果集资源：解析为php识别数据格式，通过<strong>自动下移</strong>指针**以数组数据?**方式取出结果集；<ol>
+<li>解析获取关联(字符串)数组：数组下标为字段?，元素赋值为数据值?；<br><img src="https://s2.loli.net/2022/05/16/hDLbsWQ5VFzR9ku.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定义赋值? = mysqli_fetch_assoc(查询定义赋值?);</span><br><span class="line">print_r(定义赋值?);</span><br></pre></td></tr></table></figure></li>
+<li>解析获取索引数组：始于0自动索引，元素赋值为数据值?；<br><img src="https://s2.loli.net/2022/05/16/5gLj98Mbo4TKFuA.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定义赋值? = mysqli_fetch_row(查询定义赋值?);</span><br><span class="line">print_r(定义赋值?);</span><br></pre></td></tr></table></figure></li>
+<li>解析获取关联索引数组(<strong>同时获取</strong>)：一行取两次，分别<strong>形成两</strong>数组；通过第二参数mysqli_assoc/mysqli_num/mysqli_both<strong>决定输出</strong>；<br><img src="https://s2.loli.net/2022/05/16/KWSmJ4j385ClpYw.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">定义赋值? = mysqli_fetch_array(查询定义赋值?,决定输出?);</span><br><span class="line">print_r(定义赋值?);</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>0false失败：语法错误/执行失败；<br><img src="https://s2.loli.net/2022/05/16/oGQZHY4zeiqOCyI.png"></p>
+<h2 id="mysql扩展函数"><a href="#mysql扩展函数" class="headerlink" title="mysql扩展函数"></a>mysql扩展函数</h2><h3 id="字段函数：操作结果集资源-查询"><a href="#字段函数：操作结果集资源-查询" class="headerlink" title="字段函数：操作结果集资源(查询)"></a>字段函数：操作<strong>结果集资源</strong>(查询)</h3><h4 id="mysqli-num-fields-获取结果集所有字段数量；"><a href="#mysqli-num-fields-获取结果集所有字段数量；" class="headerlink" title="mysqli_num_fields()获取结果集所有字段数量；"></a>mysqli_num_fields()获取结果集所有字段数量；</h4><p><img src="https://s2.loli.net/2022/05/16/po6BrwKqDiIksLG.png"></p>
+</li>
+<li><p>载入初始化；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_once(sql数据库初始化页.php);</span><br></pre></td></tr></table></figure></li>
+<li><p>sql指令命令；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql定义赋值? = &quot;select */字段? from 表?&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>执行操作；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查询定义赋值? = mysqli_query([连接资源?],sql定义赋值?);</span><br><span class="line">echo mysqli_num_fields(查询定义赋值?);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="mysql-field-name-列位置-获取结果集指定列位置字段-；"><a href="#mysql-field-name-列位置-获取结果集指定列位置字段-；" class="headerlink" title="mysql_field_name(,列位置?)获取结果集指定列位置字段?；"></a>mysql_field_name(,列位置?)获取结果集指定列位置字段?；</h4><p><img src="https://s2.loli.net/2022/05/16/6oWcfhZxtbXGYMA.png"></p>
+<ol>
+<li><p>载入初始化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include_once(sql数据库初始化页.php);</span><br></pre></td></tr></table></figure></li>
+<li><p>sql指令命令；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql定义赋值? = &quot;select */字段？ from 表?&quot;;</span><br></pre></td></tr></table></figure></li>
+<li><p>执行操作：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查询定义赋值? = mysqli_query([连接资源?],sql定义赋值?);</span><br><span class="line">echo mysqli_field_name(查询定义赋值?,列位置?);</span><br></pre></td></tr></table></figure>
+<h3 id="错误处理函数"><a href="#错误处理函数" class="headerlink" title="错误处理函数"></a>错误处理函数</h3><p>报错判断基于mysqli_query()返回布尔值；</p>
+<h4 id="mysqli-error-连接资源-获取报错提示信息；"><a href="#mysqli-error-连接资源-获取报错提示信息；" class="headerlink" title="mysqli_error([连接资源?],)获取报错提示信息；"></a>mysqli_error([连接资源?],)获取报错提示信息；</h4><h4 id="mysqli-errno-连接资源-获取报错代号信息；"><a href="#mysqli-errno-连接资源-获取报错代号信息；" class="headerlink" title="mysqli_errno([连接资源?],)获取报错代号信息；"></a>mysqli_errno([连接资源?],)获取报错代号信息；</h4><h2 id="实例项目：文章管理系统"><a href="#实例项目：文章管理系统" class="headerlink" title="实例项目：文章管理系统"></a>实例项目：文章管理系统</h2><h3 id="php初始化页面"><a href="#php初始化页面" class="headerlink" title="php初始化页面"></a>php初始化页面</h3><p><img src="https://s2.loli.net/2022/05/21/47nUh65fgxbvLcE.png"><br><img src="https://s2.loli.net/2022/05/21/2EfSUkwN7DHKiJt.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">建立数据库news</span><br><span class="line">create database news charset = utf8;</span><br><span class="line">建立数据表n_news及字段</span><br><span class="line">create table n_news(</span><br><span class="line">id int primary key auto_increment,</span><br><span class="line">title varchar(50) not null comment &#x27;新闻标题&#x27;,</span><br><span class="line">isTop tinyint not null comment &#x27;是否置顶&#x27;,</span><br><span class="line">content text comment &#x27;内容&#x27;,</span><br><span class="line">publisher varchar(20) not null comment &#x27;发布人&#x27;,</span><br><span class="line">pub_time int not null comment &#x27;发布时间&#x27;</span><br><span class="line">)charset utf8;</span><br></pre></td></tr></table></figure>
+<h4 id="html头标识：中文处理"><a href="#html头标识：中文处理" class="headerlink" title="html头标识：中文处理"></a>html头标识：中文处理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(&quot;content-type:text/html;charset=utf-8&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/21/EYZDNvtK1H9xzlk.png"></p>
+<h4 id="建立连接初始化：or-die短路运算"><a href="#建立连接初始化：or-die短路运算" class="headerlink" title="建立连接初始化：or die短路运算"></a>建立连接初始化：or die短路运算</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">连接资源? = mysqli_connect(&quot;主机?:端口?&quot;,&quot;用户对象?&quot;,&quot;密码?&quot;) or die(&quot;连接失败&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/21/ZmN9TG3gHA8VD5l.png"></p>
+<h4 id="封装函数判断：sql指令命令检查"><a href="#封装函数判断：sql指令命令检查" class="headerlink" title="封装函数判断：sql指令命令检查"></a>封装函数判断：sql指令命令检查</h4><p>//php7+必须手动指定mysqli_query([连接资源?],)的**连接资源?**；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function 判断执行函数?(sql定义赋值?)&#123;</span><br><span class="line">	资源定义赋值? = mysqli_query([连接资源?],sql定义赋值?);</span><br><span class="line">	//执行判断，错误输出信息/代号 跳出；成功返回值资源定义赋值给外部执行；</span><br><span class="line">	if(!资源定义赋值?)&#123;</span><br><span class="line">		echo &quot;sql执行错误，输出错误信息&quot; . mysqli_error([连接资源?]) . &quot;&lt;br/&gt;&quot;;</span><br><span class="line">		echo &quot;sql执行错误，输出错误代号&quot; . mysqli_errno([连接资源?]) . &quot;&lt;br/&gt;&quot;;</span><br><span class="line">		exit;</span><br><span class="line">	&#125;</span><br><span class="line">	return 资源定义赋值?;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/21/mKONU2caT5QvZBW.png"></p>
+<h4 id="调用-判断执行函数：执行sql指令命令"><a href="#调用-判断执行函数：执行sql指令命令" class="headerlink" title="调用 判断执行函数：执行sql指令命令"></a>调用 判断执行函数：执行sql指令命令</h4><p>//通过参数：sql定义赋值?把外部sql指令命令<strong>做参数传值</strong>进内部mysqli_query执行sql指令命令，成功通过return返回出外部；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">判断执行函数?([连接资源?],&quot;sql指令命令&quot;);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/21/4X8p1BfgxWmM3TF.png"></p>
+<h3 id="添加文章表单"><a href="#添加文章表单" class="headerlink" title="添加文章表单?"></a>添加文章表单?</h3></li>
+<li><p>获取html添加表单；<br> 指定post提交方式action提交对应位置；<br> <img src="https://s2.loli.net/2022/05/21/Q6Bmk1KqzSV9Ycu.png"></p>
+</li>
+<li><p>提交数据给后台php脚本：通过post方式提交action对应位置；<br><img src="https://s2.loli.net/2022/05/21/LdNRVSa6YTDtPMh.png"><br><img src="https://s2.loli.net/2022/05/21/RsH6WEgZypQ14kS.png"></p>
+</li>
+<li><p>后台脚本插入数据：接收数据，处理判断，执行插入；</p>
+<p> 3.1 <strong>接收数据</strong></p>
+<p> 业务逻辑：</p>
+<ol>
+<li><p>定义赋值接收$_POST方式数据；</p>
+</li>
+<li><p>isset()处理判断数据可用性：是否存在；</p>
+</li>
+<li><p>通过三目运算对判断数据，选择执行；<br><code>$? = 判断? ? 正确执行? : 错误执行?;</code><br>//trim()函数消除字符串执行空格；(integer)强制转换数字符；<br><img src="https://s2.loli.net/2022/05/21/U4oIlXTk9shenH7.png"></p>
+</li>
+<li><p>2 <strong>数据合法性判断</strong></p>
+</li>
+</ol>
+<p> 业务逻辑：</p>
+<ol>
+<li>empty()函数空值判断：标题/内容；<br><img src="https://s2.loli.net/2022/05/21/zNZsMgUEF6nKySh.png"></li>
+<li>不合法header()刷新跳转，exit()提示重新操作：标识头；<br><img src="https://s2.loli.net/2022/05/21/eBMdwNL1K3tmz5O.png"></li>
+<li>3 <strong>执行插入</strong><br><img src="https://s2.loli.net/2022/05/21/yhNGmLil36dAjPS.png"></li>
+</ol>
+<p> 业务逻辑：</p>
+<ol>
+<li>加载引入初始化页；<br><code> include_once &quot;php初始化页面.php&quot;;</code><br><img src="https://s2.loli.net/2022/05/21/iuwIhSb5KYgQTF9.png">`</li>
+<li>定义赋值sql指令命令，做传入参数；<br><img src="https://s2.loli.net/2022/05/21/HK7cuxphVC4gaYL.png"></li>
+<li>调用执行：判断执行函数?<br><img src="https://s2.loli.net/2022/05/21/G2sZjd4EaRyQ8xI.png"><br><img src="https://s2.loli.net/2022/05/21/FU9zRjYg4nIHcqK.png"></li>
+</ol>
+</li>
+<li><p>输出操作结果，跳转页面：echo输出提示，header()刷新跳转；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(&quot;refresh:3;url=news.php&quot;);</span><br><span class="line">echo $title . &quot;插入成功&quot;;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/21/1AsNHfJB3mzF9Il.png"></p>
+<h3 id="显示文章表单"><a href="#显示文章表单" class="headerlink" title="?显示文章表单"></a>?显示文章表单</h3><p>获取数据库表单所有<strong>文章以数组输出</strong>，通过html模板显示展示；</p>
+</li>
+<li><p>数据库获取文章表单：加载包含php初始化页，通过php脚本<strong>遍历结果集</strong>输出多维数组；<br> <img src="https://s2.loli.net/2022/05/21/H8zeg5wt4OPUmJI.png"></p>
+<p> 1.1 <strong>方法一</strong> 获取<strong>所有保存</strong>结果集(数组数据)，for循环遍历输出；<br> <img src="https://s2.loli.net/2022/05/21/wyhmaMuBoTJbCqF.png"><br> 1.2 <strong>方法二</strong> 获取<strong>按次(自动指针下移)保存</strong>结果集(数组数据)并判断，while循环遍历输出；<br> <img src="https://s2.loli.net/2022/05/21/PWoNjXcnQgrJk1A.png"></p>
+</li>
+<li><p>前端模板页面展示框架：加载引入html模板;<br><code>include_once &quot;展示首页?.html&quot;;</code><br><img src="https://s2.loli.net/2022/05/21/ZKH5Njig8MrDE3L.png"></p>
+</li>
+<li><p>结合php/html二者共同输出数据；foreach循环/遍历输出文章数据；</p>
+<p> 3.1 foreach循环遍历输出文章数据：修改展示页.html表单行列tr/td遍历输出；<br> <img src="https://s2.loli.net/2022/05/21/ASRiaTgh47ctmqM.png"><br> 3.2 遍历循环文章编号id/标题title/时间戳pub_time/发布人publisher/判断置顶istop：输出多维数组；<br> <img src="https://s2.loli.net/2022/05/21/aTeHxzMFRoJWriS.png"></p>
+<h3 id="连表删除文章"><a href="#连表删除文章" class="headerlink" title="连表删除文章"></a>连表删除文章</h3><p>通过对应前端按钮<strong>连带删除</strong>数据库数据实现文章删除；</p>
+</li>
+<li><p>展示文章列表表单：通过前端页面获取文章表单数据输出展示； //前端文章展示页.html/后端文章展示页.php；</p>
+</li>
+<li><p>定义赋值前端删除按钮；</p>
+</li>
+<li><p>删除按钮指定对应文章表单数据；<br> 指定foreach循环遍历文章编号id；<br> <img src="https://s2.loli.net/2022/05/21/HqE3uWaVS6FMKzg.png"></p>
+</li>
+<li><p>后端相应删除请求：通过php后端删除脚本； //后端文章删除页.php</p>
+<p> 4.1 判断存在，接收删除文章编号id；<br> <img src="https://s2.loli.net/2022/05/21/lBGU7HeQYWCqkfO.png"><br> 4.2 加载引入初始化页；<br> <code>include_once &quot;初始化页.php&quot;;</code><br> <img src="https://s2.loli.net/2022/05/21/pN7KMa8dgnj9ZA2.png"><br> 4.3 调用函数：执行删除sql指令命令；</p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_error(连接资源?,&quot;delete from 表名? where id = &quot; . $id);</span><br></pre></td></tr></table></figure>
+<p> <img src="https://s2.loli.net/2022/05/21/q6NXf5kDAPgrS8p.png"><br> 4.4 输出操作结果，跳转页面：header()刷新跳转，echo提示成功；<br> <img src="https://s2.loli.net/2022/05/21/ba78AjV9nQiuoYF.png"></p>
+<h3 id="修改文章表单"><a href="#修改文章表单" class="headerlink" title="?修改文章表单"></a>?修改文章表单</h3><p>修改展示对应文章，<strong>连带</strong>实现数据库中数据<strong>更新</strong>操作；</p>
+</li>
+<li><p>展示文章列表表单：通过前端页面获取文章表单数据输出展示； //前端文章展示页.html/后端文章展示页.php</p>
+</li>
+<li><p>实现点击查看：对应列表页文章编号id增加点击修改链接路径；<br><img src="https://s2.loli.net/2022/05/21/F2MLfY1RHQv6Xpi.png"></p>
+</li>
+<li><p>后端相应编辑请求：通过php后端编辑脚本； //后端编辑页.php</p>
+<p> 3.1 判断存在，接收编辑文章编号id；<br> <img src="https://s2.loli.net/2022/05/21/dPMvFi2fyobrh73.png"><br> 3.2 加载引入初始化页；<br> `include_once “初始化页.php”;<br> <img src="https://s2.loli.net/2022/05/21/XJrxVdRkU8YvuBl.png"><br> 3.3 调用函数：获取文章编号id传值输出文章数据；<br> <img src="https://s2.loli.net/2022/05/21/2DM5iqz3S6yIQWg.png"></p>
+</li>
+<li><p>前端展示对应编辑页面：加载引入html模板，交汇处理php后端数据；</p>
+<p> 4.1 加载引入编辑页；<br> `include_once “编辑页.php”;<br> <img src="https://s2.loli.net/2022/05/21/gr1Rij7k9M5SlwL.png"><br> 4.2 交汇处理获取：编辑标题/文章置顶项；<br> <img src="https://s2.loli.net/2022/05/21/cVaqOhXed7Ci8Hf.png"></p>
+</li>
+<li><p>需要修改前端提供更新表单：表单<strong>提交对象</strong>不限；</p>
+<p> 5.1 修改表单更新提交对象；<br> <img src="https://s2.loli.net/2022/05/21/eyprNw8KRcsTZlM.png"><br> 5.2 增加隐藏表单文章编号id：生成文章唯一草稿id；<br> <img src="https://s2.loli.net/2022/05/21/9wiZT1RgrPBVhvt.png"></p>
+</li>
+<li><p>后端php脚本处理修改数据：执行sql数据更新提交数据库；</p>
+<p> 6.1 增加更新数据php脚本；<br> <img src="https://s2.loli.net/2022/05/21/rXl1Cht9v4Gqk2S.png"><br> 6.2 判断存在：通过三目运算符接收数据；<br> <img src="https://s2.loli.net/2022/05/21/NL9YbucRhKZoJX7.png"><br> 6.3 加载引入初始化页；<br> <code>include_once &quot;初始化页&quot;;</code><br> <img src="https://s2.loli.net/2022/05/21/cqWnRE6owFzlLBG.png"><br> 6.4 调用函数：获取文章编号id/文章草稿编号id执行sql指令命令，更新提交数据库；<br> <img src="https://s2.loli.net/2022/05/21/PD3jS4GYlNzrMC7.png"><br> 6.5 输出操作结果，跳转页面：header()刷新跳转，echo提示成功；<br> <img src="https://s2.loli.net/2022/05/21/tQ18W9hbMY6rwzP.png"></p>
+</li>
+</ol>
+<p>​    </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/day11_php/" rel="prev" title="day11_php">
+      <i class="fa fa-chevron-left"></i> day11_php
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql%E6%89%A9%E5%B1%95"><span class="nav-number">1.</span> <span class="nav-text">mysql扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#php%E8%BF%9E%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">php连库操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%EF%BC%9A%E8%B6%85%E5%85%A8%E5%B1%80%E8%B5%84%E6%BA%90"><span class="nav-number">1.1.1.</span> <span class="nav-text">建立连接：超全局资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%BF%9E%E6%8E%A5%E7%BC%96%E7%A0%81"><span class="nav-number">1.1.2.</span> <span class="nav-text">设置连接编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">1.1.3.</span> <span class="nav-text">选择数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E8%BF%9E%E6%8E%A5%EF%BC%9A%E4%B8%BB%E5%8A%A8%E9%87%8A%E6%94%BE"><span class="nav-number">1.1.4.</span> <span class="nav-text">关闭连接：主动释放</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C%EF%BC%9A%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5"><span class="nav-number">1.2.</span> <span class="nav-text">数据库操作：增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9Einsert"><span class="nav-number">1.2.1.</span> <span class="nav-text">增insert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9update"><span class="nav-number">1.2.2.</span> <span class="nav-text">改update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0delete"><span class="nav-number">1.2.3.</span> <span class="nav-text">删delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5show-desc-select%EF%BC%9A%E6%9F%A5%E8%AF%A2%E7%BB%93%E6%9E%9C%E9%9B%86%E8%B5%84%E6%BA%90"><span class="nav-number">1.2.4.</span> <span class="nav-text">查show&#x2F;desc&#x2F;select：查询结果集资源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql%E6%89%A9%E5%B1%95%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">mysql扩展函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E5%87%BD%E6%95%B0%EF%BC%9A%E6%93%8D%E4%BD%9C%E7%BB%93%E6%9E%9C%E9%9B%86%E8%B5%84%E6%BA%90-%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">字段函数：操作结果集资源(查询)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysqli-num-fields-%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%9C%E9%9B%86%E6%89%80%E6%9C%89%E5%AD%97%E6%AE%B5%E6%95%B0%E9%87%8F%EF%BC%9B"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">mysqli_num_fields()获取结果集所有字段数量；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-field-name-%E5%88%97%E4%BD%8D%E7%BD%AE-%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%9C%E9%9B%86%E6%8C%87%E5%AE%9A%E5%88%97%E4%BD%8D%E7%BD%AE%E5%AD%97%E6%AE%B5-%EF%BC%9B"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">mysql_field_name(,列位置?)获取结果集指定列位置字段?；</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.2.</span> <span class="nav-text">错误处理函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysqli-error-%E8%BF%9E%E6%8E%A5%E8%B5%84%E6%BA%90-%E8%8E%B7%E5%8F%96%E6%8A%A5%E9%94%99%E6%8F%90%E7%A4%BA%E4%BF%A1%E6%81%AF%EF%BC%9B"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">mysqli_error([连接资源?],)获取报错提示信息；</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysqli-errno-%E8%BF%9E%E6%8E%A5%E8%B5%84%E6%BA%90-%E8%8E%B7%E5%8F%96%E6%8A%A5%E9%94%99%E4%BB%A3%E5%8F%B7%E4%BF%A1%E6%81%AF%EF%BC%9B"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">mysqli_errno([连接资源?],)获取报错代号信息；</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E9%A1%B9%E7%9B%AE%EF%BC%9A%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.4.</span> <span class="nav-text">实例项目：文章管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.4.1.</span> <span class="nav-text">php初始化页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#html%E5%A4%B4%E6%A0%87%E8%AF%86%EF%BC%9A%E4%B8%AD%E6%96%87%E5%A4%84%E7%90%86"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">html头标识：中文处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%9Aor-die%E7%9F%AD%E8%B7%AF%E8%BF%90%E7%AE%97"><span class="nav-number">1.4.1.2.</span> <span class="nav-text">建立连接初始化：or die短路运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85%E5%87%BD%E6%95%B0%E5%88%A4%E6%96%AD%EF%BC%9Asql%E6%8C%87%E4%BB%A4%E5%91%BD%E4%BB%A4%E6%A3%80%E6%9F%A5"><span class="nav-number">1.4.1.3.</span> <span class="nav-text">封装函数判断：sql指令命令检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E7%94%A8-%E5%88%A4%E6%96%AD%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0%EF%BC%9A%E6%89%A7%E8%A1%8Csql%E6%8C%87%E4%BB%A4%E5%91%BD%E4%BB%A4"><span class="nav-number">1.4.1.4.</span> <span class="nav-text">调用 判断执行函数：执行sql指令命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E8%A1%A8%E5%8D%95"><span class="nav-number">1.4.2.</span> <span class="nav-text">添加文章表单?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E6%96%87%E7%AB%A0%E8%A1%A8%E5%8D%95"><span class="nav-number">1.4.3.</span> <span class="nav-text">?显示文章表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E8%A1%A8%E5%88%A0%E9%99%A4%E6%96%87%E7%AB%A0"><span class="nav-number">1.4.4.</span> <span class="nav-text">连表删除文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E7%AB%A0%E8%A1%A8%E5%8D%95"><span class="nav-number">1.4.5.</span> <span class="nav-text">?修改文章表单</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tyson_H</p>
+  <div class="site-description" itemprop="description">tyson's_1point3acres</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tyson_H</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
