@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tyson1077.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="http协议hyper text transfer protocal超文本传输协议，定义规范B浏览器和C服务器传输协议规则：传输文本&#x2F;传输部分&#x2F;如何显示； 协议特点 C客户端&#x2F;S服务端模式； 传输简单快速：发送请求方法&#x2F;路径； 传输灵活：数据MIME对象类型多样； 无连接：一次连接一次请求，处理请求接收应答立即断开不回应； 无状态：对协议事务处理不记录，每次连接请求对应每次连接信息；协议分类请求协">
+<meta property="og:type" content="article">
+<meta property="og:title" content="day13_php">
+<meta property="og:url" content="https://tyson1077.github.io/day13_php/index.html">
+<meta property="og:site_name" content="tyson自留地">
+<meta property="og:description" content="http协议hyper text transfer protocal超文本传输协议，定义规范B浏览器和C服务器传输协议规则：传输文本&#x2F;传输部分&#x2F;如何显示； 协议特点 C客户端&#x2F;S服务端模式； 传输简单快速：发送请求方法&#x2F;路径； 传输灵活：数据MIME对象类型多样； 无连接：一次连接一次请求，处理请求接收应答立即断开不回应； 无状态：对协议事务处理不记录，每次连接请求对应每次连接信息；协议分类请求协">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/UxyivRHpXbGKlMJ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/rGXmONR8b1s7fta.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/5pC1rd9G2qcDgVL.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/gTCM5jXbRz7eEHo.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/wQH6fS2RWFgB81q.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/dJacNG5oOAX21WT.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/QXKyhUtBHvmge4M.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/zcELk5dF7wsh8Wy.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/vSCBxDUbmfznA2w.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/XYN2iLkTV6RCn8l.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/cSYFjfZv15aNDxp.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/T4YEhkl6I7DgQs3.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/vIGNPyboFLuM4Vf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/27ol86xgjvMGKEO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/JFnlNqgC63GsM82.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Q7wgq3ICj6XoNKH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/RpPzjVcIyE4S6Cr.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/nVAXj2OEUwg9Jaz.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/v1QqtLzZbarj5yg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Q2H8iUsMJh9wZbm.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/2yuBd4t19Lx7pwl.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/GgVpi2qfTEAzUO9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/QCS3jyroD6fEcd8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/oyUF9DHCq8uLGrT.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/O2r9qAsvPYjLabZ.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/QqKZtBIY4JUs8N9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/8JmIno5icRwDhgy.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/VNDmouKICyqnU1P.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Iy4OxbDATsoqkBg.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/MZSEY9NblpzsPOB.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/UExoy9pWagNQTiK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/dkL7MCFca9sJhgt.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/kSj6DHBhb1AUMnv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/6XFSvBn4e9p85oK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/AvNV62EIgrJwqRc.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Jb35FQpNB6RvshW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/4BMf8TtbzgWlCsm.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Bay4Wd3ukQeTEZ2.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/8reDS7xQzFdJ4VK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/PH9R2zcUAMjaVpW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/b9Ky12HQi8dV6eE.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/GFqmdJ1hnrcCy2k.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/D5z8uLQWUFscJhf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/aAdZr2ymvLeJoUI.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/dk8GTUzr9ngXCoK.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/wMkDo8JGRbzXmai.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/7JO26MKWuLafHe9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/qnm6AlHPxzW1LS7.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/k8tHbUIfXPO317i.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/LMIWyvzXsDgwkT5.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/1DAGWkmYIhugRiL.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/Cz832calOvJkwGX.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/hanwPFsUOWm6zkq.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/z8tbs5NRwD3UIY9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/05/22/i9qRDjZNdyfQXeW.png">
+<meta property="article:published_time" content="2022-05-22T14:38:05.754Z">
+<meta property="article:modified_time" content="2022-05-22T14:38:46.887Z">
+<meta property="article:author" content="tyson_H">
+<meta property="article:tag" content="hexo,tyson">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/05/22/UxyivRHpXbGKlMJ.png">
+
+<link rel="canonical" href="https://tyson1077.github.io/day13_php/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>day13_php | tyson自留地</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">tyson自留地</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">hello_world</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day13_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          day13_php
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-22 22:38:05 / Modified: 22:38:46" itemprop="dateCreated datePublished" datetime="2022-05-22T22:38:05+08:00">2022-05-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h1><p>hyper text transfer protocal超文本传输协议，定义规范B浏览器和C服务器传输协议规则：传输文本/传输部分/如何显示；</p>
+<h2 id="协议特点"><a href="#协议特点" class="headerlink" title="协议特点"></a>协议特点</h2><ol>
+<li>C客户端/S服务端模式；</li>
+<li>传输简单快速：发送请求方法/路径；</li>
+<li>传输灵活：数据MIME对象<strong>类型多样</strong>；</li>
+<li>无连接：一次连接一次请求，处理请求接收应答立即断开<strong>不回应</strong>；</li>
+<li>无状态：对协议事务处理不记录，每次连接请求<strong>对应</strong>每次连接信息；<h2 id="协议分类"><a href="#协议分类" class="headerlink" title="协议分类"></a>协议分类</h2><h3 id="请求协议：行头体"><a href="#请求协议：行头体" class="headerlink" title="请求协议：行头体"></a>请求协议：行头体</h3>发送请求；<br><img src="https://s2.loli.net/2022/05/22/UxyivRHpXbGKlMJ.png"><h4 id="请求行：http请求标识头"><a href="#请求行：http请求标识头" class="headerlink" title="请求行：http请求标识头"></a>请求行：http请求标识头</h4>基本格式：请求方式/资源路径/协议版本(动态1.1/静态1.0)；<br>如GET /index.php http/1.1<h4 id="请求头：协议内容"><a href="#请求头：协议内容" class="headerlink" title="请求头：协议内容"></a>请求头：协议内容</h4>请求头数量不限，对应请求协议独占对应行，末尾空行分隔请求头/请求体；</li>
+<li>host主机址(必须)；</li>
+<li>connect连接状态；</li>
+<li>accept对应请求接收C服务端返回(MINE)数据类型；</li>
+<li>accept-language字符集编码语言；</li>
+<li>accept-encoding数据压缩格式；</li>
+<li>user-agent浏览器B客户端唯一编码指纹信息：浏览器内核/内核版本/操作系统/浏览器版本<h4 id="请求体：请求数据内容"><a href="#请求体：请求数据内容" class="headerlink" title="请求体：请求数据内容"></a>请求体：请求数据内容</h4></li>
+<li>GET请求体明文显示url，尾椎请求行资源路径；</li>
+<li>POST请求体隐藏存在；<br>基本格式：资源名?=资源值? &amp; 资源名?n=资源值?n；<h3 id="响应协议：行头体"><a href="#响应协议：行头体" class="headerlink" title="响应协议：行头体"></a>响应协议：行头体</h3>接收回应请求；<br><img src="https://s2.loli.net/2022/05/22/rGXmONR8b1s7fta.png"><h4 id="响应行：http响应标识头"><a href="#响应行：http响应标识头" class="headerlink" title="响应行：http响应标识头"></a>响应行：http响应标识头</h4>基本格式：协议版本/状态码/响应状态<br>如http/1.1 200 ok<br>状态码：</li>
+<li>200ok 连接成功；</li>
+<li>403forbidden 访问权限不足；</li>
+<li>404notfound 访问不存在：路径/页面/文件；</li>
+<li>500serverinternalerror C服务端内部错误；<h4 id="响应头：响应协议内容"><a href="#响应头：响应协议内容" class="headerlink" title="响应头：响应协议内容"></a>响应头：响应协议内容</h4>响应头数量不限，对应响应协议独占对应行，末尾空行分隔响应头/响应体；</li>
+<li>date响应时间；</li>
+<li>server服务端信息；</li>
+<li>connect连接状态：timeout最大连接超时时间/max最大请求数量；</li>
+<li>last-modified对应请求数据C服务端最后修改时间：缓存；</li>
+<li>content-length响应体数据长度大小：数据具体字节数；</li>
+<li>content-type响应数据类型：返回服务器数据格式；<h4 id="响应体：响应数据内容"><a href="#响应体：响应数据内容" class="headerlink" title="响应体：响应数据内容"></a>响应体：响应数据内容</h4>S服务端响应返回C浏览器数据：代码数据的内容；<h4 id="常见状态码"><a href="#常见状态码" class="headerlink" title="常见状态码"></a>常见状态码</h4><a target="_blank" rel="noopener" href="https://www.w3school.com.cn/tags/html_ref_httpmessages.asp">https://www.w3school.com.cn/tags/html_ref_httpmessages.asp</a></li>
+<li>1xx服务端处理中；<br><img src="https://s2.loli.net/2022/05/22/5pC1rd9G2qcDgVL.png"></li>
+<li>2xx连接成功；<br><img src="https://s2.loli.net/2022/05/22/gTCM5jXbRz7eEHo.png"></li>
+<li>3xx请求目标路径被转移；<br><img src="https://s2.loli.net/2022/05/22/wQH6fS2RWFgB81q.png"></li>
+<li>4xx客户端报错；<br><img src="https://s2.loli.net/2022/05/22/dJacNG5oOAX21WT.png"></li>
+<li>5xx服务端报错；<br><img src="https://s2.loli.net/2022/05/22/QXKyhUtBHvmge4M.png"></li>
+</ol>
+<h2 id="响应设置"><a href="#响应设置" class="headerlink" title="响应设置"></a>响应设置</h2><p>php通过<strong>header()函数</strong>针对http协议<strong>响应头</strong>进行底层<strong>设计修改</strong>；<br>设计事项：<br><img src="https://s2.loli.net/2022/05/22/zcELk5dF7wsh8Wy.png"></p>
+<ol>
+<li>header()支持http响应设计：<br> http协议响应顺序为行头体；<br> 因此header()设计<strong>响应头必须置顶</strong>，尾椎的代码数据内容部分为响应体)；</li>
+<li>php5+后支持程序缓存：<br> 允许S服务端脚本输出代码数据内容响应体<strong>通过程序缓存保存</strong>(全局缓存设置php.ini:output_buffering)不返回C浏览器；<br> 程序缓存支持自动调整响应头/响应体位置，位置错误时报错警告；</li>
+</ol>
+<p>常见响应头设置：</p>
+<ol>
+<li><p>content-type字符集编码设置：声明mime类型正确解析；<br><code>header(&quot;content-type:text/html;charset=utf-8&quot;);</code></p>
+</li>
+<li><p>content-disposition下载扩展设置：激活浏览器下载，响应体不解析；<br>`header(“content-disposition:attachment;filename=下载文件名?”)<br><img src="https://s2.loli.net/2022/05/22/vSCBxDUbmfznA2w.png"></p>
+</li>
+<li><p>location重定向：立即跳转访问指定路径，响应体不解析；<br><code>header(&quot;location:访问指定路径?&quot;);</code><br><img src="https://s2.loli.net/2022/05/22/XYN2iLkTV6RCn8l.png"></p>
+</li>
+<li><p>refresh刷新重定向：延时跳转访问指定路径，响应体不解析；<br><code>header(&quot;refresh:时间s?;url=访问指定路径?&quot;);</code><br><img src="https://s2.loli.net/2022/05/22/cSYFjfZv15aNDxp.png"></p>
+<h2 id="php模拟请求"><a href="#php模拟请求" class="headerlink" title="php模拟请求"></a>php模拟请求</h2><p><img src="https://s2.loli.net/2022/05/22/T4YEhkl6I7DgQs3.png"></p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3></li>
+<li><p>php通过curl()脚本开源库支持灵活参数发送http/https/ftp/telnet协议；</p>
+</li>
+<li><p>http协议支持CB客户端/S服务端互访双模式；</p>
+<h3 id="curl扩展库"><a href="#curl扩展库" class="headerlink" title="curl扩展库"></a>curl扩展库</h3><h4 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h4></li>
+<li><p>php.ini开启curl扩展支持；<br><img src="https://s2.loli.net/2022/05/22/vIGNPyboFLuM4Vf.png"></p>
+</li>
+<li><p>php.ini指定curl扩展库路径extension_dir；<br><img src="https://s2.loli.net/2022/05/22/27ol86xgjvMGKEO.png"></p>
+</li>
+<li><p>curl扩展库指向dll扩展环境支持； //php54；<br>路径c:windows放置libeay32.dll/ssleay32.dll；</p>
+</li>
+<li><p>重启反代服务端apache/php；</p>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><p><img src="https://s2.loli.net/2022/05/22/JFnlNqgC63GsM82.png"><br><img src="https://s2.loli.net/2022/05/22/Q7wgq3ICj6XoNKH.png"><br>执行请求时乱码：通过<strong>指定本地</strong>header()<strong>响应头解析格式</strong>实现正确解析；</p>
+</li>
+<li><p>建立连接会话curl_init()：激活curl初始化；<br> <img src="https://s2.loli.net/2022/05/22/RpPzjVcIyE4S6Cr.png"></p>
+</li>
+<li><p>设置请求curl_setopt(连接会话资源?,参数?,[选项?])：参数/选项；<br> CURLOPT_URL连接对象：对象路径?；<br> CURLOPT_RETURNTRANSFER<strong>是否接收</strong>服务端执行响应结果返回文件流给php请求脚本路径页面：TRUE/FALSE；<br> CURLOPT_POST<strong>是否采用</strong>post方式发送请求，默认方式get：TRUE/FALSE；<br> CURLOPT_POSTFIELDS传递post数据提交<strong>方式</strong>，通过字符串/数组方式array()展示；<br> CURLOPT_HEADER<strong>是否获取</strong>header响应信息(响应行/响应头)：0/1；<br> <img src="https://s2.loli.net/2022/05/22/nVAXj2OEUwg9Jaz.png"></p>
+</li>
+<li><p>执行请求curl_exec()：发送请求接收C服务端返回；<br><img src="https://s2.loli.net/2022/05/22/v1QqtLzZbarj5yg.png"></p>
+</li>
+<li><p>关闭连接curl_close()：关闭连接资源；<br><img src="https://s2.loli.net/2022/05/22/Q2H8iUsMJh9wZbm.png"></p>
+<h1 id="文件编程"><a href="#文件编程" class="headerlink" title="文件编程"></a>文件编程</h1><p>通过php对文件进行<strong>增删改查</strong>操作，高级应用文件上传/文件配置；</p>
+<h2 id="操作分类"><a href="#操作分类" class="headerlink" title="操作分类"></a>操作分类</h2><h3 id="目录操作"><a href="#目录操作" class="headerlink" title="目录操作"></a>目录操作</h3><p>特殊文件，存放文件文件夹；</p>
+<h4 id="创建目录结构：过程"><a href="#创建目录结构：过程" class="headerlink" title="创建目录结构：过程"></a>创建目录结构：过程</h4><p>mkdir(路径文件名?)：过程成功返回true/过程失败返回false；</p>
+</li>
+</ol>
+<p><strong>定义赋值? = @mkdir(路径文件名?);</strong><br><img src="https://s2.loli.net/2022/05/22/2yuBd4t19Lx7pwl.png"><br>通过@?错误抑制运算符<strong>抑制</strong>创建过程重复报错；<br><img src="https://s2.loli.net/2022/05/22/GgVpi2qfTEAzUO9.png"><br><img src="https://s2.loli.net/2022/05/22/QCS3jyroD6fEcd8.png"></p>
+<h4 id="删除目录：过程"><a href="#删除目录：过程" class="headerlink" title="删除目录：过程"></a>删除目录：过程</h4><p>rmdir(路径文件名?)：过程成功返回true/过程失败返回false；<br><strong>定义赋值? = @rmdir(路径文件名?);</strong><br><img src="https://s2.loli.net/2022/05/22/oyUF9DHCq8uLGrT.png"></p>
+<h4 id="目录读取：获取资源"><a href="#目录读取：获取资源" class="headerlink" title="目录读取：获取资源"></a>目录读取：获取资源</h4><p>指定路径文件夹通过读取资源方式<strong>以文件流形式</strong>打开获取；</p>
+<ol>
+<li><p>定义赋值? = opendir(路径文件名?)：打开资源返回获取目录下所有内容；<br> <img src="https://s2.loli.net/2022/05/22/O2r9qAsvPYjLabZ.png"></p>
+</li>
+<li><p>readdir()：读取资源自动指针所在文件名位置后，自动下移自动指针；</p>
+<p> 任意文件夹存在特殊文件.本地路径/..上级路径；<br> <img src="https://s2.loli.net/2022/05/22/QqKZtBIY4JUs8N9.png"><br> <strong>while循环遍历读取输出：while(遍历定义赋值? = readdir(定义赋值?)){echo 遍历定义赋值?;}</strong><br> <img src="https://s2.loli.net/2022/05/22/8JmIno5icRwDhgy.png"></p>
+</li>
+<li><p>closedir()：关闭资源连接；<br><img src="https://s2.loli.net/2022/05/22/VNDmouKICyqnU1P.png"></p>
+<h3 id="其他目录操作"><a href="#其他目录操作" class="headerlink" title="其他目录操作"></a>其他目录操作</h3></li>
+<li><p>dirname(路径文件名?)：获取对应上层路径；<br><img src="https://s2.loli.net/2022/05/22/Iy4OxbDATsoqkBg.png"></p>
+</li>
+<li><p>realpath(路径?)：判断获取真实路径，路径文件夹返回路径/路径文件返回布尔false；<br><img src="https://s2.loli.net/2022/05/22/MZSEY9NblpzsPOB.png"></p>
+</li>
+<li><p>is_dir(路径文件名?)：判断是否文件夹，返回布尔true/false；<br><img src="https://s2.loli.net/2022/05/22/UExoy9pWagNQTiK.png"></p>
+</li>
+<li><p><strong>scandir(路径文件名?)<strong>：</strong>三合一封装目录读取</strong>opendir()打开资源/readdir()读取资源/closedir关闭资源；获取指定路径下所有文件，返回以数组形式；<br><img src="https://s2.loli.net/2022/05/22/dkL7MCFca9sJhgt.png"></p>
+<h4 id="递归遍历目录操作"><a href="#递归遍历目录操作" class="headerlink" title="递归遍历目录操作"></a>递归遍历目录操作</h4><p>获取指定对应目录下<strong>输出所有</strong>内部内容；<br>递归：大问题分割为最小单位问题方法，以最小方法概念解决大问题；<br>递归函数：函数本身内部调用自己；</p>
+<h5 id="实现逻辑"><a href="#实现逻辑" class="headerlink" title="实现逻辑"></a>实现逻辑</h5></li>
+<li><p>设计遍历一层文件的函数；<br> <img src="https://s2.loli.net/2022/05/22/kSj6DHBhb1AUMnv.png"></p>
+<ol>
+<li>定义路径；<br><img src="https://s2.loli.net/2022/05/22/6XFSvBn4e9p85oK.png"></li>
+<li>创建递归遍历函数：访问指定路径下所有内容，并判断内容类型；<br><img src="https://s2.loli.net/2022/05/22/AvNV62EIgrJwqRc.png"></li>
+<li>读取路径下所有内容，遍历获取输出；<br><img src="https://s2.loli.net/2022/05/22/Jb35FQpNB6RvshW.png"></li>
+</ol>
+</li>
+<li><p>获取递归点：调用<strong>遍历本身</strong>文件目录函数；</p>
+<p> a. 构造递归路径：过程；<br> <img src="https://s2.loli.net/2022/05/22/4BMf8TtbzgWlCsm.png"><br> b. 排除特殊文件./..路径；<br> <img src="https://s2.loli.net/2022/05/22/Bay4Wd3ukQeTEZ2.png"><br> c. 获取递归点：判断内容类型(路径/文件)；<br> <img src="https://s2.loli.net/2022/05/22/8reDS7xQzFdJ4VK.png"><br> d. 调用递归点；<br> <img src="https://s2.loli.net/2022/05/22/PH9R2zcUAMjaVpW.png"></p>
+</li>
+<li><p>获取递归出口：递归<strong>遍历最小</strong>单位内部文件后，<strong>结束调用</strong>；<br>函数自带递归出口，无操作；</p>
+</li>
+<li><p>标识表示层级关系；<br> <img src="https://s2.loli.net/2022/05/22/b9Ky12HQi8dV6eE.png"><br> 函数多次调用遍历进入内部，通过标识变化识别缩进层级关系；</p>
+<p> a. 为递归遍历函数增加默认参数0作为标识；<br> <img src="https://s2.loli.net/2022/05/22/GFqmdJ1hnrcCy2k.png"><br> b. 递归调用时增加对应层级子层级：进行参数+1操作；<br> <img src="https://s2.loli.net/2022/05/22/D5z8uLQWUFscJhf.png"><br> c. 通过str_repeat()函数根据对应层级输出实现缩进；<br> <img src="https://s2.loli.net/2022/05/22/aAdZr2ymvLeJoUI.png"></p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><h4 id="php5"><a href="#php5" class="headerlink" title="php5"></a>php5</h4></li>
+<li><p>file_get_contents(路径文件名?)：获取指定文件所有内容；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件定义赋值? = 路径文件名?;</span><br><span class="line">获取定义赋值? = @file_get_contents(文件定义赋值?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/22/dk8GTUzr9ngXCoK.png"></p>
+</li>
+<li><p>file_put_contents(路径文件名?,内容?)：指定内容写入指定文件内部，不存在则自动创建；<br>//返回字符串长度字节结果；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">写入定义赋值? = &quot;?&quot;;</span><br><span class="line">获取定义赋值 = file_put_contents(文件定义赋值?,写入定义赋值?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/22/wMkDo8JGRbzXmai.png"></p>
+<h4 id="php4"><a href="#php4" class="headerlink" title="php4"></a>php4</h4><p>文件操作<strong>以资源处理</strong>，读写通过内部位置自动资源指针(建立资源<strong>对资源操作</strong>)；</p>
+</li>
+<li><p>fopen(路径文件名?,模式?)：通过对应模式打开，以文件资源；</p>
+<p> 打开模式：<br> <img src="https://s2.loli.net/2022/05/22/7JO26MKWuLafHe9.png"></p>
+<ol>
+<li>r只读模式，指针转移文件头；</li>
+<li>r+读写模式，指针转移文件头；</li>
+<li>w写入模式(覆盖写入)，覆盖清空文件内部，指针转移文件头；不存在自动创建文件；</li>
+<li>w+读写模式(覆盖写入)，覆盖清空文件内部，指针转移文件头；不存在自动创建文件；</li>
+<li>a写入模式(追加写入)，指针转移文件尾；不存在自动创建文件；</li>
+<li>a+读写模式(追加写入)，指针转移文件尾；不存在自动创建文件； </li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">文件定义赋值? = 路径文件名?;</span><br><span class="line">打开资源? = fopen(文件定义赋值?,模式?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/22/qnm6AlHPxzW1LS7.png"><br>2. fread(资源?,指定长度?)：打开资源获取指定长度内容；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">读取资源? = fread(打开资源?,指定长度?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/05/22/k8tHbUIfXPO317i.png"><br>3. fwrite(资源?,指定内容?)：指定内容写入指定资源文件内部；<br><img src="https://s2.loli.net/2022/05/22/LMIWyvzXsDgwkT5.png"><br><img src="https://s2.loli.net/2022/05/22/1DAGWkmYIhugRiL.png"><br>4. fclose(资源?)：关闭资源连接；<br><img src="https://s2.loli.net/2022/05/22/Cz832calOvJkwGX.png"></p>
+<h3 id="其他文件操作"><a href="#其他文件操作" class="headerlink" title="其他文件操作"></a>其他文件操作</h3><p>前提：建立文件为资源</p>
+<ol>
+<li>is_file()：判断是否为文件，返回布尔true/false；</li>
+<li>filesize()：获取文件的大小；</li>
+<li>file_exists()：判断路径文件名是否存在；</li>
+<li>unlink()：取消路径文件名与磁盘地址关联，即删除文件；</li>
+<li>filemtime()：获取文件最后修改时间；</li>
+<li>fseek()：指定fopen()打开文件资源指针位置；</li>
+<li>fgetc()：按次获取一个字符；<br><img src="https://s2.loli.net/2022/05/22/hanwPFsUOWm6zkq.png"></li>
+<li>fgets()：按次获取行字符串；</li>
+<li>file()：按行获取整个文件输出数组，类似file_get_contents()；<h4 id="文件下载操作"><a href="#文件下载操作" class="headerlink" title="文件下载操作"></a>文件下载操作</h4>S服务端通过http协议传输文件到C浏览器不解析保存存储；<br>下载方式：</li>
+<li>a标签<br><code>&lt;a href=&quot;路径文件名?&quot;&gt;&lt;/a&gt;</code><br>缺点：下载内容优先，无法解析才启用下载/存储路径明文显示，数据安全性暴露；</li>
+<li>php下载：获取文件内容通过响应头注明不解析以文件流形式传递激活实现下载；<ol>
+<li>header()指定字符集编码；<br><img src="https://s2.loli.net/2022/05/22/z8tbs5NRwD3UIY9.png"></li>
+<li>header()设置响应头：<br> 文件返回类型content-type:image/jpg||application/octem-stream；<br> 文件返回计算方式accept-ranges:bytes；<br> 激活附件下载content-disposition:attachment;filename=”路径文件名?”；<br> //通过<code>文件定义赋值? = iconv(原码?,转码?,文件定义赋值?);</code>对路径/非法字符集编码获取文件名进行转码；<br> 文件大小字节accept-length：通过filesize()获取；<br> <img src="https://s2.loli.net/2022/05/22/i9qRDjZNdyfQXeW.png"></li>
+<li>读取文件：</li>
+<li>输出文件：<br> php5小文件file_get_contents()直接读取输出； <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">小于8m时下载文件：</span><br><span class="line">文件定义赋值? = 路径文件名?;</span><br><span class="line">echo file_get_contents(文件定义赋值?);</span><br></pre></td></tr></table></figure>
+ php4大文件通过获取文件资源，判断指针后进行下载； <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">方法一：直接读取后输出；</span><br><span class="line">文件定义赋值? = 路径文件名?;</span><br><span class="line">资源定义赋值? = @fopen(文件定义赋值?,&quot;r&quot;) or die();</span><br><span class="line">while(循环定义赋值? = fread(资源定义赋值?,1024))&#123;</span><br><span class="line">	echo 循环定义赋值?;</span><br><span class="line">&#125;</span><br><span class="line">fclose(资源定义赋值?);</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">方法二：判断指针位置后是否可读，然后读取输出；</span><br><span class="line">文件定义赋值? = 路径文件名?;</span><br><span class="line">资源定义赋值? = @fopen(文件定义赋值?,&quot;r&quot;) or die();</span><br><span class="line">while(!feof(资源定义赋值?))&#123; //判断文件内部指针不在末尾；</span><br><span class="line">	echo fread(资源定义赋值?,1024);</span><br><span class="line">&#125;</span><br><span class="line">fclose(资源定义赋值?);</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/day12_php/" rel="prev" title="day12_php">
+      <i class="fa fa-chevron-left"></i> day12_php
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.</span> <span class="nav-text">http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E7%89%B9%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">协议特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">协议分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%8D%8F%E8%AE%AE%EF%BC%9A%E8%A1%8C%E5%A4%B4%E4%BD%93"><span class="nav-number">1.2.1.</span> <span class="nav-text">请求协议：行头体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%A1%8C%EF%BC%9Ahttp%E8%AF%B7%E6%B1%82%E6%A0%87%E8%AF%86%E5%A4%B4"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">请求行：http请求标识头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E5%A4%B4%EF%BC%9A%E5%8D%8F%E8%AE%AE%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">请求头：协议内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E4%BD%93%EF%BC%9A%E8%AF%B7%E6%B1%82%E6%95%B0%E6%8D%AE%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">请求体：请求数据内容</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%8D%8F%E8%AE%AE%EF%BC%9A%E8%A1%8C%E5%A4%B4%E4%BD%93"><span class="nav-number">1.2.2.</span> <span class="nav-text">响应协议：行头体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%A1%8C%EF%BC%9Ahttp%E5%93%8D%E5%BA%94%E6%A0%87%E8%AF%86%E5%A4%B4"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">响应行：http响应标识头</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E5%A4%B4%EF%BC%9A%E5%93%8D%E5%BA%94%E5%8D%8F%E8%AE%AE%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">响应头：响应协议内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E4%BD%93%EF%BC%9A%E5%93%8D%E5%BA%94%E6%95%B0%E6%8D%AE%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">响应体：响应数据内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">常见状态码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">响应设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php%E6%A8%A1%E6%8B%9F%E8%AF%B7%E6%B1%82"><span class="nav-number">1.4.</span> <span class="nav-text">php模拟请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">1.4.1.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#curl%E6%89%A9%E5%B1%95%E5%BA%93"><span class="nav-number">1.4.2.</span> <span class="nav-text">curl扩展库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">基本操作</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%BC%96%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">文件编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">操作分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.1.</span> <span class="nav-text">目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%EF%BC%9A%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">创建目录结构：过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95%EF%BC%9A%E8%BF%87%E7%A8%8B"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">删除目录：过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E8%AF%BB%E5%8F%96%EF%BC%9A%E8%8E%B7%E5%8F%96%E8%B5%84%E6%BA%90"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">目录读取：获取资源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.2.</span> <span class="nav-text">其他目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">递归遍历目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E9%80%BB%E8%BE%91"><span class="nav-number">2.1.2.1.1.</span> <span class="nav-text">实现逻辑</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.3.</span> <span class="nav-text">文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#php5"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">php5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#php4"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">php4</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.4.</span> <span class="nav-text">其他文件操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%93%8D%E4%BD%9C"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">文件下载操作</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">tyson_H</p>
+  <div class="site-description" itemprop="description">tyson's_1point3acres</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tyson_H</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
