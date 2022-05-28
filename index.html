@@ -149,6 +149,177 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day14_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day14_php/" class="post-title-link" itemprop="url">day14_php</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-05-28 18:43:25 / Modified: 18:44:10" itemprop="dateCreated datePublished" datetime="2022-05-28T18:43:25+08:00">2022-05-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="会话技术"><a href="#会话技术" class="headerlink" title="会话技术"></a>会话技术</h1><p>web会话：指C用户浏览器对S服务端多次请求访问多个资源的整个过程；<br>http协议无状态/连接无法识别一个用户的多次请求操作，通过会话技术session增加<strong>多个请求身份验证</strong>为识别一个用户；</p>
+<h2 id="会话分类"><a href="#会话分类" class="headerlink" title="会话分类"></a>会话分类</h2><h3 id="cookie技术"><a href="#cookie技术" class="headerlink" title="cookie技术"></a>cookie技术</h3><p>S服务端脚本通过http协议为C浏览器生成存储在C响应头的用户<strong>身份信息验证码</strong>(多请求携带识别)； //身份证技术；</p>
+<h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><ol>
+<li>首次请求通过http协议在php接收用setcookie()函数<strong>生成响应头ck数据</strong>返回给浏览器；</li>
+<li>首次响应后生成存储ck识别码；</li>
+<li>多次请求相同服务端：携带ck数据识别码自动验证；</li>
+<li>php接收执行会自动判断验证ck识别码：通过$_COOKIE访问判断存储；<br><img src="https://s2.loli.net/2022/05/28/frhOHtc2gAqmjNi.png"><h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><h5 id="cookie设置"><a href="#cookie设置" class="headerlink" title="cookie设置"></a>cookie设置</h5>基本结构：setcookie(ck名?,具体值?,[ck周期?],[ck作用域?],[ck有效域名?]);</li>
+<li>ck名字；</li>
+<li>ck具体数据值；</li>
+<li>ck周期；</li>
+<li>ck作用域；</li>
+<li>ck有效域名；<br><img src="https://s2.loli.net/2022/05/28/rayN9dk64VcEuGi.png"><br><img src="https://s2.loli.net/2022/05/28/PzLW7SHxOCefEKj.png"><h5 id="读取cookie"><a href="#读取cookie" class="headerlink" title="读取cookie"></a>读取cookie</h5>通过$_COOKIE获取(对应会话)访问存储ck值：<strong>数组形式</strong>存储C浏览器；<br><code>var_dump($_COOKIE)</code><br><img src="https://s2.loli.net/2022/05/28/SrtUyoq3n6sRh2V.png"><h4 id="高级应用"><a href="#高级应用" class="headerlink" title="高级应用"></a>高级应用</h4><h5 id="ck生命周期"><a href="#ck生命周期" class="headerlink" title="ck生命周期"></a>ck生命周期</h5>cookie数据值存储浏览器生存时间；</li>
+<li>默认周期：会话结束自动关闭；</li>
+<li>时间戳周期：基于格林威治时间，通过setcookie()函数第三参数设置类型周期：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">setcookie(ck名?,ck值?,7*24*60*60); //始于格林威治时间后7*24*60*60(7天)：无效ck自动关闭；</span><br><span class="line">setcookie(ck名?,ck值?,time() + 7*24*60*60); //始于现在时间后7*24*60*60(7天)：ck会话保持存在；</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/05/28/LYcq7Urk2tNaIhs.png"><br><img src="https://s2.loli.net/2022/05/28/kZmyoXWKdVPEDpf.png"></li>
+<li>0周期：会话结束自动关闭；<br><code>setcookie(ck名?,ck值?,0);</code></li>
+<li>删除周期会话：S服务端无权直接操作C浏览器数据； 4.1 清空ck数据值?删除会话；<br> <code>setcookie(ck名?,&quot;&quot;);</code><br> <img src="https://s2.loli.net/2022/05/28/FYwoWJa3gQZPtmA.png"> 4.2 设置无效会话周期：当前时间time()为ck无效周期?删除会话；<br> <code>setcookie(ck名?,ck值?,time());</code><br> <img src="https://s2.loli.net/2022/05/28/rR3LxW4qISgQzFK.png"><h5 id="作用域范围"><a href="#作用域范围" class="headerlink" title="作用域范围"></a>作用域范围</h5>对于不同文件层级，上级文件夹无法访问下层ck数据/下层文件夹可以访问上层ck数据；</li>
+<li>默认作用域：子允许访问父文件夹ck；<br><img src="https://s2.loli.net/2022/05/28/a7UiorD91WlTBwn.png"></li>
+<li>/根路径作用域：通过setcookie()函数第四参数设置ck作用域；<br><code>setcookie(ck名?,ck值?,ck周期?,&quot;/&quot;);</code><br><img src="https://s2.loli.net/2022/05/28/cIHsRA7qnEvyYDQ.png"><h5 id="跨子域：ck跨域"><a href="#跨子域：ck跨域" class="headerlink" title="跨子域：ck跨域"></a>跨子域：ck跨域</h5>通过跨域对于同级域名下子域允许<strong>不同S服务端之间</strong>实现<strong>ck数据共享访问</strong>(默认不支持跨域访问)；</li>
+<li>默认同级有效子域访问：不支持跨域；<br><img src="https://s2.loli.net/2022/05/28/4bZpDuk7GcIAwPE.png"></li>
+<li>指定访问同级有效子域访问ck：通过setcookie()函数第五参数设置有效子域实现<strong>主域访问子ck</strong>；<br><code>setcookie(ck名?,ck值?,ck周期?,ck作用域?,ck指定有效子域);</code><br><img src="https://s2.loli.net/2022/05/28/yhtHQV5g3C7zxI1.png"></li>
+<li>子域跨域访问ck：<strong>指定有效相同上级域名</strong>实现<strong>ck数据共享访问</strong>；<br><code>setcookie(ck名?,ck值?,ck周期?,ck作用域?,ck相同上级域名);</code><br><img src="https://s2.loli.net/2022/05/28/vfs83q1gOzDmduC.png"><h5 id="ck数据数组使用"><a href="#ck数据数组使用" class="headerlink" title="ck数据数组使用"></a>ck数据数组使用</h5>cookie数据类型存储有限，设置存储多组复杂数据通过数组方式：ck名?[下标?],ck值?；</li>
+<li>设置ck数组基本结构：伪装数组手动下标；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setcookie(相同ck名?[下标?],ck值?);</span><br><span class="line">setcookie(相同ck名?[下标?],ck值?);</span><br><span class="line">print_r($_COOKIE);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/05/28/2zmpv1eMFcdrjNb.png"></li>
+<li>获取指定ck数组数据；<br><code>$_COOKIE[ck名?][下标?];</code><br><img src="https://s2.loli.net/2022/05/28/MBfS1seHcPi6TZ3.png"></li>
+</ol>
+<h3 id="session技术"><a href="#session技术" class="headerlink" title="session技术"></a>session技术</h3><p>指C用户对S终端交汇<strong>整个过程</strong>的通信时间中存储在S服务端用于<strong>区分用户操作数据</strong>(会话空间)：基于ck区分用户； //银行卡技术；</p>
+<h4 id="实现原理-1"><a href="#实现原理-1" class="headerlink" title="?实现原理"></a>?实现原理</h4><ol>
+<li>php通过session_start()函数<strong>响应判断开启</strong>sessionid会话：<br> cookie中存在sessionid，使用现成；<br> cookie中不存在sessionid，新建sessionid通过响应头返回内部ck数据给C浏览器存储；</li>
+<li>初始化超全变量$_SESSION<strong>获取空数组生成</strong>sessionid；</li>
+<li>php获取sessionid匹配指定位置对应ck数据文件：寻找session；<br> ck数据文件存在，获取内部ck数据以反序列化给$_SESSION存储；<br> ck数据文件不存在，新建sessionid存储(空数组)ck数组数据；</li>
+<li>最后获取$_SESSION内部存储ck数据以序列化发送给sessionid对应文件存储；<br><img src="https://s2.loli.net/2022/05/28/P1KmnTVAOdc6Bzg.png"><h4 id="基本操作-1"><a href="#基本操作-1" class="headerlink" title="基本操作"></a>基本操作</h4><h5 id="开启session：资源"><a href="#开启session：资源" class="headerlink" title="开启session：资源"></a>开启session：资源</h5>php脚本调用session_start()函数自动获取$_SESSION<strong>数组开启</strong>生成sessionid<strong>会话</strong>；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session_start();</span><br><span class="line">var_dump($_SESSION);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/05/28/LManfhtbAD4IqPH.png"><h5 id="session设置"><a href="#session设置" class="headerlink" title="session设置"></a>session设置</h5>基本结构：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$_SESSION[session下标?] = session值?;</span><br><span class="line">echo $_SESSION[session下标?];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$_SESSION[session下标?] = array(&quot;session值1?&quot;,&quot;session值2?&quot;);</span><br><span class="line">print_r($_SESSION[session下标?]);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/05/28/JTsnvGu6S7U8B5a.png"><br><img src="https://s2.loli.net/2022/05/28/Eu2XgQJzIbcoD6M.png"><h5 id="session获取"><a href="#session获取" class="headerlink" title="session获取"></a>session获取</h5>通过超全变量$_SESSION<strong>获取数组</strong>会话session<strong>下标访问</strong>数据；<br><code>echo $_SESSION[&quot;session下标?&quot;];</code><br><img src="https://s2.loli.net/2022/05/28/SGyteTUMiq8zCh9.png"><br><code>print_r($_SESSION[session下标?]);</code><br><img src="https://s2.loli.net/2022/05/28/gAxlKJf3HELPbzr.png"><h5 id="session跨域传输"><a href="#session跨域传输" class="headerlink" title="session跨域传输"></a>session跨域传输</h5>session本质为<strong>跨域共享</strong>数据：在本地php脚本路径写入数据<strong>传输给</strong>对应php脚本路径<strong>获取存储</strong>数据；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//本地php</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[&quot;name&quot;] = 123;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//对应php</span><br><span class="line">session_start();</span><br><span class="line">echo $_SESSION[&quot;name&quot;];</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/05/28/8nro1efqUFPu9YE.png"><h5 id="删除session数据"><a href="#删除session数据" class="headerlink" title="删除session数据"></a>删除session数据</h5>删除$_SESSION数组中数据；</li>
+<li>通过session_start()函数开启session；<br><code>session_start();</code></li>
+<li>获取所有session数组数据；<br><code>var_dump($_SESSION);</code></li>
+<li>删除对应数据；<br><code>unset($_SESSION[session下标?]);</code><br><img src="https://s2.loli.net/2022/05/28/wWIZvdTMR3UJ6xm.png"></li>
+<li>删除全部数据：定义$_SESSION为空数组array()；<br><code>$_SESSION = array();</code><br><img src="https://s2.loli.net/2022/05/28/ImcWg7fjryAHxC3.png"><h5 id="session配置使用：php-ini"><a href="#session配置使用：php-ini" class="headerlink" title="session配置使用：php.ini"></a>session配置使用：php.ini</h5>基础配置：</li>
+<li>session.name：cookie中存储sessionid对应生成名字；</li>
+<li>session.auto_start：0/1是否自动开启session，默认手动0；</li>
+<li>session_save_handler：session数据存储方式，默认为文件files；</li>
+<li>session_save_path：session文件默认存储位置；<br><img src="https://s2.loli.net/2022/05/28/VhpEZd59xSIe3qv.png"></li>
+</ol>
+<p>常见配置：</p>
+<ol>
+<li>session.cookie_lifetime：C浏览器cookie中存储sessionid生命周期，默认为会话结束0；</li>
+<li>session.cookie_path：C浏览器cookie中存储sessionid允许S服务端访问作用域范围；</li>
+<li>session.cookie_domain：C浏览器cookie中存储sessionid允许S服务端访问子域；</li>
+</ol>
+<p>配置形式：</p>
+<ol>
+<li>php.ini全局配置；</li>
+<li>php脚本局部配置：通过ini_set()函数修改配置项，低优先级仅对当前脚本有效；<br><code>ini_set(&quot;session配置项?&quot;,&quot;配置值?&quot;);</code><br><code>@ini_set(&quot;session配置项?&quot;,&quot;配置值?&quot;);</code> //考虑php版本；<h5 id="删除session文件"><a href="#删除session文件" class="headerlink" title="删除session文件"></a>删除session文件</h5>区别于删除session数据，删除session文件指销毁C浏览器cookie中存储对应sessionid文件；</li>
+<li>通过session_start()函数开启session；<br><code>session_start();</code></li>
+<li>获取所有session数组数据；<br><code>var_dump($_SESSION);</code></li>
+<li>删除session文件：销毁sessionid；<br><code>session_destroy();</code><h5 id="垃圾回收机制"><a href="#垃圾回收机制" class="headerlink" title="垃圾回收机制"></a>垃圾回收机制</h5>会话空间中session文件无法自动清除而产生大量无效文件，通过session垃圾回收机制<strong>指定session生命周期</strong>后<strong>判定</strong>session最后修改时间进行<strong>回收</strong>删除；<h6 id="实现原理："><a href="#实现原理：" class="headerlink" title="实现原理："></a>实现原理：</h6></li>
+<li>每次开启session会对session文件自动读取；</li>
+<li>读取session文件后函数判定触发垃圾回收；</li>
+<li>垃圾回收自动获取所有session文件最后修改时间/生命周期/当前时间三要素判定：有效存储/无效回收删除；<h6 id="回收参数"><a href="#回收参数" class="headerlink" title="回收参数"></a>回收参数</h6></li>
+<li>session.gc_maxlifetime = 1440：最大session生命周期为24分钟；</li>
+<li>session.gc_probability = 1：回收触发概率数分子；</li>
+<li>session.gc_divisor = 1000：回收触发概率数分母；</li>
+</ol>
+<p>通过回收触发分子/分母得知默认回收概率为：1/1000；<br><img src="https://s2.loli.net/2022/05/28/pHEO4CvRU2APkMN.png"></p>
+<h5 id="禁用ck下：使用session会话"><a href="#禁用ck下：使用session会话" class="headerlink" title="禁用ck下：使用session会话"></a>禁用ck下：使用session会话</h5><p>方法一：手动指定id唯一/name名字构建获取；</p>
+<ol>
+<li><p>无法使用session原因：</p>
+<ol>
+<li>session_start()开启每次自动生成新session文件；</li>
+<li>session依赖cookie技术存储生成sessionid，以至于每次请求<strong>携带ck</strong>验证<strong>跨脚本跨域</strong>访问时<strong>匹配相同</strong>session文件；</li>
+</ol>
+</li>
+<li><p>无ck验证实现session会话访问；</p>
+<ol>
+<li>通过php函数session_id()/session_name()<strong>手动指定</strong>id唯一和name名字<strong>构建获取</strong>；<br><img src="https://s2.loli.net/2022/05/28/MwmzOj4nGB37Nbs.png"></li>
+<li>通过表单传值获取session数据给对应脚本；<br><img src="https://s2.loli.net/2022/05/28/2eM7pZv1RxhryHz.png"></li>
+<li>对应脚本接收session数据；<br><img src="https://s2.loli.net/2022/05/28/Mj5F8RECwole4I2.png"></li>
+<li>禁止session_start()自动生成新session文件：组织获取定义生成sessionid；<br><img src="https://s2.loli.net/2022/05/28/Ihrs7eNkTLRaECl.png"></li>
+</ol>
+</li>
+</ol>
+<p>方法2：通过session既存集成方案自动操作；</p>
+<ol>
+<li><p>无法使用session原因：</p>
+<ol>
+<li>session默认配置只支持依赖ck存储sessionid(session.use_only_cookies)；</li>
+<li>session默认配置关闭其他方式传输数据；</li>
+</ol>
+</li>
+<li><p>无ck验证实现session会话访问；</p>
+<ol>
+<li>php.ini全局配置修改依赖：<br> 关闭ck依赖存储支持：session.use_only_cookies = 0；<br> <img src="https://s2.loli.net/2022/05/28/nBscXYlC4KOhyRI.png"><br> 关闭ck依赖传输数据支持：session.use_trans_sid = 0；<br> <img src="https://s2.loli.net/2022/05/28/cpMXCTJfHhegdVE.png"></li>
+<li>重启php配置：<br> 支持从非C浏览器获取sessionid/sessionname数据进行绑定；<br> 支持session_start()启动获取非C浏览器传输的数据：表单获取；<br> <img src="https://s2.loli.net/2022/05/28/63dfOaHG4obQESw.png"><br> <img src="https://s2.loli.net/2022/05/28/WbxHsgwjd9XONpv.png"></li>
+</ol>
+</li>
+</ol>
+<h3 id="两者区别"><a href="#两者区别" class="headerlink" title="两者区别"></a>两者区别</h3><ol>
+<li>安全性：ck存储c客户端&lt;session存储s服务端；</li>
+<li>数据量：ck明文4k限制/session数据不限；</li>
+<li>存储数据类型：ck存储简单数据/session存储复杂序列化数据；</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day13_php/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1850,210 +2021,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day4_php/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tyson_H">
-      <meta itemprop="description" content="tyson's_1point3acres">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tyson自留地">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/day4_php/" class="post-title-link" itemprop="url">day4_php</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-04-08 20:03:20" itemprop="dateCreated datePublished" datetime="2022-04-08T20:03:20+08:00">2022-04-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-05-27 17:26:17" itemprop="dateModified" datetime="2022-05-27T17:26:17+08:00">2022-05-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="系统常用函数"><a href="#系统常用函数" class="headerlink" title="系统常用函数"></a>系统常用函数</h1><h2 id="输出函数"><a href="#输出函数" class="headerlink" title="输出函数"></a>输出函数</h2><h3 id="print-输出内容结构"><a href="#print-输出内容结构" class="headerlink" title="print()输出内容结构"></a>print()输出内容结构</h3><p>与echo输出相似，输出后强制返回值1；括号可有可无；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo print(&quot;wtf&quot;); //wtf1</span><br><span class="line">print &quot;wtf&quot;; //wtf</span><br></pre></td></tr></table></figure>
-<h3 id="print-r-输出结构内容：数组"><a href="#print-r-输出结构内容：数组" class="headerlink" title="print_r()输出结构内容：数组"></a>print_r()输出结构内容：数组</h3><p>与var_dump()相似；不输出数据类型；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a = 123;</span><br><span class="line">print_r($a); //123</span><br></pre></td></tr></table></figure>
-<h3 id="date"><a href="#date" class="headerlink" title="date()"></a>date()</h3><p>按照指定格式输出时间戳：以格林威治时间起始计算秒数；<br>指定格式不存在时：默认指定当前时间戳；<br><img src="https://s2.loli.net/2022/04/05/YrTjavpkfzcHSNX.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo date(&quot;Y m d M:i:s&quot;); //2022 04 05 Apr:48:03</span><br></pre></td></tr></table></figure>
-<h3 id="time"><a href="#time" class="headerlink" title="time()"></a>time()</h3><p>获取当前时间时间戳：以格林威治时间起始；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo time(); //1649126989</span><br></pre></td></tr></table></figure>
-<h3 id="microtime"><a href="#microtime" class="headerlink" title="microtime()"></a>microtime()</h3><p>获取微秒级时间戳 时间戳</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo microtime(); //0.35315400 1649127293</span><br></pre></td></tr></table></figure>
-<h3 id="strtotime"><a href="#strtotime" class="headerlink" title="strtotime()"></a>strtotime()</h3><p>将字符串转换成时间戳：按照指定的格式；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo strtotime(&quot;now&quot;); //1649127293</span><br><span class="line">echo strtotime(&quot;5 apr 2022&quot;); //1649088000</span><br><span class="line">echo strtotime(&quot;+ 1day&quot;); //1649213833</span><br></pre></td></tr></table></figure>
-<h2 id="数学函数"><a href="#数学函数" class="headerlink" title="数学函数"></a>数学函数</h2><h3 id="max-指定参数最大值-指定数组"><a href="#max-指定参数最大值-指定数组" class="headerlink" title="max()指定参数最大值/指定数组"></a>max()指定参数最大值/指定数组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo max(123,321,1000); //1000</span><br></pre></td></tr></table></figure>
-<h3 id="min-获取参数较小值-指定数组"><a href="#min-获取参数较小值-指定数组" class="headerlink" title="min()获取参数较小值/指定数组"></a>min()获取参数较小值/指定数组</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo min(123,321,1000); //123</span><br></pre></td></tr></table></figure>
-<h3 id="rand-获取随机数"><a href="#rand-获取随机数" class="headerlink" title="rand()获取随机数"></a>rand()获取随机数</h3><p>指定区间获取随机数min,max；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rand(1,10); //7</span><br></pre></td></tr></table></figure>
-<p>无指定区间min,max：生成伪随机区间0,rand_max之间随机数；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo rand(); //51942467356</span><br></pre></td></tr></table></figure>
-<h3 id="mt-rand-高效获取随机数"><a href="#mt-rand-高效获取随机数" class="headerlink" title="mt_rand()高效获取随机数"></a>mt_rand()高效获取随机数</h3><p>突破windows平台rand_max=32768的限制；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo mt_rand(); //983704302</span><br></pre></td></tr></table></figure>
-<h3 id="round-四舍五入"><a href="#round-四舍五入" class="headerlink" title="round()四舍五入"></a>round()四舍五入</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo round(2.4); //2</span><br><span class="line">echo round(2.5); //3</span><br><span class="line">echo round(2.6); //3</span><br></pre></td></tr></table></figure>
-<h3 id="ceil-向大取整"><a href="#ceil-向大取整" class="headerlink" title="ceil()向大取整"></a>ceil()向大取整</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo ceil(1.1); //2</span><br></pre></td></tr></table></figure>
-<h3 id="floor-向小取整"><a href="#floor-向小取整" class="headerlink" title="floor()向小取整"></a>floor()向小取整</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo floor(3.1); //3</span><br></pre></td></tr></table></figure>
-<h3 id="pow-指定数字的指数结果"><a href="#pow-指定数字的指数结果" class="headerlink" title="pow()指定数字的指数结果"></a>pow()指定数字的指数结果</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo pow(2,9); //2^9 = 512;</span><br></pre></td></tr></table></figure>
-<h3 id="abs-绝对值"><a href="#abs-绝对值" class="headerlink" title="abs()绝对值"></a>abs()绝对值</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo abs(-2); //2</span><br><span class="line">echo abs(2); //2</span><br></pre></td></tr></table></figure>
-<h3 id="sqrt-平方根"><a href="#sqrt-平方根" class="headerlink" title="sqrt()平方根"></a>sqrt()平方根</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo sqrt(1024); //32</span><br></pre></td></tr></table></figure>
-<h2 id="判断函数的函数"><a href="#判断函数的函数" class="headerlink" title="判断函数的函数"></a>判断函数的函数</h2><h3 id="function-exists-“-”"><a href="#function-exists-“-”" class="headerlink" title="function_exists(“?”)"></a>function_exists(“?”)</h3><p>判断某个函数名内存是否存在</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function abc($a)&#123;</span><br><span class="line">&#125;</span><br><span class="line">function_exist(&quot;abc&quot;); //int(1)</span><br></pre></td></tr></table></figure>
-<h3 id="func-get-arg-位数-：起始0"><a href="#func-get-arg-位数-：起始0" class="headerlink" title="func_get_arg(位数)：起始0"></a>func_get_arg(位数)：起始0</h3><p>获取自定义函数指定位数参数<br>//参数标识起始值为0</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">var_dump(func_get_arg(0)); //调用输出int(1)</span><br><span class="line">var_dump(func_get_arg(1)); //调用输出int(2)</span><br><span class="line">var_dump(func_get_arg(2)); //调用输出int(3)</span><br><span class="line">&#125;</span><br><span class="line">abc(1,2,3); </span><br></pre></td></tr></table></figure>
-<h3 id="func-get-args"><a href="#func-get-args" class="headerlink" title="func_get_args()"></a>func_get_args()</h3><p>统计获取自定义函数所有实参：数组</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">var_dump(func_get_args()); //array(2) &#123; [0]=&gt; int(1) [1]=&gt; string(1) &quot;2&quot; &#125; </span><br><span class="line">&#125;</span><br><span class="line">abc(1,&quot;2&quot;);</span><br></pre></td></tr></table></figure>
-<h3 id="func-num-args"><a href="#func-num-args" class="headerlink" title="func_num_args()"></a>func_num_args()</h3><p>统计自定义函数实参数量</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function abc($a,$b)&#123;</span><br><span class="line">var_dump(func_num_args()); //int(3)</span><br><span class="line">&#125;</span><br><span class="line">abc(0,&quot;1&quot;,2);</span><br></pre></td></tr></table></figure>
-<h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>执行程序代码出现报错通过错误处理形式告知展现；</p>
-<h2 id="错误分类"><a href="#错误分类" class="headerlink" title="错误分类"></a>错误分类</h2><h3 id="语法错误parse-error"><a href="#语法错误parse-error" class="headerlink" title="语法错误parse error"></a>语法错误parse error</h3><h3 id="运行错误runtime-error：编译通过，执行条件不满足"><a href="#运行错误runtime-error：编译通过，执行条件不满足" class="headerlink" title="运行错误runtime error：编译通过，执行条件不满足"></a>运行错误runtime error：编译通过，执行条件不满足</h3><h3 id="逻辑错误：代码规范性错误，执行正常输出结果出错"><a href="#逻辑错误：代码规范性错误，执行正常输出结果出错" class="headerlink" title="逻辑错误：代码规范性错误，执行正常输出结果出错"></a>逻辑错误：代码规范性错误，执行正常输出结果出错</h3><h2 id="错误代号"><a href="#错误代号" class="headerlink" title="错误代号"></a>错误代号</h2><p>系统默认定义为系统常量</p>
-<h3 id="系统错误"><a href="#系统错误" class="headerlink" title="系统错误"></a>系统错误</h3><h4 id="E-PARSE编译错误"><a href="#E-PARSE编译错误" class="headerlink" title="E_PARSE编译错误"></a>E_PARSE编译错误</h4><p>编译错误，代码无法执行</p>
-<h4 id="E-ERROR致命错误"><a href="#E-ERROR致命错误" class="headerlink" title="E_ERROR致命错误"></a>E_ERROR致命错误</h4><p>fatal error致命错误，代码无法继续执行</p>
-<h4 id="E-WARNING警告错误"><a href="#E-WARNING警告错误" class="headerlink" title="E_WARNING警告错误"></a>E_WARNING警告错误</h4><p>警告错误，影响输出结果</p>
-<h4 id="E-NOTICE通知错误"><a href="#E-NOTICE通知错误" class="headerlink" title="E_NOTICE通知错误"></a>E_NOTICE通知错误</h4><p>通知错误，不影响执行</p>
-<h3 id="用户错误：自定义"><a href="#用户错误：自定义" class="headerlink" title="用户错误：自定义"></a>用户错误：自定义</h3><h4 id="E-USER-ERROR"><a href="#E-USER-ERROR" class="headerlink" title="E_USER_ERROR"></a>E_USER_ERROR</h4><h4 id="E-USER-WARNING"><a href="#E-USER-WARNING" class="headerlink" title="E_USER_WARNING"></a>E_USER_WARNING</h4><h4 id="E-USER-NOTICE"><a href="#E-USER-NOTICE" class="headerlink" title="E_USER_NOTICE"></a>E_USER_NOTICE</h4><h3 id="其他错误：E-ALL所有错误"><a href="#其他错误：E-ALL所有错误" class="headerlink" title="其他错误：E_ALL所有错误"></a>其他错误：E_ALL所有错误</h3><p>开发环境下启用，进行错误控制</p>
-<h2 id="错误控制操作"><a href="#错误控制操作" class="headerlink" title="错误控制操作"></a>错误控制操作</h2><p>错误代号由单字节存储，一种错误对应一个位；<br>开发环境下，使用<strong>位运算</strong>对错误进行控制操作；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">排除通知notice：</span><br><span class="line">E_ALL &amp; ~E_NOTICE //所有错误与notice之外的错误</span><br><span class="line">只允许警告通知存在：</span><br><span class="line">E_WARNING | E_NOTICE //允许警告或通知错误</span><br></pre></td></tr></table></figure>
-<h2 id="错误触发"><a href="#错误触发" class="headerlink" title="错误触发"></a>错误触发</h2><h3 id="运行自动触发"><a href="#运行自动触发" class="headerlink" title="运行自动触发"></a>运行自动触发</h3><p>系统自动触发后输出：针对语法错误/运行错误；<br><img src="https://s2.loli.net/2022/04/05/RenC7WjJVTByPkA.png"></p>
-<h3 id="人为触发trigger-error-“”"><a href="#人为触发trigger-error-“”" class="headerlink" title="人为触发trigger_error(“”,)"></a>人为触发trigger_error(“”,)</h3><p>预判逻辑错误：通过判断代码触发错误响应；<br>trigger_error(“”); //不阻止系统报错；<br><img src="https://s2.loli.net/2022/04/05/ocHGOFh6tQwjCTm.png"><br>加强错误等级：严谨性用户参数：trigger_error(“”,E_USER_ERROR);<br><img src="https://s2.loli.net/2022/04/05/fH9ygaRkjF3ZXUW.png"></p>
-<h3 id="自定义错误处理set-error-handler"><a href="#自定义错误处理set-error-handler" class="headerlink" title="自定义错误处理set_error_handler()"></a>自定义错误处理set_error_handler()</h3><ol>
-<li>自定义错误处理提权：<br>set_error_handler()函数将错误触发处理提升为系统级别，出现报错使用自定义报错来处理；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set_error_handler($error_handler回调自定义,[$error_types错误类型等级])</span><br><span class="line">//自定义回调函数作为参数使用：&quot;&quot;/$;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/lzLqR7X6FiPCM8D.png"></li>
-<li>设置回调传参error_handler()<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error_handler($error错误代码,$errstr,[$errfile,$errline,$errcontext])</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/XMdSmsfE9pyt2CQ.png"></li>
-<li>自定义报错处理：代码实现<br> //嵌入页面：应用于页面报错控制；优先级高于系统全局报错控制；<ol>
-<li>自定义报错处理机制<br>//error_reporting()获取系统所有报错类型等级；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">function ?自定义回调函数($errno,$errstr,$errfile,$errline,$errcontext)&#123; //导入自定义回调报错函数类型；</span><br><span class="line">//轮询判断系统遇到的错误：不存在系统本身既存报错则不执行代码；</span><br><span class="line">if(!(error_reporting() &amp; $errno))&#123; //获取的系统所有报错类型和错误代码不存在，返回值return外部不存在false；</span><br><span class="line">return false;</span><br><span class="line">//如果报错代码存在继续执行代码；</span><br><span class="line">&#125;</span><br><span class="line">//匹配报错代码类型；/</span><br><span class="line">switch($errno)&#123;</span><br><span class="line">case E_ERROR:</span><br><span class="line">case E_USER_ERROR: //两个赋值同时匹配，则输出；</span><br><span class="line">echo &quot;fatal error in file&quot; . $errfile . &quot;on line&quot; . $errline . &quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo &quot;error info:&quot; . $errstr;</span><br><span class="line">break; //匹配通过终止所有匹配；</span><br><span class="line">case E_WARNING:</span><br><span class="line">case E_USER_WARNING:</span><br><span class="line">echo &quot;Warning in file&quot; . $errfile . &quot;on line&quot; . $errline . &quot;&lt;br/&gt;&quot;;</span><br><span class="line">echo &quot;error info:&quot; . $errstr;</span><br><span class="line">break; //匹配通过终止所有匹配；</span><br><span class="line">&#125;</span><br><span class="line">return true; //匹配报错代码成功，返回值外部true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/4OIxya7pV2efSnF.png"></li>
-<li>注册自定义报错函数：导入系统并提权<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set_error_handler(?自定义回调函数);</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/xGPbYvg8qnsrdKB.png"><br><img src="https://s2.loli.net/2022/04/07/sdP1MxbTzFrhYIu.png"><h2 id="错误设置"><a href="#错误设置" class="headerlink" title="错误设置"></a>错误设置</h2><h3 id="错误显示"><a href="#错误显示" class="headerlink" title="错误显示"></a>错误显示</h3>脚本错误处理：</li>
-</ol>
-</li>
-<li>php.ini配置文件：默认全局控制<br> 错误显示开关display_errors<br> 错误显示类型error_reporting<br> <img src="https://s2.loli.net/2022/04/05/SUmKWYvHpNZa8rs.png"></li>
-<li>php脚本函数控制错误：优先级更高(用于页面)<ol>
-<li>设置错误显示级别：Error_reporting()</li>
-<li>ini_set(“配置文件配置项”,”配置值”);<br> ini_set(“error_reporting”,E_ALL);<br> ini_set(“display_errors”,1);<h3 id="错误日志"><a href="#错误日志" class="headerlink" title="错误日志"></a>错误日志</h3>生产环境下展示错误：不友好用户/不安全暴露；<br>保留错误输出给错误日志文件：</li>
-</ol>
-</li>
-<li>php.ini配置文件：开启log_errors;设置错误日志路径 error_log = “”;</li>
-<li>php脚本函数控制：ini_set();<h1 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义 $? = ?"></a>定义 $? = ?</h2><h3 id="引号定义"><a href="#引号定义" class="headerlink" title="引号定义"></a>引号定义</h3></li>
-<li>‘’单引号定义； //无结构要求单行定义</li>
-<li>“”双引号定义：可解析定义赋值$；识别($?)变量； //无结构要求单行定义<h3 id="结构化定义：保留结构"><a href="#结构化定义：保留结构" class="headerlink" title="结构化定义：保留结构"></a>结构化定义：保留结构</h3>//要求：上下边界尾椎无内容/下边界顶格；</li>
-<li>nowdoc <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$? = &lt;&lt;&lt; &#x27;?边界结束符&#x27;</span><br><span class="line">?字符串</span><br><span class="line">?边界结束符;</span><br></pre></td></tr></table></figure></li>
-<li>heredoc<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$? = &lt;&lt;&lt; ?边界结束符</span><br><span class="line">?字符串</span><br><span class="line">?边界结束符;</span><br></pre></td></tr></table></figure>
-<h2 id="转义"><a href="#转义" class="headerlink" title="转义 +?"></a>转义 +?</h2>计算机通用协议中，处理特定方式定义字母即为转义<br>常见转义符：</li>
-<li>&#39; 单引号中显示转义单引号</li>
-<li>&quot; 双引号中显示转义双引号</li>
-<li>\r 回车换行：回到当前行首位</li>
-<li>\n 回车新增行</li>
-<li>\t 缩进补全四空格：TAB</li>
-<li>$ 特定识别变量符<h2 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h2>获取字符串长度strlen() 单字节单位 //中文三字节<br>多字节拓展:开启mbstring //multi string bytes</li>
-<li>php.ini</li>
-<li>php_mbstring.dll</li>
-<li>mb_string(“?”/$?,?字集)函数：指定字符集以统计字符串<br><img src="https://s2.loli.net/2022/04/07/zxSwDdJjhBqtgAY.png"><h2 id="相关函数"><a href="#相关函数" class="headerlink" title="相关函数"></a>相关函数</h2><h3 id="转换函数"><a href="#转换函数" class="headerlink" title="转换函数"></a>转换函数</h3>implode(“?分隔符”,$?数组) 以分隔符合并数组连接成字符串<br><img src="https://s2.loli.net/2022/04/07/g1qxrVashetdyPO.png"><br>explode(“?分隔符”,$?) 以分隔符拆分字符串<br><img src="https://s2.loli.net/2022/04/07/wdLJ6lBrsSPpTuh.png"><br>str_split($?,$长度) 以指定长度拆分字符串为数组<br><img src="https://s2.loli.net/2022/04/07/UdoilWtvK9RTOZw.png"><h3 id="截取函数"><a href="#截取函数" class="headerlink" title="截取函数"></a>截取函数</h3>trim($?,[“”]) 去除首尾空白/指定的字符 //ltrim()左 rtrim()右<br><img src="https://s2.loli.net/2022/04/07/5gS4ZqEYLcJl1fK.png"><br>substr($?,起始位数值,截取长度) 截取指定位置字符串 //标识符起始于0<br><img src="https://s2.loli.net/2022/04/07/lFCcDv9Nd3rm5ih.png"><br>strstr($?,”匹配字符”) 截取匹配字符后字符串<h3 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h3>strtoupper($?) 转大写<br>strtolower($?) 转小写<br>ucfirst($?) 首字符转大<h3 id="搜索函数"><a href="#搜索函数" class="headerlink" title="搜索函数"></a>搜索函数</h3>strpos($?/””,搜索起始位) 获取子字符串初始位置 //标识符初始位值为0<br><img src="https://s2.loli.net/2022/04/07/YBwTzSWXc45VneO.png"><br>strrpos($?/””,搜索起始位) 获取子字符串最后出现位置<br><img src="https://s2.loli.net/2022/04/07/6loJvNp9q4QFty3.png"><h3 id="替换函数"><a href="#替换函数" class="headerlink" title="替换函数"></a>替换函数</h3>str_replace(“替换值”,“被替换值”,$?) 替换字符串字符<br><img src="https://s2.loli.net/2022/04/07/8GJc9iPSWXCevmA.png"><h3 id="格式化函数"><a href="#格式化函数" class="headerlink" title="格式化函数"></a>格式化函数</h3>printf(“?%?”,传入$?) //嵌入变量传参以源格式化输出占位字符和字符串<br><img src="https://s2.loli.net/2022/04/07/3dxyoVkGhgXDcFj.png"><br>sprintf(“?%?”,传入$?) //嵌入变量传参以源格式化输出占位字符和字符串,之后写入进变量<br><img src="https://s2.loli.net/2022/04/07/agoGcPYLqxzvehK.png" alt=" "></li>
-</ol>
-<h3 id="重复函数"><a href="#重复函数" class="headerlink" title="重复函数"></a>重复函数</h3><p>str_repeat($?,重复次数) //重复打印输出字符串<br><img src="https://s2.loli.net/2022/04/07/ZOfsNpS48GeHM9z.png"></p>
-<h3 id="糅杂函数"><a href="#糅杂函数" class="headerlink" title="糅杂函数"></a>糅杂函数</h3><p>str_shuffle($?) //打乱字符串顺序<br><img src="https://s2.loli.net/2022/04/07/8LJtU6RZhXTcMrH.png"></p>
-<h3 id="比较函数"><a href="#比较函数" class="headerlink" title="比较函数"></a>比较函数</h3><p>strcmp($?前,$?后)比较两个字符串大小 //返回0相等,1前大,-1后大<br><img src="https://s2.loli.net/2022/04/07/klsmKWH8TXiUMYq.png"></p>
-<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数据的组合：把单多个数据存储为一个容器，通过定义赋值指向获得该容器中所有数据；</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><ol>
-<li>array关键字<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$? = array(元素1 , 元素2 , 元素n); //索引数组</span><br><span class="line">$? = array(&quot;下标key?&quot; =&gt; 元素1 , &quot;下标key?&quot; =&gt; 元素2 , &quot;下标key?&quot; =&gt; 元素n); //关联数组</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/6jlpW491f2Gx5o8.png"></li>
-<li>[]中括号覆盖数据<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$? = [元素1 , 元素2 , 元素n];</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/SIH7ia8due2m4F3.png"></li>
-<li>[]中括号自动合成隐形数组<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$?[] = ?; //自动生成下标key 始于0</span><br><span class="line">$?[下标key序号] = ?;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/07/Oaudp1gyscbXUDM.png"><h3 id="关于：数组-下标"><a href="#关于：数组-下标" class="headerlink" title="关于：数组/下标"></a>关于：数组/下标</h3></li>
-<li>索引数组：下标为整型</li>
-<li>关联数组：下标字符串</li>
-<li>数组下标无顺序</li>
-<li>下标标识符自增始于0</li>
-<li>下标特殊值自动转换：布尔值true/false;空值NULL;<br><img src="https://s2.loli.net/2022/04/07/IzjC9B8lFMyakGR.png"></li>
-<li>一维下标为数字；二维下标为字符串；</li>
-<li>数组元素类型/长度无限制</li>
-<li>数组存储大数据：内存堆区中连续存储<h2 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h2><h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3>数组中元素也是数组：数组中加层数组；<br>//php数组无维度限制；超过三层会降低代码访问效率；<h4 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//下标key自动生成</span><br><span class="line">$? = array(</span><br><span class="line">array(&quot;&quot; =&gt; &quot;&quot; , &quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">array(&quot;&quot; =&gt; &quot;&quot; , &quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">array(&quot;&quot; =&gt; &quot;&quot; , &quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">);</span><br><span class="line">print_r($?); //输出二维数组</span><br><span class="line">echo $?数组函数[&quot;二维下标&quot;][&quot;二维元素&quot;]; //输出二维元素</span><br><span class="line"></span><br><span class="line">//下标key手动生成</span><br><span class="line">$? = array(</span><br><span class="line">? =&gt; array(&quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">? =&gt; array(&quot;&quot; =&gt; &quot;&quot;),</span><br><span class="line">);</span><br><span class="line">print_r(array[?]); //指定下标key?输出二维数组</span><br><span class="line">echo $?数组函数[&quot;二维下标&quot;][&quot;二维元素&quot;]; //输出二维元素</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/xNmBsH4OUiulyfZ.png"><br><img src="https://s2.loli.net/2022/04/13/6CvNkxyMnRdj8WP.png"><h4 id="异形数组"><a href="#异形数组" class="headerlink" title="异形数组"></a>异形数组</h4>//数组中元素不规则<h3 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h3>自动获取下标输出访问元素<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print_r($?[下标key?]); //访问输出一维数组</span><br><span class="line">print_r($?[下标key?][二维下标key?]); //访问输出二维数组</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/zXCB9ueISLUPDrv.png"><h4 id="遍历循环foreach"><a href="#遍历循环foreach" class="headerlink" title="遍历循环foreach(){}"></a>遍历循环foreach(){}</h4>//一维下标为数字；二维下标为字符串；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//自动遍历</span><br><span class="line">foreach($?数组函数 as [$?下标 =&gt;] $?元素赋值)&#123;</span><br><span class="line">echo $?下标, $?元素赋值;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/nQsIL9MEPAqKp8i.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//手动遍历：多维数组</span><br><span class="line">foreach($?数组函数 as $?一维下标)&#123;</span><br><span class="line">echo $?一维下标[&quot;?二维下标key&quot;], $?一维下标[&quot;?二维下标key&quot;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/Y8u53BsKAzbhQ1M.png"><h4 id="遍历原理："><a href="#遍历原理：" class="headerlink" title="遍历原理："></a>遍历原理：</h4>通过内部可移动指针获取数据；</li>
-<li>foreach重置指针：指向第一个元素；</li>
-<li>进入foreach循环：获取第一个元素，移动指针取出[$?下标函数]及对应$?元素赋值函数，移动至末端停止；</li>
-<li>执行循环体：轮询23；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">foreach($? as $?下标 =&gt; $?元素赋值)&#123;</span><br><span class="line">循环体输出echo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="遍历循环for"><a href="#遍历循环for" class="headerlink" title="遍历循环for(){}"></a>遍历循环for(){}</h4>基于已知数组边界始末进行有条件规律变化；<h5 id="for遍历条件："><a href="#for遍历条件：" class="headerlink" title="for遍历条件："></a>for遍历条件：</h5></li>
-<li>获取数组元素总长个数count($?数组函数)作为边界符；</li>
-<li>下标key为数字索引数组有规律；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//轮询初始化，边界，循环体输出，操作后自增；</span><br><span class="line">for($i = 0; $i &lt; count($?数组函数); $i++)&#123;</span><br><span class="line">echo $i, $?数组函数[$i下标访问元素];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/eE1f37cYsSKRylL.png"><h4 id="遍历循环while"><a href="#遍历循环while" class="headerlink" title="遍历循环while(){}"></a>遍历循环while(){}</h4><h5 id="each-函数"><a href="#each-函数" class="headerlink" title="each()函数"></a>each()函数</h5>通过数组内部指针<strong>自动移动</strong>获取下标和元素赋值，针对元素<strong>每次</strong>返回四个返回值：索引返回值/关联返回值；<br>//若末尾不存在则return返回布尔false；<br>//php7.2+不支持；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">print_r(each($?数组函数));</span><br><span class="line">//四个返回值输出</span><br><span class="line">array&#123;</span><br><span class="line">[1] =&gt; ? //索引返回元素赋值?</span><br><span class="line">[value] =&gt; ? //关联返回元素赋值?</span><br><span class="line">[0] =&gt; ? //索引返回下标值?</span><br><span class="line">[key] =&gt; ? //关联返回下标值?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/whZkuB8bztJCTF4.png"><h5 id="list-函数"><a href="#list-函数" class="headerlink" title="list()函数"></a>list()函数</h5>作为一种结构<strong>批量</strong>获取索引数组元素赋值后<strong>从0依序传值</strong>给对应$变量存储；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">list($?存储变量,) = $?数组函数;</span><br><span class="line">var_dump($?存储变量,$?存储变量n);</span><br></pre></td></tr></table></figure>
-<img src="https://s2.loli.net/2022/04/08/6vf2O7CRqWMjpVh.png"><br><img src="https://s2.loli.net/2022/04/08/SYyFpe6KczlOdkE.png"><h5 id="while循环-配合each-list-函数实现遍历"><a href="#while循环-配合each-list-函数实现遍历" class="headerlink" title="while循环(){}配合each()list()函数实现遍历?"></a>while循环(){}配合each()list()函数实现遍历?</h5>//拆分：each()函数获取下标元素赋值;<br>//装盒：list()函数批量导入传值给定义赋值;<br><img src="https://s2.loli.net/2022/04/08/mGkXW5isPR7fBjY.png"><h1 id="php面向对象"><a href="#php面向对象" class="headerlink" title="php面向对象"></a>php面向对象</h1>面向过程：对实现功能分解 具体步骤，通过<strong>指定的逻辑顺序调用</strong>函数 实现功能；<br> 如php定义赋值若干函数数组，对函数数组实现调用操作；<br>面向对象：把实现功能映射为 具体对象事物，通过<strong>调用映射某对象功能函数</strong> 实现对应功能；<br> 如php定义赋值建立sql资源连接，对资源进行操作；</li>
-</ol>
-<p>对象的基本概念：<br>    变量是对象的(抽象)属性；实现功能函数是对象的(具体操作)方法；<br>    类是对象的抽象特征模板，通过抽象类可以创建<strong>具体实例对象</strong>；</p>
-<p>类定义规则：大小字母无区分/驼峰命名/见名识其意；</p>
-<h2 id="1类创建"><a href="#1类创建" class="headerlink" title="1类创建:"></a>1类创建:</h2><p>类创建public **类成员(对象)**与public **类方法()(函数)**，通过-&gt;调用操作类对象/方法；<br>基本结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Class关键字? 类名?&#123;</span><br><span class="line">	Public $类对象定义赋值? = ?;</span><br><span class="line"> 	Public function $类方法函数定义赋值?()&#123;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2022/05/25/JgVxhvt2zica98k.png"></p>
-<h2 id="2类对象创建："><a href="#2类对象创建：" class="headerlink" title="2类对象创建："></a>2类对象创建：</h2><p>通过类<strong>创建类对象</strong>，通过对象<strong>调用类功能</strong>；<br>基本结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$定义赋值? = new关键字 类的对象名?(类功能?,类功能n?);</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2022/05/25/C3ujpfbOPUzN45K.png"></p>
-<h2 id="3类对象-方法调用："><a href="#3类对象-方法调用：" class="headerlink" title="3类对象/方法调用："></a>3类对象/方法调用：</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">通过调用$定义赋值?获取-&gt;类对象/方法；</span><br><span class="line">$调用定义赋值?-&gt;类对象?;</span><br><span class="line">$调用定义赋值?-&gt;类对象? = ?;</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2022/05/25/E3TAZfpgWDe2t1w.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$调用定义赋值?-&gt;类方法函数?();</span><br></pre></td></tr></table></figure>
-<ol>
-<li>声明类方法：调用内部类对象；<br><img src="https://s2.loli.net/2022/05/25/cineOV7G4fJoAXt.png"></li>
-<li>类中声明类方法：**$this关键字** 调用外部类对象；<br><img src="https://s2.loli.net/2022/05/25/UDuZntLwzWGb281.png"><h2 id="序列化-反序列化"><a href="#序列化-反序列化" class="headerlink" title="序列化/反序列化"></a>序列化/反序列化</h2><h3 id="序列化serialize"><a href="#序列化serialize" class="headerlink" title="序列化serialize()"></a>序列化serialize()</h3>通过serialize()序列函数对数据互转<strong>特定结构</strong>(类型?:[长度?]:数据?)，进行<strong>网络对象流处理</strong>；<br>序列化处理数据对象：字符串/整型/布尔型/浮点型；</li>
-<li>数据序列化；<br><img src="https://s2.loli.net/2022/05/25/hBNmCS5eq6jxQL4.png"></li>
-<li>数组序列化：数组?:数组元素数量?:数据类型?:下标长度?:数据?<br><img src="https://s2.loli.net/2022/05/25/GQBOMqoZz8Yf2vN.png"><br><img src="https://s2.loli.net/2022/05/25/81twNpjmIq9Ooh7.png"></li>
-<li>对象序列化：对象?:对象长度?:类中对象数量?:{类对象类型?:对象长度?:对象数据?;数据类型?:数据长度?:具体数据?}<br><img src="https://s2.loli.net/2022/05/25/y3VsMCJlKacQYh1.png"><br><img src="https://s2.loli.net/2022/05/25/XUdOGTgpBx4lJ7y.png"><h3 id="反序列化unserialize"><a href="#反序列化unserialize" class="headerlink" title="反序列化unserialize()"></a>反序列化unserialize()</h3>通过unserialize()反序列函数对<strong>网络对象流数据处理</strong>特定数据结构(类型?:[长度?]:数据?)，互转为<strong>普通数据</strong>；<br>//中文汉字符 计算拼音的字符数量；<br><img src="https://s2.loli.net/2022/05/25/XLkYbr5ACu7dhSD.png"></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2123,7 +2090,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
