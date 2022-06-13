@@ -149,6 +149,343 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day15_php/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="tyson_H">
+      <meta itemprop="description" content="tyson's_1point3acres">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tyson自留地">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/day15_php/" class="post-title-link" itemprop="url">day15_php</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-06-13 21:26:03 / Modified: 21:27:32" itemprop="dateCreated datePublished" datetime="2022-06-13T21:26:03+08:00">2022-06-13</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="GD图像处理"><a href="#GD图像处理" class="headerlink" title="GD图像处理"></a>GD图像处理</h1><h2 id="gd库引入"><a href="#gd库引入" class="headerlink" title="gd库引入"></a>gd库引入</h2><p>api指外部<strong>现成功能</strong>机制接口，通过数据<strong>格式调用</strong>函数/方法类<strong>实现功能</strong>；<br>graphic device图像处理扩展外部api：支持php脚本在本地集成扩展php.ini通过调用对应函数实现图像制作功能；</p>
+<ol>
+<li>开启加载gd库扩展：php.ini<br><code>extension = php_gd2.dll;</code><br><img src="https://s2.loli.net/2022/06/06/8IQb91EgBM2SxHX.png"></li>
+<li>重启apache<h2 id="gd库基本处理"><a href="#gd库基本处理" class="headerlink" title="gd库基本处理"></a>gd库基本处理</h2><h3 id="画布处理逻辑"><a href="#画布处理逻辑" class="headerlink" title="画布处理逻辑"></a>画布处理逻辑</h3>处理逻辑：内存中开辟块内存区用于图片制作</li>
+<li>创建画布；</li>
+<li>开启操作画布：创建/(句柄/实线)/操作；</li>
+<li>保存资源；</li>
+<li>销毁画布；<h3 id="创建画布资源"><a href="#创建画布资源" class="headerlink" title="创建画布资源"></a>创建画布资源</h3></li>
+<li>imagecreate(宽?,高?) //创建空白白色画布；<br><code>$资源定义赋值? = imagecreate(?,?);</code></li>
+<li>imagecreatetruecolor(宽?,高?) //创建真彩(无色黑)黑色画布；<br><code>$资源定义赋值? = imagecreatetruecolor(?,?);</code><br><img src="https://s2.loli.net/2022/06/06/IaEUJm6wWGyF14k.png"><h4 id="开启画布资源：匹配对应格式"><a href="#开启画布资源：匹配对应格式" class="headerlink" title="开启画布资源：匹配对应格式"></a>开启画布资源：匹配对应格式</h4></li>
+<li>imagecreatefromjpeg(路径?) //打开jpeg格式图片资源；<br><code>$资源定义赋值? = imagecreatefromjpeg(?);</code><br><img src="https://s2.loli.net/2022/06/06/TfEsgmeXS48P1a7.png"></li>
+<li>imagecreatefromgif(路径?) //打开gif格式图片资源；<br><code>$资源定义赋值? = imagecreatefromgif(?);</code></li>
+<li>imagecreatefrompng(路径?) //打开png格式图片资源；<br><code>$资源定义赋值? = imagecreatefromgif(?);</code><h3 id="操作画布：创建-句柄-实线-操作"><a href="#操作画布：创建-句柄-实线-操作" class="headerlink" title="操作画布：创建/(句柄/实线)/操作"></a>操作画布：创建/(句柄/实线)/操作</h3>指定画布资源，对画布操作资源：<strong>指定着色</strong>；</li>
+<li>imagecolorallocate(画布资源?,r?,g?,b?) //对rgb三色组指定画布资源<strong>分配颜色组</strong>0-255，<strong>返回</strong>颜色句柄数值；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$资源定义赋值? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/06/gZAkzlNPY5JvTWw.png"></li>
+</ol>
+<p>注意：<br>    1. 空白资源imagecreate分配颜色组可以自动<strong>填充第一颜色组</strong>(背景色)/真彩资源imagecreatetruecolor分配颜色组无法自动填充第一颜色组(背景色)，用于操作资源时<strong>指定着色组</strong>；<br>    2. 操作图片资源前，需要分配第一颜色组；</p>
+<h4 id="填充颜色"><a href="#填充颜色" class="headerlink" title="填充颜色"></a>填充颜色</h4><ol start="2">
+<li>imagefill(画布资源?,x坐标?,y坐标?,颜色句柄资源?) //指定位置填充背景颜色组；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagefill(画布资源?,x坐标?,y坐标?,颜色句柄资源?);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/06/As6ig5BDWHaftZm.png"><br>填充逻辑：指定点匹配相邻点，颜色组一致则自动渲染填充全图；</li>
+</ol>
+<h4 id="制作实线"><a href="#制作实线" class="headerlink" title="制作实线"></a>制作实线</h4><ol start="3">
+<li><p>imageline(画布资源?,x坐标?,y坐标?,x坐标终点?,y坐标终点?,颜色句柄资源?) //制作实线；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄(实线)资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imageline(画布资源?,x坐标?,y坐标?,x坐标终点?,y坐标终点?,颜色句柄(实线)资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/A4Xbu3RYI1haicv.png"><br><img src="https://s2.loli.net/2022/06/06/4uvItQcgxrdbkzj.png"></p>
+<h4 id="制作矩形"><a href="#制作矩形" class="headerlink" title="制作矩形"></a>制作矩形</h4></li>
+<li><p>imagerectangle(画布资源?,x坐标?,y坐标?,x坐标终点?,y坐标终点?,颜色资源?) //制作矩形；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagerectangle(画布资源?,x坐标?,y坐标?,x坐标终点?,y坐标终点?,颜色句柄资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/A4Xbu3RYI1haicv.png"><br><img src="https://s2.loli.net/2022/06/06/ZROACumr1TkjS4p.png"></p>
+<h4 id="制作圆弧"><a href="#制作圆弧" class="headerlink" title="制作圆弧"></a>制作圆弧</h4></li>
+<li><p>imagearc(画布资源?,x轴坐标?,y轴坐标?,宽?,高?,起始角度0?,终点角度360?,颜色句柄资源?) //制作圆弧；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imageallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagearc(画布资源?,x轴坐标?,y轴坐标?,宽?,高?,起始角度0?,终点角度360?,颜色句柄资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/A4Xbu3RYI1haicv.png"><br><img src="https://s2.loli.net/2022/06/06/j5SC1qQHmu8dcMP.png"></p>
+<h4 id="画布写字"><a href="#画布写字" class="headerlink" title="画布写字"></a>画布写字</h4></li>
+<li><p>imagestring(画布资源?,文字大小?,x坐标?,y坐标?,文字内容?,颜色句柄资源?) //画布水平写字；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imageallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagestring(画布资源?,文字大小?,x坐标?,y坐标?,文字内容?,颜色句柄资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/A4Xbu3RYI1haicv.png"><br><img src="https://s2.loli.net/2022/06/06/cD6MxLNyUTHnkzI.png"></p>
+</li>
+<li><p>imagettftext(画布资源?,文字大小?,旋转角度?,x坐标?,y坐标?,颜色句柄资源?,文字字体?,文字内容?) //画布旋转写字?；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imageallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagettftext(画布资源?,文字大小?,旋转角度?,x坐标?,y坐标?,颜色句柄资源?,文字字体?,文字内容?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/A4Xbu3RYI1haicv.png"><br><img src="https://s2.loli.net/2022/06/06/3xoIVQW7yTNd5wp.png"></p>
+<h3 id="保存输出资源：网页图片-本地文件"><a href="#保存输出资源：网页图片-本地文件" class="headerlink" title="保存输出资源：网页图片/本地文件"></a>保存输出资源：网页图片/本地文件</h3><p>保存方式：</p>
+</li>
+<li><p>输出保存至浏览器网页：提供画布资源，没有指定保存路径；<br> 通过header()<strong>响应头告知</strong>浏览器文件是画布，画布出错时关闭header()响应头输出报错/画布输出未报错查看判断源代码是否输出正常；</p>
+<p> 保存输出操作：</p>
+<ol>
+<li>imagepng(画布资源?);<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$画布资源? = imagecreatetruecolor(宽?,高?);</span><br><span class="line">$颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">header(&quot;content-type:image/png&quot;);</span><br><span class="line">imagepng(画布资源?);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/06/BecuvU3Cni6oPkY.png"><br><img src="https://s2.loli.net/2022/06/06/xLBqFvSc5H7hTnR.png"><br><img src="https://s2.loli.net/2022/06/06/7ZQE8UJgvTOw2mF.png"></li>
+<li>imagejpeg(画布资源?);</li>
+<li>imagegif(画布资源?);</li>
+</ol>
+</li>
+<li><p>输出为保存本地：提供画布资源，指定保存路径；</p>
+<p> 保存输出操作：</p>
+<ol>
+<li>imagepng(画布资源?,[路径?]);</li>
+<li>imagejpeg(画布资源?,[路径?]);</li>
+<li>imagegif(画布资源?,[路径?]);<h3 id="销毁画布资源"><a href="#销毁画布资源" class="headerlink" title="销毁画布资源"></a>销毁画布资源</h3>施放内存块画布资源；<br>imagedestroy(画布资源?);<h3 id="获取画布资源：信息"><a href="#获取画布资源：信息" class="headerlink" title="获取画布资源：信息"></a>获取画布资源：信息</h3><h4 id="画布尺寸：指定信息-宽-高"><a href="#画布尺寸：指定信息-宽-高" class="headerlink" title="画布尺寸：指定信息(宽/高)"></a>画布尺寸：指定信息(宽/高)</h4></li>
+</ol>
+</li>
+<li><p>imagesx(画布资源?); //获取宽；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$资源定义赋值? = &quot;路径?&quot;;</span><br><span class="line">$画布资源? = imagecreatefromjpeg(资源定义赋值?);</span><br><span class="line">echo imgsx(画布资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/FcOUvXeqQE3jIpN.png"></p>
+</li>
+<li><p>imagesy(); //获取高；</p>
+<h4 id="图片尺寸：所有信息输出数组"><a href="#图片尺寸：所有信息输出数组" class="headerlink" title="图片尺寸：所有信息输出数组"></a>图片尺寸：所有信息输出数组</h4><p>数组信息：宽/高/资源格式/宽高字符串/位/颜色句柄类型/资源类型<br>getimagesize(资源定义赋值?);</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$资源定义赋值? = &quot;路径?&quot;;</span><br><span class="line">$画布资源? = getimagesize(资源定义赋值?);</span><br><span class="line">print_r(画布资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/FNkgsIBnmU7YqfD.png"><br><img src="https://s2.loli.net/2022/06/06/O7VwprXsUoPcg5q.png"></p>
+<h2 id="gd库验证码"><a href="#gd库验证码" class="headerlink" title="gd库验证码"></a>gd库验证码</h2><p>captcha验证码即completely automated public turing test to tell computers and humans apart全自动区分计算机和人类图灵测试；</p>
+<h3 id="实现逻辑"><a href="#实现逻辑" class="headerlink" title="实现逻辑"></a>实现逻辑</h3><p>计算机生成验证码写入画布资源，用户写入验证码提交给服务器与计算机生成验证码进行对比判断；</p>
+<h3 id="验证码生成展示"><a href="#验证码生成展示" class="headerlink" title="验证码生成展示"></a>验证码生成展示</h3><ol>
+<li><p>生成创建画布资源：背景色处理；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//创建画布资源</span><br><span class="line">$画布资源 = imagecreatetruecolor(宽?,高?);</span><br><span class="line">//指定第二着色填充</span><br><span class="line">$颜色句柄资源 = imagecolorallocate(画布资源?,r?,g?.b?);</span><br><span class="line">imagefill(画布资源?,x坐标?,y坐标?,颜色句柄资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/DtYlq9Z3y7kIiQ1.png"></p>
+</li>
+<li><p>写入字符串；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$文字字体? = &quot;路径?&quot;;</span><br><span class="line">$文字颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagettftext(画布资源?,文字大小?,旋转角度?,x坐标?,y坐标?,文字颜色句柄资源?,文字字体?,文字内容?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/nCsZAcbzRw7O32t.png"><br><img src="https://s2.loli.net/2022/06/06/HZy1JEWcN6qId45.png"></p>
+</li>
+<li><p>输出图片给浏览器；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(&quot;content-type:image/png&quot;);</span><br><span class="line">imagepng(画布资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/Lyi6VUu5SYtrdjA.png"></p>
+</li>
+<li><p>销毁资源；<br><code>imagedestroy(画布资源?);</code></p>
+<h3 id="验证码随机变化：文字"><a href="#验证码随机变化：文字" class="headerlink" title="验证码随机变化：文字"></a>验证码随机变化：文字</h3><p>处理阶段：创建画布资源/写入字符串；</p>
+</li>
+<li><p>生成随机文字：字符集；<br><code>$定义赋值? = &quot;?&quot;;</code><br><img src="https://s2.loli.net/2022/06/06/QRvhWHPndLDfXlx.png"></p>
+</li>
+<li><p>获取字符集中随机汉字输出；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//获取字符串长度</span><br><span class="line">$字符串长度? = strlen(定义赋值?);</span><br><span class="line">//获取单中文字符：字符串总长/3</span><br><span class="line">$单中文字符? = 字符串长度 / 3;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/wnSiKx4PvIO3qDc.png"></p>
+</li>
+<li><p>随机获取中文字符输出；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//方法一</span><br><span class="line">$随机获取? = mt_rand(0,单中文字符? - 1);</span><br><span class="line">$字符输出? = substr(定义赋值?,随机获取? * 3,3);</span><br><span class="line">echo $字符输出?;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/VzdDT5YFl7HSiPm.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//方法二</span><br><span class="line">$随机获取输出? = substr(定义赋值?,mt_rand(0,单中文字符? - 1) * 3,3);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/ReAQEday2fTWmYj.png"></p>
+</li>
+<li><p>随机文字写入字符串；<br><code>imagettftext(画布资源?,文字大小?,旋转角度?,x坐标?,y坐标?,文字颜色句柄资源?,文字字体?,文字内容?(写入字符串));</code><br><img src="https://s2.loli.net/2022/06/06/kwZN4r7p2aqLgJe.png"></p>
+<h3 id="验证码随机变化：颜色"><a href="#验证码随机变化：颜色" class="headerlink" title="验证码随机变化：颜色"></a>验证码随机变化：颜色</h3><p>处理阶段：写入字符串；<br><code>$文字颜色句柄资源? = imagecolorallocate(画布资源?,r?:mt_rand(0,100),g?:mt_rand(0,100),b?:mt_rand(0,100));</code><br><img src="https://s2.loli.net/2022/06/06/JNUcqBsC2A47n8v.png"></p>
+<h3 id="验证码生成干扰：背景模糊-实点线干扰"><a href="#验证码生成干扰：背景模糊-实点线干扰" class="headerlink" title="验证码生成干扰：背景模糊/实点线干扰"></a>验证码生成干扰：背景模糊/实点线干扰</h3><p>处理阶段：写入字符串；</p>
+<h4 id="循环生成干扰点"><a href="#循环生成干扰点" class="headerlink" title="循环生成干扰点"></a>循环生成干扰点</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for($i = 0;$i &lt; 20;$i++)&#123;</span><br><span class="line">$颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imagestring(画布资源?,文字大小?,宽?,高?,文字内容?,颜色句柄资源?);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/R2xUokrqEV5Gsj9.png"></p>
+<h4 id="循环生成干扰线"><a href="#循环生成干扰线" class="headerlink" title="循环生成干扰线"></a>循环生成干扰线</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for($i = 0,$i &lt; 20,$i++)&#123;</span><br><span class="line">$颜色句柄资源? = imagecolorallocate(画布资源?,r?,g?,b?);</span><br><span class="line">imageline(画布资源?,x坐标?,y坐标?,x坐标终点?,y坐标终点?,颜色句柄资源?);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/06/ygLThxQH7l84z6I.png"></p>
+<h4 id="变化文字：大小-位置-可变参数"><a href="#变化文字：大小-位置-可变参数" class="headerlink" title="变化文字：大小/位置/可变参数"></a>变化文字：大小/位置/可变参数</h4><p><img src="https://s2.loli.net/2022/06/06/iBTDOF7hJ5Xsj2W.png"></p>
+<h3 id="验证码点击刷新"><a href="#验证码点击刷新" class="headerlink" title="验证码点击刷新"></a>验证码点击刷新</h3></li>
+<li><p>创建表单：内置img标签显示图片宽/高；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style = &quot;width:?px;height:?px;margin:?px auto&quot;&gt;</span><br><span class="line">&lt;img src = &quot;?.php&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/07/Pag5LK2AEG8virO.png"></p>
+</li>
+<li><p>验证码点击更换：内置img标签src来源请求php脚本进行更换验证码；img标签增加点击事件(src<strong>来源请求发起</strong>取决于浏览器/<strong>浏览器请求发起</strong>取决于src来源是否改变)；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src = &quot;?.php&quot; onclick = &quot;this.src = ?.php1&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/07/vJDkA4LGgqYeFPB.png"></p>
+</li>
+<li><p>对img标签src来源请求：进行变化无限制；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src = &quot;?.php&quot; onclick = &quot;this.src = &#x27;?.php?captcha=&#x27;+math.random()&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/07/9uTDZr5e8PQcgq2.png"></p>
+<h2 id="缩略图处理"><a href="#缩略图处理" class="headerlink" title="缩略图处理"></a>缩略图处理</h2><h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><p>通过原图画布资源生成尺寸较小画布资源；</p>
+</li>
+<li><p>获取开启：原图画布资源；</p>
+</li>
+<li><p>画布复制传入：较小画布(缩略图)资源生成保存；</p>
+</li>
+<li><p>销毁资源；</p>
+<h3 id="缩略图：指定宽高"><a href="#缩略图：指定宽高" class="headerlink" title="缩略图：指定宽高"></a>缩略图：指定宽高</h3><p><img src="https://s2.loli.net/2022/06/13/FzvidqJEfr297Km.png"></p>
+</li>
+<li><p>获取开启：原图画布资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$资源定义赋值? = &quot;路径?&quot;;</span><br><span class="line">$画布资源? = imagecreatefromjpeg(资源定义赋值?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/KQrojlTe3G7PFLu.png"></p>
+</li>
+<li><p>生成获取：缩略图画布资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">缩略图资源? = imagecreatetruecolor(宽?,高?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/Qb148iBacqzpudf.png"></p>
+</li>
+<li><p>画布复制传入：通过GD拓展函数；<br>复制传入GD函数<br>imagecopyresamepled(缩略图资源?,画布资源?,x坐标?,y坐标?,画布x坐标?,画布y坐标?,宽?,高?,画布宽?,画布高?);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$复制资源? = imagecopyresampled(缩略图资源?,画布资源?,x坐标?,y坐标?,画布x坐标?,画布y坐标?,宽?,高?,imagesx(画布资源?),imagesy(画布资源?));</span><br><span class="line">var_dump(复制资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/q5xVinlG2ONCv4I.png"></p>
+</li>
+<li><p>保存缩略图；</p>
+<ol>
+<li>指定格式header(“content-type:image/?”);</li>
+<li>保存函数imagepng()/imagejpeg()/imagegif();<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(&quot;content-type:image/png&quot;);</span><br><span class="line">imagepng(缩略图画布资源?[路径?]);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/5wFZJcMEjBGOPuY.png"></li>
+</ol>
+</li>
+<li><p>销毁资源；</p>
+<ol>
+<li>销毁画布资源imagedestroy(画布资源?);</li>
+<li>销毁缩略图资源imagedestroy(缩略图资源?);<br><img src="https://s2.loli.net/2022/06/13/5xLB9YfyXtsJz8v.png"><h3 id="缩略图：适配等比宽高"><a href="#缩略图：适配等比宽高" class="headerlink" title="缩略图：适配等比宽高"></a>缩略图：适配等比宽高</h3>基于<strong>不会失真</strong>变形基础上通过<strong>适配算法计算获得</strong>等比宽高比例的缩略图；<h4 id="适配算法实现原理"><a href="#适配算法实现原理" class="headerlink" title="适配算法实现原理"></a>适配算法实现原理</h4></li>
+</ol>
+</li>
+<li><p>计算缩略图宽高比例；</p>
+</li>
+<li><p>计算原图宽高比例；</p>
+</li>
+<li><p>两者比较运算生成：</p>
+<ol>
+<li>缩略图(1:1)大于原图(1:2)：高度优先，宽度补白；</li>
+<li>缩略图(1:2)小于原图(1:1)：宽度优先，高度补白；<br><img src="https://s2.loli.net/2022/06/13/3fKUC9vEjxVO1lW.png"><h4 id="实现处理"><a href="#实现处理" class="headerlink" title="实现处理"></a>实现处理</h4></li>
+</ol>
+</li>
+<li><p>获取开启：原图画布资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$资源定义赋值 = 路径?;</span><br><span class="line">$画布资源? = imagecreatefromjpeg(资源定义赋值?);</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>画布资源：信息尺寸输出数组</strong>；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$画布资源尺寸? = getimagesize(画布资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/CNYwiuWdPFEnxDQ.png"></p>
+</li>
+<li><p>生成获取：缩略图画布资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$缩略图资源? = imagecreatetruecolor(宽?,高?);</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>缩略图：填充背景色</strong>；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$颜色句柄? = imagecolorallocate(缩略图资源?,r?,g?,b?);</span><br><span class="line">imagefill(缩略图资源?,x坐标?,y坐标?,z坐标?,颜色句柄?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/VwtnhRKp5DgWsao.png"></p>
+</li>
+<li><p><strong>计算获取缩略图从原图复制宽高比：选择补白范围</strong>；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$缩略图宽高比? = 100 / 100;</span><br><span class="line">$画布宽高比? = $画布资源尺寸?[0] / $画布资源尺寸?[1];</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/mlEyCuATULwBN7R.png"></p>
+</li>
+<li><p>比较运算：宽高比例；</p>
+<ol>
+<li>条件比较运算：宽高比；</li>
+<li>计算缩略图宽高对应位置：放中间；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//初始化缩略图宽高比；</span><br><span class="line">$缩略图宽? = $缩略图高? = 0;</span><br><span class="line">//初始化缩略图xy坐标；</span><br><span class="line">$缩略图x坐标资源? = $缩略图y坐标资源? = 0;</span><br><span class="line">if(缩略图宽高比? &gt;= 画布宽高比?)&#123;</span><br><span class="line">	//缩略图宽高比 大于 原图画布宽高比</span><br><span class="line">	$缩略图高? = 100;</span><br><span class="line">	$缩略图宽? = floor(画布宽高比? * 缩略图高?);</span><br><span class="line">	//宽度调整</span><br><span class="line">	$缩略图x坐标资源? = floor((100 - 缩略图宽?)/2);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	//缩略图宽高比 小于 原图宽高比</span><br><span class="line">	$缩略图宽? = 100;</span><br><span class="line">	$缩略图高? = floor(缩略图宽? / 画布宽高比?);</span><br><span class="line">	//高度调整</span><br><span class="line">	$缩略图y坐标资源? = floor((100 - 缩略图高?)/2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/UaAHuSlCYot4W2k.png"></li>
+</ol>
+</li>
+<li><p>复制传入GD扩展函数：生成复制资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$复制资源? = imagecopyresampled(缩略图资源?,画布资源?,x坐标?,y坐标?,画布x坐标?,画布y坐标?,宽?,高?,画布宽?,画布高?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/hxgdzaAulJf6mSe.png"></p>
+</li>
+<li><p>保存缩略图；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(&quot;content-type:image/png&quot;);</span><br><span class="line">imagepng(缩略图资源?,[路径?]);</span><br></pre></td></tr></table></figure></li>
+<li><p>销毁资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imagedestroy(画布资源?);</span><br><span class="line">imagedestroy(缩略图资源?);</span><br></pre></td></tr></table></figure>
+<h2 id="GD库水印处理"><a href="#GD库水印处理" class="headerlink" title="GD库水印处理"></a>GD库水印处理</h2><p>将水印资源复制传递到原图画布资源上面合并；</p>
+<h3 id="实现逻辑-1"><a href="#实现逻辑-1" class="headerlink" title="实现逻辑"></a>实现逻辑</h3></li>
+<li><p>获取原图画布资源；</p>
+</li>
+<li><p>获取水印资源；</p>
+</li>
+<li><p>合并资源：复制传递后叠加；</p>
+</li>
+<li><p>保存输出；</p>
+</li>
+<li><p>销毁资源；</p>
+<h3 id="指定固定位置水印图"><a href="#指定固定位置水印图" class="headerlink" title="指定固定位置水印图"></a>指定固定位置水印图</h3></li>
+<li><p>获取开启资源：原图画布/水印图；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$资源定义赋值? = 路径?;</span><br><span class="line">$水印定义赋值? = 路径?;</span><br><span class="line">$画布资源? = imagecreatefromjpeg(定义赋值?);</span><br><span class="line">$水印资源? = imagecreatefromjpeg(水印定义赋值?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/hZ5IPJuBrvVxWg9.png"></p>
+</li>
+<li><p>合并资源：通过GD拓展函数；<br>imagecopymerge(画布资源?,水印资源?,画布x坐标?,画布y坐标?,水印x坐标?,水印y坐标?,水印宽?,水印高?,水印透明度?);</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$合并资源? = imagecopymerge(画布资源?,水印资源?,画布x坐标?,画布y坐标?,水印x坐标?,水印y坐标?,imagesx(水印资源?),imagesy(水印资源?),50);</span><br><span class="line">var_dump(合并资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/e2qK6VjzrlDByt8.png"></p>
+</li>
+<li><p>保存合并资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">header(&quot;content-type:image/jpeg&quot;);</span><br><span class="line">imagejpeg(画布资源?);</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/drnO8qe9K34SjgN.png"></p>
+</li>
+<li><p>销毁资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">imagedestroy(画布资源?);</span><br><span class="line">imagedestroy(水印资源?);</span><br></pre></td></tr></table></figure>
+<h3 id="封装函数：指定九位水印图"><a href="#封装函数：指定九位水印图" class="headerlink" title="封装函数：指定九位水印图"></a>封装函数：指定九位水印图</h3></li>
+<li><p>创建制图函数结构；</p>
+<p> 函数条件：</p>
+<ol>
+<li>获取原图画布资源；</li>
+<li>获取水印资源；</li>
+<li>合并水印图存储位置；</li>
+<li>位置选择：九宫格；</li>
+<li>水印透明度；</li>
+<li>&amp;$错误输出：引用传参记录错误；<br><img src="https://s2.loli.net/2022/06/13/NPo2Ufu4m3nTEJX.png"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function 函数封装?(原图画布资源?,水印资源?,合并存储路径?,错误输出?,位置选择? = 1,水印透明度 = 20)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>返回函数处理结果：成功返回存储名/失败返回false输出错误(引用传参记录处理)；<br><img src="https://s2.loli.net/2022/06/13/lTeEmI4qZB8QSrA.png"></p>
+</li>
+<li><p>判断存在：原图画布资源/水印资源；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(!is_file(资源定义赋值?))&#123;</span><br><span class="line">	$错误输出? = &quot;原图画布不存在&quot;;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">if(!is_file(水印定义赋值?))&#123;</span><br><span class="line">	$错误输出? = &quot;水印资源不存在&quot;;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/NB5zg6x7A4qrIPG.png"></p>
+</li>
+<li><p>判断存在：合并存储路径；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if(!is_dir(合并存储路径?))&#123;</span><br><span class="line">	$错误输出? = &quot;保存存储路径不正确&quot;;</span><br><span class="line">	return false；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/ygbuQipjoxKnYV6.png"></p>
+</li>
+<li><p>获取开启资源：原图画布资源/水印资源；</p>
+<ol>
+<li>获取资源<strong>信息数组</strong>；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$画布资源信息? = getimagesize(原图画布资源?);</span><br><span class="line">$水印资源信息? = getimagesize(水印资源信息?);</span><br><span class="line">echo $画布资源信息?[&#x27;mime&#x27;];</span><br><span class="line">echo $水印资源信息?[&#x27;mime&#x27;];</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/SWvZj6sTUJQo14l.png"></li>
+<li>开启资源：通过mime类型<strong>指定函数匹配数组</strong>(成功构造<strong>组合资源函数</strong>/失败报错)；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$资源匹配? = array(</span><br><span class="line">	&quot;image/jpeg&quot; =&gt; &quot;jpeg&quot;,</span><br><span class="line">	&quot;image/jpg&quot; =&gt; &quot;jpeg&quot;,</span><br><span class="line">	&quot;image/gif&quot; =&gt; &quot;gif&quot;,</span><br><span class="line">	&quot;image/png&quot; =&gt; &quot;png&quot;,</span><br><span class="line">	&quot;image/pjpeg&quot; =&gt; &quot;jpeg&quot;</span><br><span class="line">	);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/GCRSFbaU1gwYVxP.png"></li>
+<li><strong>匹配存在</strong>(画布资源信息数组/水印资源信息数组)：<strong>判断下标值key</strong>；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">if(array_key_exists(画布资源信息?[&#x27;mime&#x27;],资源匹配?))&#123;</span><br><span class="line">	$错误输出? = &quot;当前画布资源类型无法处理合并水印&quot;;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br><span class="line">if(array_key_exists(水印资源信息?[&#x27;mime&#x27;],资源匹配?))&#123;</span><br><span class="line">	$错误输出? = &quot;当前水印资源类型无法处理合并水印&quot;;</span><br><span class="line">	return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/S4UjohvVZtdf873.png"></li>
+<li>构造<strong>组合资源</strong>函数：开启画布资源函数/开启水印资源函数/开启合并资源函数；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$构造画布资源? = &quot;imagecreatefrom&quot; . 资源匹配?[画布资源信息?[&#x27;mime&#x27;]];</span><br><span class="line">$构造水印资源? = &quot;imagecreatefrom&quot; . 资源匹配?[水印资源信息?[&#x27;mime&#x27;]];</span><br><span class="line">$画布保存? = &quot;image&quot; . 资源匹配?[画布资源信息?[&#x27;mime&#x27;]];</span><br><span class="line">echo $构造画布资源?;</span><br><span class="line">echo $构造水印资源?;</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/pjAqi4tTB6ZLdao.png"></li>
+<li>开启资源；<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$开启画布资源? = 构造画布资源?(资源定义赋值?);</span><br><span class="line">$开启水印资源? = 构造水印资源?(水印定义赋值?);</span><br></pre></td></tr></table></figure>
+<img src="https://s2.loli.net/2022/06/13/3pqsemurnYXd1fk.png"></li>
+</ol>
+</li>
+<li><p><strong>合并资源</strong>生成水印：计算水印位置；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">//初始化水印位置；</span><br><span class="line">$水印x坐标? = $水印y坐标? = 0;</span><br><span class="line">switch($位置选择?)&#123;</span><br><span class="line">	case 1:</span><br><span class="line">	//左上</span><br><span class="line">		break;</span><br><span class="line">	case 2:</span><br><span class="line">	//中上</span><br><span class="line">		$水印x坐标? = floor((画布资源信息?[0] - 水印资源信息?[0]) / 2);</span><br><span class="line">		break;</span><br><span class="line">	//右上</span><br><span class="line">	case 3:</span><br><span class="line">		$水印x坐标? = 画布资源信息?[0] - 水印资源信息?[0];</span><br><span class="line">		break;</span><br><span class="line">	//左中</span><br><span class="line">	case 4:</span><br><span class="line">		$水印y坐标? = floor((画布资源信息?[1] - 水印资源信息?[1]) / 2);</span><br><span class="line">		break;</span><br><span class="line">	//中中</span><br><span class="line">	case 5:</span><br><span class="line">		$水印x坐标? = floor((画布资源信息?[0] - 水印资源信息?[0]) / 2);</span><br><span class="line">		$水印y坐标? = floor((画布资源信息?[1] - 水印资源信息?[1]) / 2);	</span><br><span class="line">		break;</span><br><span class="line">	//右中</span><br><span class="line">	case 6:</span><br><span class="line">		$水印x坐标? = 画布资源信息?[0] - 水印资源信息?[0];</span><br><span class="line">		$水印y坐标? = floor((画布资源信息?[1] - 水印资源信息?[1]) / 2);</span><br><span class="line">		break;</span><br><span class="line">	//右下</span><br><span class="line">	case 7:</span><br><span class="line">		$水印y坐标? = 画布资源信息?[1] - 水印资源信息?[1];</span><br><span class="line">		break;</span><br><span class="line">	//左下</span><br><span class="line">	case 8:</span><br><span class="line">		$水印x坐标? = floor((画布资源信息?[0] - 水印资源信息?[0]) / 2);</span><br><span class="line">		$水印y坐标? = 画布资源信息?[1] - 水印资源信息?[1];</span><br><span class="line">		break;</span><br><span class="line">	//中下</span><br><span class="line">	case 9:</span><br><span class="line">		$水印x坐标? = 画布资源信息?[0] - 水印资源信息?[0];</span><br><span class="line">		$水印y坐标? = 画布资源信息?[1] - 水印资源信息?[1];</span><br><span class="line">		break</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/CnPlTrvI3zASRW5.png"><br><img src="https://s2.loli.net/2022/06/13/g4rAcMSLiEsHCbu.png"></p>
+</li>
+<li><p>判断合并资源：保存销毁；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">if(imagecopymerge(开启画布资源?,开启水印资源?,水印x坐标?,水印y坐标?,0,0,水印资源信息?[0],水印资源信息?[1],水印透明度? = 20))&#123;</span><br><span class="line">//成功保存，返回路径；</span><br><span class="line">	header(&quot;content-type&quot; . 画布资源信息?[&#x27;mime&#x27;]);</span><br><span class="line">	//规范路径；</span><br><span class="line">	$组合路径资源? = &#x27;路径?&#x27; . trim(strrchr(画布资源? , &#x27;/&#x27;) , &#x27;/&#x27;);</span><br><span class="line">	$合并资源保存?($开启画布资源?,合并存储路径? . &#x27;/&#x27;. 组合路径资源?);</span><br><span class="line">	return $组合路径资源?;</span><br><span class="line">	//销毁资源；</span><br><span class="line">	imagedestroy(开启画布资源?);</span><br><span class="line">	imagedestroy(开启水印资源?);</span><br><span class="line">&#125;else&#123;</span><br><span class="line">//失败报错；</span><br><span class="line">	$错误输出? = &quot;水印合并资源处理失败&quot;;</span><br><span class="line">return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/n21STckMZP7g3di.png"></p>
+</li>
+<li><p>判断调用封装：写入数据库；</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$调用返回? = watermark(&#x27;画布资源路径?&#x27;,&#x27;水印资源路径?&#x27;,__DIR__,错误输出?);</span><br><span class="line">if(调用返回?)&#123;</span><br><span class="line">	echo 调用返回?;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">	echo 错误输出?;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/06/13/uGRyts3IVrHd8Bm.png"></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day14_php/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -343,10 +680,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-05-22 22:38:05 / Modified: 22:38:46" itemprop="dateCreated datePublished" datetime="2022-05-22T22:38:05+08:00">2022-05-22</time>
+              <time title="Created: 2022-05-22 22:38:05" itemprop="dateCreated datePublished" datetime="2022-05-22T22:38:05+08:00">2022-05-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-06-13 21:27:06" itemprop="dateModified" datetime="2022-06-13T21:27:06+08:00">2022-06-13</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1876,151 +2219,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://tyson1077.github.io/day5_php/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="tyson_H">
-      <meta itemprop="description" content="tyson's_1point3acres">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tyson自留地">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/day5_php/" class="post-title-link" itemprop="url">php_day5</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-04-16 19:43:12 / Modified: 19:43:53" itemprop="dateCreated datePublished" datetime="2022-04-16T19:43:12+08:00">2022-04-16</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数组函数"><a href="#数组函数" class="headerlink" title="数组函数"></a>数组函数</h1><h2 id="排序函数"><a href="#排序函数" class="headerlink" title="排序函数"></a>排序函数</h2><p>基于首字符ASCII码对数组元素赋值排序；<br>//排序函数返回值为布尔，定义赋值接收后print_r()打印输出&amp;$原绑定数组；<br>//元素赋值标识符始于0；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$?数组函数 = array(3,2,1,4,5);</span><br><span class="line">$?接收函数 = sort(?数组函数); //排序完成 接收返回值</span><br><span class="line">print_r($?数组函数); //输出原数组</span><br></pre></td></tr></table></figure>
-<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>基于元素，重置索引下标从小到大正向排序；<br><img src="https://s2.loli.net/2022/04/10/zJoUkVRLDt1hgE4.png"></p>
-<h3 id="rsort"><a href="#rsort" class="headerlink" title="rsort()"></a>rsort()</h3><p>基于元素，重置索引下标从大到小逆向排序；<br><img src="https://s2.loli.net/2022/04/10/Hv1VlNPRqMISA7p.png"></p>
-<h3 id="asort"><a href="#asort" class="headerlink" title="asort()"></a>asort()</h3><p>基于元素，保留下标key正向排序；<br><img src="https://s2.loli.net/2022/04/10/SKjfom14TglVcrO.png"></p>
-<h3 id="arsort"><a href="#arsort" class="headerlink" title="arsort()"></a>arsort()</h3><p>基于元素，保留下标key逆向排序；<br><img src="https://s2.loli.net/2022/04/10/2hfZa9qAJz5NRrp.png"></p>
-<h3 id="ksort"><a href="#ksort" class="headerlink" title="ksort()"></a>ksort()</h3><p>基于重置下标key序号正向排序；<br><img src="https://s2.loli.net/2022/04/10/ai7ZE38HhjT9z6u.png"></p>
-<h3 id="krsort"><a href="#krsort" class="headerlink" title="krsort()"></a>krsort()</h3><p>基于重置下标key序号逆向排序；<br><img src="https://s2.loli.net/2022/04/10/vM3aUX4EJRHd7Fo.png"></p>
-<h3 id="shuffle"><a href="#shuffle" class="headerlink" title="shuffle()"></a>shuffle()</h3><p>基于重置正序下标杂糅排序，打乱掉元素赋值；<br><img src="https://s2.loli.net/2022/04/10/zfFmT49j3XNLRVl.png"></p>
-<h2 id="指针函数"><a href="#指针函数" class="headerlink" title="指针函数"></a>指针函数</h2><p>针对数组内部移动指针操作；<br>//指针位置对应空值不存在返回布尔false；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(&quot;this_1&quot;,&quot;this_2&quot;,&quot;this_3&quot;);</span><br><span class="line">echo current($aaa); //this_1 当前元素赋值</span><br><span class="line">echo key($aaa); //0 当前下标key</span><br><span class="line">echo next($aaa); //this_2 下位元素赋值</span><br><span class="line">echo key($aaa); //1 当前下标key</span><br><span class="line">next($aaa); //移动下位元素赋值</span><br><span class="line">echo key($aaa); //2 当前下标key</span><br><span class="line">echo end($aaa); //this_3 末位元素赋值</span><br><span class="line">echo reset($aaa); //this_1 首位元素赋值</span><br><span class="line">next($aaa); //移动下位元素赋值</span><br><span class="line">echo prev($aaa); //this_1 //上位元素赋值</span><br></pre></td></tr></table></figure>
-<p><img src="https://s2.loli.net/2022/04/10/sd5Mk9lrA7YBwNf.png"></p>
-<h3 id="reset"><a href="#reset" class="headerlink" title="reset()"></a>reset()</h3><p>移动内部指针到数组首位：输出返回下标值和元素赋值，不存在返回布尔false；</p>
-<h3 id="end"><a href="#end" class="headerlink" title="end()"></a>end()</h3><p>移动内部指针到数组末尾：输出返回下标值和元素赋值，不存在返回布尔false；</p>
-<h3 id="next"><a href="#next" class="headerlink" title="next()"></a>next()</h3><p>移动内部指针下一位数组：输出返回下标值和元素赋值；</p>
-<h3 id="prev"><a href="#prev" class="headerlink" title="prev()"></a>prev()</h3><p>移动内部指针上一位数组：输出返回下标值和元素赋值；</p>
-<h3 id="current"><a href="#current" class="headerlink" title="current()"></a>current()</h3><p>获取当前数组内部指针位置：输出返回当前下标值和元素赋值；</p>
-<h3 id="key"><a href="#key" class="headerlink" title="key()"></a>key()</h3><p>获取当前数组内部指针位置：输出返回对应下标值；</p>
-<h2 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h2><p>操作后原数组发生变化：生成新数组；不存在返回空值NULL；</p>
-<h3 id="模拟数据结构：栈队列操作"><a href="#模拟数据结构：栈队列操作" class="headerlink" title="模拟数据结构：栈队列操作"></a>模拟数据结构：栈队列操作</h3><p><strong>压栈：先进后出FILO first in last out</strong><br>//栈操作同端进出；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(); //定义赋值空数组</span><br><span class="line">array_push($aaa,3); //末追3</span><br><span class="line">array_push($aaa,2); //末追3</span><br><span class="line">array_push($aaa,1); //末追1</span><br><span class="line">print_r($aaa); //Array ( [0] =&gt; 3 [1] =&gt; 2 [2] =&gt; 1 ) 压栈完成 打印输出</span><br><span class="line">echo array_pop($aaa),array_pop($aaa),array_pop($aaa); //123 出栈 提取操作栈</span><br><span class="line">print_r($aaa); //Array ( ) 出栈完 数组清空</span><br></pre></td></tr></table></figure>
-<p><strong>队列：先进先出FIFO first in first out</strong><br>//队列操作首进后出；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$aaa = array(); //定义赋值空数组</span><br><span class="line">array_unshift($aaa,3); //首增3</span><br><span class="line">array_unshift($aaa,2); //首增2</span><br><span class="line">array_unshift($aaa,1); //首增1</span><br><span class="line">print_r($aaa); //Array ( [0] =&gt; 1 [1] =&gt; 2 [2] =&gt; 3 ) 入队列完成 打印输出</span><br><span class="line">echo array_pop($aaa),array_pop($aaa),array_pop($aaa); //321 出队 提取操作的队列</span><br><span class="line">print_r($aaa); //Array ( ) 出队完成 数组清空</span><br></pre></td></tr></table></figure>
-<h4 id="array-unshift"><a href="#array-unshift" class="headerlink" title="array_unshift($?,?)"></a>array_unshift($?,?)</h4><p>首端新增元素赋值；</p>
-<h4 id="array-shift"><a href="#array-shift" class="headerlink" title="array_shift($?,?)"></a>array_shift($?,?)</h4><p>首端提取元素赋值；</p>
-<h4 id="array-push"><a href="#array-push" class="headerlink" title="array_push($?,?)"></a>array_push($?,?)</h4><p>末尾追加元素赋值；</p>
-<h4 id="array-pop"><a href="#array-pop" class="headerlink" title="array_pop($?,?)"></a>array_pop($?,?)</h4><p>末尾提取元素赋值；</p>
-<h3 id="count"><a href="#count" class="headerlink" title="count()"></a>count()</h3><p>统计数组元素赋值数量；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print_r(count($?));</span><br><span class="line">var_dump(count($?));</span><br></pre></td></tr></table></figure>
-<h3 id="in-array"><a href="#in-array" class="headerlink" title="in_array(?,$?)"></a>in_array(?,$?)</h3><p>判断数组是否存在元素赋值，以布尔返回；<br><img src="https://s2.loli.net/2022/04/10/ZEw7rBfHlP3qRJc.png"></p>
-<h3 id="array-reverse"><a href="#array-reverse" class="headerlink" title="array_reverse()"></a>array_reverse()</h3><p>颠倒数组的元素赋值：逆向反转排序；<br><img src="https://s2.loli.net/2022/04/10/FZpHzjS4dQKiRvD.png"></p>
-<h3 id="array-keys"><a href="#array-keys" class="headerlink" title="array_keys()"></a>array_keys()</h3><p>获取数组所有下标key；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r(array_keys($?));</span><br></pre></td></tr></table></figure>
-<h3 id="array-values"><a href="#array-values" class="headerlink" title="array_values()"></a>array_values()</h3><p>获取数组所有元素赋值；</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print_r(array_values($?));</span><br></pre></td></tr></table></figure>
-<h1 id="编程思想"><a href="#编程思想" class="headerlink" title="编程思想"></a>编程思想</h1><p>利用数学模型实现代码数据模型解决对应需求；<br>算法：任意代码实现数学模型；</p>
-<h2 id="递推算法"><a href="#递推算法" class="headerlink" title="递推算法"></a>递推算法</h2><p>通过已知条件演绎规律推出计算结果：顺推/逆推；<br><strong>算法举例：</strong><br>斐波那契数列：求任意位置对应值；<br><img src="https://s2.loli.net/2022/04/10/JyCEetZGcoWBFlg.png"><br><strong>代码实现：</strong><br>已知前两个数值，第三值之后为前两个值取和；得前三的值演绎规律<br>//定义赋值指定数组输出循环体后实现；<br><img src="https://s2.loli.net/2022/04/10/b3tli7aEmIZGVHg.png"><br><img src="https://s2.loli.net/2022/04/10/eAJU9Ki6pjwcuFh.png"></p>
-<h2 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h2><p>划小简化问题归类为同类子问题，调用函数过程解决问题；<br>//递归函数<br><strong>代码实现：</strong></p>
-<ol>
-<li>简化问题找到<strong>递归点</strong>；</li>
-<li>调用解决问题的函数实现递归：本质上<strong>调用多次</strong>相同函数内存空间，利用空间换时间；</li>
-<li>找到<strong>递归出口</strong>结束死循环；</li>
-</ol>
-<p><strong>算法举例：</strong><br>斐波那契数列：求任意位置对应值；<br><img src="https://s2.loli.net/2022/04/16/DxvaK7qesGdB3hn.png"><br>//判断定义赋值输出后实现前两层数值累加；<br><img src="https://s2.loli.net/2022/04/16/tcfgSbqsl5YNeZv.png"><br><img src="https://s2.loli.net/2022/04/16/JMbxmEiZvSNB91A.png"></p>
-<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>重复轮询按照规定大小比较两个相邻数组元素赋值后<strong>交换</strong>；<br><img src="https://s2.loli.net/2022/04/16/gTXrQU1c2yHKNS7.png"><br><strong>代码实现：</strong></p>
-<ol>
-<li>按规定比较相邻前一个数组元素实现交换；</li>
-<li>轮询数组元素比较至末端终止；<br><img src="https://s2.loli.net/2022/04/16/3hlnxdJRmLXPIts.png"><br><img src="https://s2.loli.net/2022/04/16/2gHoMaxXsh41pPZ.png"><br><img src="https://s2.loli.net/2022/04/16/riyKgkXV9fHxmhz.png"><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3>按规定大小选择每个数组元素赋值<strong>插入</strong>数组起始序列位置；<br>//不稳定排序<br><img src="https://s2.loli.net/2022/04/16/BDizrQ6esGRJLTE.png"></li>
-</ol>
-<p><strong>代码实现：</strong></p>
-<ol>
-<li><p>按要求获取数组元素下标和元素赋值；</p>
-</li>
-<li><p>要求符合：每次轮询交换分别插入序首位置；<br><img src="https://s2.loli.net/2022/04/16/8MgtHxlGOqJo7US.png"></p>
-<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>按规定大小把数组每个元素赋值<strong>插入已完成</strong>排序的数组元素赋值序列中；<br><img src="https://s2.loli.net/2022/04/16/xHZemfl3sPaMGYB.png"><br>//稳定排序<br>代码实现：</p>
-</li>
-<li><p>记录已完成排序数组；</p>
-</li>
-<li><p>获取待排数组元素赋值按规定插入前序数组正确下标位置后比较交换；</p>
-</li>
-<li><p>轮询操作每个数组元素赋值；<br><img src="https://s2.loli.net/2022/04/16/5TKHCsNrYloSiP6.png"><br><img src="https://s2.loli.net/2022/04/16/zyBdZt7VshXoOrD.png"><br><img src="https://s2.loli.net/2022/04/16/3f2vTKXGbHnlmIW.png"></p>
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>按规定大小多次比较<strong>拆分</strong>指定数组赋值元素为独立两份后交换<strong>合并递归</strong>成为有序数组；<br>//不稳定排序<br><img src="https://s2.loli.net/2022/04/16/HeL8ynDQKlduwE5.png"><br>代码实现：</p>
-</li>
-<li><p>获取数组元素赋值后多次拆分为独立两个数组；</p>
-</li>
-<li><p>按规定比较交换两数组元素赋值；</p>
-</li>
-<li><p>轮询后多次合并递归(递归点/结束递归)多份数组为整个有序数组；<br><img src="https://s2.loli.net/2022/04/16/OuZHk2QKFRCWXoM.png"><br><img src="https://s2.loli.net/2022/04/16/NTYQzde5f6RiW2j.png"></p>
-<h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><p>采用分治法按规定大小把多个最小单位有序<strong>子数组</strong>元素赋值<strong>二路归并</strong>合并为整个有序数组表；<br><img src="https://s2.loli.net/2022/04/16/73VafdmWnyBHeGY.png"></p>
-</li>
-</ol>
-<p><strong>二路归并：</strong><br><img src="https://s2.loli.net/2022/04/16/Isy4exFGJihNtob.png"><br><img src="https://s2.loli.net/2022/04/16/9nRDepILjO57Qfr.png"><br>代码实现：</p>
-<ol>
-<li>拆分数组为最小单位有序子数组元素赋值；</li>
-<li>子数组元素赋值指向整个空数组空间；</li>
-<li>轮询移动指针操作比较合并序列尾；<br><img src="https://s2.loli.net/2022/04/16/YGVaC58Z6JkiQDs.png"><br><img src="https://s2.loli.net/2022/04/16/YJgbDCSKjnUt7PI.png"><h2 id="查找算法"><a href="#查找算法" class="headerlink" title="查找算法"></a>查找算法</h2>大型数组中快速查找实现定位代码块元素；<h3 id="顺序查找"><a href="#顺序查找" class="headerlink" title="顺序查找"></a>顺序查找</h3>数据结构从一端顺序扫描到另一端<strong>查找匹配</strong>获取定位关键字与给定值；<br><img src="https://s2.loli.net/2022/04/16/iroBGfLMplD1zEj.png"></li>
-</ol>
-<h3 id="二分查找：折半算法"><a href="#二分查找：折半算法" class="headerlink" title="二分查找：折半算法"></a>二分查找：折半算法</h3><p>给定关键字与数值<strong>拆分</strong>线形升降数组序列后<strong>递归匹配</strong>中间值后<strong>比较交换</strong>子数组；<br><strong>折半算法：</strong><br><img src="https://s2.loli.net/2022/04/16/UhESVLfyQzbqeTH.png"><br><img src="https://s2.loli.net/2022/04/16/KbqenBF7X1sIi4P.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2090,7 +2288,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">20</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
